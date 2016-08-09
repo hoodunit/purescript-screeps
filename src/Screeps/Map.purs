@@ -22,7 +22,7 @@ type ExitToRoom =
   , room :: String }
 
 describeExits :: String -> Maybe ExitsInfo
-describeExits name = toMaybe $ runThisFn1 "attackController" Game.map name
+describeExits name = toMaybe $ runThisFn1 "describeExits" Game.map name
 
 -- TODO: options
 findExit :: Room -> Room -> ReturnCode
