@@ -2,22 +2,34 @@
 
 Defines the main types used in the library and the relationships between them.
 
-#### `RawOwnedStructure`
+#### `Market`
 
 ``` purescript
-data RawOwnedStructure :: * -> *
+data Market :: *
 ```
 
-#### `RawRoomObject`
+#### `Room`
 
 ``` purescript
-data RawRoomObject :: * -> *
+data Room :: *
 ```
 
-#### `RawStructure`
+#### `RoomPosition`
 
 ``` purescript
-data RawStructure :: * -> *
+data RoomPosition :: *
+```
+
+#### `Store`
+
+``` purescript
+data Store :: *
+```
+
+#### `WorldMap`
+
+``` purescript
+data WorldMap :: *
 ```
 
 #### `RoomObject`
@@ -36,120 +48,6 @@ type Structure a = RoomObject (RawStructure a)
 
 ``` purescript
 type OwnedStructure a = Structure (RawOwnedStructure a)
-```
-
-#### `RawContainer`
-
-``` purescript
-data RawContainer :: *
-```
-
-#### `RawController`
-
-``` purescript
-data RawController :: *
-```
-
-#### `RawExtension`
-
-``` purescript
-data RawExtension :: *
-```
-
-#### `RawExtractor`
-
-``` purescript
-data RawExtractor :: *
-```
-
-#### `RawKeeperLair`
-
-``` purescript
-data RawKeeperLair :: *
-```
-
-#### `RawLab`
-
-``` purescript
-data RawLab :: *
-```
-
-#### `RawLink`
-
-``` purescript
-data RawLink :: *
-```
-
-#### `RawNuker`
-
-``` purescript
-data RawNuker :: *
-```
-
-#### `RawObserver`
-
-``` purescript
-data RawObserver :: *
-```
-
-#### `RawPortal`
-
-``` purescript
-data RawPortal :: *
-```
-
-#### `RawPowerBank`
-
-``` purescript
-data RawPowerBank :: *
-```
-
-#### `RawPowerSpawn`
-
-``` purescript
-data RawPowerSpawn :: *
-```
-
-#### `RawRampart`
-
-``` purescript
-data RawRampart :: *
-```
-
-#### `RawRoad`
-
-``` purescript
-data RawRoad :: *
-```
-
-#### `RawSpawn`
-
-``` purescript
-data RawSpawn :: *
-```
-
-#### `RawStorage`
-
-``` purescript
-data RawStorage :: *
-```
-
-#### `RawTerminal`
-
-``` purescript
-data RawTerminal :: *
-```
-
-#### `RawTower`
-
-``` purescript
-data RawTower :: *
-```
-
-#### `RawWall`
-
-``` purescript
-data RawWall :: *
 ```
 
 #### `Container`
@@ -266,70 +164,16 @@ type Tower = OwnedStructure RawTower
 type Wall = OwnedStructure RawWall
 ```
 
-#### `Room`
+#### `ConstructionSite`
 
 ``` purescript
-data Room :: *
-```
-
-#### `RoomPosition`
-
-``` purescript
-data RoomPosition :: *
-```
-
-#### `RawCreep`
-
-``` purescript
-data RawCreep :: *
+type ConstructionSite = RoomObject RawConstructionSite
 ```
 
 #### `Creep`
 
 ``` purescript
 type Creep = RoomObject RawCreep
-```
-
-#### `RawConstructionSite`
-
-``` purescript
-data RawConstructionSite :: *
-```
-
-#### `RawFlag`
-
-``` purescript
-data RawFlag :: *
-```
-
-#### `RawMineral`
-
-``` purescript
-data RawMineral :: *
-```
-
-#### `RawNuke`
-
-``` purescript
-data RawNuke :: *
-```
-
-#### `RawResource`
-
-``` purescript
-data RawResource :: *
-```
-
-#### `RawSource`
-
-``` purescript
-data RawSource :: *
-```
-
-#### `ConstructionSite`
-
-``` purescript
-type ConstructionSite = RoomObject RawConstructionSite
 ```
 
 #### `Flag`
@@ -362,46 +206,178 @@ type Resource = RoomObject RawResource
 type Source = RoomObject RawSource
 ```
 
-#### `WorldMap`
+#### `RawOwnedStructure`
 
 ``` purescript
-data WorldMap :: *
+data RawOwnedStructure :: * -> *
 ```
 
-#### `Market`
+#### `RawRoomObject`
 
 ``` purescript
-data Market :: *
+data RawRoomObject :: * -> *
 ```
 
-#### `Store`
+#### `RawStructure`
 
 ``` purescript
-data Store :: *
+data RawStructure :: * -> *
 ```
 
-#### `CreepCargo`
+#### `RawContainer`
 
 ``` purescript
-data CreepCargo :: *
+data RawContainer :: *
 ```
 
-#### `Gcl`
+#### `RawController`
 
 ``` purescript
-type Gcl = { level :: Int, progress :: Int, progressTotal :: Int }
+data RawController :: *
 ```
 
-#### `Cpu`
+#### `RawExtension`
 
 ``` purescript
-type Cpu = { limit :: Int, tickLimit :: Int, bucket :: Int }
+data RawExtension :: *
 ```
 
-#### `SpawningInfo`
+#### `RawExtractor`
 
 ``` purescript
-type SpawningInfo = { name :: String, needTime :: Int, remainingTime :: Int }
+data RawExtractor :: *
+```
+
+#### `RawKeeperLair`
+
+``` purescript
+data RawKeeperLair :: *
+```
+
+#### `RawLab`
+
+``` purescript
+data RawLab :: *
+```
+
+#### `RawLink`
+
+``` purescript
+data RawLink :: *
+```
+
+#### `RawNuker`
+
+``` purescript
+data RawNuker :: *
+```
+
+#### `RawObserver`
+
+``` purescript
+data RawObserver :: *
+```
+
+#### `RawPortal`
+
+``` purescript
+data RawPortal :: *
+```
+
+#### `RawPowerBank`
+
+``` purescript
+data RawPowerBank :: *
+```
+
+#### `RawPowerSpawn`
+
+``` purescript
+data RawPowerSpawn :: *
+```
+
+#### `RawRampart`
+
+``` purescript
+data RawRampart :: *
+```
+
+#### `RawRoad`
+
+``` purescript
+data RawRoad :: *
+```
+
+#### `RawSpawn`
+
+``` purescript
+data RawSpawn :: *
+```
+
+#### `RawStorage`
+
+``` purescript
+data RawStorage :: *
+```
+
+#### `RawTerminal`
+
+``` purescript
+data RawTerminal :: *
+```
+
+#### `RawTower`
+
+``` purescript
+data RawTower :: *
+```
+
+#### `RawWall`
+
+``` purescript
+data RawWall :: *
+```
+
+#### `RawConstructionSite`
+
+``` purescript
+data RawConstructionSite :: *
+```
+
+#### `RawCreep`
+
+``` purescript
+data RawCreep :: *
+```
+
+#### `RawFlag`
+
+``` purescript
+data RawFlag :: *
+```
+
+#### `RawMineral`
+
+``` purescript
+data RawMineral :: *
+```
+
+#### `RawNuke`
+
+``` purescript
+data RawNuke :: *
+```
+
+#### `RawResource`
+
+``` purescript
+data RawResource :: *
+```
+
+#### `RawSource`
+
+``` purescript
+data RawSource :: *
 ```
 
 

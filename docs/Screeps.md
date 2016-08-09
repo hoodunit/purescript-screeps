@@ -1774,12 +1774,6 @@ data Store :: *
 type Storage = OwnedStructure RawStorage
 ```
 
-#### `SpawningInfo`
-
-``` purescript
-type SpawningInfo = { name :: String, needTime :: Int, remainingTime :: Int }
-```
-
 #### `Spawn`
 
 ``` purescript
@@ -2074,12 +2068,6 @@ type Lab = OwnedStructure RawLab
 type KeeperLair = OwnedStructure RawKeeperLair
 ```
 
-#### `Gcl`
-
-``` purescript
-type Gcl = { level :: Int, progress :: Int, progressTotal :: Int }
-```
-
 #### `Flag`
 
 ``` purescript
@@ -2098,22 +2086,10 @@ type Extractor = OwnedStructure RawExtractor
 type Extension = OwnedStructure RawExtension
 ```
 
-#### `CreepCargo`
-
-``` purescript
-data CreepCargo :: *
-```
-
 #### `Creep`
 
 ``` purescript
 type Creep = RoomObject RawCreep
-```
-
-#### `Cpu`
-
-``` purescript
-type Cpu = { limit :: Int, tickLimit :: Int, bucket :: Int }
 ```
 
 #### `Controller`

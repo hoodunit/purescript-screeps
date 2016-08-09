@@ -14,6 +14,18 @@ data Game :: *
 gameGlobal :: Game
 ```
 
+#### `Gcl`
+
+``` purescript
+type Gcl = { level :: Int, progress :: Int, progressTotal :: Int }
+```
+
+#### `Cpu`
+
+``` purescript
+type Cpu = { limit :: Int, tickLimit :: Int, bucket :: Int }
+```
+
 #### `constructionSites`
 
 ``` purescript

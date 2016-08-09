@@ -2,6 +2,12 @@
 
 Corresponds to the Screeps API [Creep](http://support.screeps.com/hc/en-us/articles/203013212-Creep)
 
+#### `CreepCargo`
+
+``` purescript
+data CreepCargo :: *
+```
+
 #### `body`
 
 ``` purescript

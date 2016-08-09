@@ -10,10 +10,12 @@ import Data.Maybe (Maybe)
 
 import Screeps.Constants (BodyPart, BodyPartType, Direction, Id, Path, ResourceType, ReturnCode)
 import Screeps.Effects (CMD, MEMORY)
-import Screeps.Types (ConstructionSite, Controller, Creep, CreepCargo, Mineral, Resource, RoomPosition, Source, Structure)
+import Screeps.Types (ConstructionSite, Controller, Creep, Mineral, Resource, RoomPosition, Source, Structure)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
 import Screeps.Memory (fromJson, toJson)
 import Screeps.Room (FindPathOpts, defaultFindPathOpts)
+
+foreign import data CreepCargo :: *
 
 body :: Creep -> Array BodyPart
 body creep = unsafeField "body" creep

@@ -8,11 +8,21 @@ import Data.StrMap as StrMap
 
 import Screeps.Constants (Id, ReturnCode)
 import Screeps.Effects (CMD, TIME)
-import Screeps.Types (ConstructionSite, Cpu, Creep, Flag, Gcl, Market, Room, Spawn, Structure, WorldMap)
+import Screeps.Types (ConstructionSite, Creep, Flag, Market, Room, Spawn, Structure, WorldMap)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 
 foreign import data Game :: *
 foreign import gameGlobal :: Game
+
+type Gcl =
+  { level :: Int
+  , progress :: Int
+  , progressTotal :: Int }
+
+type Cpu =
+  { limit :: Int
+  , tickLimit :: Int
+  , bucket :: Int }
 
 constructionSites :: StrMap.StrMap ConstructionSite
 constructionSites = unsafeField "constructionSites" gameGlobal
