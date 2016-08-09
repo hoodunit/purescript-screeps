@@ -3,7 +3,7 @@
 PureScript bindings for the [Screeps API](http://support.screeps.com/hc/en-us/articles/203084991-API-Reference).
 
 
-## Usage
+## Installation
 
 Install:
 
@@ -24,3 +24,7 @@ To deploy your code you need to expose it to Screeps from the exported CommonJS 
   }
 }
 ```
+
+## Usage
+
+Module documentation is [here](https://github.com/nicholaskariniemi/purescript-screeps/tree/master/docs).
