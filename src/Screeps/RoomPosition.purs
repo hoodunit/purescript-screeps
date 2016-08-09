@@ -94,5 +94,5 @@ isNearTo' pos otherPos = runThisFn1 "isNearTo" pos otherPos
 
 -- look function omitted - use lookFor
 
-lookFor :: forall a. RoomPosition -> LookType a -> a
-lookFor = runThisFn1 "lookFor"
+lookFor :: forall a. RoomPosition -> LookType a -> Maybe a
+lookFor pos lookType = toMaybe $ runThisFn1 "lookFor" pos lookType
