@@ -1,6 +1,12 @@
 -- | Defines the main types used in the library and the relationships between them.
 module Screeps.Types where
 
+import Prelude
+import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
+import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
+import Data.Generic (class Generic, gEq, gShow)
+import Data.Maybe (Maybe)
+
 foreign import data Market :: *
 foreign import data Room :: *
 foreign import data RoomPosition :: *
@@ -69,3 +75,80 @@ foreign import data RawMineral :: *
 foreign import data RawNuke :: *
 foreign import data RawResource :: *
 foreign import data RawSource :: *
+
+type Path = Array PathStep -- or String?
+
+type PathStep =
+  { x :: Int
+  , y :: Int
+  , dx :: Number
+  , dy :: Number
+  , direction :: Direction }
+
+newtype ReturnCode = ReturnCode Int
+derive instance genericReturnCode :: Generic ReturnCode
+instance eqReturnCode :: Eq ReturnCode where eq = gEq
+instance showReturnCode :: Show ReturnCode where
+  show (ReturnCode n) = show n
+
+newtype ResourceType = ResourceType String
+derive instance genericResourceType :: Generic ResourceType
+instance eqResourceType :: Eq ResourceType where eq = gEq
+instance showResourceType :: Show ResourceType where
+  show (ResourceType s) = s
+
+newtype StructureType = StructureType String
+derive instance genericStructureType :: Generic StructureType
+instance eqStructureType :: Eq StructureType where eq = gEq
+instance showStructureType :: Show StructureType where show = gShow
+
+newtype TerrainMask = TerrainMask Int
+derive instance genericTerrainMask :: Generic TerrainMask
+instance eqTerrainMask :: Eq TerrainMask where eq = gEq
+instance showTerrainMask :: Show TerrainMask where show = gShow
+
+newtype Terrain = Terrain String
+derive instance genericTerrain :: Generic Terrain
+instance eqTerrain :: Eq Terrain where eq = gEq
+instance showTerrain :: Show Terrain
+  where show (Terrain s) = s
+
+newtype Mode = Mode String
+derive instance genericMode :: Generic Mode
+instance eqMode :: Eq Mode where eq = gEq
+instance showMode :: Show Mode where show = gShow
+
+newtype Id a = Id String
+derive instance genericId :: Generic (Id a)
+instance eqId :: Eq (Id a) where eq = gEq
+instance showId :: Show (Id a) where show = gShow
+instance decodeJsonId :: DecodeJson (Id a) where decodeJson = gDecodeJson
+instance encodeJsonId :: EncodeJson (Id a) where encodeJson = gEncodeJson
+
+newtype Direction = Direction Int
+derive instance genericDirection :: Generic Direction
+instance eqDirection :: Eq Direction where eq = gEq
+instance showDirection :: Show Direction where show = gShow
+
+newtype BodyPartType = BodyPartType String
+derive instance genericBodyPartType :: Generic BodyPartType
+instance eqBodyPartType :: Eq BodyPartType where eq = gEq
+instance showBodyPartType :: Show BodyPartType where show = gShow
+
+newtype Color = Color Int
+derive instance genericColor :: Generic Color
+instance eqColor :: Eq Color where eq = gEq
+instance showColor :: Show Color where show = gShow
+
+newtype LookType a = LookType String
+newtype FindType a = FindType Int
+
+type StructureInfo =
+  { "1" :: Int
+  , "2" :: Int
+  , "3" :: Int
+  , "4" :: Int
+  , "5" :: Int
+  , "6" :: Int
+  , "7" :: Int
+  , "8" :: Int }

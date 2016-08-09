@@ -3,9 +3,8 @@ module Screeps.ConstructionSite where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Constants
 import Screeps.Effects (CMD)
-import Screeps.Types
+import Screeps.Types (ConstructionSite, Id, ReturnCode, StructureType)
 import Screeps.FFI (runThisEffFn0, unsafeField)
 
 id :: ConstructionSite -> Id ConstructionSite

@@ -4,10 +4,10 @@ module Screeps.Tower where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_tower)
+import Screeps.Constants (structure_tower)
 import Screeps.Effects (CMD)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Creep, Tower, Structure)
+import Screeps.Types (Creep, ReturnCode, Structure, Tower)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 
 energy :: Tower -> Int

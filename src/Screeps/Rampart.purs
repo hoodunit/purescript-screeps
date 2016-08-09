@@ -4,11 +4,11 @@ module Screeps.Rampart where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_rampart)
+import Screeps.Constants (structure_rampart)
 import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Rampart, Structure)
+import Screeps.Types (Rampart, ReturnCode, Structure)
 
 isPublic :: Rampart -> Boolean
 isPublic = unsafeField "isPublic"

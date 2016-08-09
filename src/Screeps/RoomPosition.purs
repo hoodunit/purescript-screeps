@@ -5,9 +5,8 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (Color, Direction, FindType, LookType, Path, ReturnCode, StructureType)
 import Screeps.Effects (CMD)
-import Screeps.Types (RoomObject, RoomPosition)
+import Screeps.Types (Color, Direction, FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, StructureType)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, unsafeField)
 import Screeps.Room (FindPathOpts)
 

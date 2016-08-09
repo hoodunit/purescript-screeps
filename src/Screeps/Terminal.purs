@@ -4,11 +4,11 @@ module Screeps.Terminal where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ResourceType(ResourceType), ReturnCode, structure_terminal)
+import Screeps.Constants (structure_terminal)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Structure, Terminal)
+import Screeps.Types (ResourceType(ResourceType), ReturnCode, Structure, Terminal)
 
 foreign import data Store :: *
 

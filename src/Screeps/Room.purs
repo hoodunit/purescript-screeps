@@ -5,9 +5,8 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (FindType, LookType, Mode, Path, ReturnCode, StructureType)
 import Screeps.Effects (CMD)
-import Screeps.Types (Controller, Room, RoomObject, RoomPosition, Storage, Terminal)
+import Screeps.Types (Controller, FindType, LookType, Mode, Path, ReturnCode, Room, RoomObject, RoomPosition, Storage, StructureType, Terminal)
 import Screeps.FFI (runThisEffFn2, runThisEffFn3, runThisFn1, runThisFn2, runThisFn3, runThisFn5, runThisFn6, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: *

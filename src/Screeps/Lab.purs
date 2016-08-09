@@ -4,11 +4,11 @@ module Screeps.Lab where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_lab)
+import Screeps.Constants (structure_lab)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Creep, Lab, Structure)
+import Screeps.Types (Creep, Lab, ReturnCode, Structure)
 
 cooldown :: Lab -> Int
 cooldown = unsafeField "cooldown"

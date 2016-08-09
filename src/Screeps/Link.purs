@@ -4,11 +4,11 @@ module Screeps.Link where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_link)
+import Screeps.Constants (structure_link)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Link, Structure)
+import Screeps.Types (Link, ReturnCode, Structure)
 
 cooldown :: Link -> Int
 cooldown = unsafeField "cooldown"

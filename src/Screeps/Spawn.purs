@@ -7,10 +7,10 @@ import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (BodyPartType, ReturnCode, structure_spawn)
+import Screeps.Constants (structure_spawn)
 import Screeps.Effects (CMD)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Creep, Spawn, Structure)
+import Screeps.Types (BodyPartType, Creep, ReturnCode, Spawn, Structure)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
 
 type CreepInfo =

@@ -6,186 +6,6 @@ Functions for using particular types are defined in their own modules.
 
 ### Re-exported from Screeps.Constants:
 
-#### `TerrainMask`
-
-``` purescript
-newtype TerrainMask
-  = TerrainMask Int
-```
-
-##### Instances
-``` purescript
-Generic TerrainMask
-Eq TerrainMask
-Show TerrainMask
-```
-
-#### `Terrain`
-
-``` purescript
-newtype Terrain
-  = Terrain String
-```
-
-##### Instances
-``` purescript
-Generic Terrain
-Eq Terrain
-Show Terrain
-```
-
-#### `StructureType`
-
-``` purescript
-newtype StructureType
-  = StructureType String
-```
-
-##### Instances
-``` purescript
-Generic StructureType
-Eq StructureType
-Show StructureType
-```
-
-#### `StructureInfo`
-
-``` purescript
-type StructureInfo = { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
-```
-
-#### `ReturnCode`
-
-``` purescript
-newtype ReturnCode
-  = ReturnCode Int
-```
-
-##### Instances
-``` purescript
-Generic ReturnCode
-Eq ReturnCode
-Show ReturnCode
-```
-
-#### `ResourceType`
-
-``` purescript
-newtype ResourceType
-  = ResourceType String
-```
-
-##### Instances
-``` purescript
-Generic ResourceType
-Eq ResourceType
-Show ResourceType
-```
-
-#### `PathStep`
-
-``` purescript
-type PathStep = { x :: Int, y :: Int, dx :: Number, dy :: Number, direction :: Direction }
-```
-
-#### `Path`
-
-``` purescript
-type Path = Array PathStep
-```
-
-#### `Mode`
-
-``` purescript
-newtype Mode
-  = Mode String
-```
-
-##### Instances
-``` purescript
-Generic Mode
-Eq Mode
-Show Mode
-```
-
-#### `LookType`
-
-``` purescript
-newtype LookType a
-  = LookType String
-```
-
-#### `Id`
-
-``` purescript
-newtype Id a
-  = Id String
-```
-
-##### Instances
-``` purescript
-Generic (Id a)
-Eq (Id a)
-Show (Id a)
-DecodeJson (Id a)
-EncodeJson (Id a)
-```
-
-#### `FindType`
-
-``` purescript
-newtype FindType a
-  = FindType Int
-```
-
-#### `Direction`
-
-``` purescript
-newtype Direction
-  = Direction Int
-```
-
-##### Instances
-``` purescript
-Generic Direction
-Eq Direction
-Show Direction
-```
-
-#### `Color`
-
-``` purescript
-newtype Color
-  = Color Int
-```
-
-##### Instances
-``` purescript
-Generic Color
-Eq Color
-Show Color
-```
-
-#### `BodyPartType`
-
-``` purescript
-newtype BodyPartType
-  = BodyPartType String
-```
-
-##### Instances
-``` purescript
-Generic BodyPartType
-Eq BodyPartType
-Show BodyPartType
-```
-
-#### `BodyPart`
-
-``` purescript
-type BodyPart = { boost :: Maybe String, type :: BodyPartType, hits :: Int }
-```
-
 #### `wall_hits_max`
 
 ``` purescript
@@ -1750,10 +1570,58 @@ type Wall = OwnedStructure RawWall
 type Tower = OwnedStructure RawTower
 ```
 
+#### `TerrainMask`
+
+``` purescript
+newtype TerrainMask
+  = TerrainMask Int
+```
+
+##### Instances
+``` purescript
+Generic TerrainMask
+Eq TerrainMask
+Show TerrainMask
+```
+
+#### `Terrain`
+
+``` purescript
+newtype Terrain
+  = Terrain String
+```
+
+##### Instances
+``` purescript
+Generic Terrain
+Eq Terrain
+Show Terrain
+```
+
 #### `Terminal`
 
 ``` purescript
 type Terminal = OwnedStructure RawTerminal
+```
+
+#### `StructureType`
+
+``` purescript
+newtype StructureType
+  = StructureType String
+```
+
+##### Instances
+``` purescript
+Generic StructureType
+Eq StructureType
+Show StructureType
+```
+
+#### `StructureInfo`
+
+``` purescript
+type StructureInfo = { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
 ```
 
 #### `Structure`
@@ -1802,6 +1670,34 @@ data Room :: *
 
 ``` purescript
 type Road = OwnedStructure RawRoad
+```
+
+#### `ReturnCode`
+
+``` purescript
+newtype ReturnCode
+  = ReturnCode Int
+```
+
+##### Instances
+``` purescript
+Generic ReturnCode
+Eq ReturnCode
+Show ReturnCode
+```
+
+#### `ResourceType`
+
+``` purescript
+newtype ResourceType
+  = ResourceType String
+```
+
+##### Instances
+``` purescript
+Generic ResourceType
+Eq ResourceType
+Show ResourceType
 ```
 
 #### `Resource`
@@ -2008,6 +1904,18 @@ type PowerBank = OwnedStructure RawPowerBank
 type Portal = OwnedStructure RawPortal
 ```
 
+#### `PathStep`
+
+``` purescript
+type PathStep = { x :: Int, y :: Int, dx :: Number, dy :: Number, direction :: Direction }
+```
+
+#### `Path`
+
+``` purescript
+type Path = Array PathStep
+```
+
 #### `OwnedStructure`
 
 ``` purescript
@@ -2032,6 +1940,20 @@ type Nuker = OwnedStructure RawNuker
 type Nuke = RoomObject RawNuke
 ```
 
+#### `Mode`
+
+``` purescript
+newtype Mode
+  = Mode String
+```
+
+##### Instances
+``` purescript
+Generic Mode
+Eq Mode
+Show Mode
+```
+
 #### `Mineral`
 
 ``` purescript
@@ -2042,6 +1964,13 @@ type Mineral = RoomObject RawMineral
 
 ``` purescript
 data Market :: *
+```
+
+#### `LookType`
+
+``` purescript
+newtype LookType a
+  = LookType String
 ```
 
 #### `Link`
@@ -2062,10 +1991,33 @@ type Lab = OwnedStructure RawLab
 type KeeperLair = OwnedStructure RawKeeperLair
 ```
 
+#### `Id`
+
+``` purescript
+newtype Id a
+  = Id String
+```
+
+##### Instances
+``` purescript
+Generic (Id a)
+Eq (Id a)
+Show (Id a)
+DecodeJson (Id a)
+EncodeJson (Id a)
+```
+
 #### `Flag`
 
 ``` purescript
 type Flag = RoomObject RawFlag
+```
+
+#### `FindType`
+
+``` purescript
+newtype FindType a
+  = FindType Int
 ```
 
 #### `Extractor`
@@ -2078,6 +2030,20 @@ type Extractor = OwnedStructure RawExtractor
 
 ``` purescript
 type Extension = OwnedStructure RawExtension
+```
+
+#### `Direction`
+
+``` purescript
+newtype Direction
+  = Direction Int
+```
+
+##### Instances
+``` purescript
+Generic Direction
+Eq Direction
+Show Direction
 ```
 
 #### `Creep`
@@ -2102,5 +2068,33 @@ type Container = Structure RawContainer
 
 ``` purescript
 type ConstructionSite = RoomObject RawConstructionSite
+```
+
+#### `Color`
+
+``` purescript
+newtype Color
+  = Color Int
+```
+
+##### Instances
+``` purescript
+Generic Color
+Eq Color
+Show Color
+```
+
+#### `BodyPartType`
+
+``` purescript
+newtype BodyPartType
+  = BodyPartType String
+```
+
+##### Instances
+``` purescript
+Generic BodyPartType
+Eq BodyPartType
+Show BodyPartType
 ```
 

@@ -8,6 +8,12 @@ Corresponds to the Screeps API [Creep](http://support.screeps.com/hc/en-us/artic
 data CreepCargo :: *
 ```
 
+#### `BodyPart`
+
+``` purescript
+type BodyPart = { boost :: Maybe String, type :: BodyPartType, hits :: Int }
+```
+
 #### `body`
 
 ``` purescript

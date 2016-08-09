@@ -3,10 +3,10 @@ module Screeps.Storage where
 
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ResourceType(ResourceType), structure_storage)
+import Screeps.Constants (structure_storage)
 import Screeps.FFI (unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Storage, Structure)
+import Screeps.Types (ResourceType(ResourceType), Storage, Structure)
 
 foreign import data Store :: *
 

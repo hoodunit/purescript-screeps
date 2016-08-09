@@ -4,11 +4,11 @@ module Screeps.PowerSpawn where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_power_spawn)
+import Screeps.Constants (structure_power_spawn)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (PowerSpawn, Structure)
+import Screeps.Types (PowerSpawn, ReturnCode, Structure)
 
 energy :: PowerSpawn -> Int
 energy = unsafeField "energy"

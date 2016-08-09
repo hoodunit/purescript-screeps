@@ -4,11 +4,11 @@ module Screeps.Observer where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_observer)
+import Screeps.Constants (structure_observer)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Observer, Structure)
+import Screeps.Types (Observer, ReturnCode, Structure)
 
 observeRoom :: forall e. Observer -> String -> Eff (cmd :: CMD | e) ReturnCode
 observeRoom obs roomName = runThisEffFn1 "observeRoom" obs roomName

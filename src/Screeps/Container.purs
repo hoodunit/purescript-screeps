@@ -4,8 +4,8 @@ module Screeps.Container where
 import Data.Maybe (Maybe)
 
 import Screeps.Structure (unsafeCast)
-import Screeps.Constants (ResourceType(ResourceType), structure_container)
-import Screeps.Types (Container, Structure)
+import Screeps.Constants (structure_container)
+import Screeps.Types (Container, ResourceType(ResourceType), Structure)
 import Screeps.FFI (unsafeField)
 
 foreign import data Store :: *

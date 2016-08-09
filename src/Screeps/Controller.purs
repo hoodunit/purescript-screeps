@@ -4,11 +4,11 @@ module Screeps.Controller where
 import Data.Maybe (Maybe)
 import Control.Monad.Eff (Eff)
 
-import Screeps.Constants
+import Screeps.Constants (structure_controller)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Controller, Structure)
+import Screeps.Types (Controller, ReturnCode, Structure)
 
 level :: Controller -> Int
 level = unsafeField "level"

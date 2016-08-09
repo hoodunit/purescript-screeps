@@ -4,11 +4,11 @@ module Screeps.Nuker where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode, structure_nuker)
+import Screeps.Constants (structure_nuker)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Nuker, RoomPosition, Structure)
+import Screeps.Types (Nuker, ReturnCode, RoomPosition, Structure)
 
 energy :: Nuker -> Int
 energy = unsafeField "energy"
