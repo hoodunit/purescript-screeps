@@ -8,4 +8,10 @@ Corresponds to the Screeps API [StructureRoad](http://support.screeps.com/hc/en-
 ticksToDecay :: Road -> Int
 ```
 
+#### `toRoad`
+
+``` purescript
+toRoad :: forall a. Structure a -> Maybe Road
+```
+
 

@@ -8,4 +8,10 @@ Corresponds to the Screeps API [StructureKeeperLair](http://support.screeps.com/
 ticksToSpawn :: KeeperLair -> Int
 ```
 
+#### `toKeeperLair`
+
+``` purescript
+toKeeperLair :: forall a. Structure a -> Maybe KeeperLair
+```
+
 

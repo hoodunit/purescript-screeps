@@ -4,7 +4,6 @@ module Screeps.Types where
 foreign import data Market :: *
 foreign import data Room :: *
 foreign import data RoomPosition :: *
-foreign import data Store :: *
 foreign import data WorldMap :: *
 
 type RoomObject a = RawRoomObject a

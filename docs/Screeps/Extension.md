@@ -14,4 +14,10 @@ energy :: Extension -> Int
 energyCapacity :: Extension -> Int
 ```
 
+#### `toExtension`
+
+``` purescript
+toExtension :: forall a. Structure a -> Maybe Extension
+```
+
 

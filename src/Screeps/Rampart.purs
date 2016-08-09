@@ -2,11 +2,13 @@
 module Screeps.Rampart where
 
 import Control.Monad.Eff (Eff)
+import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode)
+import Screeps.Constants (ReturnCode, structure_rampart)
 import Screeps.Effects (CMD)
-import Screeps.Types (Rampart)
 import Screeps.FFI (unsafeField)
+import Screeps.Structure (unsafeCast)
+import Screeps.Types (Rampart, Structure)
 
 isPublic :: Rampart -> Boolean
 isPublic = unsafeField "isPublic"
@@ -16,3 +18,6 @@ ticksToDecay = unsafeField "ticksToDecay"
 
 setPublic :: forall e. Rampart -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
 setPublic = unsafeField "setPublic"
+
+toRampart :: forall a. Structure a -> Maybe Rampart
+toRampart = unsafeCast structure_rampart

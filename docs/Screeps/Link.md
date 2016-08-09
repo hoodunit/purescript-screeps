@@ -32,4 +32,10 @@ transferEnergy :: forall e. Link -> Link -> Eff (cmd :: CMD | e) ReturnCode
 transferEnergyAmt :: forall e. Link -> Link -> Int -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toLink`
+
+``` purescript
+toLink :: forall a. Structure a -> Maybe Link
+```
+
 

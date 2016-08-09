@@ -86,4 +86,10 @@ recycleCreep :: forall e. Spawn -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 renewCreep :: forall e. Spawn -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toSpawn`
+
+``` purescript
+toSpawn :: forall a. Structure a -> Maybe Spawn
+```
+
 

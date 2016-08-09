@@ -44,4 +44,10 @@ upgradeBlocked :: Controller -> Int
 unclaim :: forall e. Controller -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toController`
+
+``` purescript
+toController :: forall a. Structure a -> Maybe Controller
+```
+
 

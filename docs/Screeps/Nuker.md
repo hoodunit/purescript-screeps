@@ -38,4 +38,10 @@ cooldown :: Nuker -> Int
 launchNuke :: forall e. Nuker -> RoomPosition -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toNuker`
+
+``` purescript
+toNuker :: forall a. Structure a -> Maybe Nuker
+```
+
 

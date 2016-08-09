@@ -8,4 +8,10 @@ Corresponds to the Screeps API [StructureWall](http://support.screeps.com/hc/en-
 ticksToLive :: Wall -> Int
 ```
 
+#### `toWall`
+
+``` purescript
+toWall :: forall a. Structure a -> Maybe Wall
+```
+
 

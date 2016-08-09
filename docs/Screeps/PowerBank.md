@@ -14,4 +14,10 @@ power :: PowerBank -> Int
 ticksToDecay :: PowerBank -> Int
 ```
 
+#### `toPowerBank`
+
+``` purescript
+toPowerBank :: forall a. Structure a -> Maybe PowerBank
+```
+
 

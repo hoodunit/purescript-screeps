@@ -2,6 +2,12 @@
 
 Corresponds to the Screeps API [StructureStorage](http://support.screeps.com/hc/en-us/articles/208436805-StructureStorage)
 
+#### `Store`
+
+``` purescript
+data Store :: *
+```
+
 #### `store`
 
 ``` purescript
@@ -18,6 +24,12 @@ storeGet :: Storage -> ResourceType -> Int
 
 ``` purescript
 storeCapacity :: Storage -> Int
+```
+
+#### `toStorage`
+
+``` purescript
+toStorage :: forall a. Structure a -> Maybe Storage
 ```
 
 

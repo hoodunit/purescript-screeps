@@ -1762,12 +1762,6 @@ type Terminal = OwnedStructure RawTerminal
 type Structure a = RoomObject (RawStructure a)
 ```
 
-#### `Store`
-
-``` purescript
-data Store :: *
-```
-
 #### `Storage`
 
 ``` purescript

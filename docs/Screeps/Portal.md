@@ -14,4 +14,10 @@ destination :: Portal -> RoomPosition
 ticksToDecay :: Portal -> Int
 ```
 
+#### `toPortal`
+
+``` purescript
+toPortal :: forall a. Structure a -> Maybe Portal
+```
+
 

@@ -20,12 +20,6 @@ data Room :: *
 data RoomPosition :: *
 ```
 
-#### `Store`
-
-``` purescript
-data Store :: *
-```
-
 #### `WorldMap`
 
 ``` purescript

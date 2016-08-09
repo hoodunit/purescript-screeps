@@ -56,4 +56,10 @@ boostCreep' :: forall e. Lab -> Creep -> Int -> Eff (cmd :: CMD | e) ReturnCode
 runReaction :: forall e. Lab -> Lab -> Lab -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toLab`
+
+``` purescript
+toLab :: forall a. Structure a -> Maybe Lab
+```
+
 

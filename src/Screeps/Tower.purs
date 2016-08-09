@@ -2,9 +2,11 @@
 module Screeps.Tower where
 
 import Control.Monad.Eff (Eff)
+import Data.Maybe (Maybe)
 
-import Screeps.Constants (ReturnCode)
+import Screeps.Constants (ReturnCode, structure_tower)
 import Screeps.Effects (CMD)
+import Screeps.Structure (unsafeCast)
 import Screeps.Types (Creep, Tower, Structure)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 
@@ -28,3 +30,6 @@ transferEnergy = runThisEffFn1 "transferEnergy"
 
 transferEnergyAmt :: forall e. Tower -> Creep -> Int -> Eff (cmd :: CMD | e) ReturnCode
 transferEnergyAmt = runThisEffFn2 "transferEnergy"
+
+toTower :: forall a. Structure a -> Maybe Tower
+toTower = unsafeCast structure_tower

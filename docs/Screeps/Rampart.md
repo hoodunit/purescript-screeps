@@ -20,4 +20,10 @@ ticksToDecay :: Rampart -> Int
 setPublic :: forall e. Rampart -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toRampart`
+
+``` purescript
+toRampart :: forall a. Structure a -> Maybe Rampart
+```
+
 

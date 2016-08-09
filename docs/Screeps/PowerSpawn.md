@@ -38,4 +38,10 @@ createPowerCreep :: forall e. PowerSpawn -> String -> Eff (cmd :: CMD | e) Retur
 processPower :: forall e. PowerSpawn -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toPowerSpawn`
+
+``` purescript
+toPowerSpawn :: forall a. Structure a -> Maybe PowerSpawn
+```
+
 

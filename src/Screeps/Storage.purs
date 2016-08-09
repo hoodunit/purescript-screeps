@@ -1,9 +1,14 @@
 -- | Corresponds to the Screeps API [StructureStorage](http://support.screeps.com/hc/en-us/articles/208436805-StructureStorage)
 module Screeps.Storage where
 
-import Screeps.Constants (ResourceType(ResourceType))
-import Screeps.Types (Storage, Store)
+import Data.Maybe (Maybe)
+
+import Screeps.Constants (ResourceType(ResourceType), structure_storage)
 import Screeps.FFI (unsafeField)
+import Screeps.Structure (unsafeCast)
+import Screeps.Types (Storage, Structure)
+
+foreign import data Store :: *
 
 store :: Storage -> Store
 store = unsafeField "store"
@@ -13,3 +18,6 @@ storeGet s (ResourceType res) = unsafeField res (store s)
 
 storeCapacity :: Storage -> Int
 storeCapacity = unsafeField "storeCapacity"
+
+toStorage :: forall a. Structure a -> Maybe Storage
+toStorage = unsafeCast structure_storage

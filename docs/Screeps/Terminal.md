@@ -2,6 +2,12 @@
 
 Corresponds to the Screeps API [StructureTerminal](http://support.screeps.com/hc/en-us/articles/207713399-StructureTerminal)
 
+#### `Store`
+
+``` purescript
+data Store :: *
+```
+
 #### `store`
 
 ``` purescript
@@ -30,6 +36,12 @@ send :: forall e. Terminal -> ResourceType -> Int -> String -> Eff (cmd :: CMD |
 
 ``` purescript
 send' :: forall e. Terminal -> ResourceType -> Int -> String -> String -> Eff (cmd :: CMD | e) ReturnCode
+```
+
+#### `toTerminal`
+
+``` purescript
+toTerminal :: forall a. Structure a -> Maybe Terminal
 ```
 
 

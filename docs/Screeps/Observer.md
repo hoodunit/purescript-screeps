@@ -8,4 +8,10 @@ Corresponds to the Screeps API [StructureObserver](http://support.screeps.com/hc
 observeRoom :: forall e. Observer -> String -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toObserver`
+
+``` purescript
+toObserver :: forall a. Structure a -> Maybe Observer
+```
+
 

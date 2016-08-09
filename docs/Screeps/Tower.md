@@ -44,4 +44,10 @@ transferEnergy :: forall e. Tower -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 transferEnergyAmt :: forall e. Tower -> Creep -> Int -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
+#### `toTower`
+
+``` purescript
+toTower :: forall a. Structure a -> Maybe Tower
+```
+
 
