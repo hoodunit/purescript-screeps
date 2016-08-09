@@ -5,9 +5,11 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
+import Screeps.Constants (Color, Direction, FindType, LookType, Path, ReturnCode, StructureType)
+import Screeps.Effects (CMD)
+import Screeps.Types (RoomObject, RoomPosition)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, unsafeField)
 import Screeps.Room (FindPathOpts)
-import Screeps.Types
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 

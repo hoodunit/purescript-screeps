@@ -7,8 +7,15 @@ import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
-import Screeps.Types
+import Screeps.Constants (BodyPartType, ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Creep, Spawn)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
+
+type CreepInfo =
+  { name :: String
+  , needTime :: Int
+  , remainingTime :: Int }
 
 energy :: Spawn -> Int
 energy = unsafeField "energy"
@@ -24,11 +31,6 @@ name = unsafeField "name"
 
 spawning :: Spawn -> Maybe CreepInfo
 spawning spawn = toMaybe $ unsafeField "spawning" spawn
-
-type CreepInfo =
-  { name :: String
-  , needTime :: Int
-  , remainingTime :: Int }
 
 canCreateCreep :: Spawn -> Array BodyPartType -> ReturnCode
 canCreateCreep spawn parts = runThisFn1 "canCreateCreep" spawn parts

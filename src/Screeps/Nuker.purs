@@ -3,7 +3,9 @@ module Screeps.Nuker where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Nuker, RoomPosition)
 import Screeps.FFI (runThisEffFn1, unsafeField)
 
 energy :: Nuker -> Int

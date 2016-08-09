@@ -1,7 +1,8 @@
 -- | Corresponds to the Screeps API [StructureStorage](http://support.screeps.com/hc/en-us/articles/208436805-StructureStorage)
 module Screeps.Storage where
 
-import Screeps.Types
+import Screeps.Constants (ResourceType(ResourceType))
+import Screeps.Types (Storage, Store)
 import Screeps.FFI (unsafeField)
 
 store :: Storage -> Store

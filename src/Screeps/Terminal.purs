@@ -3,7 +3,9 @@ module Screeps.Terminal where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ResourceType(ResourceType), ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Store, Terminal)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField)
 
 store :: Terminal -> Store

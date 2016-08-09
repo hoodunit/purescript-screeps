@@ -3,7 +3,9 @@ module Screeps.PowerSpawn where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (PowerSpawn)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
 
 energy :: PowerSpawn -> Int

@@ -4,7 +4,9 @@ module Screeps.Map where
 import Prelude
 import Data.Maybe (Maybe)
 
-import Screeps.Types
+import Screeps.Constants (FindType, ReturnCode, Terrain(Terrain))
+import Screeps.Effects (CMD)
+import Screeps.Types (Room, RoomPosition)
 import Screeps.FFI (toMaybe, runThisFn1, runThisFn2, runThisFn3)
 import Screeps.Game as Game
 

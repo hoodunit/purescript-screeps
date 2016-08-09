@@ -9,7 +9,7 @@ import Data.Argonaut.Printer (printJson)
 import Data.Either (Either)
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types (MEMORY)
+import Screeps.Effects (MEMORY)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeGetFieldEff, unsafeSetFieldEff, unsafeDeleteFieldEff)
 
 foreign import data MemoryGlobal :: *

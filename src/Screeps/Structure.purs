@@ -6,7 +6,9 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe(Just, Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
-import Screeps.Types
+import Screeps.Constants
+import Screeps.Effects (CMD)
+import Screeps.Types (Container, Controller, Extension, Extractor, KeeperLair, Lab, Link, Nuker, Observer, PowerBank, PowerSpawn, Portal, Rampart, Road, Spawn, Storage, Structure, Terminal, Tower, Wall)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
 
 hits :: forall a. Structure a -> Int

@@ -3,7 +3,9 @@ module Screeps.Link where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types (ReturnCode, CMD, Link)
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Link)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 
 cooldown :: Link -> Int

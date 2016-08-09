@@ -6,7 +6,9 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 import Data.StrMap as StrMap
 
-import Screeps.Types
+import Screeps.Constants (Id, ReturnCode)
+import Screeps.Effects (CMD, TIME)
+import Screeps.Types (ConstructionSite, Cpu, Creep, Flag, Gcl, Market, Room, Spawn, Structure, WorldMap)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 
 foreign import data Game :: *

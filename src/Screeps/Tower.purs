@@ -3,7 +3,9 @@ module Screeps.Tower where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Creep, Tower, Structure)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 
 energy :: Tower -> Int

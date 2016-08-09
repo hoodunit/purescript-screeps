@@ -3,7 +3,9 @@ module Screeps.Observer where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Observer)
 import Screeps.FFI (runThisEffFn1)
 
 observeRoom :: forall e. Observer -> String -> Eff (cmd :: CMD | e) ReturnCode

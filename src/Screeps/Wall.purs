@@ -1,7 +1,7 @@
 -- | Corresponds to the Screeps API [StructureWall](http://support.screeps.com/hc/en-us/articles/208437125-StructureWall)
 module Screeps.Wall where
 
-import Screeps.Types
+import Screeps.Types (Wall)
 import Screeps.FFI (unsafeField)
 
 ticksToLive :: Wall -> Int

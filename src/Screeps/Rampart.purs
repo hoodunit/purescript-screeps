@@ -3,7 +3,9 @@ module Screeps.Rampart where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Rampart)
 import Screeps.FFI (unsafeField)
 
 isPublic :: Rampart -> Boolean

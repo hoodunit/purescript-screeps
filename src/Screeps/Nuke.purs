@@ -1,7 +1,8 @@
 -- | Corresponds to the Screeps API [Nuke](http://support.screeps.com/hc/en-us/articles/208488525-Nuke)
 module Screeps.Nuke where
 
-import Screeps.Types (Nuke, Id)
+import Screeps.Constants (Id)
+import Screeps.Types (Nuke)
 import Screeps.FFI (unsafeField)
 
 id :: Nuke -> Id Nuke

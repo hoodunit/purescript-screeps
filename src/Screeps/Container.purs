@@ -1,6 +1,7 @@
 -- | Corresponds to the Screeps API [StructureContainer](http://support.screeps.com/hc/en-us/articles/208435885-StructureContainer)
 module Screeps.Container where
 
+import Screeps.Constants
 import Screeps.Types
 import Screeps.FFI (unsafeField)
 

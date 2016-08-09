@@ -3,6 +3,8 @@ module Screeps.Controller where
 
 import Control.Monad.Eff (Eff)
 
+import Screeps.Constants
+import Screeps.Effects (CMD)
 import Screeps.Types
 import Screeps.FFI (runThisEffFn0, unsafeField)
 

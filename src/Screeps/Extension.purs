@@ -1,7 +1,7 @@
 -- | Corresponds to the Screeps API [StructureExtension](http://support.screeps.com/hc/en-us/articles/207711949-StructureExtension)
 module Screeps.Extension where
 
-import Screeps.Types
+import Screeps.Types (Extension)
 import Screeps.FFI (unsafeField)
 
 energy :: Extension -> Int

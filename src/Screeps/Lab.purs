@@ -3,7 +3,9 @@ module Screeps.Lab where
 
 import Control.Monad.Eff (Eff)
 
-import Screeps.Types
+import Screeps.Constants (ReturnCode)
+import Screeps.Effects (CMD)
+import Screeps.Types (Creep, Lab)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 
 cooldown :: Lab -> Int

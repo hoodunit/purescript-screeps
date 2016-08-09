@@ -2,6 +2,12 @@
 
 Corresponds to the Screeps API [StructureSpawn](http://support.screeps.com/hc/en-us/articles/205990342-StructureSpawn)
 
+#### `CreepInfo`
+
+``` purescript
+type CreepInfo = { name :: String, needTime :: Int, remainingTime :: Int }
+```
+
 #### `energy`
 
 ``` purescript
@@ -30,12 +36,6 @@ name :: Spawn -> String
 
 ``` purescript
 spawning :: Spawn -> Maybe CreepInfo
-```
-
-#### `CreepInfo`
-
-``` purescript
-type CreepInfo = { name :: String, needTime :: Int, remainingTime :: Int }
 ```
 
 #### `canCreateCreep`
