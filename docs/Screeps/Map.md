@@ -8,6 +8,18 @@ Corresponds to the Screeps API [Map](http://support.screeps.com/hc/en-us/article
 type ExitsInfo = { 1 :: String, 3 :: String, 5 :: String, 7 :: String }
 ```
 
+#### `RoomRoute`
+
+``` purescript
+type RoomRoute = Array ExitToRoom
+```
+
+#### `ExitToRoom`
+
+``` purescript
+type ExitToRoom = { exit :: FindType Unit, room :: String }
+```
+
 #### `describeExits`
 
 ``` purescript
@@ -26,18 +38,6 @@ findExit :: Room -> Room -> ReturnCode
 findExit' :: String -> String -> ReturnCode
 ```
 
-#### `RoomRoute`
-
-``` purescript
-type RoomRoute = Array ExitToRoom
-```
-
-#### `ExitToRoom`
-
-``` purescript
-type ExitToRoom = { exit :: FindType Unit, room :: String }
-```
-
 #### `findRoute`
 
 ``` purescript
@@ -54,24 +54,6 @@ findRoute' :: String -> String -> RoomRoute
 
 ``` purescript
 getRoomLinearDistance :: String -> String -> Int
-```
-
-#### `terrain_plain`
-
-``` purescript
-terrain_plain :: Terrain
-```
-
-#### `terrain_swamp`
-
-``` purescript
-terrain_swamp :: Terrain
-```
-
-#### `terrain_wall`
-
-``` purescript
-terrain_wall :: Terrain
 ```
 
 #### `getTerrainAt`

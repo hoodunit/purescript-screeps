@@ -59,7 +59,7 @@ findClosestByPath :: forall a. RoomPosition -> FindType a -> Maybe a
 #### `findClosestByPath'`
 
 ``` purescript
-findClosestByPath' :: RoomPosition -> Array RoomPosition -> Maybe (RoomObject Unit)
+findClosestByPath' :: RoomPosition -> Array RoomPosition -> Maybe RoomPosition
 ```
 
 #### `findClosestByRange`
@@ -71,7 +71,7 @@ findClosestByRange :: forall a. RoomPosition -> FindType a -> Maybe a
 #### `findClosestByRange'`
 
 ``` purescript
-findClosestByRange' :: RoomPosition -> Array RoomPosition -> Maybe (RoomObject Unit)
+findClosestByRange' :: RoomPosition -> Array RoomPosition -> Maybe RoomPosition
 ```
 
 #### `findInRange`
@@ -83,7 +83,7 @@ findInRange :: forall a. RoomPosition -> FindType a -> Int -> Array a
 #### `findInRange'`
 
 ``` purescript
-findInRange' :: RoomPosition -> Array RoomPosition -> Int -> Array (RoomObject Unit)
+findInRange' :: RoomPosition -> Array RoomPosition -> Int -> Array RoomPosition
 ```
 
 #### `findPathTo`
@@ -164,16 +164,10 @@ isNearTo :: RoomPosition -> Int -> Int -> Boolean
 isNearTo' :: RoomPosition -> RoomPosition -> Boolean
 ```
 
-#### `look`
-
-``` purescript
-look :: RoomPosition -> Array (RoomObject Unit)
-```
-
 #### `lookFor`
 
 ``` purescript
-lookFor :: forall a. RoomPosition -> LookType a -> Array a
+lookFor :: forall a. RoomPosition -> LookType a -> a
 ```
 
 

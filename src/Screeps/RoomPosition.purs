@@ -6,7 +6,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, Direction, FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, StructureType)
+import Screeps.Types (Color, Direction, FindType, LookType, Path, ReturnCode, RoomPosition, StructureType)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, unsafeField)
 import Screeps.Room (FindPathOpts)
 
@@ -37,20 +37,20 @@ createFlag'' pos name color secondaryColor = runThisEffFn3 "createFlag" pos name
 findClosestByPath :: forall a. RoomPosition -> FindType a -> Maybe a
 findClosestByPath pos findType = toMaybe $ runThisFn1 "findClosestByPath" pos findType
 
-findClosestByPath' :: RoomPosition -> Array RoomPosition -> Maybe (RoomObject Unit)
+findClosestByPath' :: RoomPosition -> Array RoomPosition -> Maybe RoomPosition
 findClosestByPath' pos objects = toMaybe $ runThisFn1 "findClosestByPath" pos objects
 
 findClosestByRange :: forall a. RoomPosition -> FindType a -> Maybe a
 findClosestByRange pos findType = toMaybe $ runThisFn1 "findClosestByRange" pos findType
 
-findClosestByRange' :: RoomPosition -> Array RoomPosition -> Maybe (RoomObject Unit)
+findClosestByRange' :: RoomPosition -> Array RoomPosition -> Maybe RoomPosition
 findClosestByRange' pos objects = toMaybe $ runThisFn1 "findClosestByRange" pos objects
 
 findInRange :: forall a. RoomPosition -> FindType a -> Int -> Array a
 findInRange pos findType range = runThisFn2 "findInRange" pos findType range
 
--- TODO: parse return types?
-findInRange' :: RoomPosition -> Array RoomPosition -> Int -> Array (RoomObject Unit)
+-- TODO: make this more flexible as in original API
+findInRange' :: RoomPosition -> Array RoomPosition -> Int -> Array RoomPosition
 findInRange' pos findType range = runThisFn2 "findInRange" pos findType range
 
 findPathTo :: RoomPosition -> Int -> Int -> Path
@@ -92,8 +92,7 @@ isNearTo pos x' y' = runThisFn2 "isNearTo" pos x' y'
 isNearTo' :: RoomPosition -> RoomPosition -> Boolean
 isNearTo' pos otherPos = runThisFn1 "isNearTo" pos otherPos
 
-look :: RoomPosition -> Array (RoomObject Unit)
-look = runThisFn0 "look"
+-- look function omitted - use lookFor
 
-lookFor :: forall a. RoomPosition -> LookType a -> Array a
+lookFor :: forall a. RoomPosition -> LookType a -> a
 lookFor = runThisFn1 "lookFor"

@@ -6,7 +6,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Controller, FindType, LookType, Mode, Path, ReturnCode, Room, RoomObject, RoomPosition, Storage, StructureType, Terminal)
+import Screeps.Types (Controller, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, Terminal)
 import Screeps.FFI (runThisEffFn2, runThisEffFn3, runThisFn1, runThisFn2, runThisFn3, runThisFn5, runThisFn6, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: *
@@ -97,26 +97,15 @@ findPath' = runThisFn3 "findPath"
 getPositionAt :: Room -> Int -> Int -> RoomPosition
 getPositionAt = runThisFn2 "getPositionAt"
 
--- TODO: returned types?
-lookAt :: Room -> Int -> Int -> Array (RoomObject Unit)
-lookAt = runThisFn2 "lookAt"
+-- lookAt omitted - use lookForAt
+-- lookAtArea omitted - use lookForAtArea
 
--- TODO: returned types?
-lookAt' :: Room -> RoomPosition -> Array (RoomObject Unit)
-lookAt' = runThisFn1 "lookAt"
-
--- TODO: returned types?
-lookAtArea :: Room -> Int -> Int -> Int -> Int -> Boolean -> Array (RoomObject Unit)
-lookAtArea r top left bot right asArray = runThisFn5 "lookAt" r top left bot right asArray
-
--- TODO: returned types?
-lookForAt :: forall a. Room -> LookType a -> Int -> Int -> Array a
+lookForAt :: forall a. Room -> LookType a -> Int -> Int -> a
 lookForAt = runThisFn2 "lookForAt"
 
--- TODO: returned types?
-lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> Array a
+lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> a
 lookForAt' = runThisFn2 "lookForAt"
 
--- TODO: returned types?
-lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Boolean -> Array a
-lookForAtArea r t top left bot right asArray = runThisFn6 "lookForAt" r t top left bot right asArray
+-- TODO: implement this
+-- lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Boolean -> Array a
+-- lookForAtArea r t top left bot right asArray = runThisFn6 "lookForAt" r t top left bot right asArray

@@ -140,40 +140,16 @@ findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> FindPathOpts o ->
 getPositionAt :: Room -> Int -> Int -> RoomPosition
 ```
 
-#### `lookAt`
-
-``` purescript
-lookAt :: Room -> Int -> Int -> Array (RoomObject Unit)
-```
-
-#### `lookAt'`
-
-``` purescript
-lookAt' :: Room -> RoomPosition -> Array (RoomObject Unit)
-```
-
-#### `lookAtArea`
-
-``` purescript
-lookAtArea :: Room -> Int -> Int -> Int -> Int -> Boolean -> Array (RoomObject Unit)
-```
-
 #### `lookForAt`
 
 ``` purescript
-lookForAt :: forall a. Room -> LookType a -> Int -> Int -> Array a
+lookForAt :: forall a. Room -> LookType a -> Int -> Int -> a
 ```
 
 #### `lookForAt'`
 
 ``` purescript
-lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> Array a
-```
-
-#### `lookForAtArea`
-
-``` purescript
-lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Boolean -> Array a
+lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> a
 ```
 
 
