@@ -1,5 +1,7 @@
 ## Module Screeps.Mineral
 
+Corresponds to the Screeps API [Mineral](http://support.screeps.com/hc/en-us/articles/207218579-Mineral)
+
 #### `mineralAmount`
 
 ``` purescript

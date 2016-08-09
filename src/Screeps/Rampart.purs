@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureRampart](http://support.screeps.com/hc/en-us/articles/207712959-StructureRampart)
 module Screeps.Rampart where
 
 import Control.Monad.Eff (Eff)

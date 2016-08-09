@@ -1,5 +1,7 @@
 ## Module Screeps.PowerBank
 
+Corresponds to the Screeps API [StructurePowerBank](http://support.screeps.com/hc/en-us/articles/207712729-StructurePowerBank)
+
 #### `power`
 
 ``` purescript

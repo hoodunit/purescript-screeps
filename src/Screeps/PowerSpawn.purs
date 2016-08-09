@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructurePowerSpawn](http://support.screeps.com/hc/en-us/articles/208436585-StructurePowerSpawn)
 module Screeps.PowerSpawn where
 
 import Control.Monad.Eff (Eff)

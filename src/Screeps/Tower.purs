@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureTower](http://support.screeps.com/hc/en-us/articles/208437105-StructureTower)
 module Screeps.Tower where
 
 import Control.Monad.Eff (Eff)

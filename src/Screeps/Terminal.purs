@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureTerminal](http://support.screeps.com/hc/en-us/articles/207713399-StructureTerminal)
 module Screeps.Terminal where
 
 import Control.Monad.Eff (Eff)

@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-us/articles/203079201-RoomPosition)
 module Screeps.RoomPosition where
 
 import Prelude

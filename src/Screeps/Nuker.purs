@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureNuker](http://support.screeps.com/hc/en-us/articles/208488255-StructureNuker)
 module Screeps.Nuker where
 
 import Control.Monad.Eff (Eff)

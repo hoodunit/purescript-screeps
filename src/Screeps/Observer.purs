@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureObserver](http://support.screeps.com/hc/en-us/articles/208436365-StructureObserver)
 module Screeps.Observer where
 
 import Control.Monad.Eff (Eff)

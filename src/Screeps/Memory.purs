@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps APIs [Memory](http://support.screeps.com/hc/en-us/articles/203084991-API-Reference) and [RawMemory](http://support.screeps.com/hc/en-us/articles/205619121-RawMemory)
 module Screeps.Memory where
 
 import Prelude

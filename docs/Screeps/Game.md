@@ -1,5 +1,7 @@
 ## Module Screeps.Game
 
+Corresponds to the Screeps API [Game](http://support.screeps.com/hc/en-us/articles/203016382-Game)
+
 #### `Game`
 
 ``` purescript

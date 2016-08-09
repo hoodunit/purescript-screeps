@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureController](http://support.screeps.com/hc/en-us/articles/207711889-StructureController)
 module Screeps.Controller where
 
 import Control.Monad.Eff (Eff)

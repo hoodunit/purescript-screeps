@@ -28,3 +28,5 @@ To deploy your code you need to expose it to Screeps from the exported CommonJS 
 ## Usage
 
 Module documentation is [here](https://github.com/nicholaskariniemi/purescript-screeps/tree/master/docs).
+
+In most cases you will import `Screeps.Types`, which contains all of the major types, and then one or more of the other modules. Most modules correspond directly to a Screeps API class/object.

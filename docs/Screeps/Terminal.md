@@ -1,5 +1,7 @@
 ## Module Screeps.Terminal
 
+Corresponds to the Screeps API [StructureTerminal](http://support.screeps.com/hc/en-us/articles/207713399-StructureTerminal)
+
 #### `store`
 
 ``` purescript

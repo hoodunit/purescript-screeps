@@ -1,5 +1,7 @@
 ## Module Screeps.Controller
 
+Corresponds to the Screeps API [StructureController](http://support.screeps.com/hc/en-us/articles/207711889-StructureController)
+
 #### `level`
 
 ``` purescript

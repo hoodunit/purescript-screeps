@@ -1,5 +1,7 @@
 ## Module Screeps.PowerSpawn
 
+Corresponds to the Screeps API [StructurePowerSpawn](http://support.screeps.com/hc/en-us/articles/208436585-StructurePowerSpawn)
+
 #### `energy`
 
 ``` purescript

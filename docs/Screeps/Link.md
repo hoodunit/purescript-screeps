@@ -1,5 +1,7 @@
 ## Module Screeps.Link
 
+Corresponds to the Screeps API [StructureLink](http://support.screeps.com/hc/en-us/articles/208436275-StructureLink)
+
 #### `cooldown`
 
 ``` purescript

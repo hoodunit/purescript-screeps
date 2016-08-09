@@ -1,3 +1,4 @@
+-- | Internal helper module for JavaScript FFI
 module Screeps.FFI where
 
 import Prelude

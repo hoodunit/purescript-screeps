@@ -1,5 +1,7 @@
 ## Module Screeps.FFI
 
+Internal helper module for JavaScript FFI
+
 #### `unsafeField`
 
 ``` purescript

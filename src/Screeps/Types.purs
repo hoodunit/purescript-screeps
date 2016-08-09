@@ -1,3 +1,5 @@
+-- | This module defines almost all of the types and constants used in the library.
+-- | Functions for using particular types are defined in their own modules.
 module Screeps.Types where
 
 import Prelude
@@ -6,8 +8,13 @@ import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 import Data.Maybe (Maybe)
 
+-- | Tag for functions which execute a Screeps command as a side effect e.g. to move a creep.
 foreign import data CMD :: !
+
+-- | Memory accesses are tagged with this effect.
 foreign import data MEMORY :: !
+
+-- | For time-dependent functions where the output changes depending on when it is called.
 foreign import data TIME :: !
 
 foreign import data RawOwnedStructure :: * -> *

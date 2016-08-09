@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [Structure](http://support.screeps.com/hc/en-us/articles/203079221-Structure)
 module Screeps.Structure where
 
 import Prelude

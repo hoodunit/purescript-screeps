@@ -1,5 +1,7 @@
 ## Module Screeps.Creep
 
+Corresponds to the Screeps API [Creep](http://support.screeps.com/hc/en-us/articles/203013212-Creep)
+
 #### `body`
 
 ``` purescript

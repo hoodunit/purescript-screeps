@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [Flag](http://support.screeps.com/hc/en-us/articles/203079181-Flag)
 module Screeps.Flag where
 
 import Control.Monad.Eff (Eff)

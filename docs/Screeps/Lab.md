@@ -1,5 +1,7 @@
 ## Module Screeps.Lab
 
+Corresponds to the Screeps API [StructureLab](http://support.screeps.com/hc/en-us/articles/208436195-StructureLab)
+
 #### `cooldown`
 
 ``` purescript

@@ -1,5 +1,7 @@
 ## Module Screeps.Rampart
 
+Corresponds to the Screeps API [StructureRampart](http://support.screeps.com/hc/en-us/articles/207712959-StructureRampart)
+
 #### `isPublic`
 
 ``` purescript

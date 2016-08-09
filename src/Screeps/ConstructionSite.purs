@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [ConstructionSite](http://support.screeps.com/hc/en-us/articles/203016342-ConstructionSite)
 module Screeps.ConstructionSite where
 
 import Control.Monad.Eff (Eff)

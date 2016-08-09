@@ -1,5 +1,7 @@
 ## Module Screeps.Tower
 
+Corresponds to the Screeps API [StructureTower](http://support.screeps.com/hc/en-us/articles/208437105-StructureTower)
+
 #### `energy`
 
 ``` purescript

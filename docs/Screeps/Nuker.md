@@ -1,5 +1,7 @@
 ## Module Screeps.Nuker
 
+Corresponds to the Screeps API [StructureNuker](http://support.screeps.com/hc/en-us/articles/208488255-StructureNuker)
+
 #### `energy`
 
 ``` purescript

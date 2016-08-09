@@ -1,5 +1,7 @@
 ## Module Screeps.Map
 
+Corresponds to the Screeps API [Map](http://support.screeps.com/hc/en-us/articles/203079191-Map)
+
 #### `ExitsInfo`
 
 ``` purescript

@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureSpawn](http://support.screeps.com/hc/en-us/articles/205990342-StructureSpawn)
 module Screeps.Spawn where
 
 import Prelude

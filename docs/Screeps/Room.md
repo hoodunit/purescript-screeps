@@ -1,5 +1,7 @@
 ## Module Screeps.Room
 
+Corresponds to the Screeps API [Room](http://support.screeps.com/hc/en-us/articles/203079011-Room)
+
 #### `RoomGlobal`
 
 ``` purescript

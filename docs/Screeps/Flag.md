@@ -1,5 +1,7 @@
 ## Module Screeps.Flag
 
+Corresponds to the Screeps API [Flag](http://support.screeps.com/hc/en-us/articles/203079181-Flag)
+
 #### `color`
 
 ``` purescript

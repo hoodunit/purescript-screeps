@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [Map](http://support.screeps.com/hc/en-us/articles/203079191-Map)
 module Screeps.Map where
 
 import Prelude

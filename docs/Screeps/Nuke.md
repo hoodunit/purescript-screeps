@@ -1,5 +1,7 @@
 ## Module Screeps.Nuke
 
+Corresponds to the Screeps API [Nuke](http://support.screeps.com/hc/en-us/articles/208488525-Nuke)
+
 #### `id`
 
 ``` purescript

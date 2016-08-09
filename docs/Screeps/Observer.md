@@ -1,5 +1,7 @@
 ## Module Screeps.Observer
 
+Corresponds to the Screeps API [StructureObserver](http://support.screeps.com/hc/en-us/articles/208436365-StructureObserver)
+
 #### `observeRoom`
 
 ``` purescript

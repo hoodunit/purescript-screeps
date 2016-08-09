@@ -1,5 +1,7 @@
 ## Module Screeps.ConstructionSite
 
+Corresponds to the Screeps API [ConstructionSite](http://support.screeps.com/hc/en-us/articles/203016342-ConstructionSite)
+
 #### `id`
 
 ``` purescript

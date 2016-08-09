@@ -1,3 +1,4 @@
+-- | Corresponds to the Screeps API [StructureLink](http://support.screeps.com/hc/en-us/articles/208436275-StructureLink)
 module Screeps.Link where
 
 import Control.Monad.Eff (Eff)

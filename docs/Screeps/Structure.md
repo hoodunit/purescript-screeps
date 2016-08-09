@@ -1,5 +1,7 @@
 ## Module Screeps.Structure
 
+Corresponds to the Screeps API [Structure](http://support.screeps.com/hc/en-us/articles/203079221-Structure)
+
 #### `hits`
 
 ``` purescript
