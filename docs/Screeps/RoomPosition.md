@@ -167,7 +167,7 @@ isNearTo' :: RoomPosition -> RoomPosition -> Boolean
 #### `lookFor`
 
 ``` purescript
-lookFor :: forall a. RoomPosition -> LookType a -> Maybe a
+lookFor :: forall a. RoomPosition -> LookType a -> Array a
 ```
 
 

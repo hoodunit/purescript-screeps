@@ -143,13 +143,13 @@ getPositionAt :: Room -> Int -> Int -> RoomPosition
 #### `lookForAt`
 
 ``` purescript
-lookForAt :: forall a. Room -> LookType a -> Int -> Int -> a
+lookForAt :: forall a. Room -> LookType a -> Int -> Int -> Array a
 ```
 
 #### `lookForAt'`
 
 ``` purescript
-lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> a
+lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> Array a
 ```
 
 

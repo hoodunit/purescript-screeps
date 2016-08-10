@@ -100,10 +100,10 @@ getPositionAt = runThisFn2 "getPositionAt"
 -- lookAt omitted - use lookForAt
 -- lookAtArea omitted - use lookForAtArea
 
-lookForAt :: forall a. Room -> LookType a -> Int -> Int -> a
+lookForAt :: forall a. Room -> LookType a -> Int -> Int -> Array a
 lookForAt = runThisFn2 "lookForAt"
 
-lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> a
+lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> Array a
 lookForAt' = runThisFn2 "lookForAt"
 
 -- TODO: implement this
