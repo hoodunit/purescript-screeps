@@ -164,10 +164,16 @@ isNearTo :: RoomPosition -> Int -> Int -> Boolean
 isNearTo' :: RoomPosition -> RoomPosition -> Boolean
 ```
 
+#### `lookForImpl`
+
+``` purescript
+lookForImpl :: forall a b. RoomPosition -> LookType a -> (b -> Either String (Array a)) -> (b -> Either String (Array a)) -> Either String (Array a)
+```
+
 #### `lookFor`
 
 ``` purescript
-lookFor :: forall a. RoomPosition -> LookType a -> Array a
+lookFor :: forall a. RoomPosition -> LookType a -> Either String (Array a)
 ```
 
 

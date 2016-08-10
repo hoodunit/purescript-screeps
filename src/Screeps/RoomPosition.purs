@@ -3,6 +3,7 @@ module Screeps.RoomPosition where
 
 import Prelude
 import Control.Monad.Eff (Eff)
+import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
@@ -94,5 +95,12 @@ isNearTo' pos otherPos = runThisFn1 "isNearTo" pos otherPos
 
 -- look function omitted - use lookFor
 
-lookFor :: forall a. RoomPosition -> LookType a -> Array a
-lookFor pos lookType = runThisFn1 "lookFor" pos lookType
+foreign import lookForImpl :: forall a.
+  RoomPosition
+  -> LookType a
+  -> (String -> Either String (Array a))
+  -> (Array a -> Either String (Array a))
+  -> Either String (Array a)
+
+lookFor :: forall a. RoomPosition -> LookType a -> Either String (Array a)
+lookFor pos lookType = lookForImpl pos lookType Left Right

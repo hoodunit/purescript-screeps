@@ -9,3 +9,17 @@ exports.mkRoomPosition = function(x){
     }
   }
 }
+
+exports.lookForImpl = function(pos){
+  return function(type){
+    return function(left){
+      return function(right){
+        try {
+          return right(pos.lookFor(type));
+        } catch(e){
+          return left(e.toString());
+        }
+      }
+    }
+  }
+}
