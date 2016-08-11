@@ -39,8 +39,20 @@ canCreateCreep spawn parts = runThisFn1 "canCreateCreep" spawn parts
 canCreateCreep' :: forall e. Spawn -> Array BodyPartType -> String -> Eff (cmd :: CMD | e) ReturnCode
 canCreateCreep' spawn parts name' = runThisEffFn2 "canCreateCreep" spawn parts name'
 
-foreign import createCreepImpl :: forall e. Spawn -> Array BodyPartType -> (ReturnCode -> Either ReturnCode String) -> (String -> Either ReturnCode String) -> Eff (cmd :: CMD | e) (Either ReturnCode String)
-foreign import createCreepPrimeImpl :: forall e mem. Spawn -> Array BodyPartType -> NullOrUndefined String -> mem -> (ReturnCode -> Either ReturnCode String) -> (String -> Either ReturnCode String) -> Eff (cmd :: CMD | e) (Either ReturnCode String)
+foreign import createCreepImpl :: forall e.
+  Spawn ->
+  Array BodyPartType ->
+  (ReturnCode -> Either ReturnCode String) ->
+  (String -> Either ReturnCode String) ->
+  Eff (cmd :: CMD | e) (Either ReturnCode String)
+foreign import createCreepPrimeImpl :: forall e mem.
+  Spawn ->
+  Array BodyPartType ->
+  NullOrUndefined String ->
+  mem ->
+  (ReturnCode -> Either ReturnCode String) ->
+  (String -> Either ReturnCode String) ->
+  Eff (cmd :: CMD | e) (Either ReturnCode String)
 
 createCreep :: forall e. Spawn -> Array BodyPartType -> Eff (cmd :: CMD | e) (Either ReturnCode String)
 createCreep spawn parts = createCreepImpl spawn parts Left Right
