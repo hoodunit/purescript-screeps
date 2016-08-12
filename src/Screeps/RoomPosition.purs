@@ -7,7 +7,7 @@ import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, Direction, FindType, LookType, Path, ReturnCode, RoomPosition, StructureType)
+import Screeps.Types (Color, Direction, FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, StructureType)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, unsafeField)
 import Screeps.Room (FindPathOpts)
 
@@ -41,11 +41,17 @@ findClosestByPath pos findType = toMaybe $ runThisFn1 "findClosestByPath" pos fi
 findClosestByPath' :: RoomPosition -> Array RoomPosition -> Maybe RoomPosition
 findClosestByPath' pos objects = toMaybe $ runThisFn1 "findClosestByPath" pos objects
 
+findClosestByPath'' :: forall a. RoomPosition -> Array (RoomObject a) -> Maybe (RoomObject a)
+findClosestByPath'' pos objects = toMaybe $ runThisFn1 "findClosestByPath" pos objects
+
 findClosestByRange :: forall a. RoomPosition -> FindType a -> Maybe a
 findClosestByRange pos findType = toMaybe $ runThisFn1 "findClosestByRange" pos findType
 
 findClosestByRange' :: RoomPosition -> Array RoomPosition -> Maybe RoomPosition
 findClosestByRange' pos objects = toMaybe $ runThisFn1 "findClosestByRange" pos objects
+
+findClosestByRange'' :: forall a. RoomPosition -> Array (RoomObject a) -> Maybe (RoomObject a)
+findClosestByRange'' pos objects = toMaybe $ runThisFn1 "findClosestByRange" pos objects
 
 findInRange :: forall a. RoomPosition -> FindType a -> Int -> Array a
 findInRange pos findType range = runThisFn2 "findInRange" pos findType range
@@ -53,6 +59,9 @@ findInRange pos findType range = runThisFn2 "findInRange" pos findType range
 -- TODO: make this more flexible as in original API
 findInRange' :: RoomPosition -> Array RoomPosition -> Int -> Array RoomPosition
 findInRange' pos findType range = runThisFn2 "findInRange" pos findType range
+
+findInRange'' :: forall a. RoomPosition -> Array (RoomObject a) -> Int -> Array (RoomObject a)
+findInRange'' pos findType range = runThisFn2 "findInRange" pos findType range
 
 findPathTo :: RoomPosition -> Int -> Int -> Path
 findPathTo pos x' y' = runThisFn2 "findPathTo" pos x' y'
