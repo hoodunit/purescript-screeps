@@ -10,15 +10,14 @@ exports.mkRoomPosition = function(x){
   }
 }
 
-exports.lookForImpl = function(pos){
-  return function(type){
-    return function(left){
-      return function(right){
-        try {
-          return right(pos.lookFor(type));
-        } catch(e){
-          return left(e.toString());
-        }
+exports.errorToEitherImpl = function(fun){
+  return function(left){
+    return function(right){
+      try {
+        return right(fun());
+      } catch(e){
+        console.log("Caught error: " + e.toString());
+        return left(e);
       }
     }
   }
