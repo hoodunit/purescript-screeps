@@ -38,22 +38,16 @@ remove :: forall e. Flag -> Eff (cmd :: CMD | e) ReturnCode
 setColor :: forall e. Flag -> Color -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
-#### `setColor'`
+#### `setColors`
 
 ``` purescript
-setColor' :: forall e. Flag -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
+setColors :: forall e. Flag -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `setPosition`
 
 ``` purescript
-setPosition :: forall e. Flag -> Int -> Int -> Eff (cmd :: CMD | e) ReturnCode
-```
-
-#### `setPosition'`
-
-``` purescript
-setPosition' :: forall e. Flag -> RoomPosition -> Eff (cmd :: CMD | e) ReturnCode
+setPosition :: forall a e. Flag -> TargetPosition a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 

@@ -14,6 +14,18 @@ data RoomGlobal :: *
 roomGlobal :: RoomGlobal
 ```
 
+#### `PathOptions`
+
+``` purescript
+type PathOptions o = { ignoreCreeps :: Maybe Boolean, ignoreDestructibleStructures :: Maybe Boolean, ignoreRoads :: Maybe Boolean, ignore :: Maybe (Array RoomPosition), avoid :: Maybe (Array RoomPosition), maxOps :: Maybe Int, heuristicWeight :: Maybe Number, serialize :: Maybe Boolean, maxRooms :: Maybe Int | o }
+```
+
+#### `pathOpts`
+
+``` purescript
+pathOpts :: PathOptions ()
+```
+
 #### `controller`
 
 ``` purescript
@@ -77,19 +89,31 @@ deserializePath :: String -> Path
 #### `createConstructionSite`
 
 ``` purescript
-createConstructionSite :: forall e. Room -> Int -> Int -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
-```
-
-#### `createConstructionSite'`
-
-``` purescript
-createConstructionSite' :: forall e. Room -> RoomPosition -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
+createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `createFlag`
 
 ``` purescript
-createFlag :: forall e. Room -> Int -> Int -> Eff (cmd :: CMD | e) ReturnCode
+createFlag :: forall a e. Room -> TargetPosition a -> Eff (cmd :: CMD | e) ReturnCode
+```
+
+#### `createFlagWithName`
+
+``` purescript
+createFlagWithName :: forall a e. Room -> TargetPosition a -> String -> Eff (cmd :: CMD | e) ReturnCode
+```
+
+#### `createFlagWithColor`
+
+``` purescript
+createFlagWithColor :: forall a e. Room -> TargetPosition a -> String -> Color -> Eff (cmd :: CMD | e) ReturnCode
+```
+
+#### `createFlagWithColors`
+
+``` purescript
+createFlagWithColors :: forall a e. Room -> TargetPosition a -> String -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `find`
@@ -101,25 +125,27 @@ find :: forall a. Room -> FindType a -> Array a
 #### `find'`
 
 ``` purescript
-find' :: forall a. Room -> FindType a -> (a -> Boolean) -> Array a
+find' :: forall a. Room -> FindType a -> FilterFn a -> Array a
+```
+
+#### `RoomIdentifier`
+
+``` purescript
+data RoomIdentifier
+  = RoomName String
+  | RoomObj Room
+```
+
+#### `findExitToImpl`
+
+``` purescript
+findExitToImpl :: forall a. Room -> a -> (ReturnCode -> Either ReturnCode (FindType RoomPosition)) -> (FindType RoomPosition -> Either ReturnCode (FindType RoomPosition)) -> Either ReturnCode (FindType RoomPosition)
 ```
 
 #### `findExitTo`
 
 ``` purescript
-findExitTo :: Room -> Room -> Int
-```
-
-#### `FindPathOpts`
-
-``` purescript
-type FindPathOpts o = { ignoreCreeps :: Boolean, ignoreDestructibleStructures :: Boolean, ignoreRoads :: Boolean, maxOps :: Int, heuristicWeight :: Number, serialize :: Boolean, maxRooms :: Int | o }
-```
-
-#### `defaultFindPathOpts`
-
-``` purescript
-defaultFindPathOpts :: FindPathOpts ()
+findExitTo :: Room -> RoomIdentifier -> Either ReturnCode (FindType RoomPosition)
 ```
 
 #### `findPath`
@@ -131,7 +157,7 @@ findPath :: Room -> RoomPosition -> RoomPosition -> Path
 #### `findPath'`
 
 ``` purescript
-findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> FindPathOpts o -> Path
+findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> PathOptions o -> Path
 ```
 
 #### `getPositionAt`
@@ -143,13 +169,7 @@ getPositionAt :: Room -> Int -> Int -> RoomPosition
 #### `lookForAt`
 
 ``` purescript
-lookForAt :: forall a. Room -> LookType a -> Int -> Int -> Array a
-```
-
-#### `lookForAt'`
-
-``` purescript
-lookForAt' :: forall a. Room -> LookType a -> RoomPosition -> Array a
+lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> Array a
 ```
 
 

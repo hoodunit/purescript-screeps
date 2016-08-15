@@ -59,13 +59,7 @@ getRoomLinearDistance :: String -> String -> Int
 #### `getTerrainAt`
 
 ``` purescript
-getTerrainAt :: Int -> Int -> String -> Terrain
-```
-
-#### `getTerrainAt'`
-
-``` purescript
-getTerrainAt' :: RoomPosition -> Terrain
+getTerrainAt :: forall a. TargetPosition a -> String -> Terrain
 ```
 
 #### `isRoomProtected`

@@ -548,4 +548,28 @@ newtype FindType a
 type StructureInfo = { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
 ```
 
+#### `FilterFn`
+
+``` purescript
+type FilterFn a = a -> Boolean
+```
+
+#### `TargetPosition`
+
+``` purescript
+data TargetPosition a
+  = TargetPt Int Int
+  | TargetObj (RoomObject a)
+  | TargetPos RoomPosition
+```
+
+#### `FindContext`
+
+``` purescript
+data FindContext a
+  = OfType (FindType a)
+  | OfObj (Array a)
+  | OfPos (Array RoomPosition)
+```
+
 

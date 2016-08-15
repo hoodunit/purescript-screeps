@@ -14,6 +14,43 @@ mkRoomPosition :: Int -> Int -> String -> RoomPosition
 errorToEitherImpl :: forall a. (Unit -> a) -> (Error -> Either Error a) -> (a -> Either Error a) -> Either Error a
 ```
 
+#### `ClosestPathOptions`
+
+``` purescript
+type ClosestPathOptions = PathOptions (filter :: Maybe (forall a. a -> Boolean), algorithm :: Maybe FindAlgorithm)
+```
+
+#### `FindAlgorithm`
+
+``` purescript
+newtype FindAlgorithm
+  = FindAlgorithm String
+```
+
+#### `algorithmAstar`
+
+``` purescript
+algorithmAstar :: FindAlgorithm
+```
+
+#### `algorithmDijkstra`
+
+``` purescript
+algorithmDijkstra :: FindAlgorithm
+```
+
+#### `closestPathOpts`
+
+``` purescript
+closestPathOpts :: ClosestPathOptions
+```
+
+#### `unwrapContext`
+
+``` purescript
+unwrapContext :: forall a b. FindContext a -> b
+```
+
 #### `errorToEither`
 
 ``` purescript
@@ -50,114 +87,82 @@ createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff (cmd ::
 createFlag :: forall e. RoomPosition -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
 ```
 
-#### `createFlag'`
+#### `createFlagWithName`
 
 ``` purescript
-createFlag' :: forall e. RoomPosition -> String -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithName :: forall e. RoomPosition -> String -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
 ```
 
-#### `createFlag''`
+#### `createFlagWithColor`
 
 ``` purescript
-createFlag'' :: forall e. RoomPosition -> String -> Color -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+```
+
+#### `createFlagWithColors`
+
+``` purescript
+createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
 ```
 
 #### `findClosestByPath`
 
 ``` purescript
-findClosestByPath :: forall a. RoomPosition -> FindType a -> Either Error (Maybe a)
+findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
 ```
 
 #### `findClosestByPath'`
 
 ``` purescript
-findClosestByPath' :: RoomPosition -> Array RoomPosition -> Either Error (Maybe RoomPosition)
-```
-
-#### `findClosestByPath''`
-
-``` purescript
-findClosestByPath'' :: forall a. RoomPosition -> Array (RoomObject a) -> Either Error (Maybe (RoomObject a))
+findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe RoomPosition)
 ```
 
 #### `findClosestByRange`
 
 ``` purescript
-findClosestByRange :: forall a. RoomPosition -> FindType a -> Either Error (Maybe a)
+findClosestByRange :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
 ```
 
 #### `findClosestByRange'`
 
 ``` purescript
-findClosestByRange' :: RoomPosition -> Array RoomPosition -> Either Error (Maybe RoomPosition)
-```
-
-#### `findClosestByRange''`
-
-``` purescript
-findClosestByRange'' :: forall a. RoomPosition -> Array (RoomObject a) -> Either Error (Maybe (RoomObject a))
+findClosestByRange' :: forall a. RoomPosition -> FindContext a -> FilterFn a -> Either Error (Maybe a)
 ```
 
 #### `findInRange`
 
 ``` purescript
-findInRange :: forall a. RoomPosition -> FindType a -> Int -> Either Error (Array a)
+findInRange :: forall a. RoomPosition -> FindContext a -> Int -> Either Error (Array a)
 ```
 
 #### `findInRange'`
 
 ``` purescript
-findInRange' :: RoomPosition -> Array RoomPosition -> Int -> Either Error (Array RoomPosition)
-```
-
-#### `findInRange''`
-
-``` purescript
-findInRange'' :: forall a. RoomPosition -> Array (RoomObject a) -> Int -> Either Error (Array (RoomObject a))
+findInRange' :: forall a. RoomPosition -> FindContext a -> Int -> FilterFn a -> Either Error (Array a)
 ```
 
 #### `findPathTo`
 
 ``` purescript
-findPathTo :: RoomPosition -> Int -> Int -> Either Error Path
+findPathTo :: forall a. RoomPosition -> TargetPosition a -> Either Error Path
 ```
 
 #### `findPathTo'`
 
 ``` purescript
-findPathTo' :: forall o. RoomPosition -> Int -> Int -> FindPathOpts o -> Either Error Path
-```
-
-#### `findPathToPos`
-
-``` purescript
-findPathToPos :: RoomPosition -> RoomPosition -> Either Error Path
-```
-
-#### `findPathToPos'`
-
-``` purescript
-findPathToPos' :: forall o. RoomPosition -> RoomPosition -> FindPathOpts o -> Either Error Path
+findPathTo' :: forall a. RoomPosition -> TargetPosition a -> PathOptions () -> Either Error Path
 ```
 
 #### `getDirectionTo`
 
 ``` purescript
-getDirectionTo :: RoomPosition -> Int -> Int -> Direction
+getDirectionTo :: forall a. RoomPosition -> TargetPosition a -> Direction
 ```
 
 #### `getRangeTo`
 
 ``` purescript
-getRangeTo :: RoomPosition -> Int -> Int -> Int
-```
-
-May return Infinity
-
-#### `getRangeTo'`
-
-``` purescript
-getRangeTo' :: RoomPosition -> RoomPosition -> Int
+getRangeTo :: forall a. RoomPosition -> TargetPosition a -> Int
 ```
 
 May return Infinity
@@ -165,37 +170,19 @@ May return Infinity
 #### `inRangeTo`
 
 ``` purescript
-inRangeTo :: RoomPosition -> Int -> Int -> Int -> Boolean
-```
-
-#### `inRangeTo'`
-
-``` purescript
-inRangeTo' :: RoomPosition -> RoomPosition -> Int -> Boolean
+inRangeTo :: forall a. RoomPosition -> TargetPosition a -> Int -> Boolean
 ```
 
 #### `isEqualTo`
 
 ``` purescript
-isEqualTo :: RoomPosition -> Int -> Int -> Boolean
-```
-
-#### `isEqualTo'`
-
-``` purescript
-isEqualTo' :: RoomPosition -> RoomPosition -> Boolean
+isEqualTo :: forall a. RoomPosition -> TargetPosition a -> Boolean
 ```
 
 #### `isNearTo`
 
 ``` purescript
-isNearTo :: RoomPosition -> Int -> Int -> Boolean
-```
-
-#### `isNearTo'`
-
-``` purescript
-isNearTo' :: RoomPosition -> RoomPosition -> Boolean
+isNearTo :: forall a. RoomPosition -> TargetPosition a -> Boolean
 ```
 
 #### `lookFor`

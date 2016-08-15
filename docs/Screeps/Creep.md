@@ -14,6 +14,18 @@ data CreepCargo :: *
 type BodyPart = { boost :: Maybe String, type :: BodyPartType, hits :: Int }
 ```
 
+#### `MoveOptions`
+
+``` purescript
+type MoveOptions = PathOptions (reusePath :: Maybe Int, serializeMemory :: Maybe Boolean, noPathFinding :: Maybe Boolean)
+```
+
+#### `moveOpts`
+
+``` purescript
+moveOpts :: MoveOptions
+```
+
 #### `body`
 
 ``` purescript
@@ -212,40 +224,16 @@ move :: forall e. Creep -> Direction -> Eff (cmd :: CMD | e) ReturnCode
 moveByPath :: forall e. Creep -> Path -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
-#### `MoveOptions`
-
-``` purescript
-type MoveOptions = FindPathOpts (reusePath :: Int, serializeMemory :: Boolean, noPathFinding :: Boolean)
-```
-
-#### `defaultMoveOpts`
-
-``` purescript
-defaultMoveOpts :: MoveOptions
-```
-
 #### `moveTo`
 
 ``` purescript
-moveTo :: forall e. Creep -> Int -> Int -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
+moveTo :: forall a e. Creep -> TargetPosition a -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
 ```
 
 #### `moveTo'`
 
 ``` purescript
-moveTo' :: forall e. Creep -> Int -> Int -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-```
-
-#### `moveToPos`
-
-``` purescript
-moveToPos :: forall e. Creep -> RoomPosition -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-```
-
-#### `moveToPos'`
-
-``` purescript
-moveToPos' :: forall e. Creep -> RoomPosition -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
+moveTo' :: forall a e. Creep -> TargetPosition a -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
 ```
 
 #### `notifyWhenAttacked`

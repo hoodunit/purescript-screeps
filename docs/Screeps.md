@@ -1604,6 +1604,15 @@ Show Terrain
 type Terminal = OwnedStructure RawTerminal
 ```
 
+#### `TargetPosition`
+
+``` purescript
+data TargetPosition a
+  = TargetPt Int Int
+  | TargetObj (RoomObject a)
+  | TargetPos RoomPosition
+```
+
 #### `StructureType`
 
 ``` purescript
@@ -2018,6 +2027,21 @@ type Flag = RoomObject RawFlag
 ``` purescript
 newtype FindType a
   = FindType Int
+```
+
+#### `FindContext`
+
+``` purescript
+data FindContext a
+  = OfType (FindType a)
+  | OfObj (Array a)
+  | OfPos (Array RoomPosition)
+```
+
+#### `FilterFn`
+
+``` purescript
+type FilterFn a = a -> Boolean
 ```
 
 #### `Extractor`

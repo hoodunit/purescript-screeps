@@ -170,4 +170,22 @@ toNullable :: forall a. Maybe a -> NullOrUndefined a
 toUndefinable :: forall a. Maybe a -> NullOrUndefined a
 ```
 
+#### `JsObject`
+
+``` purescript
+data JsObject :: *
+```
+
+#### `selectMaybesImpl`
+
+``` purescript
+selectMaybesImpl :: forall a. (Maybe a -> Boolean) -> (Maybe a -> a) -> a -> JsObject
+```
+
+#### `selectMaybes`
+
+``` purescript
+selectMaybes :: forall a. a -> JsObject
+```
+
 
