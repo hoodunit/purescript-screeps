@@ -82,14 +82,14 @@ createFlag room (TargetPos pos) = runThisEffFn1 "createFlag" room pos
 createFlag room (TargetObj obj) = runThisEffFn1 "createFlag" room obj
 
 createFlagWithName :: forall a e. Room -> TargetPosition a -> String -> Eff (cmd :: CMD | e) ReturnCode
-createFlagWithName room (TargetPt x' y') name = runThisEffFn3 "createFlag" room x' y' name
-createFlagWithName room (TargetPos pos) name = runThisEffFn2 "createFlag" room pos name
-createFlagWithName room (TargetObj obj) name = runThisEffFn2 "createFlag" room obj name
+createFlagWithName room (TargetPt x' y') name' = runThisEffFn3 "createFlag" room x' y' name'
+createFlagWithName room (TargetPos pos) name' = runThisEffFn2 "createFlag" room pos name'
+createFlagWithName room (TargetObj obj) name' = runThisEffFn2 "createFlag" room obj name'
 
 createFlagWithColor :: forall a e. Room -> TargetPosition a -> String -> Color -> Eff (cmd :: CMD | e) ReturnCode
-createFlagWithColor room (TargetPt x' y') name color = runThisEffFn4 "createFlag" room x' y' name color
-createFlagWithColor room (TargetPos pos) name color = runThisEffFn3 "createFlag" room pos name color
-createFlagWithColor room (TargetObj obj) name color = runThisEffFn3 "createFlag" room obj name color
+createFlagWithColor room (TargetPt x' y') name' color = runThisEffFn4 "createFlag" room x' y' name' color
+createFlagWithColor room (TargetPos pos) name' color = runThisEffFn3 "createFlag" room pos name' color
+createFlagWithColor room (TargetObj obj) name' color = runThisEffFn3 "createFlag" room obj name' color
 
 createFlagWithColors :: forall a e. Room -> TargetPosition a -> String -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
 createFlagWithColors room (TargetPt x' y') name' color color2 =
