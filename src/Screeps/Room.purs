@@ -4,6 +4,7 @@ module Screeps.Room where
 import Prelude
 import Control.Monad.Eff (Eff)
 import Data.Array as Array
+import Data.Either (Either(Left,Right))
 import Data.Maybe (Maybe(Just, Nothing))
 import Data.StrMap as StrMap
 import Data.Tuple (Tuple(Tuple))
@@ -104,9 +105,18 @@ find = runThisFn1 "find"
 find' :: forall a. Room -> FindType a -> FilterFn a -> Array a
 find' room findType filter = runThisFn2 "find" room findType { filter }
 
--- TODO: returns FindType | certain error codes
-findExitTo :: Room -> Room -> Int
-findExitTo = runThisFn1 "findExitTo"
+data RoomIdentifier = RoomName String | RoomObj Room
+
+foreign import findExitToImpl :: forall a.
+  Room ->
+  a ->
+  (ReturnCode -> Either ReturnCode (FindType RoomPosition)) ->
+  (FindType RoomPosition -> Either ReturnCode (FindType RoomPosition)) ->
+  Either ReturnCode (FindType RoomPosition)
+
+findExitTo :: Room -> RoomIdentifier -> Either ReturnCode (FindType RoomPosition)
+findExitTo room (RoomName otherRoomName) = findExitToImpl room otherRoomName Left Right
+findExitTo room (RoomObj otherRoom) = findExitToImpl room otherRoom Left Right
 
 findPath :: Room -> RoomPosition -> RoomPosition -> Path
 findPath = runThisFn2 "findPath"
