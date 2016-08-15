@@ -152,3 +152,19 @@ type StructureInfo =
   , "6" :: Int
   , "7" :: Int
   , "8" :: Int }
+
+-----------------
+-- Helper types and functions
+-----------------
+
+type FilterFn a = a -> Boolean
+
+data TargetPosition a =
+  TargetPt Int Int |
+  TargetObj (RoomObject a) |
+  TargetPos RoomPosition
+
+data FindContext a =
+  OfType (FindType a) |
+  OfObj (Array a) | -- should be RoomObject a
+  OfPos (Array RoomPosition)

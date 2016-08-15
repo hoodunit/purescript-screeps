@@ -6,13 +6,13 @@ import Control.Monad.Eff (Eff)
 import Data.Argonaut.Decode (class DecodeJson)
 import Data.Argonaut.Encode (class EncodeJson)
 import Data.Either (Either)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(Nothing))
 
 import Screeps.Effects (CMD, MEMORY)
-import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, RoomPosition, Source, Structure)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
+import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
 import Screeps.Memory (fromJson, toJson)
-import Screeps.Room (FindPathOpts, defaultFindPathOpts)
+import Screeps.Room (PathOptions)
 
 foreign import data CreepCargo :: *
 
@@ -20,6 +20,26 @@ type BodyPart =
   { boost :: Maybe String
   , type :: BodyPartType
   , hits :: Int }
+
+type MoveOptions = PathOptions
+  ( reusePath :: Maybe Int
+  , serializeMemory :: Maybe Boolean
+  , noPathFinding :: Maybe Boolean )
+
+moveOpts :: MoveOptions
+moveOpts =
+  { ignoreCreeps: Nothing
+  , ignoreDestructibleStructures: Nothing
+  , ignoreRoads: Nothing
+  , ignore: Nothing
+  , avoid: Nothing
+  , maxOps: Nothing
+  , heuristicWeight: Nothing
+  , serialize: Nothing
+  , maxRooms: Nothing
+  , reusePath: Nothing
+  , serializeMemory: Nothing
+  , noPathFinding: Nothing }
 
 body :: Creep -> Array BodyPart
 body creep = unsafeField "body" creep
@@ -121,37 +141,15 @@ move = runThisEffFn1 "move"
 moveByPath :: forall e. Creep -> Path -> Eff (cmd :: CMD | e) ReturnCode
 moveByPath = runThisEffFn1 "moveByPath"
 
-type MoveOptions = FindPathOpts
-  ( reusePath :: Int
-  , serializeMemory :: Boolean
-  , noPathFinding :: Boolean )
+moveTo :: forall a e. Creep -> TargetPosition a -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
+moveTo creep (TargetPt x y) = runThisEffFn2 "moveTo" creep x y
+moveTo creep (TargetPos pos) = runThisEffFn1 "moveTo" creep pos
+moveTo creep (TargetObj obj) = runThisEffFn1 "moveTo" creep obj
 
-defaultMoveOpts :: MoveOptions
-defaultMoveOpts =
-  { ignoreCreeps: defaultFindPathOpts.ignoreCreeps
-  , ignoreDestructibleStructures: defaultFindPathOpts.ignoreDestructibleStructures
-  , ignoreRoads: defaultFindPathOpts.ignoreRoads
-  -- , ignore: defaultFindPathOpts.ignore
-  -- , avoid: defaultFindPathOpts.avoid
-  , maxOps: defaultFindPathOpts.maxOps
-  , heuristicWeight: defaultFindPathOpts.heuristicWeight
-  , serialize: defaultFindPathOpts.serialize
-  , maxRooms: defaultFindPathOpts.maxRooms
-  , reusePath: 5
-  , serializeMemory: true
-  , noPathFinding: false }
-
-moveTo :: forall e. Creep -> Int -> Int -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-moveTo creep x y = runThisEffFn2 "moveTo" creep x y
-
-moveTo' :: forall e. Creep -> Int -> Int -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-moveTo' creep x y opts = runThisEffFn3 "moveTo" creep x y opts
-
-moveToPos :: forall e. Creep -> RoomPosition -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-moveToPos = runThisEffFn1 "moveTo"
-
-moveToPos' :: forall e. Creep -> RoomPosition -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-moveToPos' = runThisEffFn2 "moveTo"
+moveTo' :: forall a e. Creep -> TargetPosition a -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
+moveTo' creep (TargetPt x y) opts = runThisEffFn3 "moveTo" creep x y (selectMaybes opts)
+moveTo' creep (TargetPos pos) opts = runThisEffFn2 "moveTo" creep pos (selectMaybes opts)
+moveTo' creep (TargetObj obj) opts = runThisEffFn2 "moveTo" creep obj (selectMaybes opts)
 
 notifyWhenAttacked :: forall e. Creep -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
 notifyWhenAttacked = runThisEffFn1 "notifyWhenAttacked"

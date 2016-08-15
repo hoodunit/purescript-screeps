@@ -4,7 +4,7 @@ module Screeps.Flag where
 import Control.Monad.Eff (Eff)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, Flag, ReturnCode, RoomPosition)
+import Screeps.Types (Color, Flag, ReturnCode, RoomPosition, TargetPosition(..))
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, unsafeField)
 
 color :: Flag -> Color
@@ -25,11 +25,10 @@ remove = runThisEffFn0 "remove"
 setColor :: forall e. Flag -> Color -> Eff (cmd :: CMD | e) ReturnCode
 setColor = runThisEffFn1 "setColor"
 
-setColor' :: forall e. Flag -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
-setColor' = runThisEffFn2 "setColor"
+setColors :: forall e. Flag -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
+setColors = runThisEffFn2 "setColor"
 
-setPosition :: forall e. Flag -> Int -> Int -> Eff (cmd :: CMD | e) ReturnCode
-setPosition flag x y = runThisEffFn2 "setPosition" flag x y
-
-setPosition' :: forall e. Flag -> RoomPosition -> Eff (cmd :: CMD | e) ReturnCode
-setPosition' = runThisEffFn1 "setPosition"
+setPosition :: forall a e. Flag -> TargetPosition a -> Eff (cmd :: CMD | e) ReturnCode
+setPosition flag (TargetPt x y) = runThisEffFn2 "setPosition" flag x y
+setPosition flag (TargetObj obj) = runThisEffFn1 "setPosition" flag obj
+setPosition flag (TargetPos pos) = runThisEffFn1 "setPosition" flag pos
