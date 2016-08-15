@@ -84,7 +84,7 @@ findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Ma
 findClosestByPath pos ctx = errorToEither \_ ->
   toMaybe $ runThisFn1 "findClosestByPath" pos (unwrapContext ctx)
 
-findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe RoomPosition)
+findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe a)
 findClosestByPath' pos ctx opts = errorToEither \_ ->
   toMaybe $ runThisFn2 "findClosestByPath" pos (unwrapContext ctx) (selectMaybes opts)
 

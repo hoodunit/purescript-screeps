@@ -114,7 +114,7 @@ findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Ma
 #### `findClosestByPath'`
 
 ``` purescript
-findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe RoomPosition)
+findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe a)
 ```
 
 #### `findClosestByRange`
