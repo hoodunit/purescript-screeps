@@ -11,7 +11,7 @@ Install:
 bower install --save purescript-screeps
 ```
 
-To deploy your code you need to expose it to Screeps from the exported CommonJS "loop" function and push it to the Screeps servers. If you are using NodeJS and pulp and running the Screeps game from Steam locally, deployment can be done automatically on changes with by running `npm run watch:deploy` with the following scripts in your `package.json`:
+To deploy your code you need to expose it to Screeps from the exported CommonJS "loop" function and push it to the Screeps servers. If you are using NodeJS and pulp and running the Screeps game from Steam locally, deployment can be done automatically on changes by running `npm run watch:deploy` with the following scripts in your `package.json`:
 
 ```
 # package.json
