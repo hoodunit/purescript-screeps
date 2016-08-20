@@ -9,12 +9,12 @@ import Data.Maybe (Maybe(Just, Nothing))
 import Data.StrMap as StrMap
 import Data.Tuple (Tuple(Tuple))
 
-import Screeps.Effects (CMD)
+import Screeps.Effects (CMD, TICK)
 import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, TargetPosition(..), Terminal)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: *
-foreign import roomGlobal :: Unit -> RoomGlobal
+foreign import getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
 
 -- TODO: costCallback option
 type PathOptions o =
@@ -65,11 +65,11 @@ storage room = toMaybe $ unsafeField "storage" room
 terminal :: Room -> Maybe Terminal
 terminal room = toMaybe $ unsafeField "terminal" room
 
-serializePath :: Path -> String
-serializePath = runThisFn1 "serializePath" (roomGlobal unit)
+serializePath :: RoomGlobal -> Path -> String
+serializePath = runThisFn1 "serializePath"
 
-deserializePath :: String -> Path
-deserializePath = runThisFn1 "deserializePath" (roomGlobal unit)
+deserializePath :: RoomGlobal -> String -> Path
+deserializePath = runThisFn1 "deserializePath"
 
 createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
 createConstructionSite room (TargetPt x' y') strucType = runThisEffFn3 "createConstructionSite" room x' y' strucType

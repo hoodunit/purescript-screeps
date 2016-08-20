@@ -2,7 +2,7 @@
 
 // module Screeps.Room
 
-exports.roomGlobal = function(){ return Room; }
+exports.getRoomGlobal = function(){ return Room; }
 
 exports.findExitToImpl = function(room){
   return function(otherRoom){

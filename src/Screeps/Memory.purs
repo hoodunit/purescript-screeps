@@ -9,35 +9,35 @@ import Data.Argonaut.Printer (printJson)
 import Data.Either (Either)
 import Control.Monad.Eff (Eff)
 
-import Screeps.Effects (MEMORY)
+import Screeps.Effects (MEMORY, TICK)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeGetFieldEff, unsafeSetFieldEff, unsafeDeleteFieldEff)
 
 foreign import data MemoryGlobal :: *
-foreign import memoryGlobal :: Unit -> MemoryGlobal
+foreign import getMemoryGlobal :: forall e. Eff (tick :: TICK | e) MemoryGlobal
 
 foreign import data RawMemoryGlobal :: *
-foreign import rawMemoryGlobal :: Unit -> RawMemoryGlobal
+foreign import getRawMemoryGlobal :: forall e. Eff (tick :: TICK | e) RawMemoryGlobal
 
-get :: forall a e. (DecodeJson a) => String -> Eff ( memory :: MEMORY | e ) (Either String a)
-get key = decodeJson <$> unsafeGetFieldEff key (memoryGlobal unit)
+get :: forall a e. (DecodeJson a) => MemoryGlobal -> String -> Eff ( memory :: MEMORY | e ) (Either String a)
+get memoryGlobal key = decodeJson <$> unsafeGetFieldEff key memoryGlobal
 
-set :: forall a e. (EncodeJson a) => String -> a -> Eff ( memory :: MEMORY | e ) Unit
-set key val = unsafeSetFieldEff key (memoryGlobal unit) (encodeJson val)
+set :: forall a e. (EncodeJson a) => MemoryGlobal -> String -> a -> Eff ( memory :: MEMORY | e ) Unit
+set memoryGlobal key val = unsafeSetFieldEff key memoryGlobal (encodeJson val)
 
-delete :: forall e. String -> Eff ( memory :: MEMORY | e ) Unit
-delete key = unsafeDeleteFieldEff key (memoryGlobal unit)
+delete :: forall e. MemoryGlobal -> String -> Eff ( memory :: MEMORY | e ) Unit
+delete memoryGlobal key = unsafeDeleteFieldEff key memoryGlobal
 
-getRaw :: forall a e. (DecodeJson a) => Eff ( memory :: MEMORY | e) (Either String a)
-getRaw = fromJson <$> runThisEffFn0 "get" (rawMemoryGlobal unit)
+getRaw :: forall a e. (DecodeJson a) => RawMemoryGlobal -> Eff ( memory :: MEMORY | e) (Either String a)
+getRaw rawMemoryGlobal = fromJson <$> runThisEffFn0 "get" rawMemoryGlobal
 
-getRaw' :: forall e. Eff ( memory :: MEMORY | e) String
-getRaw' = runThisEffFn0 "get" (rawMemoryGlobal unit)
+getRaw' :: forall e. RawMemoryGlobal -> Eff ( memory :: MEMORY | e) String
+getRaw' rawMemoryGlobal = runThisEffFn0 "get" rawMemoryGlobal
 
-setRaw :: forall a e. (EncodeJson a) => a -> Eff ( memory :: MEMORY | e) Unit
-setRaw memory = runThisEffFn1 "set" (rawMemoryGlobal unit) (toJson memory)
+setRaw :: forall a e. (EncodeJson a) => RawMemoryGlobal -> a -> Eff ( memory :: MEMORY | e) Unit
+setRaw rawMemoryGlobal memory = runThisEffFn1 "set" rawMemoryGlobal (toJson memory)
 
-setRaw' :: forall e. String -> Eff ( memory :: MEMORY | e) Unit
-setRaw' = runThisEffFn1 "set" (rawMemoryGlobal unit)
+setRaw' :: forall e. RawMemoryGlobal -> String -> Eff ( memory :: MEMORY | e) Unit
+setRaw' = runThisEffFn1 "set"
 
 fromJson :: forall a. (DecodeJson a) => String -> (Either String a)
 fromJson jsonStr = jsonParser jsonStr >>= decodeJson

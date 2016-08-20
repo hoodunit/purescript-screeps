@@ -7,6 +7,8 @@ import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 import Data.Maybe (Maybe)
 
+foreign import data GameGlobal :: *
+
 foreign import data Market :: *
 foreign import data Room :: *
 foreign import data RoomPosition :: *
