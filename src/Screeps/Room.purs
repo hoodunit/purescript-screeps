@@ -14,7 +14,7 @@ import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Pat
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: *
-foreign import roomGlobal :: RoomGlobal
+foreign import roomGlobal :: Unit -> RoomGlobal
 
 -- TODO: costCallback option
 type PathOptions o =
@@ -66,10 +66,10 @@ terminal :: Room -> Maybe Terminal
 terminal room = toMaybe $ unsafeField "terminal" room
 
 serializePath :: Path -> String
-serializePath = runThisFn1 "serializePath" roomGlobal
+serializePath = runThisFn1 "serializePath" (roomGlobal unit)
 
 deserializePath :: String -> Path
-deserializePath = runThisFn1 "deserializePath" roomGlobal
+deserializePath = runThisFn1 "deserializePath" (roomGlobal unit)
 
 createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
 createConstructionSite room (TargetPt x' y') strucType = runThisEffFn3 "createConstructionSite" room x' y' strucType

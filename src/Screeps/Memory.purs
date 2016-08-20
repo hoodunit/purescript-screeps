@@ -13,31 +13,31 @@ import Screeps.Effects (MEMORY)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeGetFieldEff, unsafeSetFieldEff, unsafeDeleteFieldEff)
 
 foreign import data MemoryGlobal :: *
-foreign import memoryGlobal :: MemoryGlobal
+foreign import memoryGlobal :: Unit -> MemoryGlobal
 
 foreign import data RawMemoryGlobal :: *
-foreign import rawMemoryGlobal :: RawMemoryGlobal
+foreign import rawMemoryGlobal :: Unit -> RawMemoryGlobal
 
 get :: forall a e. (DecodeJson a) => String -> Eff ( memory :: MEMORY | e ) (Either String a)
-get key = decodeJson <$> unsafeGetFieldEff key memoryGlobal
+get key = decodeJson <$> unsafeGetFieldEff key (memoryGlobal unit)
 
 set :: forall a e. (EncodeJson a) => String -> a -> Eff ( memory :: MEMORY | e ) Unit
-set key val = unsafeSetFieldEff key memoryGlobal (encodeJson val)
+set key val = unsafeSetFieldEff key (memoryGlobal unit) (encodeJson val)
 
 delete :: forall e. String -> Eff ( memory :: MEMORY | e ) Unit
-delete key = unsafeDeleteFieldEff key memoryGlobal
+delete key = unsafeDeleteFieldEff key (memoryGlobal unit)
 
 getRaw :: forall a e. (DecodeJson a) => Eff ( memory :: MEMORY | e) (Either String a)
-getRaw = fromJson <$> runThisEffFn0 "get" rawMemoryGlobal
+getRaw = fromJson <$> runThisEffFn0 "get" (rawMemoryGlobal unit)
 
 getRaw' :: forall e. Eff ( memory :: MEMORY | e) String
-getRaw' = runThisEffFn0 "get" rawMemoryGlobal
+getRaw' = runThisEffFn0 "get" (rawMemoryGlobal unit)
 
 setRaw :: forall a e. (EncodeJson a) => a -> Eff ( memory :: MEMORY | e) Unit
-setRaw memory = runThisEffFn1 "set" rawMemoryGlobal (toJson memory)
+setRaw memory = runThisEffFn1 "set" (rawMemoryGlobal unit) (toJson memory)
 
 setRaw' :: forall e. String -> Eff ( memory :: MEMORY | e) Unit
-setRaw' = runThisEffFn1 "set" rawMemoryGlobal
+setRaw' = runThisEffFn1 "set" (rawMemoryGlobal unit)
 
 fromJson :: forall a. (DecodeJson a) => String -> (Either String a)
 fromJson jsonStr = jsonParser jsonStr >>= decodeJson

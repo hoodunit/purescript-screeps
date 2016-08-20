@@ -1,3 +1,3 @@
 "use strict";
 
-exports.gameGlobal = Game;
+exports.gameGlobal = function(){ return Game; }

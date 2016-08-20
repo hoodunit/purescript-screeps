@@ -1,4 +1,4 @@
 "use strict";
 
-exports.memoryGlobal = Memory;
-exports.rawMemoryGlobal = RawMemory;
+exports.memoryGlobal = function(){ return Memory; }
+exports.rawMemoryGlobal = function(){ return RawMemory; }

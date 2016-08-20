@@ -11,7 +11,7 @@ import Screeps.Types (ConstructionSite, Creep, Flag, Id, Market, ReturnCode, Roo
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 
 foreign import data Game :: *
-foreign import gameGlobal :: Game
+foreign import gameGlobal :: Unit -> Game
 
 type Gcl =
   { level :: Int
@@ -24,46 +24,46 @@ type Cpu =
   , bucket :: Int }
 
 constructionSites :: StrMap.StrMap ConstructionSite
-constructionSites = unsafeField "constructionSites" gameGlobal
+constructionSites = unsafeField "constructionSites" (gameGlobal unit)
 
 cpu :: Cpu
-cpu = unsafeField "cpu" gameGlobal
+cpu = unsafeField "cpu" (gameGlobal unit)
 
 creeps :: StrMap.StrMap Creep
-creeps = unsafeField "creeps" gameGlobal
+creeps = unsafeField "creeps" (gameGlobal unit)
 
 flags :: StrMap.StrMap Flag
-flags = unsafeField "flags" gameGlobal
+flags = unsafeField "flags" (gameGlobal unit)
 
 gcl :: Gcl
-gcl = unsafeField "gcl" gameGlobal
+gcl = unsafeField "gcl" (gameGlobal unit)
 
 map :: WorldMap
-map = unsafeField "map" gameGlobal
+map = unsafeField "map" (gameGlobal unit)
 
 market :: Market
-market = unsafeField "market" gameGlobal
+market = unsafeField "market" (gameGlobal unit)
 
 rooms :: StrMap.StrMap Room
-rooms = unsafeField "rooms" gameGlobal
+rooms = unsafeField "rooms" (gameGlobal unit)
 
 spawns :: StrMap.StrMap Spawn
-spawns = unsafeField "spawns" gameGlobal
+spawns = unsafeField "spawns" (gameGlobal unit)
 
 structures :: StrMap.StrMap (Structure Unit)
-structures = unsafeField "structures" gameGlobal
+structures = unsafeField "structures" (gameGlobal unit)
 
 time :: Int
-time = unsafeField "time" gameGlobal
+time = unsafeField "time" (gameGlobal unit)
 
 getUsed :: forall e. Eff (time :: TIME | e) Number
-getUsed = runThisEffFn0 "getUsed" cpu
+getUsed = runThisEffFn0 "getUsed" (unsafeField "cpu" (gameGlobal unit))
 
 getObjectById :: forall a. Id a -> Maybe a
-getObjectById id = toMaybe $ runThisFn1 "getObjectById" gameGlobal id
+getObjectById id = toMaybe $ runThisFn1 "getObjectById" (gameGlobal unit) id
 
 notify :: forall e. String -> Eff (cmd :: CMD | e) Unit
-notify msg = runThisEffFn1 "notify" gameGlobal msg
+notify msg = runThisEffFn1 "notify" (gameGlobal unit) msg
 
 notify' :: forall e. String -> Int -> Eff (cmd :: CMD | e) Unit
-notify' msg groupInterval = runThisEffFn2 "notify" gameGlobal msg groupInterval
+notify' msg groupInterval = runThisEffFn2 "notify" (gameGlobal unit) msg groupInterval
