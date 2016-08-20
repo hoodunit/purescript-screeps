@@ -6,6 +6,7 @@ import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 import Data.Maybe (Maybe)
+import Data.StrMap as StrMap
 
 foreign import data GameGlobal :: *
 
@@ -145,15 +146,7 @@ instance showColor :: Show Color where show = gShow
 newtype LookType a = LookType String
 newtype FindType a = FindType Int
 
-type StructureInfo =
-  { "1" :: Int
-  , "2" :: Int
-  , "3" :: Int
-  , "4" :: Int
-  , "5" :: Int
-  , "6" :: Int
-  , "7" :: Int
-  , "8" :: Int }
+type StructureInfo = StrMap.StrMap Int
 
 -----------------
 -- Helper types and functions
