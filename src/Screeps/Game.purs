@@ -56,7 +56,7 @@ structures = unsafeField "structures" gameGlobal
 time :: Int
 time = unsafeField "time" gameGlobal
 
-getUsed :: forall e. Eff (time :: TIME | e) Int
+getUsed :: forall e. Eff (time :: TIME | e) Number
 getUsed = runThisEffFn0 "getUsed" cpu
 
 getObjectById :: forall a. Id a -> Maybe a
