@@ -2,8 +2,8 @@
 module Screeps.RoomPosition where
 
 import Prelude
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Exception (EXCEPTION, Error, error)
+import Control.Monad.Eff (Eff, runPure)
+import Control.Monad.Eff.Exception (EXCEPTION, Error, error, try)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe(Nothing), maybe)
 import Unsafe.Coerce (unsafeCoerce)
@@ -15,11 +15,8 @@ import Screeps.Room (PathOptions)
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 
-foreign import errorToEitherImpl :: forall a.
-  (Unit -> a) ->
-  (Error -> Either Error a) ->
-  (a -> Either Error a) ->
-  Either Error a
+tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
+tryPure = runPure <<< try
 
 type ClosestPathOptions = PathOptions
   ( filter :: Maybe (forall a. a -> Boolean)
@@ -53,9 +50,6 @@ unwrapContext (OfType findType) = unsafeCoerce findType
 unwrapContext (OfObj objects) = unsafeCoerce objects
 unwrapContext (OfPos positions) = unsafeCoerce positions
 
-errorToEither :: forall a. (Unit -> a) -> Either Error a
-errorToEither fun = errorToEitherImpl fun Left Right
-
 roomName :: RoomPosition -> String
 roomName = unsafeField "roomName"
 
@@ -81,41 +75,34 @@ createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Ef
 createFlagWithColors pos name color secondaryColor = runThisEffFn3 "createFlag" pos name color secondaryColor
 
 findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
-findClosestByPath pos ctx = errorToEither \_ ->
-  toMaybe $ runThisFn1 "findClosestByPath" pos (unwrapContext ctx)
+findClosestByPath pos ctx = tryPure (toMaybe <$> runThisEffFn1 "findClosestByPath" pos (unwrapContext ctx))
 
 findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe a)
-findClosestByPath' pos ctx opts = errorToEither \_ ->
-  toMaybe $ runThisFn2 "findClosestByPath" pos (unwrapContext ctx) (selectMaybes opts)
+findClosestByPath' pos ctx opts = tryPure (toMaybe <$> runThisEffFn2 "findClosestByPath" pos ctx' options)
+  where ctx' = unwrapContext ctx
+        options = selectMaybes opts
 
 findClosestByRange :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
-findClosestByRange pos ctx = errorToEither \_ ->
-  toMaybe $ runThisFn1 "findClosestByRange" pos (unwrapContext ctx)
+findClosestByRange pos ctx = tryPure (toMaybe <$> runThisEffFn1 "findClosestByRange" pos (unwrapContext ctx))
 
 findClosestByRange' :: forall a. RoomPosition -> FindContext a -> FilterFn a -> Either Error (Maybe a)
-findClosestByRange' pos ctx filter = errorToEither \_ ->
-  toMaybe $ runThisFn2 "findClosestByRange" pos (unwrapContext ctx) { filter }
+findClosestByRange' pos ctx filter = tryPure (toMaybe <$> runThisEffFn2 "findClosestByRange" pos (unwrapContext ctx) { filter })
 
 findInRange :: forall a. RoomPosition -> FindContext a -> Int -> Either Error (Array a)
-findInRange pos ctx range = errorToEither \_ ->
-  runThisFn2 "findInRange" pos (unwrapContext ctx) range
+findInRange pos ctx range = tryPure (runThisEffFn2 "findInRange" pos (unwrapContext ctx) range)
 
 findInRange' :: forall a. RoomPosition -> FindContext a -> Int -> FilterFn a -> Either Error (Array a)
-findInRange' pos ctx range filter = errorToEither \_ ->
-  runThisFn3 "findInRange" pos (unwrapContext ctx) range { filter }
+findInRange' pos ctx range filter = tryPure (runThisEffFn3 "findInRange" pos (unwrapContext ctx) range { filter })
 
 findPathTo :: forall a. RoomPosition -> TargetPosition a -> Either Error Path
-findPathTo pos (TargetPt x' y') = errorToEither \_ -> runThisFn2 "findPathTo" pos x' y'
-findPathTo pos (TargetPos destPos) = errorToEither \_ -> runThisFn1 "findPathTo" pos destPos
-findPathTo pos (TargetObj obj) = errorToEither \_ -> runThisFn1 "findPathTo" pos obj
+findPathTo pos (TargetPt x' y') = tryPure (runThisEffFn2 "findPathTo" pos x' y')
+findPathTo pos (TargetPos destPos) = tryPure (runThisEffFn1 "findPathTo" pos destPos)
+findPathTo pos (TargetObj obj) = tryPure (runThisEffFn1 "findPathTo" pos obj)
 
 findPathTo' :: forall a. RoomPosition -> TargetPosition a -> PathOptions () -> Either Error Path
-findPathTo' pos (TargetPt x' y') opts = errorToEither \_ ->
-  runThisFn3 "findPathTo" pos x' y' (selectMaybes opts)
-findPathTo' pos (TargetPos destPos) opts = errorToEither \_ ->
-  runThisFn2 "findPathTo" pos destPos (selectMaybes opts)
-findPathTo' pos (TargetObj obj) opts = errorToEither \_ ->
-  runThisFn2 "findPathTo" pos obj (selectMaybes opts)
+findPathTo' pos (TargetPt x' y') opts = tryPure (runThisEffFn3 "findPathTo" pos x' y' (selectMaybes opts))
+findPathTo' pos (TargetPos destPos) opts = tryPure (runThisEffFn2 "findPathTo" pos destPos (selectMaybes opts))
+findPathTo' pos (TargetObj obj) opts = tryPure (runThisEffFn2 "findPathTo" pos obj (selectMaybes opts))
 
 getDirectionTo :: forall a. RoomPosition -> TargetPosition a -> Direction
 getDirectionTo pos (TargetPt x' y') = runThisFn2 "getDirectionTo" pos x' y'
@@ -146,4 +133,4 @@ isNearTo pos (TargetObj obj) = runThisFn1 "isNearTo" pos obj
 -- look function omitted - use lookFor
 
 lookFor :: forall a. RoomPosition -> LookType a -> Either Error (Array a)
-lookFor pos lookType = errorToEither \_ -> runThisFn1 "lookFor" pos lookType
+lookFor pos lookType = tryPure (runThisEffFn1 "lookFor" pos lookType)

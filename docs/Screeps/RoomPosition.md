@@ -8,10 +8,10 @@ Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-u
 mkRoomPosition :: Int -> Int -> String -> RoomPosition
 ```
 
-#### `errorToEitherImpl`
+#### `tryPure`
 
 ``` purescript
-errorToEitherImpl :: forall a. (Unit -> a) -> (Error -> Either Error a) -> (a -> Either Error a) -> Either Error a
+tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
 ```
 
 #### `ClosestPathOptions`
@@ -49,12 +49,6 @@ closestPathOpts :: ClosestPathOptions
 
 ``` purescript
 unwrapContext :: forall a b. FindContext a -> b
-```
-
-#### `errorToEither`
-
-``` purescript
-errorToEither :: forall a. (Unit -> a) -> Either Error a
 ```
 
 #### `roomName`

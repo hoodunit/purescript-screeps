@@ -9,16 +9,3 @@ exports.mkRoomPosition = function(x){
     }
   }
 }
-
-exports.errorToEitherImpl = function(fun){
-  return function(left){
-    return function(right){
-      try {
-        return right(fun());
-      } catch(e){
-        console.log("Caught error: " + e.toString());
-        return left(e);
-      }
-    }
-  }
-}
