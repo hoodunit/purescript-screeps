@@ -8,10 +8,10 @@ Corresponds to the Screeps API [Room](http://support.screeps.com/hc/en-us/articl
 data RoomGlobal :: *
 ```
 
-#### `roomGlobal`
+#### `getRoomGlobal`
 
 ``` purescript
-roomGlobal :: RoomGlobal
+getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
 ```
 
 #### `PathOptions`
@@ -77,13 +77,13 @@ terminal :: Room -> Maybe Terminal
 #### `serializePath`
 
 ``` purescript
-serializePath :: Path -> String
+serializePath :: RoomGlobal -> Path -> String
 ```
 
 #### `deserializePath`
 
 ``` purescript
-deserializePath :: String -> Path
+deserializePath :: RoomGlobal -> String -> Path
 ```
 
 #### `createConstructionSite`

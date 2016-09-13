@@ -16,6 +16,14 @@ data MEMORY :: !
 
 Memory accesses are tagged with this effect.
 
+#### `TICK`
+
+``` purescript
+data TICK :: !
+```
+
+Global scope is cleared periodically, so values depending on global variables like Game and Memory need to be fetched dynamically. This effect enforces this.
+
 #### `TIME`
 
 ``` purescript

@@ -2,16 +2,10 @@
 
 Corresponds to the Screeps API [Game](http://support.screeps.com/hc/en-us/articles/203016382-Game)
 
-#### `Game`
+#### `getGameGlobal`
 
 ``` purescript
-data Game :: *
-```
-
-#### `gameGlobal`
-
-``` purescript
-gameGlobal :: Game
+getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal
 ```
 
 #### `Gcl`
@@ -29,91 +23,91 @@ type Cpu = { limit :: Int, tickLimit :: Int, bucket :: Int }
 #### `constructionSites`
 
 ``` purescript
-constructionSites :: StrMap ConstructionSite
+constructionSites :: GameGlobal -> StrMap ConstructionSite
 ```
 
 #### `cpu`
 
 ``` purescript
-cpu :: Cpu
+cpu :: GameGlobal -> Cpu
 ```
 
 #### `creeps`
 
 ``` purescript
-creeps :: StrMap Creep
+creeps :: GameGlobal -> StrMap Creep
 ```
 
 #### `flags`
 
 ``` purescript
-flags :: StrMap Flag
+flags :: GameGlobal -> StrMap Flag
 ```
 
 #### `gcl`
 
 ``` purescript
-gcl :: Gcl
+gcl :: GameGlobal -> Gcl
 ```
 
 #### `map`
 
 ``` purescript
-map :: WorldMap
+map :: GameGlobal -> WorldMap
 ```
 
 #### `market`
 
 ``` purescript
-market :: Market
+market :: GameGlobal -> Market
 ```
 
 #### `rooms`
 
 ``` purescript
-rooms :: StrMap Room
+rooms :: GameGlobal -> StrMap Room
 ```
 
 #### `spawns`
 
 ``` purescript
-spawns :: StrMap Spawn
+spawns :: GameGlobal -> StrMap Spawn
 ```
 
 #### `structures`
 
 ``` purescript
-structures :: StrMap (Structure Unit)
+structures :: GameGlobal -> StrMap (Structure Unit)
 ```
 
 #### `time`
 
 ``` purescript
-time :: Int
+time :: GameGlobal -> Int
 ```
 
 #### `getUsed`
 
 ``` purescript
-getUsed :: forall e. Eff (time :: TIME | e) Int
+getUsed :: forall e. GameGlobal -> Eff (time :: TIME | e) Number
 ```
 
 #### `getObjectById`
 
 ``` purescript
-getObjectById :: forall a. Id a -> Maybe a
+getObjectById :: forall a. GameGlobal -> Id a -> Maybe a
 ```
 
 #### `notify`
 
 ``` purescript
-notify :: forall e. String -> Eff (cmd :: CMD | e) Unit
+notify :: forall e. GameGlobal -> String -> Eff (cmd :: CMD | e) Unit
 ```
 
 #### `notify'`
 
 ``` purescript
-notify' :: forall e. String -> Int -> Eff (cmd :: CMD | e) Unit
+notify' :: forall e. GameGlobal -> String -> Int -> Eff (cmd :: CMD | e) Unit
 ```
 
 

@@ -1534,6 +1534,14 @@ data TIME :: !
 
 For time-dependent functions where the output changes depending on when it is called.
 
+#### `TICK`
+
+``` purescript
+data TICK :: !
+```
+
+Global scope is cleared periodically, so values depending on global variables like Game and Memory need to be fetched dynamically. This effect enforces this.
+
 #### `MEMORY`
 
 ``` purescript
@@ -1630,7 +1638,7 @@ Show StructureType
 #### `StructureInfo`
 
 ``` purescript
-type StructureInfo = { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+type StructureInfo = StrMap Int
 ```
 
 #### `Structure`
@@ -2014,6 +2022,12 @@ Eq (Id a)
 Show (Id a)
 DecodeJson (Id a)
 EncodeJson (Id a)
+```
+
+#### `GameGlobal`
+
+``` purescript
+data GameGlobal :: *
 ```
 
 #### `Flag`

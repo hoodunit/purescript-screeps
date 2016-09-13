@@ -2,6 +2,12 @@
 
 Defines the main types used in the library and the relationships between them.
 
+#### `GameGlobal`
+
+``` purescript
+data GameGlobal :: *
+```
+
 #### `Market`
 
 ``` purescript
@@ -545,7 +551,7 @@ newtype FindType a
 #### `StructureInfo`
 
 ``` purescript
-type StructureInfo = { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+type StructureInfo = StrMap Int
 ```
 
 #### `FilterFn`
