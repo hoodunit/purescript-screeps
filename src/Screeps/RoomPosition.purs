@@ -7,10 +7,11 @@ import Control.Monad.Eff.Exception (EXCEPTION, Error, error, try)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe(Nothing), maybe)
 import Unsafe.Coerce (unsafeCoerce)
+import Data.Options (Options, Option, opt, options, (:=))
 
 import Screeps.Effects (CMD)
 import Screeps.Types (Color, Direction, FilterFn, FindContext(..), FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, TargetPosition(..), StructureType)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, toMaybe, unsafeField)
 import Screeps.Room (PathOptions)
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
@@ -18,9 +19,42 @@ foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
 tryPure = runPure <<< try
 
-type ClosestPathOptions = PathOptions
-  ( filter :: Maybe (forall a. a -> Boolean)
-  , algorithm :: Maybe FindAlgorithm )
+-- TODO: costCallback option
+foreign import data ClosestPathOptions :: *
+type ClosestPathOption = Option ClosestPathOptions
+
+ignoreCreeps :: ClosestPathOption Boolean
+ignoreCreeps = opt "ignoreCreeps"
+
+ignoreDestructibleStructures :: ClosestPathOption Boolean
+ignoreDestructibleStructures = opt "ignoreDestructibleStructures"
+
+ignoreRoads :: ClosestPathOption Boolean
+ignoreRoads = opt "ignoreRoads"
+
+ignore :: ClosestPathOption (Array RoomPosition)
+ignore = opt "ignore"
+
+avoid :: ClosestPathOption (Array RoomPosition)
+avoid = opt "avoid"
+
+maxOps :: ClosestPathOption Int
+maxOps = opt "maxOps"
+
+heuristicWeight :: ClosestPathOption Number
+heuristicWeight = opt "heuristicWeight"
+
+serialize :: ClosestPathOption Boolean
+serialize = opt "serialize"
+
+maxRooms :: ClosestPathOption Int
+maxRooms = opt "maxRooms"
+
+filter :: forall a. ClosestPathOption (FilterFn a)
+filter = opt "filter"
+
+algorithm :: ClosestPathOption FindAlgorithm
+algorithm = opt "algorithm"
 
 newtype FindAlgorithm = FindAlgorithm String
 
@@ -29,21 +63,6 @@ algorithmAstar = FindAlgorithm "astar"
 
 algorithmDijkstra :: FindAlgorithm
 algorithmDijkstra = FindAlgorithm "dijkstra"
-
-closestPathOpts :: ClosestPathOptions
-closestPathOpts =
-  { ignoreCreeps: Nothing
-  , ignoreDestructibleStructures: Nothing
-  , ignoreRoads: Nothing
-  , ignore: Nothing
-  , avoid: Nothing
-  , maxOps: Nothing
-  , heuristicWeight: Nothing
-  , serialize: Nothing
-  , maxRooms: Nothing
-  , filter: Nothing
-  , algorithm: Nothing
-  }
 
 unwrapContext :: forall a b. FindContext a -> b
 unwrapContext (OfType findType) = unsafeCoerce findType
@@ -77,32 +96,33 @@ createFlagWithColors pos name color secondaryColor = runThisEffFn3 "createFlag" 
 findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
 findClosestByPath pos ctx = tryPure (toMaybe <$> runThisEffFn1 "findClosestByPath" pos (unwrapContext ctx))
 
-findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe a)
-findClosestByPath' pos ctx opts = tryPure (toMaybe <$> runThisEffFn2 "findClosestByPath" pos ctx' options)
+findClosestByPath' :: forall a. RoomPosition -> FindContext a -> Options ClosestPathOptions -> Either Error (Maybe a)
+findClosestByPath' pos ctx opts = tryPure (toMaybe <$> runThisEffFn2 "findClosestByPath" pos ctx' opts')
   where ctx' = unwrapContext ctx
-        options = selectMaybes opts
+        opts' = options opts
 
 findClosestByRange :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
 findClosestByRange pos ctx = tryPure (toMaybe <$> runThisEffFn1 "findClosestByRange" pos (unwrapContext ctx))
 
 findClosestByRange' :: forall a. RoomPosition -> FindContext a -> FilterFn a -> Either Error (Maybe a)
-findClosestByRange' pos ctx filter = tryPure (toMaybe <$> runThisEffFn2 "findClosestByRange" pos (unwrapContext ctx) { filter })
+findClosestByRange' pos ctx f = tryPure (toMaybe <$> runThisEffFn2 "findClosestByRange" pos (unwrapContext ctx) opts)
+    where opts = options $ filter := f
 
 findInRange :: forall a. RoomPosition -> FindContext a -> Int -> Either Error (Array a)
 findInRange pos ctx range = tryPure (runThisEffFn2 "findInRange" pos (unwrapContext ctx) range)
 
-findInRange' :: forall a. RoomPosition -> FindContext a -> Int -> FilterFn a -> Either Error (Array a)
-findInRange' pos ctx range filter = tryPure (runThisEffFn3 "findInRange" pos (unwrapContext ctx) range { filter })
+findInRange' :: forall a. RoomPosition -> FindContext a -> Int -> Options PathOptions -> Either Error (Array a)
+findInRange' pos ctx range opts = tryPure (runThisEffFn3 "findInRange" pos (unwrapContext ctx) range (options opts))
 
 findPathTo :: forall a. RoomPosition -> TargetPosition a -> Either Error Path
 findPathTo pos (TargetPt x' y') = tryPure (runThisEffFn2 "findPathTo" pos x' y')
 findPathTo pos (TargetPos destPos) = tryPure (runThisEffFn1 "findPathTo" pos destPos)
 findPathTo pos (TargetObj obj) = tryPure (runThisEffFn1 "findPathTo" pos obj)
 
-findPathTo' :: forall a. RoomPosition -> TargetPosition a -> PathOptions () -> Either Error Path
-findPathTo' pos (TargetPt x' y') opts = tryPure (runThisEffFn3 "findPathTo" pos x' y' (selectMaybes opts))
-findPathTo' pos (TargetPos destPos) opts = tryPure (runThisEffFn2 "findPathTo" pos destPos (selectMaybes opts))
-findPathTo' pos (TargetObj obj) opts = tryPure (runThisEffFn2 "findPathTo" pos obj (selectMaybes opts))
+findPathTo' :: forall a. RoomPosition -> TargetPosition a -> Options PathOptions -> Either Error Path
+findPathTo' pos (TargetPt x' y') opts = tryPure (runThisEffFn3 "findPathTo" pos x' y' (options opts))
+findPathTo' pos (TargetPos destPos) opts = tryPure (runThisEffFn2 "findPathTo" pos destPos (options opts))
+findPathTo' pos (TargetObj obj) opts = tryPure (runThisEffFn2 "findPathTo" pos obj (options opts))
 
 getDirectionTo :: forall a. RoomPosition -> TargetPosition a -> Direction
 getDirectionTo pos (TargetPt x' y') = runThisFn2 "getDirectionTo" pos x' y'

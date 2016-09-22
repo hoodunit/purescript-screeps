@@ -14,7 +14,8 @@
     "purescript-argonaut-codecs": "^1.1.0",
     "purescript-unsafe-coerce": "^1.0.0",
     "purescript-partial": "^1.1.2",
-    "purescript-exceptions": "~1.0.0"
+    "purescript-exceptions": "~1.0.0",
+    "purescript-options": "^1.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^1.0.0"
