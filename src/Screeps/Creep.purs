@@ -6,13 +6,13 @@ import Control.Monad.Eff (Eff)
 import Data.Argonaut.Decode (class DecodeJson)
 import Data.Argonaut.Encode (class EncodeJson)
 import Data.Either (Either)
-import Data.Maybe (Maybe(Nothing))
+import Data.Maybe (Maybe)
+import Data.Options (Options, Option, opt, options)
 
 import Screeps.Effects (CMD, MEMORY)
-import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
+import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..), RoomPosition)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
 import Screeps.Memory (fromJson, toJson)
-import Screeps.Room (PathOptions)
 
 foreign import data CreepCargo :: *
 
@@ -21,25 +21,45 @@ type BodyPart =
   , type :: BodyPartType
   , hits :: Int }
 
-type MoveOptions = PathOptions
-  ( reusePath :: Maybe Int
-  , serializeMemory :: Maybe Boolean
-  , noPathFinding :: Maybe Boolean )
+-- TODO: costCallback option
+foreign import data MoveOptions :: *
+type MoveOption = Option MoveOptions
 
-moveOpts :: MoveOptions
-moveOpts =
-  { ignoreCreeps: Nothing
-  , ignoreDestructibleStructures: Nothing
-  , ignoreRoads: Nothing
-  , ignore: Nothing
-  , avoid: Nothing
-  , maxOps: Nothing
-  , heuristicWeight: Nothing
-  , serialize: Nothing
-  , maxRooms: Nothing
-  , reusePath: Nothing
-  , serializeMemory: Nothing
-  , noPathFinding: Nothing }
+ignoreCreeps :: MoveOption Boolean
+ignoreCreeps = opt "ignoreCreeps"
+
+ignoreDestructibleStructures :: MoveOption Boolean
+ignoreDestructibleStructures = opt "ignoreDestructibleStructures"
+
+ignoreRoads :: MoveOption Boolean
+ignoreRoads = opt "ignoreRoads"
+
+ignore :: MoveOption (Array RoomPosition)
+ignore = opt "ignore"
+
+avoid :: MoveOption (Array RoomPosition)
+avoid = opt "avoid"
+
+maxOps :: MoveOption Int
+maxOps = opt "maxOps"
+
+heuristicWeight :: MoveOption Number
+heuristicWeight = opt "heuristicWeight"
+
+serialize :: MoveOption Boolean
+serialize = opt "serialize"
+
+maxRooms :: MoveOption Int
+maxRooms = opt "maxRooms"
+
+reusePath :: MoveOption Int
+reusePath = opt "reusePath"
+
+serializeMemory :: MoveOption Boolean
+serializeMemory = opt "serializeMemory"
+
+noPathFinding :: MoveOption Boolean
+noPathFinding = opt "noPathFinding"
 
 body :: Creep -> Array BodyPart
 body creep = unsafeField "body" creep
@@ -146,10 +166,10 @@ moveTo creep (TargetPt x y) = runThisEffFn2 "moveTo" creep x y
 moveTo creep (TargetPos pos) = runThisEffFn1 "moveTo" creep pos
 moveTo creep (TargetObj obj) = runThisEffFn1 "moveTo" creep obj
 
-moveTo' :: forall a e. Creep -> TargetPosition a -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
-moveTo' creep (TargetPt x y) opts = runThisEffFn3 "moveTo" creep x y (selectMaybes opts)
-moveTo' creep (TargetPos pos) opts = runThisEffFn2 "moveTo" creep pos (selectMaybes opts)
-moveTo' creep (TargetObj obj) opts = runThisEffFn2 "moveTo" creep obj (selectMaybes opts)
+moveTo' :: forall a e. Creep -> TargetPosition a -> Options MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
+moveTo' creep (TargetPt x y) opts = runThisEffFn3 "moveTo" creep x y (options opts)
+moveTo' creep (TargetPos pos) opts = runThisEffFn2 "moveTo" creep pos (options opts)
+moveTo' creep (TargetObj obj) opts = runThisEffFn2 "moveTo" creep obj (options opts)
 
 notifyWhenAttacked :: forall e. Creep -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
 notifyWhenAttacked = runThisEffFn1 "notifyWhenAttacked"

@@ -17,13 +17,85 @@ type BodyPart = { boost :: Maybe String, type :: BodyPartType, hits :: Int }
 #### `MoveOptions`
 
 ``` purescript
-type MoveOptions = PathOptions (reusePath :: Maybe Int, serializeMemory :: Maybe Boolean, noPathFinding :: Maybe Boolean)
+data MoveOptions :: *
 ```
 
-#### `moveOpts`
+#### `MoveOption`
 
 ``` purescript
-moveOpts :: MoveOptions
+type MoveOption = Option MoveOptions
+```
+
+#### `ignoreCreeps`
+
+``` purescript
+ignoreCreeps :: MoveOption Boolean
+```
+
+#### `ignoreDestructibleStructures`
+
+``` purescript
+ignoreDestructibleStructures :: MoveOption Boolean
+```
+
+#### `ignoreRoads`
+
+``` purescript
+ignoreRoads :: MoveOption Boolean
+```
+
+#### `ignore`
+
+``` purescript
+ignore :: MoveOption (Array RoomPosition)
+```
+
+#### `avoid`
+
+``` purescript
+avoid :: MoveOption (Array RoomPosition)
+```
+
+#### `maxOps`
+
+``` purescript
+maxOps :: MoveOption Int
+```
+
+#### `heuristicWeight`
+
+``` purescript
+heuristicWeight :: MoveOption Number
+```
+
+#### `serialize`
+
+``` purescript
+serialize :: MoveOption Boolean
+```
+
+#### `maxRooms`
+
+``` purescript
+maxRooms :: MoveOption Int
+```
+
+#### `reusePath`
+
+``` purescript
+reusePath :: MoveOption Int
+```
+
+#### `serializeMemory`
+
+``` purescript
+serializeMemory :: MoveOption Boolean
+```
+
+#### `noPathFinding`
+
+``` purescript
+noPathFinding :: MoveOption Boolean
 ```
 
 #### `body`
@@ -233,7 +305,7 @@ moveTo :: forall a e. Creep -> TargetPosition a -> Eff (cmd :: CMD, memory :: ME
 #### `moveTo'`
 
 ``` purescript
-moveTo' :: forall a e. Creep -> TargetPosition a -> MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
+moveTo' :: forall a e. Creep -> TargetPosition a -> Options MoveOptions -> Eff (cmd :: CMD, memory :: MEMORY | e) ReturnCode
 ```
 
 #### `notifyWhenAttacked`

@@ -17,13 +17,67 @@ getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
 #### `PathOptions`
 
 ``` purescript
-type PathOptions o = { ignoreCreeps :: Maybe Boolean, ignoreDestructibleStructures :: Maybe Boolean, ignoreRoads :: Maybe Boolean, ignore :: Maybe (Array RoomPosition), avoid :: Maybe (Array RoomPosition), maxOps :: Maybe Int, heuristicWeight :: Maybe Number, serialize :: Maybe Boolean, maxRooms :: Maybe Int | o }
+data PathOptions :: *
 ```
 
-#### `pathOpts`
+#### `PathOption`
 
 ``` purescript
-pathOpts :: PathOptions ()
+type PathOption = Option PathOptions
+```
+
+#### `ignoreCreeps`
+
+``` purescript
+ignoreCreeps :: PathOption Boolean
+```
+
+#### `ignoreDestructibleStructures`
+
+``` purescript
+ignoreDestructibleStructures :: PathOption Boolean
+```
+
+#### `ignoreRoads`
+
+``` purescript
+ignoreRoads :: PathOption Boolean
+```
+
+#### `ignore`
+
+``` purescript
+ignore :: PathOption (Array RoomPosition)
+```
+
+#### `avoid`
+
+``` purescript
+avoid :: PathOption (Array RoomPosition)
+```
+
+#### `maxOps`
+
+``` purescript
+maxOps :: PathOption Int
+```
+
+#### `heuristicWeight`
+
+``` purescript
+heuristicWeight :: PathOption Number
+```
+
+#### `serialize`
+
+``` purescript
+serialize :: PathOption Boolean
+```
+
+#### `maxRooms`
+
+``` purescript
+maxRooms :: PathOption Int
 ```
 
 #### `controller`
@@ -157,7 +211,7 @@ findPath :: Room -> RoomPosition -> RoomPosition -> Path
 #### `findPath'`
 
 ``` purescript
-findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> PathOptions o -> Path
+findPath' :: Room -> RoomPosition -> RoomPosition -> Options PathOptions -> Path
 ```
 
 #### `getPositionAt`

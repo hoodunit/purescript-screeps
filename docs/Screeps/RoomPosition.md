@@ -17,7 +17,79 @@ tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
 #### `ClosestPathOptions`
 
 ``` purescript
-type ClosestPathOptions = PathOptions (filter :: Maybe (forall a. a -> Boolean), algorithm :: Maybe FindAlgorithm)
+data ClosestPathOptions :: *
+```
+
+#### `ClosestPathOption`
+
+``` purescript
+type ClosestPathOption = Option ClosestPathOptions
+```
+
+#### `ignoreCreeps`
+
+``` purescript
+ignoreCreeps :: ClosestPathOption Boolean
+```
+
+#### `ignoreDestructibleStructures`
+
+``` purescript
+ignoreDestructibleStructures :: ClosestPathOption Boolean
+```
+
+#### `ignoreRoads`
+
+``` purescript
+ignoreRoads :: ClosestPathOption Boolean
+```
+
+#### `ignore`
+
+``` purescript
+ignore :: ClosestPathOption (Array RoomPosition)
+```
+
+#### `avoid`
+
+``` purescript
+avoid :: ClosestPathOption (Array RoomPosition)
+```
+
+#### `maxOps`
+
+``` purescript
+maxOps :: ClosestPathOption Int
+```
+
+#### `heuristicWeight`
+
+``` purescript
+heuristicWeight :: ClosestPathOption Number
+```
+
+#### `serialize`
+
+``` purescript
+serialize :: ClosestPathOption Boolean
+```
+
+#### `maxRooms`
+
+``` purescript
+maxRooms :: ClosestPathOption Int
+```
+
+#### `filter`
+
+``` purescript
+filter :: forall a. ClosestPathOption (FilterFn a)
+```
+
+#### `algorithm`
+
+``` purescript
+algorithm :: ClosestPathOption FindAlgorithm
 ```
 
 #### `FindAlgorithm`
@@ -37,12 +109,6 @@ algorithmAstar :: FindAlgorithm
 
 ``` purescript
 algorithmDijkstra :: FindAlgorithm
-```
-
-#### `closestPathOpts`
-
-``` purescript
-closestPathOpts :: ClosestPathOptions
 ```
 
 #### `unwrapContext`
@@ -108,7 +174,7 @@ findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Ma
 #### `findClosestByPath'`
 
 ``` purescript
-findClosestByPath' :: forall a. RoomPosition -> FindContext a -> ClosestPathOptions -> Either Error (Maybe a)
+findClosestByPath' :: forall a. RoomPosition -> FindContext a -> Options ClosestPathOptions -> Either Error (Maybe a)
 ```
 
 #### `findClosestByRange`
@@ -132,7 +198,7 @@ findInRange :: forall a. RoomPosition -> FindContext a -> Int -> Either Error (A
 #### `findInRange'`
 
 ``` purescript
-findInRange' :: forall a. RoomPosition -> FindContext a -> Int -> FilterFn a -> Either Error (Array a)
+findInRange' :: forall a. RoomPosition -> FindContext a -> Int -> Options PathOptions -> Either Error (Array a)
 ```
 
 #### `findPathTo`
@@ -144,7 +210,7 @@ findPathTo :: forall a. RoomPosition -> TargetPosition a -> Either Error Path
 #### `findPathTo'`
 
 ``` purescript
-findPathTo' :: forall a. RoomPosition -> TargetPosition a -> PathOptions () -> Either Error Path
+findPathTo' :: forall a. RoomPosition -> TargetPosition a -> Options PathOptions -> Either Error Path
 ```
 
 #### `getDirectionTo`

@@ -42,9 +42,3 @@ toNullable = maybe null notNullOrUndefined
 
 toUndefinable :: forall a. Maybe a -> NullOrUndefined a
 toUndefinable = maybe undefined notNullOrUndefined
-
-foreign import data JsObject :: *
-foreign import selectMaybesImpl :: forall a. (Maybe a -> Boolean) -> (Maybe a -> a) -> a -> JsObject
-
-selectMaybes :: forall a. a -> JsObject
-selectMaybes obj = unsafePartial $ selectMaybesImpl isJust fromJust obj

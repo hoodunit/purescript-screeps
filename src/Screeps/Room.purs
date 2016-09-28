@@ -8,38 +8,45 @@ import Data.Either (Either(Left,Right))
 import Data.Maybe (Maybe(Just, Nothing))
 import Data.StrMap as StrMap
 import Data.Tuple (Tuple(Tuple))
+import Data.Options (Options, Option, opt, options)
 
 import Screeps.Effects (CMD, TICK)
 import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, TargetPosition(..), Terminal)
-import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: *
 foreign import getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
 
 -- TODO: costCallback option
-type PathOptions o =
-  { ignoreCreeps :: Maybe Boolean
-  , ignoreDestructibleStructures :: Maybe Boolean
-  , ignoreRoads :: Maybe Boolean
-  , ignore :: Maybe (Array RoomPosition)
-  , avoid :: Maybe (Array RoomPosition)
-  , maxOps :: Maybe Int
-  , heuristicWeight :: Maybe Number
-  , serialize :: Maybe Boolean
-  , maxRooms :: Maybe Int
-  | o }
+foreign import data PathOptions :: *
+type PathOption = Option PathOptions
 
-pathOpts :: PathOptions ()
-pathOpts =
-  { ignoreCreeps: Nothing
-  , ignoreDestructibleStructures: Nothing
-  , ignoreRoads: Nothing
-  , ignore: Nothing
-  , avoid: Nothing
-  , maxOps: Nothing
-  , heuristicWeight: Nothing
-  , serialize: Nothing
-  , maxRooms: Nothing }
+ignoreCreeps :: PathOption Boolean
+ignoreCreeps = opt "ignoreCreeps"
+
+ignoreDestructibleStructures :: PathOption Boolean
+ignoreDestructibleStructures = opt "ignoreDestructibleStructures"
+
+ignoreRoads :: PathOption Boolean
+ignoreRoads = opt "ignoreRoads"
+
+ignore :: PathOption (Array RoomPosition)
+ignore = opt "ignore"
+
+avoid :: PathOption (Array RoomPosition)
+avoid = opt "avoid"
+
+maxOps :: PathOption Int
+maxOps = opt "maxOps"
+
+heuristicWeight :: PathOption Number
+heuristicWeight = opt "heuristicWeight"
+
+serialize :: PathOption Boolean
+serialize = opt "serialize"
+
+maxRooms :: PathOption Int
+maxRooms = opt "maxRooms"
 
 controller :: Room -> Maybe Controller
 controller room = toMaybe $ unsafeField "controller" room
@@ -121,8 +128,8 @@ findExitTo room (RoomObj otherRoom) = findExitToImpl room otherRoom Left Right
 findPath :: Room -> RoomPosition -> RoomPosition -> Path
 findPath = runThisFn2 "findPath"
 
-findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> PathOptions o -> Path
-findPath' room pos1 pos2 opts = runThisFn3 "findPath" room pos1 pos2 (selectMaybes opts)
+findPath' :: Room -> RoomPosition -> RoomPosition -> Options PathOptions -> Path
+findPath' room pos1 pos2 opts = runThisFn3 "findPath" room pos1 pos2 (options opts)
 
 getPositionAt :: Room -> Int -> Int -> RoomPosition
 getPositionAt = runThisFn2 "getPositionAt"
