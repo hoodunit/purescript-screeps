@@ -7,6 +7,7 @@ import Data.Argonaut.Decode (class DecodeJson)
 import Data.Argonaut.Encode (class EncodeJson)
 import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
+import Data.StrMap
 
 import Screeps.Effects (CMD, MEMORY)
 import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
@@ -14,7 +15,8 @@ import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, 
 import Screeps.Memory (fromJson, toJson)
 import Screeps.Room (PathOptions)
 
-foreign import data CreepCargo :: *
+--foreign import data CreepCargo :: *
+type CreepCargo = StrMap Int
 
 type BodyPart =
   { boost :: Maybe String
