@@ -3,8 +3,8 @@ module Screeps.Creep where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Data.Argonaut.Decode (class DecodeJson)
-import Data.Argonaut.Encode (class EncodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
 import Data.StrMap
@@ -12,7 +12,6 @@ import Data.StrMap
 import Screeps.Effects (CMD, MEMORY)
 import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
-import Screeps.Memory (fromJson, toJson)
 import Screeps.Room (PathOptions)
 
 --foreign import data CreepCargo :: *
@@ -130,11 +129,11 @@ heal :: forall e. Creep -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 heal = runThisEffFn1 "heal"
 
 getMemory :: forall a e. (DecodeJson a) => Creep -> String -> Eff ( memory :: MEMORY | e ) (Either String a)
-getMemory creep key = fromJson <$> unsafeGetFieldEff key creepMemory
+getMemory creep key = decodeJson <$> unsafeGetFieldEff key creepMemory
   where creepMemory = unsafeField "memory" creep
 
 setMemory :: forall a e. (EncodeJson a) => Creep -> String -> a -> Eff ( memory :: MEMORY | e ) Unit
-setMemory creep key val = unsafeSetFieldEff key creepMemory (toJson val)
+setMemory creep key val = unsafeSetFieldEff key creepMemory (encodeJson val)
   where creepMemory = unsafeField "memory" creep
 
 move :: forall e. Creep -> Direction -> Eff (cmd :: CMD | e) ReturnCode
