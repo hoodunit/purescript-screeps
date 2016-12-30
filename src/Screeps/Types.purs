@@ -1,12 +1,14 @@
 -- | Defines the main types used in the library and the relationships between them.
 module Screeps.Types where
 
-import Prelude
+import Prelude (class Eq, class Show, show, (<>))
 import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 import Data.Maybe (Maybe)
+import Data.Show  (class Show)
 import Data.StrMap as StrMap
+import Screeps.FFI (unsafeField)
 
 foreign import data GameGlobal :: *
 
@@ -15,8 +17,19 @@ foreign import data Room :: *
 foreign import data RoomPosition :: *
 foreign import data WorldMap :: *
 
+instance showRoomPosition :: Show RoomPosition where
+  show pos = show x <> "," <> show y <> ":" <> roomName
+    where
+      x :: Int
+      x = unsafeField "x" pos
+      y :: Int
+      y = unsafeField "y" pos
+      roomName :: String
+      roomName  = unsafeField "roomName" pos
+
 type RoomObject a = RawRoomObject a
 type Structure a = RoomObject (RawStructure a)
+
 type OwnedStructure a = Structure (RawOwnedStructure a)
 
 type Container = Structure RawContainer
