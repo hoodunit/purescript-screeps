@@ -7,7 +7,8 @@ import Data.Maybe (Maybe)
 import Data.StrMap as StrMap
 
 import Screeps.Effects (CMD, TICK, TIME)
-import Screeps.Types (ConstructionSite, Creep, Flag, GameGlobal, Id, Market, ReturnCode, Room, Spawn, Structure, WorldMap)
+import Screeps.ReturnCode (ReturnCode)
+import Screeps.Types (ConstructionSite, Creep, Flag, GameGlobal, Id, Market, Room, Spawn, Structure, WorldMap)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 
 foreign import getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal

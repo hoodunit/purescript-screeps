@@ -8,7 +8,8 @@ import Screeps.Constants (structure_link)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Link, ReturnCode, Structure)
+import Screeps.Types (Link, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 cooldown :: Link -> Int
 cooldown = unsafeField "cooldown"

@@ -8,7 +8,8 @@ import Screeps.Constants (structure_controller)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Controller, ReturnCode, Structure)
+import Screeps.Types (Controller, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 level :: Controller -> Int
 level = unsafeField "level"

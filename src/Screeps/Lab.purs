@@ -8,7 +8,8 @@ import Screeps.Constants (structure_lab)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Creep, Lab, ReturnCode, Structure)
+import Screeps.Types (Creep, Lab, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 cooldown :: Lab -> Int
 cooldown = unsafeField "cooldown"

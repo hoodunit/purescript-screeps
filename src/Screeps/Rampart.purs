@@ -8,7 +8,8 @@ import Screeps.Constants (structure_rampart)
 import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Rampart, ReturnCode, Structure)
+import Screeps.Types (Rampart, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 isPublic :: Rampart -> Boolean
 isPublic = unsafeField "isPublic"

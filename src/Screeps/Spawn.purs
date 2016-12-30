@@ -10,8 +10,9 @@ import Data.Maybe (Maybe)
 import Screeps.Constants (structure_spawn)
 import Screeps.Effects (CMD)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (BodyPartType, Creep, ReturnCode, Spawn, Structure)
+import Screeps.Types (BodyPartType, Creep, Spawn, Structure)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
+import Screeps.ReturnCode (ReturnCode)
 
 type CreepInfo =
   { name :: String

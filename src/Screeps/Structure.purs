@@ -7,7 +7,8 @@ import Data.Maybe (Maybe(Just, Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Id, ReturnCode, Structure, StructureType)
+import Screeps.ReturnCode (ReturnCode)
+import Screeps.Types (Id, Structure, StructureType)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
 
 hits :: forall a. Structure a -> Int

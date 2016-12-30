@@ -8,7 +8,8 @@ import Screeps.Constants (structure_nuker)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Nuker, ReturnCode, RoomPosition, Structure)
+import Screeps.Types (Nuker, RoomPosition, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 energy :: Nuker -> Int
 energy = unsafeField "energy"

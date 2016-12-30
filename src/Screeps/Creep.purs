@@ -10,7 +10,8 @@ import Data.Maybe (Maybe(Nothing))
 import Data.StrMap
 
 import Screeps.Effects (CMD, MEMORY)
-import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
+import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, Source, Structure, TargetPosition(..))
+import Screeps.ReturnCode (ReturnCode)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
 import Screeps.Room (PathOptions)
 

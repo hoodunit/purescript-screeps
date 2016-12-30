@@ -4,8 +4,9 @@ module Screeps.Flag where
 import Control.Monad.Eff (Eff)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, Flag, ReturnCode, RoomPosition, TargetPosition(..))
+import Screeps.Types (Color, Flag, RoomPosition, TargetPosition(..))
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, unsafeField)
+import Screeps.ReturnCode (ReturnCode)
 
 color :: Flag -> Color
 color = unsafeField "color"

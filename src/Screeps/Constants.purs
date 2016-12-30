@@ -4,24 +4,6 @@ import Prelude
 
 import Screeps.Types
 
-foreign import ok :: ReturnCode
-foreign import err_not_owner :: ReturnCode
-foreign import err_no_path :: ReturnCode
-foreign import err_name_exists :: ReturnCode
-foreign import err_busy :: ReturnCode
-foreign import err_not_found :: ReturnCode
-foreign import err_not_enough_energy :: ReturnCode
-foreign import err_not_enough_resources :: ReturnCode
-foreign import err_invalid_target :: ReturnCode
-foreign import err_full :: ReturnCode
-foreign import err_not_in_range :: ReturnCode
-foreign import err_invalid_args :: ReturnCode
-foreign import err_tired :: ReturnCode
-foreign import err_no_bodypart :: ReturnCode
-foreign import err_not_enough_extensions :: ReturnCode
-foreign import err_rcl_not_enough :: ReturnCode
-foreign import err_gcl_not_enough :: ReturnCode
-
 foreign import find_exit_top :: FindType RoomPosition
 foreign import find_exit_right :: FindType RoomPosition
 foreign import find_exit_bottom :: FindType RoomPosition

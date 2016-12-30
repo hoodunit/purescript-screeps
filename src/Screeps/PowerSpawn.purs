@@ -8,7 +8,8 @@ import Screeps.Constants (structure_power_spawn)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (PowerSpawn, ReturnCode, Structure)
+import Screeps.Types (PowerSpawn, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 energy :: PowerSpawn -> Int
 energy = unsafeField "energy"

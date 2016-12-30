@@ -9,7 +9,8 @@ import Data.Maybe (Maybe(Nothing), maybe)
 import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, Direction, FilterFn, FindContext(..), FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, TargetPosition(..), StructureType)
+import Screeps.Types (Color, Direction, FilterFn, FindContext(..), FindType, LookType, Path, RoomObject, RoomPosition, TargetPosition(..), StructureType)
+import Screeps.ReturnCode (ReturnCode)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 import Screeps.Room (PathOptions)
 

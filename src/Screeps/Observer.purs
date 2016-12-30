@@ -8,7 +8,8 @@ import Screeps.Constants (structure_observer)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Observer, ReturnCode, Structure)
+import Screeps.Types (Observer, Structure)
+import Screeps.ReturnCode (ReturnCode)
 
 observeRoom :: forall e. Observer -> String -> Eff (cmd :: CMD | e) ReturnCode
 observeRoom obs roomName = runThisEffFn1 "observeRoom" obs roomName

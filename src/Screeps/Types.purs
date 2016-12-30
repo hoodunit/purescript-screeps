@@ -9,6 +9,7 @@ import Data.Maybe (Maybe)
 import Data.Show  (class Show)
 import Data.StrMap as StrMap
 import Screeps.FFI (unsafeField)
+import Screeps.ReturnCode
 
 foreign import data GameGlobal :: *
 
@@ -100,12 +101,6 @@ type PathStep =
   , dx :: Number
   , dy :: Number
   , direction :: Direction }
-
-newtype ReturnCode = ReturnCode Int
-derive instance genericReturnCode :: Generic ReturnCode
-instance eqReturnCode :: Eq ReturnCode where eq = gEq
-instance showReturnCode :: Show ReturnCode where
-  show (ReturnCode n) = show n
 
 newtype ResourceType = ResourceType String
 derive instance genericResourceType :: Generic ResourceType
