@@ -25,15 +25,6 @@ exports.find_hostile_construction_sites = FIND_HOSTILE_CONSTRUCTION_SITES;
 exports.find_minerals = FIND_MINERALS;
 exports.find_nukes = FIND_NUKES;
 
-exports.top = TOP;
-exports.top_right = TOP_RIGHT;
-exports.right = RIGHT;
-exports.bottom_right = BOTTOM_RIGHT;
-exports.bottom = BOTTOM;
-exports.bottom_left = BOTTOM_LEFT;
-exports.left = LEFT;
-exports.top_left = TOP_LEFT;
-
 exports.color_red = COLOR_RED;
 exports.color_purple = COLOR_PURPLE;
 exports.color_blue = COLOR_BLUE;

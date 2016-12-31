@@ -1,7 +1,7 @@
 -- | Defines the main types used in the library and the relationships between them.
 module Screeps.Types where
 
-import Prelude (class Eq, class Show, show, (<>))
+import Prelude (class Eq, class Show, show, (<>), (==))
 import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
@@ -10,6 +10,7 @@ import Data.Show  (class Show)
 import Data.StrMap as StrMap
 import Screeps.FFI (unsafeField)
 import Screeps.ReturnCode
+import Screeps.Types.Direction
 
 foreign import data GameGlobal :: *
 
@@ -135,11 +136,6 @@ instance eqId :: Eq (Id a) where eq = gEq
 instance showId :: Show (Id a) where show = gShow
 instance decodeJsonId :: DecodeJson (Id a) where decodeJson = gDecodeJson
 instance encodeJsonId :: EncodeJson (Id a) where encodeJson = gEncodeJson
-
-newtype Direction = Direction Int
-derive instance genericDirection :: Generic Direction
-instance eqDirection :: Eq Direction where eq = gEq
-instance showDirection :: Show Direction where show = gShow
 
 newtype BodyPartType = BodyPartType String
 derive instance genericBodyPartType :: Generic BodyPartType

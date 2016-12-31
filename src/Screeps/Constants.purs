@@ -28,15 +28,6 @@ foreign import find_hostile_construction_sites :: FindType ConstructionSite
 foreign import find_minerals :: FindType Mineral
 foreign import find_nukes :: FindType Nuke
 
-foreign import top :: Direction
-foreign import top_right :: Direction
-foreign import right :: Direction
-foreign import bottom_right :: Direction
-foreign import bottom :: Direction
-foreign import bottom_left :: Direction
-foreign import left :: Direction
-foreign import top_left :: Direction
-
 foreign import color_red :: Color
 foreign import color_purple :: Color
 foreign import color_blue :: Color
