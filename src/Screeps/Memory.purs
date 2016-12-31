@@ -18,6 +18,12 @@ foreign import getMemoryGlobal :: forall e. Eff (tick :: TICK | e) MemoryGlobal
 foreign import data RawMemoryGlobal :: *
 foreign import getRawMemoryGlobal :: forall e. Eff (tick :: TICK | e) RawMemoryGlobal
 
+foreign import getObjectMemory :: forall a.   DecodeJson a
+                               => String -> String -> String -> a
+foreign import setObjectMemory :: forall a e. EncodeJson a
+                               => String -> String -> String -> a
+                               -> Eff (memory :: MEMORY | e) Unit
+
 get :: forall a e. (DecodeJson a) => MemoryGlobal -> String -> Eff ( memory :: MEMORY | e ) (Either String a)
 get memoryGlobal key = decodeJson <$> unsafeGetFieldEff key memoryGlobal
 

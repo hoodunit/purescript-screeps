@@ -152,9 +152,9 @@ newtype FindType a = FindType Int
 
 type StructureInfo = StrMap.StrMap Int
 
------------------
--- Helper types and functions
------------------
+--------------------------------
+-- Helper types and functions --
+--------------------------------
 
 type FilterFn a = a -> Boolean
 
