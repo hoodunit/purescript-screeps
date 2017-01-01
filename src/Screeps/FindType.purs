@@ -4,11 +4,13 @@ module Screeps.FindType where
 import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.ConstructionSite (ConstructionSite)
 --import Screeps.Creep (Creep)
-import Screeps.Flag (Flag)
-import Screeps.Source (Source)
+import Screeps.Flag    (Flag)
 import Screeps.Mineral (Mineral)
-import Screeps.Types (FindType, LookType, Resource, AnyStructure, Nuke, Creep, Terrain)
-import Screeps.Spawn (Spawn)
+import Screeps.Nuke    (Nuke)
+import Screeps.Resource(Resource)
+import Screeps.Source  (Source)
+import Screeps.Spawn   (Spawn)
+import Screeps.Types   (FindType, LookType, AnyStructure, Creep, Terrain)
 
 foreign import find_exit_top :: FindType RoomPosition
 foreign import find_exit_right :: FindType RoomPosition

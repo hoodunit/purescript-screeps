@@ -63,12 +63,6 @@ foreign import data Creep  :: *
 instance creepIsRoomObject :: RoomObject     Creep where
 instance creepIsOwned      :: Owned      Creep
 
-foreign import data Nuke :: *
-instance objectNuke      :: RoomObject     Nuke where
-
-foreign import data Resource :: *
-instance objectResource      :: RoomObject     Resource where
-
 -- | Derived markers
 type Path = Array PathStep
 
