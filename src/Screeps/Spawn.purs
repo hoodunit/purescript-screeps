@@ -8,6 +8,7 @@ import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
+import Screeps.Id (class HasId)
 import Screeps.Refillable (class Refillable)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
@@ -19,12 +20,13 @@ type CreepInfo =
   , needTime :: Int
   , remainingTime :: Int }
 
-foreign import data Spawn      :: *
-instance objectSpawn       ::      RoomObject Spawn where
-instance ownedSpawn            :: Owned Spawn where
-instance structuralSpawn   ::     Structural Spawn where
-instance refillableSpawn   ::     Refillable Spawn where
-instance structureSpawn        ::      Structure Spawn where
+foreign import data Spawn :: *
+instance objectSpawn      :: RoomObject Spawn
+instance ownedSpawn       :: Owned      Spawn
+instance spawnHasId       :: HasId      Spawn
+instance structuralSpawn  :: Structural Spawn
+instance refillableSpawn  :: Refillable Spawn
+instance structureSpawn   :: Structure  Spawn where
   _structureType _ = structure_spawn
 
 memory :: forall props. Spawn -> { | props }

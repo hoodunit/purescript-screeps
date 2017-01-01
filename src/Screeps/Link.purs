@@ -8,6 +8,7 @@ import Screeps.Constants (link_cooldown)
 import Screeps.Coolsdown (class Coolsdown)
 import Screeps.Decays (class Decays)
 import Screeps.Effects (CMD)
+import Screeps.Id
 import Screeps.FFI (runThisEffFn1, runThisEffFn2)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (AnyStructure)
@@ -21,6 +22,7 @@ instance structuralLink   ::     Structural Link where
 instance linkDecays       ::     Decays     Link where
 instance linkCoolsdown    ::     Coolsdown  Link where
   expectedCooldown = link_cooldown
+instance linkHasId             :: HasId Link where
 instance refillableLink   ::     Refillable Link where
 instance structureLink         ::      Structure Link where
   _structureType _ = structure_link

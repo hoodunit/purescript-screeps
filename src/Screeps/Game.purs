@@ -14,6 +14,7 @@ import Screeps.Flag (Flag)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 import Screeps.Market (Market)
 import Screeps.Spawn  (Spawn)
+import Screeps.Id
 
 foreign import getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal
 
@@ -63,6 +64,7 @@ time = unsafeField "time"
 getUsed :: forall e. GameGlobal -> Eff (time :: TIME | e) Number
 getUsed game = runThisEffFn0 "getUsed" (cpu game)
 
+-- | Phase this out - it is unsafe without explicit checking of Id!
 getObjectById :: forall a. GameGlobal -> Id a -> Maybe a
 getObjectById game id = toMaybe $ runThisFn1 "getObjectById" game id
 

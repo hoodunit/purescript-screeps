@@ -6,6 +6,7 @@ import Control.Monad.Eff (Eff)
 
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, unsafeField)
+import Screeps.Id (class HasId)
 import Screeps.Progress (class Progress)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types (AnyStructure, structure_controller
@@ -16,10 +17,11 @@ import Screeps.Types (AnyStructure, structure_controller
 import Screeps.ReturnCode (ReturnCode)
 
 foreign import data Controller :: *
-instance objectController      :: RoomObject Controller where
-instance ownedController       :: Owned      Controller where
-instance structuralController  :: Structural Controller where
-instance progressController    :: Progress   Controller where
+instance objectController      :: RoomObject Controller
+instance ownedController       :: Owned      Controller
+instance controllerHasId       :: HasId      Controller
+instance structuralController  :: Structural Controller
+instance progressController    :: Progress   Controller
 instance structureController   :: Structure  Controller where
   _structureType _ = structure_controller
 

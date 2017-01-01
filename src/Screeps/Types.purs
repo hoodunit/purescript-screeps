@@ -8,8 +8,9 @@ import Data.Generic (class Generic, gEq, gShow)
 import Data.StrMap as StrMap
 import Type.Proxy
 
-import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.Direction(Direction)
+import Screeps.Id(class HasId)
+import Screeps.RoomPosition.Type (RoomPosition)
 
 foreign import data GameGlobal :: *
 
@@ -24,13 +25,15 @@ foreign import data AnyRoomObject :: *
 class Structural     a -- has `structureType` - Structure or ConstructionSite
 
 class ( RoomObject a
-      , Structural a ) <= Structure      a where
+      , Structural a
+      , HasId      a ) <= Structure      a where
     _structureType :: Proxy a -> StructureType
 
 foreign import data AnyStructure  :: *
 
-instance anyStructureIsRoomObject :: RoomObject AnyStructure where
-instance anyStructureIsStructural :: Structural AnyStructure where
+instance anyStructureHasId        :: HasId      AnyStructure
+instance anyStructureIsRoomObject :: RoomObject AnyStructure
+instance anyStructureIsStructural :: Structural AnyStructure
 instance anyStructure :: Structure AnyStructure where
   _structureType _ = StructureType "<unknown>"
 
@@ -99,13 +102,6 @@ newtype Mode = Mode String
 derive instance genericMode :: Generic Mode
 instance eqMode :: Eq Mode where eq = gEq
 instance showMode :: Show Mode where show = gShow
-
-newtype Id a = Id String
-derive instance genericId :: Generic (Id a)
-instance eqId :: Eq (Id a) where eq = gEq
-instance showId :: Show (Id a) where show = gShow
-instance decodeJsonId :: DecodeJson (Id a) where decodeJson = gDecodeJson
-instance encodeJsonId :: EncodeJson (Id a) where encodeJson = gEncodeJson
 
 newtype BodyPartType = BodyPartType String
 derive instance genericBodyPartType :: Generic BodyPartType

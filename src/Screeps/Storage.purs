@@ -4,16 +4,18 @@ module Screeps.Storage where
 import Data.Maybe (Maybe)
 
 import Screeps.FFI (unsafeField)
+import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(ResourceType(ResourceType), Storage, AnyStructure)
 import Screeps.Stores
 
-foreign import data Storage    :: *
-instance objectStorage       ::      RoomObject Storage where
-instance ownedStorage          :: Owned Storage where
-instance structuralStorage   ::     Structural Storage where
-instance storageStores         ::      Stores    Storage where
-instance structureStorage      ::      Structure Storage where
+foreign import data Storage :: *
+instance objectStorage      :: RoomObject Storage
+instance ownedStorage       :: Owned      Storage
+instance storageHasId       :: HasId      Storage
+instance structuralStorage  :: Structural Storage
+instance storageStores      :: Stores     Storage
+instance structureStorage   :: Structure  Storage where
   _structureType _ = structure_storage
 
 toStorage :: AnyStructure -> Maybe Storage

@@ -7,7 +7,7 @@ import Data.Maybe (Maybe(Just, Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 import Type.Proxy
 
-import Screeps.Effects (CMD)
+import Screeps.Effects    (CMD)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Types -- (Id, Structure, StructureType)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
@@ -17,9 +17,6 @@ hits = unsafeField "hits"
 
 hitsMax :: forall a. Structure a => a -> Int
 hitsMax = unsafeField "hitsMax"
-
-id :: forall a. Structure a => a -> Id a
-id = unsafeField "id"
 
 structureType :: forall a. Structural a => a -> StructureType
 structureType = unsafeField "structureType"

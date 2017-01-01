@@ -3,19 +3,21 @@ module Screeps.Road where
 
 import Data.Maybe (Maybe)
 
+import Screeps.Decays    ( class Decays )
+import Screeps.Id
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types     ( AnyStructure
                          , class Structure
                          , class Structural
                          , class RoomObject
                          , structure_road   )
-import Screeps.Decays    ( class Decays )
 
-foreign import data Road       :: *
-instance objectRoad       ::      RoomObject Road where
-instance structuralRoad   ::     Structural Road where
-instance roadDecays       :: Decays Road where
-instance structureRoad         ::      Structure Road where
+foreign import data Road :: *
+instance objectRoad      :: RoomObject Road
+instance structuralRoad  :: Structural Road
+instance roadHasId       :: HasId      Road
+instance roadDecays      :: Decays     Road
+instance structureRoad   :: Structure  Road where
   _structureType _ = structure_road
 
 toRoad :: AnyStructure -> Maybe Road

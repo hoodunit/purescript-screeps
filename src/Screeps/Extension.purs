@@ -3,17 +3,18 @@ module Screeps.Extension where
 
 import Data.Maybe (Maybe)
 
-import Screeps.FFI (unsafeField)
+import Screeps.Id (class HasId)
 import Screeps.Refillable (class Refillable)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (Extension, AnyStructure)
 
 foreign import data Extension  :: *
-instance objectExtension       :: RoomObject Extension where
-instance ownedExtension        :: Owned     Extension where
-instance structuralExtension   :: Structural Extension where
-instance refillableExtension   :: Refillable Extension where
-instance structureExtension    :: Structure Extension where
+instance objectExtension       :: RoomObject Extension
+instance ownedExtension        :: Owned      Extension
+instance extensionHasId        :: HasId      Extension
+instance structuralExtension   :: Structural Extension
+instance refillableExtension   :: Refillable Extension
+instance structureExtension    :: Structure  Extension where
   _structureType _ = structure_extension
 
 toExtension :: AnyStructure -> Maybe Extension

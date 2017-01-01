@@ -9,17 +9,18 @@ import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
 import Data.StrMap (StrMap)
 
-import Screeps.Effects (CMD, MEMORY)
 import Screeps.ConstructionSite (ConstructionSite)
 import Screeps.Controller (Controller)
-import Screeps.Types (BodyPartType, Creep, Id, Path, ResourceType, class Structure, TargetPosition(..))
-import Screeps.Mineral   (Mineral)
 import Screeps.Direction (Direction)
-import Screeps.Source     (Source)
+import Screeps.Effects (CMD, MEMORY)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
+import Screeps.Id
+import Screeps.Mineral   (Mineral)
 import Screeps.Resource   (Resource)
 import Screeps.ReturnCode (ReturnCode)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
 import Screeps.Room (PathOptions)
+import Screeps.Source     (Source)
+import Screeps.Types (BodyPartType, Creep, Path, ResourceType, class Structure, TargetPosition(..))
 
 --foreign import data CreepCargo :: *
 type CreepCargo = StrMap Int
@@ -71,12 +72,6 @@ hits = unsafeField "hits"
 
 hitsMax :: Creep -> Int
 hitsMax = unsafeField "hitsMax"
-
-getId :: Creep -> Id Creep
-getId = unsafeField "id"
-
-getIdAsStr :: Creep -> String
-getIdAsStr = unsafeField "id"
 
 my :: Creep -> Boolean
 my = unsafeField "my"

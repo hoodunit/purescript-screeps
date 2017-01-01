@@ -1,9 +1,10 @@
 -- | Corresponds to the Screeps API [Mineral](http://support.screeps.com/hc/en-us/articles/207218579-Mineral)
 module Screeps.Mineral where
 
-import Screeps.Regenerates (class Regenerates)
-import Screeps.Types       (Id, ResourceType, class RoomObject)
 import Screeps.FFI         (unsafeField)
+import Screeps.Id          (class HasId)
+import Screeps.Regenerates (class Regenerates)
+import Screeps.Types       (ResourceType, class RoomObject)
 
 foreign import data Mineral :: *
 instance objectMineral      :: RoomObject  Mineral
@@ -14,7 +15,4 @@ mineralAmount = unsafeField "mineralAmount"
 
 mineralType :: Mineral -> ResourceType
 mineralType = unsafeField "mineralType"
-
-id :: Mineral -> Id Mineral
-id = unsafeField "id"
 

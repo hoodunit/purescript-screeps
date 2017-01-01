@@ -6,17 +6,19 @@ import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField)
+import Screeps.Id (class HasId)
 import Screeps.Stores    (class Stores)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (ResourceType(ResourceType), AnyStructure, Terminal)
 import Screeps.ReturnCode (ReturnCode)
 
-foreign import data Terminal   :: *
-instance objectTerminal       ::      RoomObject Terminal where
-instance ownedTerminal         :: Owned Terminal where
-instance structuralTerminal   ::     Structural Terminal where
-instance terminalStores       ::     Stores     Terminal where
-instance structureTerminal     ::      Structure Terminal where
+foreign import data Terminal :: *
+instance objectTerminal      :: RoomObject Terminal
+instance ownedTerminal       :: Owned      Terminal
+instance terminalHasId       :: HasId      Terminal
+instance structuralTerminal  :: Structural Terminal
+instance terminalStores      :: Stores     Terminal
+instance structureTerminal   :: Structure  Terminal where
   _structureType _ = structure_terminal
 
 send :: forall e. Terminal -> ResourceType -> Int -> String -> Eff ( cmd :: CMD | e) ReturnCode

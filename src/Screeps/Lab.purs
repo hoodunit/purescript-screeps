@@ -12,12 +12,14 @@ import Screeps.Refillable (class Refillable)
 import Screeps.Structure  (fromAnyStructure)
 import Screeps.Types      --(Creep, Lab, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.Id         (class HasId)
 
 foreign import data Lab        :: *
 instance objectLab       ::      RoomObject Lab where
 instance ownedLab              :: Owned Lab where
 instance structuralLab   ::     Structural Lab where
 instance refillableLab   ::     Refillable Lab where
+instance labHasId        ::     HasId      Lab where
 instance coolsdownLab   ::     Coolsdown Lab where
   expectedCooldown = lab_cooldown
 instance structureLab          ::      Structure Lab where
