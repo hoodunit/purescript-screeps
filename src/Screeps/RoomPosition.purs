@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, FilterFn, FindContext(..), LookType, Path, StructureType, TargetPosition(..))
+import Screeps.Types (Color, FilterFn, LookType, Path, StructureType, TargetPosition(..), FindType)
 import Screeps.Direction (Direction)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe)
@@ -17,6 +17,11 @@ import Screeps.Room (PathOptions)
 import Screeps.RoomPosition.Type (RoomPosition)
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
+
+data FindContext a =
+  OfType (FindType a) |
+  OfObj  (Array    a) | -- should be RoomObject a
+  OfPos  (Array RoomPosition)
 
 tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
 tryPure = runPure <<< try

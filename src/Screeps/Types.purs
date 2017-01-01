@@ -133,7 +133,3 @@ data TargetPosition a =
   TargetObj a      | -- RoomObject a
   TargetPos RoomPosition
 
-data FindContext a =
-  OfType (FindType a) |
-  OfObj  (Array    a) | -- should be RoomObject a
-  OfPos  (Array RoomPosition)
