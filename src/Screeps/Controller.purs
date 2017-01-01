@@ -7,12 +7,13 @@ import Control.Monad.Eff (Eff)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, unsafeField)
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (AnyStructure, structure_controller, class Owned, class Structure)
+import Screeps.Types (AnyStructure, structure_controller, class Owned, class Structure, class RoomObject)
 import Screeps.ReturnCode (ReturnCode)
 
 foreign import data Controller :: *
-instance ownedController       :: Owned Controller where
-instance structureController   :: Structure Controller where
+instance objectController      :: RoomObject Controller where
+instance ownedController       :: Owned      Controller where
+instance structureController   :: Structure  Controller where
   _structureType _ = structure_controller
 
 level :: Controller -> Int
