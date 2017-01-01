@@ -59,13 +59,6 @@ foreign import structure_terminal :: StructureType
 foreign import structure_container :: StructureType
 foreign import structure_nuker :: StructureType
 
-foreign import data Link       :: *
-instance objectLink       ::      RoomObject Link where
-instance ownedLink             :: Owned Link where
-instance structuralLink   ::     Structural Link where
-instance structureLink         ::      Structure Link where
-  _structureType _ = structure_link
-
 foreign import data Nuker      :: *
 instance objectNuker       ::      RoomObject Nuker where
 instance ownedNuker            :: Owned Nuker where
