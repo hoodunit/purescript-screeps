@@ -1,5 +1,6 @@
 {
   "name": "purescript-screeps-classy",
+  "version" : "0.2",
   "ignore": [
     "**/.*",
     "node_modules",
