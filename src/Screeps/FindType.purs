@@ -1,6 +1,10 @@
 -- | All FindType constants
 module Screeps.FindType where
 
+import Data.Eq     ((==))
+import Data.Monoid ((<>))
+import Data.Show   (class Show, show)
+
 import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.ConstructionSite (ConstructionSite)
 --import Screeps.Creep (Creep)
@@ -37,6 +41,36 @@ foreign import find_my_construction_sites :: FindType ConstructionSite
 foreign import find_hostile_construction_sites :: FindType ConstructionSite
 foreign import find_minerals :: FindType Mineral
 foreign import find_nukes :: FindType Nuke
+
+instance showFindType :: Show (FindType a) where
+  show f | f===find_exit_top                   = "find_exit_top" 
+  show f | f===find_exit_right                 = "find_exit_right" 
+  show f | f===find_exit_bottom                = "find_exit_bottom" 
+  show f | f===find_exit_left                  = "find_exit_left" 
+  show f | f===find_exit                       = "find_exit" 
+  show f | f===find_creeps                     = "find_creeps" 
+  show f | f===find_my_creeps                  = "find_my_creeps" 
+  show f | f===find_hostile_creeps             = "find_hostile_creeps" 
+  show f | f===find_sources_active             = "find_sources_active" 
+  show f | f===find_sources                    = "find_sources" 
+  show f | f===find_dropped_energy             = "find_dropped_energy" 
+  show f | f===find_dropped_resources          = "find_dropped_resources" 
+  show f | f===find_structures                 = "find_structures" 
+  show f | f===find_my_structures              = "find_my_structures" 
+  show f | f===find_hostile_structures         = "find_hostile_structures" 
+  show f | f===find_flags                      = "find_flags" 
+  show f | f===find_construction_sites         = "find_construction_sites" 
+  show f | f===find_my_spawns                  = "find_my_spawns" 
+  show f | f===find_hostile_spawns             = "find_hostile_spawns" 
+  show f | f===find_my_construction_sites      = "find_my_construction_sites" 
+  show f | f===find_hostile_construction_sites = "find_hostile_construction_sites" 
+  show f | f===find_minerals                   = "find_minerals" 
+  show f | f===find_nukes                      = "find_nukes"
+  show (FindType f)                           = "FindType " <> show f
+
+feq :: forall a b. FindType a -> FindType b -> Boolean 
+feq (FindType a) (FindType b) = a == b
+infixr 3 feq as ===
 
 newtype LookType a = LookType String
 foreign import look_creeps :: LookType Creep
