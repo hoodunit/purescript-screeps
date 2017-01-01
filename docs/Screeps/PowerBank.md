@@ -2,22 +2,31 @@
 
 Corresponds to the Screeps API [StructurePowerBank](http://support.screeps.com/hc/en-us/articles/207712729-StructurePowerBank)
 
+#### `PowerBank`
+
+``` purescript
+data PowerBank :: *
+```
+
+##### Instances
+``` purescript
+RoomObject PowerBank
+Owned PowerBank
+Structural PowerBank
+Decays PowerBank
+Structure PowerBank
+```
+
 #### `power`
 
 ``` purescript
 power :: PowerBank -> Int
 ```
 
-#### `ticksToDecay`
-
-``` purescript
-ticksToDecay :: PowerBank -> Int
-```
-
 #### `toPowerBank`
 
 ``` purescript
-toPowerBank :: forall a. Structure a -> Maybe PowerBank
+toPowerBank :: AnyStructure -> Maybe PowerBank
 ```
 
 

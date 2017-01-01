@@ -5,13 +5,13 @@ Corresponds to the Screeps API [RoomObject](http://support.screeps.com/hc/en-us/
 #### `room`
 
 ``` purescript
-room :: forall a. RoomObject a -> Room
+room :: forall a. RoomObject a => a -> Room
 ```
 
 #### `pos`
 
 ``` purescript
-pos :: forall a. RoomObject a -> RoomPosition
+pos :: forall a. RoomObject a => a -> RoomPosition
 ```
 
 

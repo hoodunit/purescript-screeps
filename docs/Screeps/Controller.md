@@ -2,22 +2,25 @@
 
 Corresponds to the Screeps API [StructureController](http://support.screeps.com/hc/en-us/articles/207711889-StructureController)
 
+#### `Controller`
+
+``` purescript
+data Controller :: *
+```
+
+##### Instances
+``` purescript
+RoomObject Controller
+Owned Controller
+Structural Controller
+Progress Controller
+Structure Controller
+```
+
 #### `level`
 
 ``` purescript
 level :: Controller -> Int
-```
-
-#### `progress`
-
-``` purescript
-progress :: Controller -> Int
-```
-
-#### `progressTotal`
-
-``` purescript
-progressTotal :: Controller -> Int
 ```
 
 #### `reservation`
@@ -47,7 +50,7 @@ unclaim :: forall e. Controller -> Eff (cmd :: CMD | e) ReturnCode
 #### `toController`
 
 ``` purescript
-toController :: forall a. Structure a -> Maybe Controller
+toController :: AnyStructure -> Maybe Controller
 ```
 
 

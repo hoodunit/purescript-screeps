@@ -2,16 +2,24 @@
 
 Corresponds to the Screeps API [StructureRoad](http://support.screeps.com/hc/en-us/articles/207713089-StructureRoad)
 
-#### `ticksToDecay`
+#### `Road`
 
 ``` purescript
-ticksToDecay :: Road -> Int
+data Road :: *
+```
+
+##### Instances
+``` purescript
+RoomObject Road
+Structural Road
+Decays Road
+Structure Road
 ```
 
 #### `toRoad`
 
 ``` purescript
-toRoad :: forall a. Structure a -> Maybe Road
+toRoad :: AnyStructure -> Maybe Road
 ```
 
 

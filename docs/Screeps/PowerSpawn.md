@@ -2,16 +2,19 @@
 
 Corresponds to the Screeps API [StructurePowerSpawn](http://support.screeps.com/hc/en-us/articles/208436585-StructurePowerSpawn)
 
-#### `energy`
+#### `PowerSpawn`
 
 ``` purescript
-energy :: PowerSpawn -> Int
+data PowerSpawn :: *
 ```
 
-#### `energyCapacity`
-
+##### Instances
 ``` purescript
-energyCapacity :: PowerSpawn -> Int
+RoomObject PowerSpawn
+Owned PowerSpawn
+Structural PowerSpawn
+Refillable PowerSpawn
+Structure PowerSpawn
 ```
 
 #### `power`
@@ -41,7 +44,7 @@ processPower :: forall e. PowerSpawn -> Eff (cmd :: CMD | e) ReturnCode
 #### `toPowerSpawn`
 
 ``` purescript
-toPowerSpawn :: forall a. Structure a -> Maybe PowerSpawn
+toPowerSpawn :: AnyStructure -> Maybe PowerSpawn
 ```
 
 

@@ -26,6 +26,18 @@ data RawMemoryGlobal :: *
 getRawMemoryGlobal :: forall e. Eff (tick :: TICK | e) RawMemoryGlobal
 ```
 
+#### `getObjectMemory`
+
+``` purescript
+getObjectMemory :: String -> String -> String -> Json
+```
+
+#### `setObjectMemory`
+
+``` purescript
+setObjectMemory :: forall e. String -> String -> String -> Json -> Eff (memory :: MEMORY | e) Unit
+```
+
 #### `get`
 
 ``` purescript

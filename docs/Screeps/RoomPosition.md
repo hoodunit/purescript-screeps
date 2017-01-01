@@ -8,6 +8,15 @@ Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-u
 mkRoomPosition :: Int -> Int -> String -> RoomPosition
 ```
 
+#### `FindContext`
+
+``` purescript
+data FindContext a
+  = OfType (FindType a)
+  | OfObj (Array a)
+  | OfPos (Array RoomPosition)
+```
+
 #### `tryPure`
 
 ``` purescript
@@ -49,24 +58,6 @@ closestPathOpts :: ClosestPathOptions
 
 ``` purescript
 unwrapContext :: forall a b. FindContext a -> b
-```
-
-#### `roomName`
-
-``` purescript
-roomName :: RoomPosition -> String
-```
-
-#### `x`
-
-``` purescript
-x :: RoomPosition -> Int
-```
-
-#### `y`
-
-``` purescript
-y :: RoomPosition -> Int
 ```
 
 #### `createConstructionSite`

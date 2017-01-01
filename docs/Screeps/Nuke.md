@@ -2,6 +2,18 @@
 
 Corresponds to the Screeps API [Nuke](http://support.screeps.com/hc/en-us/articles/208488525-Nuke)
 
+#### `Nuke`
+
+``` purescript
+data Nuke :: *
+```
+
+##### Instances
+``` purescript
+RoomObject Nuke
+Regenerates Nuke
+```
+
 #### `id`
 
 ``` purescript
@@ -18,12 +30,6 @@ launchRoomName :: Nuke -> String
 
 ``` purescript
 timeToLand :: Nuke -> Int
-```
-
-#### `ticksToRegeneration`
-
-``` purescript
-ticksToRegeneration :: Nuke -> Int
 ```
 
 

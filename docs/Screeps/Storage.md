@@ -2,34 +2,25 @@
 
 Corresponds to the Screeps API [StructureStorage](http://support.screeps.com/hc/en-us/articles/208436805-StructureStorage)
 
-#### `Store`
+#### `Storage`
 
 ``` purescript
-data Store :: *
+data Storage :: *
 ```
 
-#### `store`
-
+##### Instances
 ``` purescript
-store :: Storage -> Store
-```
-
-#### `storeGet`
-
-``` purescript
-storeGet :: Storage -> ResourceType -> Int
-```
-
-#### `storeCapacity`
-
-``` purescript
-storeCapacity :: Storage -> Int
+RoomObject Storage
+Owned Storage
+Structural Storage
+Stores Storage
+Structure Storage
 ```
 
 #### `toStorage`
 
 ``` purescript
-toStorage :: forall a. Structure a -> Maybe Storage
+toStorage :: AnyStructure -> Maybe Storage
 ```
 
 

@@ -2,6 +2,17 @@
 
 Corresponds to the Screeps API [Source](http://support.screeps.com/hc/en-us/articles/203079211-Source)
 
+#### `Source`
+
+``` purescript
+data Source :: *
+```
+
+##### Instances
+``` purescript
+RoomObject Source
+```
+
 #### `energy`
 
 ``` purescript
@@ -18,12 +29,6 @@ energyCapacity :: Source -> Int
 
 ``` purescript
 id :: Source -> Id Source
-```
-
-#### `ticksToRegeneration`
-
-``` purescript
-ticksToRegeneration :: Source -> Int
 ```
 
 

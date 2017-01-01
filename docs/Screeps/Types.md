@@ -8,22 +8,10 @@ Defines the main types used in the library and the relationships between them.
 data GameGlobal :: *
 ```
 
-#### `Market`
-
-``` purescript
-data Market :: *
-```
-
 #### `Room`
 
 ``` purescript
 data Room :: *
-```
-
-#### `RoomPosition`
-
-``` purescript
-data RoomPosition :: *
 ```
 
 #### `WorldMap`
@@ -35,349 +23,196 @@ data WorldMap :: *
 #### `RoomObject`
 
 ``` purescript
-type RoomObject a = RawRoomObject a
+class RoomObject a 
+```
+
+Any `RoomObject` with a location, and room containing it. 
+
+##### Instances
+``` purescript
+RoomObject AnyStructure
+RoomObject Creep
+```
+
+#### `AnyRoomObject`
+
+``` purescript
+data AnyRoomObject :: *
+```
+
+#### `Structural`
+
+``` purescript
+class Structural a 
+```
+
+##### Instances
+``` purescript
+Structural AnyStructure
 ```
 
 #### `Structure`
 
 ``` purescript
-type Structure a = RoomObject (RawStructure a)
+class (RoomObject a, Structural a) <= Structure a  where
+  _structureType :: Proxy a -> StructureType
 ```
 
-#### `OwnedStructure`
-
+##### Instances
 ``` purescript
-type OwnedStructure a = Structure (RawOwnedStructure a)
+Structure AnyStructure
 ```
 
-#### `Container`
+#### `AnyStructure`
 
 ``` purescript
-type Container = Structure RawContainer
+data AnyStructure :: *
 ```
 
-#### `Controller`
-
+##### Instances
 ``` purescript
-type Controller = OwnedStructure RawController
+RoomObject AnyStructure
+Structural AnyStructure
+Structure AnyStructure
 ```
 
-#### `Extension`
+#### `Owned`
 
 ``` purescript
-type Extension = OwnedStructure RawExtension
+class Owned a 
 ```
 
-#### `Extractor`
+This class fixes an omission in original hierarchy class,
 
+##### Instances
 ``` purescript
-type Extractor = OwnedStructure RawExtractor
+Owned Creep
 ```
 
-#### `KeeperLair`
+#### `structure_spawn`
 
 ``` purescript
-type KeeperLair = OwnedStructure RawKeeperLair
+structure_spawn :: StructureType
 ```
 
-#### `Lab`
+#### `structure_extension`
 
 ``` purescript
-type Lab = OwnedStructure RawLab
+structure_extension :: StructureType
 ```
 
-#### `Link`
+#### `structure_road`
 
 ``` purescript
-type Link = OwnedStructure RawLink
+structure_road :: StructureType
 ```
 
-#### `Nuker`
+#### `structure_wall`
 
 ``` purescript
-type Nuker = OwnedStructure RawNuker
+structure_wall :: StructureType
 ```
 
-#### `Observer`
+#### `structure_rampart`
 
 ``` purescript
-type Observer = OwnedStructure RawObserver
+structure_rampart :: StructureType
 ```
 
-#### `Portal`
+#### `structure_keeper_lair`
 
 ``` purescript
-type Portal = OwnedStructure RawPortal
+structure_keeper_lair :: StructureType
 ```
 
-#### `PowerBank`
+#### `structure_portal`
 
 ``` purescript
-type PowerBank = OwnedStructure RawPowerBank
+structure_portal :: StructureType
 ```
 
-#### `PowerSpawn`
+#### `structure_controller`
 
 ``` purescript
-type PowerSpawn = OwnedStructure RawPowerSpawn
+structure_controller :: StructureType
 ```
 
-#### `Rampart`
+#### `structure_link`
 
 ``` purescript
-type Rampart = OwnedStructure RawRampart
+structure_link :: StructureType
 ```
 
-#### `Road`
+#### `structure_storage`
 
 ``` purescript
-type Road = OwnedStructure RawRoad
+structure_storage :: StructureType
 ```
 
-#### `Spawn`
+#### `structure_tower`
 
 ``` purescript
-type Spawn = OwnedStructure RawSpawn
+structure_tower :: StructureType
 ```
 
-#### `Storage`
+#### `structure_observer`
 
 ``` purescript
-type Storage = OwnedStructure RawStorage
+structure_observer :: StructureType
 ```
 
-#### `Terminal`
+#### `structure_power_bank`
 
 ``` purescript
-type Terminal = OwnedStructure RawTerminal
+structure_power_bank :: StructureType
 ```
 
-#### `Tower`
+#### `structure_power_spawn`
 
 ``` purescript
-type Tower = OwnedStructure RawTower
+structure_power_spawn :: StructureType
 ```
 
-#### `Wall`
+#### `structure_extractor`
 
 ``` purescript
-type Wall = OwnedStructure RawWall
+structure_extractor :: StructureType
 ```
 
-#### `ConstructionSite`
+#### `structure_lab`
 
 ``` purescript
-type ConstructionSite = RoomObject RawConstructionSite
+structure_lab :: StructureType
+```
+
+#### `structure_terminal`
+
+``` purescript
+structure_terminal :: StructureType
+```
+
+#### `structure_container`
+
+``` purescript
+structure_container :: StructureType
+```
+
+#### `structure_nuker`
+
+``` purescript
+structure_nuker :: StructureType
 ```
 
 #### `Creep`
 
 ``` purescript
-type Creep = RoomObject RawCreep
+data Creep :: *
 ```
 
-#### `Flag`
-
+##### Instances
 ``` purescript
-type Flag = RoomObject RawFlag
-```
-
-#### `Mineral`
-
-``` purescript
-type Mineral = RoomObject RawMineral
-```
-
-#### `Nuke`
-
-``` purescript
-type Nuke = RoomObject RawNuke
-```
-
-#### `Resource`
-
-``` purescript
-type Resource = RoomObject RawResource
-```
-
-#### `Source`
-
-``` purescript
-type Source = RoomObject RawSource
-```
-
-#### `RawOwnedStructure`
-
-``` purescript
-data RawOwnedStructure :: * -> *
-```
-
-#### `RawRoomObject`
-
-``` purescript
-data RawRoomObject :: * -> *
-```
-
-#### `RawStructure`
-
-``` purescript
-data RawStructure :: * -> *
-```
-
-#### `RawContainer`
-
-``` purescript
-data RawContainer :: *
-```
-
-#### `RawController`
-
-``` purescript
-data RawController :: *
-```
-
-#### `RawExtension`
-
-``` purescript
-data RawExtension :: *
-```
-
-#### `RawExtractor`
-
-``` purescript
-data RawExtractor :: *
-```
-
-#### `RawKeeperLair`
-
-``` purescript
-data RawKeeperLair :: *
-```
-
-#### `RawLab`
-
-``` purescript
-data RawLab :: *
-```
-
-#### `RawLink`
-
-``` purescript
-data RawLink :: *
-```
-
-#### `RawNuker`
-
-``` purescript
-data RawNuker :: *
-```
-
-#### `RawObserver`
-
-``` purescript
-data RawObserver :: *
-```
-
-#### `RawPortal`
-
-``` purescript
-data RawPortal :: *
-```
-
-#### `RawPowerBank`
-
-``` purescript
-data RawPowerBank :: *
-```
-
-#### `RawPowerSpawn`
-
-``` purescript
-data RawPowerSpawn :: *
-```
-
-#### `RawRampart`
-
-``` purescript
-data RawRampart :: *
-```
-
-#### `RawRoad`
-
-``` purescript
-data RawRoad :: *
-```
-
-#### `RawSpawn`
-
-``` purescript
-data RawSpawn :: *
-```
-
-#### `RawStorage`
-
-``` purescript
-data RawStorage :: *
-```
-
-#### `RawTerminal`
-
-``` purescript
-data RawTerminal :: *
-```
-
-#### `RawTower`
-
-``` purescript
-data RawTower :: *
-```
-
-#### `RawWall`
-
-``` purescript
-data RawWall :: *
-```
-
-#### `RawConstructionSite`
-
-``` purescript
-data RawConstructionSite :: *
-```
-
-#### `RawCreep`
-
-``` purescript
-data RawCreep :: *
-```
-
-#### `RawFlag`
-
-``` purescript
-data RawFlag :: *
-```
-
-#### `RawMineral`
-
-``` purescript
-data RawMineral :: *
-```
-
-#### `RawNuke`
-
-``` purescript
-data RawNuke :: *
-```
-
-#### `RawResource`
-
-``` purescript
-data RawResource :: *
-```
-
-#### `RawSource`
-
-``` purescript
-data RawSource :: *
+RoomObject Creep
+Owned Creep
 ```
 
 #### `Path`
@@ -386,24 +221,12 @@ data RawSource :: *
 type Path = Array PathStep
 ```
 
+Derived markers
+
 #### `PathStep`
 
 ``` purescript
 type PathStep = { x :: Int, y :: Int, dx :: Number, dy :: Number, direction :: Direction }
-```
-
-#### `ReturnCode`
-
-``` purescript
-newtype ReturnCode
-  = ReturnCode Int
-```
-
-##### Instances
-``` purescript
-Generic ReturnCode
-Eq ReturnCode
-Show ReturnCode
 ```
 
 #### `ResourceType`
@@ -492,20 +315,6 @@ DecodeJson (Id a)
 EncodeJson (Id a)
 ```
 
-#### `Direction`
-
-``` purescript
-newtype Direction
-  = Direction Int
-```
-
-##### Instances
-``` purescript
-Generic Direction
-Eq Direction
-Show Direction
-```
-
 #### `BodyPartType`
 
 ``` purescript
@@ -534,20 +343,6 @@ Eq Color
 Show Color
 ```
 
-#### `LookType`
-
-``` purescript
-newtype LookType a
-  = LookType String
-```
-
-#### `FindType`
-
-``` purescript
-newtype FindType a
-  = FindType Int
-```
-
 #### `StructureInfo`
 
 ``` purescript
@@ -565,17 +360,8 @@ type FilterFn a = a -> Boolean
 ``` purescript
 data TargetPosition a
   = TargetPt Int Int
-  | TargetObj (RoomObject a)
+  | TargetObj a
   | TargetPos RoomPosition
-```
-
-#### `FindContext`
-
-``` purescript
-data FindContext a
-  = OfType (FindType a)
-  | OfObj (Array a)
-  | OfPos (Array RoomPosition)
 ```
 
 

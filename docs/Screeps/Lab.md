@@ -2,22 +2,20 @@
 
 Corresponds to the Screeps API [StructureLab](http://support.screeps.com/hc/en-us/articles/208436195-StructureLab)
 
-#### `cooldown`
+#### `Lab`
 
 ``` purescript
-cooldown :: Lab -> Int
+data Lab :: *
 ```
 
-#### `energy`
-
+##### Instances
 ``` purescript
-energy :: Lab -> Int
-```
-
-#### `energyCapacity`
-
-``` purescript
-energyCapacity :: Lab -> Int
+RoomObject Lab
+Owned Lab
+Structural Lab
+Refillable Lab
+Coolsdown Lab
+Structure Lab
 ```
 
 #### `mineralAmount`
@@ -59,7 +57,7 @@ runReaction :: forall e. Lab -> Lab -> Lab -> Eff (cmd :: CMD | e) ReturnCode
 #### `toLab`
 
 ``` purescript
-toLab :: forall a. Structure a -> Maybe Lab
+toLab :: AnyStructure -> Maybe Lab
 ```
 
 

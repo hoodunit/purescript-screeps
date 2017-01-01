@@ -8,16 +8,19 @@ Corresponds to the Screeps API [StructureSpawn](http://support.screeps.com/hc/en
 type CreepInfo = { name :: String, needTime :: Int, remainingTime :: Int }
 ```
 
-#### `energy`
+#### `Spawn`
 
 ``` purescript
-energy :: Spawn -> Int
+data Spawn :: *
 ```
 
-#### `energyCapacity`
-
+##### Instances
 ``` purescript
-energyCapacity :: Spawn -> Int
+RoomObject Spawn
+Owned Spawn
+Structural Spawn
+Refillable Spawn
+Structure Spawn
 ```
 
 #### `memory`
@@ -89,7 +92,7 @@ renewCreep :: forall e. Spawn -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 #### `toSpawn`
 
 ``` purescript
-toSpawn :: forall a. Structure a -> Maybe Spawn
+toSpawn :: AnyStructure -> Maybe Spawn
 ```
 
 

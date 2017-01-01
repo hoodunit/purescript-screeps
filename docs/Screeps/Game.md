@@ -77,7 +77,7 @@ spawns :: GameGlobal -> StrMap Spawn
 #### `structures`
 
 ``` purescript
-structures :: GameGlobal -> StrMap (Structure Unit)
+structures :: GameGlobal -> StrMap AnyStructure
 ```
 
 #### `time`

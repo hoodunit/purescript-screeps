@@ -5,55 +5,67 @@ Corresponds to the Screeps API [Structure](http://support.screeps.com/hc/en-us/a
 #### `hits`
 
 ``` purescript
-hits :: forall a. Structure a -> Int
+hits :: forall a. Structure a => a -> Int
 ```
 
 #### `hitsMax`
 
 ``` purescript
-hitsMax :: forall a. Structure a -> Int
+hitsMax :: forall a. Structure a => a -> Int
 ```
 
 #### `id`
 
 ``` purescript
-id :: forall a. Structure a -> Id (Structure a)
+id :: forall a. Structure a => a -> Id a
 ```
 
 #### `structureType`
 
 ``` purescript
-structureType :: forall a. Structure a -> StructureType
+structureType :: forall a. Structural a => a -> StructureType
 ```
 
 #### `destroy`
 
 ``` purescript
-destroy :: forall a e. Structure a -> Eff (cmd :: CMD | e) ReturnCode
+destroy :: forall a e. Structure a => a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `isActive`
 
 ``` purescript
-isActive :: forall a e. Structure a -> Eff (cmd :: CMD | e) Boolean
+isActive :: forall a e. Structure a => a -> Eff (cmd :: CMD | e) Boolean
 ```
 
 #### `notifyWhenAttacked`
 
 ``` purescript
-notifyWhenAttacked :: forall a e. Structure a -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
+notifyWhenAttacked :: forall a e. Structure a => a -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `unsafeCast`
 
 ``` purescript
-unsafeCast :: forall a b. StructureType -> Structure a -> Maybe b
+unsafeCast :: forall a. Structure a => StructureType -> AnyStructure -> Maybe a
 ```
 
-#### `asStructure`
+#### `toAnyStructure`
 
 ``` purescript
-asStructure :: forall a. Structure a -> Structure Unit
+toAnyStructure :: forall a. Structure a => a -> AnyStructure
+```
+
+#### `fromAnyStructure`
+
+``` purescript
+fromAnyStructure :: forall a. Structure a => AnyStructure -> Maybe a
+```
+
+#### `asAnyStructure`
+
+``` purescript
+asAnyStructure :: forall a. Structure a => a -> AnyStructure
 ```
 
 
