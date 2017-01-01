@@ -101,13 +101,6 @@ instance structuralRampart   ::     Structural Rampart where
 instance structureRampart      ::      Structure Rampart where
   _structureType _ = structure_rampart
 
-foreign import data Road       :: *
-instance objectRoad       ::      RoomObject Road where
-instance ownedRoad             :: Owned Road where
-instance structuralRoad   ::     Structural Road where
-instance structureRoad         ::      Structure Road where
-  _structureType _ = structure_road
-
 foreign import data Spawn      :: *
 instance objectSpawn       ::      RoomObject Spawn where
 instance ownedSpawn            :: Owned Spawn where

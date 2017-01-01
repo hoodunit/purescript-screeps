@@ -3,12 +3,20 @@ module Screeps.Road where
 
 import Data.Maybe (Maybe)
 
-import Screeps.FFI (unsafeField)
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (Road, AnyStructure)
+import Screeps.Types     ( AnyStructure
+                         , class Structure
+                         , class Structural
+                         , class RoomObject
+                         , structure_road   )
+import Screeps.Decays    ( class Decays )
 
-ticksToDecay :: Road -> Int
-ticksToDecay = unsafeField "ticksToDecay"
+foreign import data Road       :: *
+instance objectRoad       ::      RoomObject Road where
+instance structuralRoad   ::     Structural Road where
+instance roadDecays       :: Decays Road where
+instance structureRoad         ::      Structure Road where
+  _structureType _ = structure_road
 
 toRoad :: AnyStructure -> Maybe Road
 toRoad = fromAnyStructure
