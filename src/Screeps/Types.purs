@@ -21,22 +21,23 @@ class RoomObject     a
 
 foreign import data AnyRoomObject :: *
 
-class RoomObject a <= Structure      a where
+class Structural     a -- has `structureType` - Structure or ConstructionSite
+
+class ( RoomObject a
+      , Structural a ) <= Structure      a where
     _structureType :: Proxy a -> StructureType
 
 foreign import data AnyStructure  :: *
 
 instance anyStructureIsRoomObject :: RoomObject AnyStructure where
+instance anyStructureIsStructural :: Structural AnyStructure where
 instance anyStructure :: Structure AnyStructure where
   _structureType _ = StructureType "<unknown>"
 
 --  where myStructureType :: StructureType
 -- | This class fixes an omission in original hierarchy class,
 --   where both Structure and ConstructionSite share the field `structureType`
-class Structural     a -- structureType
 class Owned          a -- my, owned
-
-instance structureIsStructural :: Structure a => Structural a
 
 foreign import structure_spawn :: StructureType
 foreign import structure_extension :: StructureType
@@ -60,108 +61,126 @@ foreign import structure_nuker :: StructureType
 
 foreign import data Container  :: *
 instance objectContainer       ::      RoomObject Container where
+instance structuralContainer   ::     Structural Container where
 instance structureContainer    ::      Structure Container where
   _structureType _ = structure_container
 
 foreign import data Extension  :: *
 instance objectExtension       ::      RoomObject Extension where
 instance ownedExtension        :: Owned     Extension where
+instance structuralExtension   ::     Structural Extension where
 instance structureExtension    :: Structure Extension where
   _structureType _ = structure_extension
 
 foreign import data Extractor  :: *
 instance objectExtractor       ::      RoomObject Extractor where
 instance ownedExtractor        :: Owned     Extractor where
+instance structuralExtractor   ::     Structural Extractor where
 instance structureExtractor    :: Structure Extractor where
   _structureType _ = structure_extractor
 
 foreign import data KeeperLair :: *
 instance objectKeeperLair       ::      RoomObject KeeperLair where
 instance ownedKeeperLair       :: Owned KeeperLair where -- TODO: check it is?
+instance structuralKeeperLair   ::     Structural KeeperLair where
 instance structureKeeperLair   ::      Structure KeeperLair where
   _structureType _ = structure_keeper_lair
 
 foreign import data Lab        :: *
 instance objectLab       ::      RoomObject Lab where
 instance ownedLab              :: Owned Lab where
+instance structuralLab   ::     Structural Lab where
 instance structureLab          ::      Structure Lab where
   _structureType _ = structure_lab
 
 foreign import data Link       :: *
 instance objectLink       ::      RoomObject Link where
 instance ownedLink             :: Owned Link where
+instance structuralLink   ::     Structural Link where
 instance structureLink         ::      Structure Link where
   _structureType _ = structure_link
 
 foreign import data Nuker      :: *
 instance objectNuker       ::      RoomObject Nuker where
 instance ownedNuker            :: Owned Nuker where
+instance structuralNuker   ::     Structural Nuker where
 instance structureNuker        ::      Structure Nuker where
   _structureType _ = structure_nuker
 
 foreign import data Observer   :: *
 instance objectObserver       ::      RoomObject Observer where
 instance ownedObserver         :: Owned Observer where
+instance structuralObserver   ::     Structural Observer where
 instance structureObserver     ::      Structure Observer where
   _structureType _ = structure_observer
 
 foreign import data Portal     :: *
 instance objectPortal       ::      RoomObject Portal where
 instance ownedPortal           :: Owned Portal where
+instance structuralPortal   ::     Structural Portal where
 instance structurePortal       ::      Structure Portal where
   _structureType _ = structure_portal
 
 foreign import data PowerBank  :: *
 instance objectPowerBank       ::      RoomObject PowerBank where
 instance ownedPowerBank        :: Owned PowerBank where
+instance structuralPowerBank   ::     Structural PowerBank where
 instance structurePowerBank    ::      Structure PowerBank where
   _structureType _ = structure_power_bank
 
 foreign import data PowerSpawn :: *
 instance objectPowerSpawn       ::      RoomObject PowerSpawn where
 instance ownedPowerSpawn       :: Owned PowerSpawn where
+instance structuralPowerSpawn   ::     Structural PowerSpawn where
 instance structurePowerSpawn   ::      Structure PowerSpawn where
   _structureType _ = structure_power_spawn
 
 foreign import data Rampart    :: *
 instance objectRampart       ::      RoomObject Rampart where
 instance ownedRampart          :: Owned Rampart where
+instance structuralRampart   ::     Structural Rampart where
 instance structureRampart      ::      Structure Rampart where
   _structureType _ = structure_rampart
 
 foreign import data Road       :: *
 instance objectRoad       ::      RoomObject Road where
 instance ownedRoad             :: Owned Road where
+instance structuralRoad   ::     Structural Road where
 instance structureRoad         ::      Structure Road where
   _structureType _ = structure_road
 
 foreign import data Spawn      :: *
 instance objectSpawn       ::      RoomObject Spawn where
 instance ownedSpawn            :: Owned Spawn where
+instance structuralSpawn   ::     Structural Spawn where
 instance structureSpawn        ::      Structure Spawn where
   _structureType _ = structure_spawn
 
 foreign import data Storage    :: *
 instance objectStorage       ::      RoomObject Storage where
 instance ownedStorage          :: Owned Storage where
+instance structuralStorage   ::     Structural Storage where
 instance structureStorage      ::      Structure Storage where
   _structureType _ = structure_storage
 
 foreign import data Terminal   :: *
 instance objectTerminal       ::      RoomObject Terminal where
 instance ownedTerminal         :: Owned Terminal where
+instance structuralTerminal   ::     Structural Terminal where
 instance structureTerminal     ::      Structure Terminal where
   _structureType _ = structure_terminal
 
 foreign import data Tower      :: *
 instance objectTower       ::      RoomObject Tower where
 instance ownedTower            :: Owned Tower where
+instance structuralTower   ::     Structural Tower where
 instance structureTower        ::      Structure Tower where
   _structureType _ = structure_tower
 
 foreign import data Wall       :: *
 instance objectWall       ::      RoomObject Wall where
 instance ownedWall             :: Owned Wall where
+instance structuralWall   ::     Structural Wall where
 instance structureWall         :: Structure Wall where
   _structureType _ = structure_wall
 

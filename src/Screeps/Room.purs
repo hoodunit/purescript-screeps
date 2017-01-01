@@ -3,7 +3,7 @@ module Screeps.Room where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Data.Array as Array
+--import Data.Array as Array
 import Data.Either (Either(Left,Right))
 import Data.Maybe (Maybe(Just, Nothing))
 --import Data.StrMap as StrMap
