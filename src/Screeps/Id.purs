@@ -3,8 +3,9 @@ module Screeps.Id(Id(..), class HasId, id) where
 import Control.Category           ((<<<))
 import Control.Monad.Eff          (Eff)
 
-import Data.Argonaut.Encode.Class (class EncodeJson, gEncodeJson)
-import Data.Argonaut.Decode.Class (class DecodeJson, gDecodeJson)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Functor               ((<$>))
 import Data.Generic               (class Generic,    gEq, gShow)
 import Data.Eq                    (class Eq)
 import Data.Maybe                 (Maybe(..))
@@ -21,6 +22,7 @@ newtype Id a = Id String
 id :: forall a. HasId a => a -> Id a
 id  = unsafeField "id"
 
+-- | Id as string.
 idAsString :: forall a. Id a -> String
 idAsString (Id s) = s
 
@@ -32,8 +34,8 @@ foreign import unsafeGetObjectById :: forall a. Id a -> Maybe a
 foreign import unsafeGetObjectByIdEff :: forall a e. Eff (tick :: TICK | e) (Id a) -> (Maybe a)
 
 derive instance genericId    :: Generic    (Id a)
-instance        eqId         :: Eq         (Id a) where eq         = gEq
-instance        showId       :: Show       (Id a) where show       = gShow
-instance        decodeJsonId :: DecodeJson (Id a) where decodeJson = gDecodeJson
-instance        encodeJsonId :: EncodeJson (Id a) where encodeJson = gEncodeJson
+instance        eqId         :: Eq         (Id a) where eq                = gEq
+instance        showId       :: Show       (Id a) where show              = gShow
+instance        decodeJsonId :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
+instance        encodeJsonId :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
 
