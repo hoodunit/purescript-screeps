@@ -75,9 +75,6 @@ instance objectNuke      :: RoomObject     Nuke where
 foreign import data Resource :: *
 instance objectResource      :: RoomObject     Resource where
 
-foreign import data Source :: *
-instance objectSource      :: RoomObject     Source where
-
 -- | Derived markers
 type Path = Array PathStep
 
