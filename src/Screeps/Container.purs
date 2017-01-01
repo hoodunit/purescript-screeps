@@ -4,19 +4,20 @@ module Screeps.Container where
 import Data.Maybe (Maybe)
 
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (Container, ResourceType(ResourceType), AnyStructure)
-import Screeps.FFI (unsafeField)
+import Screeps.Stores    (class Stores)
+import Screeps.Types -- (Container, ResourceType(ResourceType), AnyStructure)
 
-foreign import data Store :: *
+foreign import data Container :: *
 
-store :: Container -> Store
-store = unsafeField "store"
+instance objectContainer      :: RoomObject Container where
 
-storeGet :: Container -> ResourceType -> Int
-storeGet s (ResourceType res) = unsafeField res (store s)
+instance structuralContainer  :: Structural Container where
 
-storeCapacity :: Container -> Int
-storeCapacity = unsafeField "storeCapacity"
+instance storeInContainer     :: Stores     Container where
+
+instance structureContainer   :: Structure  Container where
+  _structureType _ = structure_container
 
 toContainer :: AnyStructure -> Maybe Container
-toContainer = fromAnyStructure
+toContainer  = fromAnyStructure
+

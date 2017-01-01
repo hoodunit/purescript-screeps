@@ -59,19 +59,6 @@ foreign import structure_terminal :: StructureType
 foreign import structure_container :: StructureType
 foreign import structure_nuker :: StructureType
 
-foreign import data Container  :: *
-instance objectContainer       ::      RoomObject Container where
-instance structuralContainer   ::     Structural Container where
-instance structureContainer    ::      Structure Container where
-  _structureType _ = structure_container
-
-foreign import data Lab        :: *
-instance objectLab       ::      RoomObject Lab where
-instance ownedLab              :: Owned Lab where
-instance structuralLab   ::     Structural Lab where
-instance structureLab          ::      Structure Lab where
-  _structureType _ = structure_lab
-
 foreign import data Link       :: *
 instance objectLink       ::      RoomObject Link where
 instance ownedLink             :: Owned Link where

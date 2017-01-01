@@ -4,20 +4,23 @@ module Screeps.Lab where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (Creep, Lab, AnyStructure)
+import Screeps.Effects    (CMD)
+import Screeps.FFI        (runThisEffFn1, runThisEffFn2, unsafeField)
+import Screeps.Refillable (class Refillable)
+import Screeps.Structure  (fromAnyStructure)
+import Screeps.Types      --(Creep, Lab, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
+
+foreign import data Lab        :: *
+instance objectLab       ::      RoomObject Lab where
+instance ownedLab              :: Owned Lab where
+instance structuralLab   ::     Structural Lab where
+instance refillableLab   ::     Refillable Lab where
+instance structureLab          ::      Structure Lab where
+  _structureType _ = structure_lab
 
 cooldown :: Lab -> Int
 cooldown = unsafeField "cooldown"
-
-energy :: Lab -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: Lab -> Int
-energyCapacity = unsafeField "energyCapacity"
 
 mineralAmount :: Lab -> Int
 mineralAmount = unsafeField "mineralAmount"
