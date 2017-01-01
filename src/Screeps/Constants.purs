@@ -3,6 +3,7 @@ module Screeps.Constants where
 import Prelude
 
 import Screeps.Types
+import Screeps.RoomPosition.Type
 
 foreign import find_exit_top :: FindType RoomPosition
 foreign import find_exit_right :: FindType RoomPosition

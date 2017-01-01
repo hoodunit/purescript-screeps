@@ -9,11 +9,12 @@ import Data.Maybe (Maybe(Nothing), maybe)
 import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, FilterFn, FindContext(..), FindType, LookType, Path, RoomObject, RoomPosition, TargetPosition(..), StructureType)
+import Screeps.Types (Color, FilterFn, FindContext(..), FindType, LookType, Path, RoomObject, TargetPosition(..), StructureType)
 import Screeps.Types.Direction (Direction)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 import Screeps.Room (PathOptions)
+import Screeps.RoomPosition.Type
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 
@@ -51,15 +52,6 @@ unwrapContext :: forall a b. FindContext a -> b
 unwrapContext (OfType findType) = unsafeCoerce findType
 unwrapContext (OfObj objects) = unsafeCoerce objects
 unwrapContext (OfPos positions) = unsafeCoerce positions
-
-roomName :: RoomPosition -> String
-roomName = unsafeField "roomName"
-
-x :: RoomPosition -> Int
-x = unsafeField "x"
-
-y :: RoomPosition -> Int
-y = unsafeField "y"
 
 createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
 createConstructionSite = runThisEffFn1 "createConstructionSite"

@@ -6,7 +6,8 @@ import Data.Maybe (Maybe)
 import Screeps.Constants (structure_portal)
 import Screeps.FFI (unsafeField)
 import Screeps.Structure (unsafeCast)
-import Screeps.Types (Portal, RoomPosition, Structure)
+import Screeps.Types (Portal, Structure)
+import Screeps.RoomPosition.Type (RoomPosition)
 
 destination :: Portal -> RoomPosition
 destination = unsafeField "destination"

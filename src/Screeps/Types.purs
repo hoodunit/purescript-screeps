@@ -10,24 +10,13 @@ import Data.Show  (class Show)
 import Data.StrMap as StrMap
 import Screeps.FFI (unsafeField)
 import Screeps.ReturnCode
+import Screeps.RoomPosition.Type
 import Screeps.Types.Direction
 
 foreign import data GameGlobal :: *
 
-foreign import data Market :: *
 foreign import data Room :: *
-foreign import data RoomPosition :: *
 foreign import data WorldMap :: *
-
-instance showRoomPosition :: Show RoomPosition where
-  show pos = show x <> "," <> show y <> ":" <> roomName
-    where
-      x :: Int
-      x = unsafeField "x" pos
-      y :: Int
-      y = unsafeField "y" pos
-      roomName :: String
-      roomName  = unsafeField "roomName" pos
 
 type RoomObject a = RawRoomObject a
 type Structure a = RoomObject (RawStructure a)
