@@ -23,7 +23,6 @@ foreign import data AnyRoomObject :: *
 
 class Structure      a where
     _structureType :: Proxy a -> StructureType
-class Structure a <= OwnedStructure a
 
 foreign import data AnyStructure  :: *
 
@@ -36,9 +35,8 @@ instance anyStructure :: Structure AnyStructure where
 class Structural     a -- structureType
 class Owned          a -- my, owned
 
-instance structureIsStructural :: Structure a      => Structural a
-instance structureIsRoomObject :: Structure a      => RoomObject a
-instance ownedStructureIsOwned :: OwnedStructure a => Owned      a
+instance structureIsStructural :: Structure a => Structural a
+instance structureIsRoomObject :: Structure a => RoomObject a
 
 foreign import structure_spawn :: StructureType
 foreign import structure_extension :: StructureType
@@ -65,88 +63,88 @@ instance structureContainer    ::      Structure Container where
   _structureType _ = structure_container
 
 foreign import data Extension  :: *
-instance ownedExtension        :: OwnedStructure Extension where
-instance structureExtension    ::      Structure Extension where
+instance ownedExtension        :: Owned     Extension where
+instance structureExtension    :: Structure Extension where
   _structureType _ = structure_extension
 
 foreign import data Extractor  :: *
-instance ownedExtractor        :: OwnedStructure Extractor where
-instance structureExtractor    ::      Structure Extractor where
+instance ownedExtractor        :: Owned     Extractor where
+instance structureExtractor    :: Structure Extractor where
   _structureType _ = structure_extractor
 
 foreign import data KeeperLair :: *
-instance ownedKeeperLair       :: OwnedStructure KeeperLair where -- TODO: check it is?
+instance ownedKeeperLair       :: Owned KeeperLair where -- TODO: check it is?
 instance structureKeeperLair   ::      Structure KeeperLair where
   _structureType _ = structure_keeper_lair
 
 foreign import data Lab        :: *
-instance ownedLab              :: OwnedStructure Lab where
+instance ownedLab              :: Owned Lab where
 instance structureLab          ::      Structure Lab where
   _structureType _ = structure_lab
 
 foreign import data Link       :: *
-instance ownedLink             :: OwnedStructure Link where
+instance ownedLink             :: Owned Link where
 instance structureLink         ::      Structure Link where
   _structureType _ = structure_link
 
 foreign import data Nuker      :: *
-instance ownedNuker            :: OwnedStructure Nuker where
+instance ownedNuker            :: Owned Nuker where
 instance structureNuker        ::      Structure Nuker where
   _structureType _ = structure_nuker
 
 foreign import data Observer   :: *
-instance ownedObserver         :: OwnedStructure Observer where
+instance ownedObserver         :: Owned Observer where
 instance structureObserver     ::      Structure Observer where
   _structureType _ = structure_observer
 
 foreign import data Portal     :: *
-instance ownedPortal           :: OwnedStructure Portal where
+instance ownedPortal           :: Owned Portal where
 instance structurePortal       ::      Structure Portal where
   _structureType _ = structure_portal
 
 foreign import data PowerBank  :: *
-instance ownedPowerBank        :: OwnedStructure PowerBank where
+instance ownedPowerBank        :: Owned PowerBank where
 instance structurePowerBank    ::      Structure PowerBank where
   _structureType _ = structure_power_bank
 
 foreign import data PowerSpawn :: *
-instance ownedPowerSpawn       :: OwnedStructure PowerSpawn where
+instance ownedPowerSpawn       :: Owned PowerSpawn where
 instance structurePowerSpawn   ::      Structure PowerSpawn where
   _structureType _ = structure_power_spawn
 
 foreign import data Rampart    :: *
-instance ownedRampart          :: OwnedStructure Rampart where
+instance ownedRampart          :: Owned Rampart where
 instance structureRampart      ::      Structure Rampart where
   _structureType _ = structure_rampart
 
 foreign import data Road       :: *
-instance ownedRoad             :: OwnedStructure Road where
+instance ownedRoad             :: Owned Road where
 instance structureRoad         ::      Structure Road where
   _structureType _ = structure_road
 
 foreign import data Spawn      :: *
-instance ownedSpawn            :: OwnedStructure Spawn where
+instance ownedSpawn            :: Owned Spawn where
 instance structureSpawn        ::      Structure Spawn where
   _structureType _ = structure_spawn
 
 foreign import data Storage    :: *
-instance ownedStorage          :: OwnedStructure Storage where
+instance ownedStorage          :: Owned Storage where
 instance structureStorage      ::      Structure Storage where
   _structureType _ = structure_storage
 
 foreign import data Terminal   :: *
-instance ownedTerminal         :: OwnedStructure Terminal where
+instance ownedTerminal         :: Owned Terminal where
 instance structureTerminal     ::      Structure Terminal where
   _structureType _ = structure_terminal
 
 foreign import data Tower      :: *
-instance ownedTower            :: OwnedStructure Tower where
+instance ownedTower            :: Owned Tower where
 instance structureTower        ::      Structure Tower where
   _structureType _ = structure_tower
 
 foreign import data Wall       :: *
-instance ownedWall             :: OwnedStructure Wall where
-instance structureWall         ::      Structure Wall where
+instance ownedWall             :: Owned Wall where
+instance structureWall         :: Structure Wall where
   _structureType _ = structure_wall
 
 foreign import data ConstructionSite  :: *
