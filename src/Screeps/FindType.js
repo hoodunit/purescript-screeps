@@ -13,7 +13,6 @@ exports.find_sources = FIND_SOURCES;
 exports.find_dropped_energy = FIND_DROPPED_ENERGY;
 exports.find_dropped_resources = FIND_DROPPED_RESOURCES;
 exports.find_structures = FIND_STRUCTURES;
-exports.find_structures0 = FIND_STRUCTURES;
 exports.find_my_structures = FIND_MY_STRUCTURES;
 exports.find_hostile_structures = FIND_HOSTILE_STRUCTURES;
 exports.find_flags = FIND_FLAGS;
