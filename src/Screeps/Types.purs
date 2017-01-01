@@ -59,45 +59,6 @@ foreign import structure_terminal :: StructureType
 foreign import structure_container :: StructureType
 foreign import structure_nuker :: StructureType
 
-foreign import data Observer   :: *
-instance objectObserver       ::      RoomObject Observer where
-instance ownedObserver         :: Owned Observer where
-instance structuralObserver   ::     Structural Observer where
-instance structureObserver     ::      Structure Observer where
-  _structureType _ = structure_observer
-
-foreign import data Portal     :: *
-instance objectPortal       ::      RoomObject Portal where
-instance ownedPortal           :: Owned Portal where
-instance structuralPortal   ::     Structural Portal where
-instance structurePortal       ::      Structure Portal where
-  _structureType _ = structure_portal
-
-foreign import data PowerBank  :: *
-instance objectPowerBank       ::      RoomObject PowerBank where
-instance ownedPowerBank        :: Owned PowerBank where
-instance structuralPowerBank   ::     Structural PowerBank where
-instance structurePowerBank    ::      Structure PowerBank where
-  _structureType _ = structure_power_bank
-
-foreign import data Rampart    :: *
-instance objectRampart       ::      RoomObject Rampart where
-instance ownedRampart          :: Owned Rampart where
-instance structuralRampart   ::     Structural Rampart where
-instance structureRampart      ::      Structure Rampart where
-  _structureType _ = structure_rampart
-
-foreign import data Tower      :: *
-instance objectTower       ::      RoomObject Tower where
-instance ownedTower            :: Owned Tower where
-instance structuralTower   ::     Structural Tower where
-instance structureTower        ::      Structure Tower where
-  _structureType _ = structure_tower
-
-foreign import data ConstructionSite  :: *
-instance constructionSiteIsRoomObject :: RoomObject ConstructionSite where
-instance constructionSiteIsStructural :: Structural ConstructionSite where
-
 foreign import data Creep  :: *
 instance creepIsRoomObject :: RoomObject     Creep where
 instance creepIsOwned      :: Owned      Creep

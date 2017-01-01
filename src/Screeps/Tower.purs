@@ -6,15 +6,18 @@ import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
 import Screeps.Structure (fromAnyStructure)
+import Screeps.Refillable
 import Screeps.ReturnCode
-import Screeps.Types (class Structure, Creep, AnyStructure, Tower)
-import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
+import Screeps.Types --(class Structure, Creep, AnyStructure, Tower)
+import Screeps.FFI (runThisEffFn1, runThisEffFn2)
 
-energy :: Tower -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: Tower -> Int
-energyCapacity = unsafeField "energyCapacity"
+foreign import data Tower      :: *
+instance objectTower       ::      RoomObject Tower where
+instance ownedTower            :: Owned Tower where
+instance structuralTower   ::     Structural Tower where
+instance refillableTower   ::     Refillable Tower where
+instance structureTower        ::      Structure Tower where
+  _structureType _ = structure_tower
 
 attack :: forall e. Tower -> Creep -> Eff ( cmd :: CMD | e) ReturnCode
 attack = runThisEffFn1 "attack"

@@ -3,15 +3,21 @@ module Screeps.PowerBank where
 
 import Data.Maybe (Maybe)
 
+import Screeps.Decays (class Decays)
 import Screeps.FFI (unsafeField)
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (PowerBank, AnyStructure)
+import Screeps.Types
+
+foreign import data PowerBank  :: *
+instance objectPowerBank       ::      RoomObject PowerBank where
+instance ownedPowerBank        :: Owned PowerBank where
+instance structuralPowerBank   ::     Structural PowerBank where
+instance decaysPowerBank       ::     Decays PowerBank where
+instance structurePowerBank    ::      Structure PowerBank where
+  _structureType _ = structure_power_bank
 
 power :: PowerBank -> Int
 power = unsafeField "power"
-
-ticksToDecay :: PowerBank -> Int
-ticksToDecay = unsafeField "ticksToDecay"
 
 toPowerBank :: AnyStructure -> Maybe PowerBank
 toPowerBank = fromAnyStructure

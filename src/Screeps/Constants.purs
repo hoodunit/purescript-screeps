@@ -16,17 +16,6 @@ foreign import color_brown :: Color
 foreign import color_grey :: Color
 foreign import color_white :: Color
 
-foreign import look_creeps :: LookType Creep
-foreign import look_energy :: LookType Resource
-foreign import look_resources :: LookType Resource
-foreign import look_sources :: LookType Source
-foreign import look_minerals :: LookType Mineral
-foreign import look_structures :: LookType AnyStructure
-foreign import look_flags :: LookType Flag
-foreign import look_construction_sites :: LookType ConstructionSite
-foreign import look_nukes :: LookType Nuke
-foreign import look_terrain :: LookType Terrain
-
 foreign import obstacle_object_types :: Array String
 
 foreign import part_move :: BodyPartType

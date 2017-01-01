@@ -6,6 +6,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 import Data.StrMap as StrMap
 
+import Screeps.ConstructionSite (ConstructionSite)
 import Screeps.Effects (CMD, TICK, TIME)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Types --(ConstructionSite, Creep, Flag, GameGlobal, Id, Room, Spawn, Structure, WorldMap)

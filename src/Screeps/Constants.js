@@ -11,17 +11,6 @@ exports.color_brown = COLOR_BROWN;
 exports.color_grey = COLOR_GREY;
 exports.color_white = COLOR_WHITE;
 
-exports.look_creeps = LOOK_CREEPS;
-exports.look_energy = LOOK_ENERGY;
-exports.look_resources = LOOK_RESOURCES;
-exports.look_sources = LOOK_SOURCES;
-exports.look_minerals = LOOK_MINERALS;
-exports.look_structures = LOOK_STRUCTURES;
-exports.look_flags = LOOK_FLAGS;
-exports.look_construction_sites = LOOK_CONSTRUCTION_SITES;
-exports.look_nukes = LOOK_NUKES;
-exports.look_terrain = LOOK_TERRAIN;
-
 exports.obstacle_object_types = OBSTACLE_OBJECT_TYPES;
 
 exports.part_move = MOVE;
