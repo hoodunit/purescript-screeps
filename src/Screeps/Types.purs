@@ -5,14 +5,10 @@ import Prelude (class Eq, class Show, show, (<>), (==))
 import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
-import Data.Maybe (Maybe)
-import Data.Show  (class Show)
 import Data.StrMap as StrMap
 import Type.Proxy
 
-import Screeps.FFI (unsafeField)
-import Screeps.ReturnCode
-import Screeps.RoomPosition.Type
+import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.Direction(Direction)
 
 foreign import data GameGlobal :: *
@@ -71,12 +67,12 @@ instance structureContainer    ::      Structure Container where
 foreign import data Extension  :: *
 instance ownedExtension        :: OwnedStructure Extension where
 instance structureExtension    ::      Structure Extension where
-  _structureType _ = structure_container
+  _structureType _ = structure_extension
 
 foreign import data Extractor  :: *
 instance ownedExtractor        :: OwnedStructure Extractor where
 instance structureExtractor    ::      Structure Extractor where
-  _structureType _ = structure_container
+  _structureType _ = structure_extractor
 
 foreign import data KeeperLair :: *
 instance ownedKeeperLair       :: OwnedStructure KeeperLair where -- TODO: check it is?
