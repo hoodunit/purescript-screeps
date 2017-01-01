@@ -4,27 +4,31 @@ module Screeps.Nuker where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
+import Screeps.Constants (nuker_cooldown)
+import Screeps.Coolsdown (class Coolsdown)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, unsafeField)
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (Nuker, AnyStructure)
+import Screeps.Types --(Nuker, AnyStructure)
 import Screeps.RoomPosition.Type (RoomPosition)
+import Screeps.Refillable (class Refillable)
 import Screeps.ReturnCode (ReturnCode)
 
-energy :: Nuker -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: Nuker -> Int
-energyCapacity = unsafeField "energyCapacity"
+foreign import data Nuker      :: *
+instance objectNuker       ::      RoomObject Nuker where
+instance ownedNuker            :: Owned Nuker where
+instance structuralNuker   ::     Structural Nuker where
+instance refillableNuker   ::     Refillable Nuker where
+instance coolsdownNuker    ::     Coolsdown Nuker where
+  expectedCooldown = nuker_cooldown
+instance structureNuker        ::      Structure Nuker where
+  _structureType _ = structure_nuker
 
 ghodium :: Nuker -> Int
 ghodium = unsafeField "ghodium"
 
 ghodiumCapacity :: Nuker -> Int
 ghodiumCapacity = unsafeField "ghodiumCapacity"
-
-cooldown :: Nuker -> Int
-cooldown = unsafeField "cooldown"
 
 launchNuke :: forall e. Nuker -> RoomPosition -> Eff (cmd :: CMD | e) ReturnCode
 launchNuke = runThisEffFn1 "launchNuke"

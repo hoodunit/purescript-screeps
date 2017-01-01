@@ -4,6 +4,8 @@ module Screeps.Lab where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
+import Screeps.Constants  (lab_cooldown)
+import Screeps.Coolsdown  (class Coolsdown)
 import Screeps.Effects    (CMD)
 import Screeps.FFI        (runThisEffFn1, runThisEffFn2, unsafeField)
 import Screeps.Refillable (class Refillable)
@@ -16,11 +18,10 @@ instance objectLab       ::      RoomObject Lab where
 instance ownedLab              :: Owned Lab where
 instance structuralLab   ::     Structural Lab where
 instance refillableLab   ::     Refillable Lab where
+instance coolsdownLab   ::     Coolsdown Lab where
+  expectedCooldown = lab_cooldown
 instance structureLab          ::      Structure Lab where
   _structureType _ = structure_lab
-
-cooldown :: Lab -> Int
-cooldown = unsafeField "cooldown"
 
 mineralAmount :: Lab -> Int
 mineralAmount = unsafeField "mineralAmount"

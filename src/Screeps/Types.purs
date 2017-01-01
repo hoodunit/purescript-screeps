@@ -59,13 +59,6 @@ foreign import structure_terminal :: StructureType
 foreign import structure_container :: StructureType
 foreign import structure_nuker :: StructureType
 
-foreign import data Nuker      :: *
-instance objectNuker       ::      RoomObject Nuker where
-instance ownedNuker            :: Owned Nuker where
-instance structuralNuker   ::     Structural Nuker where
-instance structureNuker        ::      Structure Nuker where
-  _structureType _ = structure_nuker
-
 foreign import data Observer   :: *
 instance objectObserver       ::      RoomObject Observer where
 instance ownedObserver         :: Owned Observer where
