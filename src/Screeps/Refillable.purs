@@ -4,11 +4,21 @@ module Screeps.Refillable where
 import Data.Maybe (Maybe)
 
 import Screeps.FFI (unsafeField)
+import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (Extension, AnyStructure)
 
 class ( Structure a
       , Owned     a ) <= Refillable a
+
+foreign import data AnyRefillable :: *
+instance anyRefillableIsRoomObject :: RoomObject AnyRefillable
+instance anyRefillableHasId        :: HasId      AnyRefillable
+instance refillableIsStructural    :: Structural AnyRefillable
+instance refillableIsOwned         :: Owned      AnyRefillable
+instance refillableIsStructure     :: Structure  AnyRefillable where
+  _structureType _ = StructureType "<any refillable>"
+instance anyRefillable             :: Refillable AnyRefillable
 
 energy :: forall a. Refillable a => a -> Int
 energy = unsafeField "energy"
