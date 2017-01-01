@@ -9,8 +9,9 @@ import Data.Maybe (Maybe(Just, Nothing))
 --import Data.StrMap as StrMap
 
 import Screeps.Effects (CMD, TICK)
-import Screeps.Types (Color, FilterFn, FindType, LookType, Mode, Path, Room, StructureType, TargetPosition(..))
+import Screeps.Types (Color, FilterFn, Mode, Path, Room, StructureType, TargetPosition(..))
 import Screeps.Controller (Controller)
+import Screeps.FindType (FindType, LookType)
 import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.Storage (Storage)
 import Screeps.Terminal   (Terminal)

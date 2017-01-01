@@ -10,7 +10,9 @@ import Screeps.Nuke    (Nuke)
 import Screeps.Resource(Resource)
 import Screeps.Source  (Source)
 import Screeps.Spawn   (Spawn)
-import Screeps.Types   (FindType, LookType, AnyStructure, Creep, Terrain)
+import Screeps.Types   (AnyStructure, Creep, Terrain)
+
+newtype FindType a = FindType Int
 
 foreign import find_exit_top :: FindType RoomPosition
 foreign import find_exit_right :: FindType RoomPosition
@@ -36,6 +38,7 @@ foreign import find_hostile_construction_sites :: FindType ConstructionSite
 foreign import find_minerals :: FindType Mineral
 foreign import find_nukes :: FindType Nuke
 
+newtype LookType a = LookType String
 foreign import look_creeps :: LookType Creep
 foreign import look_energy :: LookType Resource
 foreign import look_resources :: LookType Resource

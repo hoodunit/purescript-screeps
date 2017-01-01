@@ -117,9 +117,6 @@ derive instance genericColor :: Generic Color
 instance eqColor :: Eq Color where eq = gEq
 instance showColor :: Show Color where show = gShow
 
-newtype LookType a = LookType String
-newtype FindType a = FindType Int
-
 type StructureInfo = StrMap.StrMap Int
 
 --------------------------------
