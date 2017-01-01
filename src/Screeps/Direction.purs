@@ -1,5 +1,5 @@
 -- | Defines the main types used in the library and the relationships between them.
-module Screeps.Types.Direction where
+module Screeps.Direction where
 
 import Prelude (class Eq, class Show, show, (<>), (==))
 import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)

@@ -1,5 +1,5 @@
 {
-  "name": "purescript-screeps",
+  "name": "purescript-screeps-classy",
   "ignore": [
     "**/.*",
     "node_modules",

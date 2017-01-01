@@ -1,20 +1,20 @@
 -- | Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-us/articles/203079201-RoomPosition)
 module Screeps.RoomPosition where
 
-import Prelude
+import Prelude ((<$>), (<<<))
 import Control.Monad.Eff (Eff, runPure)
-import Control.Monad.Eff.Exception (EXCEPTION, Error, error, try)
-import Data.Either (Either(Left, Right))
-import Data.Maybe (Maybe(Nothing), maybe)
+import Control.Monad.Eff.Exception (EXCEPTION, Error, try)
+import Data.Either (Either)
+import Data.Maybe (Maybe(Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Effects (CMD)
-import Screeps.Types --(Color, FilterFn, FindContext(..), FindType, LookType, Path, RoomObject, TargetPosition(..), StructureType)
-import Screeps.Types.Direction (Direction)
+import Screeps.Types (Color, FilterFn, FindContext(..), LookType, Path, StructureType, TargetPosition(..))
+import Screeps.Direction (Direction)
 import Screeps.ReturnCode (ReturnCode)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe)
 import Screeps.Room (PathOptions)
-import Screeps.RoomPosition.Type
+import Screeps.RoomPosition.Type (RoomPosition)
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 

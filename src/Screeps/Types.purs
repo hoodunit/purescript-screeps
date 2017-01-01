@@ -13,7 +13,7 @@ import Type.Proxy
 import Screeps.FFI (unsafeField)
 import Screeps.ReturnCode
 import Screeps.RoomPosition.Type
-import Screeps.Types.Direction
+import Screeps.Direction(Direction)
 
 foreign import data GameGlobal :: *
 
@@ -43,7 +43,6 @@ class Owned          a -- my, owned
 instance structureIsStructural :: Structure a      => Structural a
 instance structureIsRoomObject :: Structure a      => RoomObject a
 instance ownedStructureIsOwned :: OwnedStructure a => Owned      a
-instance creepIsOwned          ::                     Owned      Creep
 
 foreign import structure_spawn :: StructureType
 foreign import structure_extension :: StructureType
@@ -91,12 +90,12 @@ instance structureKeeperLair   ::      Structure KeeperLair where
 
 foreign import data Lab        :: *
 instance ownedLab              :: OwnedStructure Lab where
-instance structureLab    ::      Structure Lab where
+instance structureLab          ::      Structure Lab where
   _structureType _ = structure_lab
 
 foreign import data Link       :: *
 instance ownedLink             :: OwnedStructure Link where
-instance structureLink    ::      Structure Link where
+instance structureLink         ::      Structure Link where
   _structureType _ = structure_link
 
 foreign import data Nuker      :: *
@@ -159,15 +158,16 @@ instance ownedWall             :: OwnedStructure Wall where
 instance structureWall         ::      Structure Wall where
   _structureType _ = structure_wall
 
-foreign import data ConstructionSite :: *
+foreign import data ConstructionSite  :: *
 instance constructionSiteIsRoomObject :: RoomObject ConstructionSite where
 instance constructionSiteIsStructural :: Structural ConstructionSite where
 
-foreign import data Creep :: *
-instance creepIsRoomObject    :: RoomObject     Creep where
+foreign import data Creep  :: *
+instance creepIsRoomObject :: RoomObject     Creep where
+instance creepIsOwned      :: Owned      Creep
 
-foreign import data Flag :: *
-instance objectFlag      :: RoomObject     Flag where
+foreign import data Flag   :: *
+instance objectFlag        :: RoomObject     Flag where
 
 foreign import data Mineral :: *
 instance objectMineral      :: RoomObject     Mineral where
