@@ -65,20 +65,6 @@ instance structuralContainer   ::     Structural Container where
 instance structureContainer    ::      Structure Container where
   _structureType _ = structure_container
 
-foreign import data Extractor  :: *
-instance objectExtractor       ::      RoomObject Extractor where
-instance ownedExtractor        :: Owned     Extractor where
-instance structuralExtractor   ::     Structural Extractor where
-instance structureExtractor    :: Structure Extractor where
-  _structureType _ = structure_extractor
-
-foreign import data KeeperLair :: *
-instance objectKeeperLair       ::      RoomObject KeeperLair where
-instance ownedKeeperLair       :: Owned KeeperLair where -- TODO: check it is?
-instance structuralKeeperLair   ::     Structural KeeperLair where
-instance structureKeeperLair   ::      Structure KeeperLair where
-  _structureType _ = structure_keeper_lair
-
 foreign import data Lab        :: *
 instance objectLab       ::      RoomObject Lab where
 instance ownedLab              :: Owned Lab where
