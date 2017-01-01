@@ -65,13 +65,6 @@ instance structuralContainer   ::     Structural Container where
 instance structureContainer    ::      Structure Container where
   _structureType _ = structure_container
 
-foreign import data Extension  :: *
-instance objectExtension       ::      RoomObject Extension where
-instance ownedExtension        :: Owned     Extension where
-instance structuralExtension   ::     Structural Extension where
-instance structureExtension    :: Structure Extension where
-  _structureType _ = structure_extension
-
 foreign import data Extractor  :: *
 instance objectExtractor       ::      RoomObject Extractor where
 instance ownedExtractor        :: Owned     Extractor where
@@ -176,13 +169,6 @@ instance ownedTower            :: Owned Tower where
 instance structuralTower   ::     Structural Tower where
 instance structureTower        ::      Structure Tower where
   _structureType _ = structure_tower
-
-foreign import data Wall       :: *
-instance objectWall       ::      RoomObject Wall where
-instance ownedWall             :: Owned Wall where
-instance structuralWall   ::     Structural Wall where
-instance structureWall         :: Structure Wall where
-  _structureType _ = structure_wall
 
 foreign import data ConstructionSite  :: *
 instance constructionSiteIsRoomObject :: RoomObject ConstructionSite where
