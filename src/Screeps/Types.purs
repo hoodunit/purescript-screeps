@@ -115,20 +115,6 @@ instance structuralSpawn   ::     Structural Spawn where
 instance structureSpawn        ::      Structure Spawn where
   _structureType _ = structure_spawn
 
-foreign import data Storage    :: *
-instance objectStorage       ::      RoomObject Storage where
-instance ownedStorage          :: Owned Storage where
-instance structuralStorage   ::     Structural Storage where
-instance structureStorage      ::      Structure Storage where
-  _structureType _ = structure_storage
-
-foreign import data Terminal   :: *
-instance objectTerminal       ::      RoomObject Terminal where
-instance ownedTerminal         :: Owned Terminal where
-instance structuralTerminal   ::     Structural Terminal where
-instance structureTerminal     ::      Structure Terminal where
-  _structureType _ = structure_terminal
-
 foreign import data Tower      :: *
 instance objectTower       ::      RoomObject Tower where
 instance ownedTower            :: Owned Tower where

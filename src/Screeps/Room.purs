@@ -9,9 +9,11 @@ import Data.Maybe (Maybe(Just, Nothing))
 --import Data.StrMap as StrMap
 
 import Screeps.Effects (CMD, TICK)
-import Screeps.Types (Color, FilterFn, FindType, LookType, Mode, Path, Room, Storage, StructureType, TargetPosition(..), Terminal)
+import Screeps.Types (Color, FilterFn, FindType, LookType, Mode, Path, Room, StructureType, TargetPosition(..))
 import Screeps.Controller (Controller)
 import Screeps.RoomPosition.Type (RoomPosition)
+import Screeps.Storage (Storage)
+import Screeps.Terminal   (Terminal)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 import Screeps.ReturnCode (ReturnCode)
 
