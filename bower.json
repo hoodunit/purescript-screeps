@@ -5,7 +5,10 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "output"
+    "output",
+    "npm_debug.log",
+    "test.hs",
+    "test.md"
   ],
   "dependencies": {
      "purescript-console"        : "^2.0.0"
