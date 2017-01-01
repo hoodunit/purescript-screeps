@@ -68,9 +68,11 @@ instance showFindType :: Show (FindType a) where
   show f | f===find_nukes                      = "find_nukes"
   show (FindType f)                           = "FindType " <> show f
 
-feq :: forall a b. FindType a -> FindType b -> Boolean 
-feq (FindType a) (FindType b) = a == b
-infixr 3 feq as ===
+findTypeEq :: forall a b. FindType a
+                       -> FindType b
+                       -> Boolean 
+findTypeEq (FindType a) (FindType b) = a == b
+infixr 3 findTypeEq as ===
 
 newtype LookType a = LookType String
 foreign import look_creeps :: LookType Creep
@@ -83,4 +85,21 @@ foreign import look_flags :: LookType Flag
 foreign import look_construction_sites :: LookType ConstructionSite
 foreign import look_nukes :: LookType Nuke
 foreign import look_terrain :: LookType Terrain
+
+instance showLookType :: Show (LookType a) where
+  show f | f=-=look_creeps             = "look_creeps" 
+  show f | f=-=look_energy             = "look_energy" 
+  show f | f=-=look_resources          = "look_resources" 
+  show f | f=-=look_sources            = "look_sources" 
+  show f | f=-=look_minerals           = "look_minerals" 
+  show f | f=-=look_structures         = "look_structures" 
+  show f | f=-=look_flags              = "look_flags" 
+  show f | f=-=look_construction_sites = "look_construction_sites" 
+  show f | f=-=look_nukes              = "look_nukes" 
+  show f | f=-=look_terrain            = "look_terrain"
+  show f                               = "LookType " <> show f 
+
+lookEq :: forall a b. LookType a -> LookType b -> Boolean 
+lookEq (LookType a) (LookType b) = a == b
+infixr 3 lookEq as =-=
 
