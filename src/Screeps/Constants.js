@@ -1,30 +1,5 @@
 "use strict";
 
-exports.find_exit_top = FIND_EXIT_TOP;
-exports.find_exit_right = FIND_EXIT_RIGHT;
-exports.find_exit_bottom = FIND_EXIT_BOTTOM;
-exports.find_exit_left = FIND_EXIT_LEFT;
-exports.find_exit = FIND_EXIT;
-exports.find_creeps = FIND_CREEPS;
-exports.find_my_creeps = FIND_MY_CREEPS;
-exports.find_hostile_creeps = FIND_HOSTILE_CREEPS;
-exports.find_sources_active = FIND_SOURCES_ACTIVE;
-exports.find_sources = FIND_SOURCES;
-exports.find_dropped_energy = FIND_DROPPED_ENERGY;
-exports.find_dropped_resources = FIND_DROPPED_RESOURCES;
-exports.find_structures = FIND_STRUCTURES;
-exports.find_structures0 = FIND_STRUCTURES;
-exports.find_my_structures = FIND_MY_STRUCTURES;
-exports.find_hostile_structures = FIND_HOSTILE_STRUCTURES;
-exports.find_flags = FIND_FLAGS;
-exports.find_construction_sites = FIND_CONSTRUCTION_SITES;
-exports.find_my_spawns = FIND_MY_SPAWNS;
-exports.find_hostile_spawns = FIND_HOSTILE_SPAWNS;
-exports.find_my_construction_sites = FIND_MY_CONSTRUCTION_SITES;
-exports.find_hostile_construction_sites = FIND_HOSTILE_CONSTRUCTION_SITES;
-exports.find_minerals = FIND_MINERALS;
-exports.find_nukes = FIND_NUKES;
-
 exports.color_red = COLOR_RED;
 exports.color_purple = COLOR_PURPLE;
 exports.color_blue = COLOR_BLUE;

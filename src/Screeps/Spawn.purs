@@ -8,8 +8,9 @@ import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
+import Screeps.Refillable (class Refillable)
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
+import Screeps.Types -- (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
 import Screeps.ReturnCode (ReturnCode)
 
@@ -18,11 +19,13 @@ type CreepInfo =
   , needTime :: Int
   , remainingTime :: Int }
 
-energy :: Spawn -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: Spawn -> Int
-energyCapacity = unsafeField "energyCapacity"
+foreign import data Spawn      :: *
+instance objectSpawn       ::      RoomObject Spawn where
+instance ownedSpawn            :: Owned Spawn where
+instance structuralSpawn   ::     Structural Spawn where
+instance refillableSpawn   ::     Refillable Spawn where
+instance structureSpawn        ::      Structure Spawn where
+  _structureType _ = structure_spawn
 
 memory :: forall props. Spawn -> { | props }
 memory = unsafeField "memory"

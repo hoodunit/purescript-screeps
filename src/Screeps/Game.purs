@@ -11,6 +11,7 @@ import Screeps.ReturnCode (ReturnCode)
 import Screeps.Types --(ConstructionSite, Creep, Flag, GameGlobal, Id, Room, Spawn, Structure, WorldMap)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 import Screeps.Market (Market)
+import Screeps.Spawn  (Spawn)
 
 foreign import getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal
 

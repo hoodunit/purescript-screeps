@@ -87,13 +87,6 @@ instance structuralRampart   ::     Structural Rampart where
 instance structureRampart      ::      Structure Rampart where
   _structureType _ = structure_rampart
 
-foreign import data Spawn      :: *
-instance objectSpawn       ::      RoomObject Spawn where
-instance ownedSpawn            :: Owned Spawn where
-instance structuralSpawn   ::     Structural Spawn where
-instance structureSpawn        ::      Structure Spawn where
-  _structureType _ = structure_spawn
-
 foreign import data Tower      :: *
 instance objectTower       ::      RoomObject Tower where
 instance ownedTower            :: Owned Tower where
