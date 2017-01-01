@@ -6,15 +6,18 @@ import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
+import Screeps.Refillable
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types (PowerSpawn, AnyStructure)
+import Screeps.Types --(AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
 
-energy :: PowerSpawn -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: PowerSpawn -> Int
-energyCapacity = unsafeField "energyCapacity"
+foreign import data PowerSpawn :: *
+instance objectPowerSpawn       ::      RoomObject PowerSpawn where
+instance ownedPowerSpawn       :: Owned PowerSpawn where
+instance structuralPowerSpawn   ::     Structural PowerSpawn where
+instance refillablePowerSpawn   ::     Refillable PowerSpawn where
+instance structurePowerSpawn   ::      Structure PowerSpawn where
+  _structureType _ = structure_power_spawn
 
 power :: PowerSpawn -> Int
 power = unsafeField "power"

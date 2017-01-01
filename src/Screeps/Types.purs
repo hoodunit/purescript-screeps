@@ -121,13 +121,6 @@ instance structuralPowerBank   ::     Structural PowerBank where
 instance structurePowerBank    ::      Structure PowerBank where
   _structureType _ = structure_power_bank
 
-foreign import data PowerSpawn :: *
-instance objectPowerSpawn       ::      RoomObject PowerSpawn where
-instance ownedPowerSpawn       :: Owned PowerSpawn where
-instance structuralPowerSpawn   ::     Structural PowerSpawn where
-instance structurePowerSpawn   ::      Structure PowerSpawn where
-  _structureType _ = structure_power_spawn
-
 foreign import data Rampart    :: *
 instance objectRampart       ::      RoomObject Rampart where
 instance ownedRampart          :: Owned Rampart where
