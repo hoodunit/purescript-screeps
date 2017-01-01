@@ -4,12 +4,11 @@ module Screeps.Terminal where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_terminal)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField)
-import Screeps.Structure (unsafeCast)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (ResourceType(ResourceType), AnyStructure, Terminal)
 import Screeps.ReturnCode (ReturnCode)
-import Screeps.Types (ResourceType(ResourceType), Structure, Terminal)
 
 foreign import data Store :: *
 
@@ -28,5 +27,5 @@ send term res amount destRoomName = runThisEffFn3 "send" term res amount destRoo
 send' :: forall e. Terminal -> ResourceType -> Int -> String -> String -> Eff ( cmd :: CMD | e) ReturnCode
 send' term res amount destRoomName description = runThisEffFn4 "send" term res amount destRoomName description
 
-toTerminal :: forall a. Structure a -> Maybe Terminal
-toTerminal = unsafeCast structure_terminal
+toTerminal :: AnyStructure -> Maybe Terminal
+toTerminal = fromAnyStructure

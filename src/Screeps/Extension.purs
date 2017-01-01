@@ -3,10 +3,9 @@ module Screeps.Extension where
 
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_extension)
 import Screeps.FFI (unsafeField)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (Extension, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (Extension, AnyStructure)
 
 energy :: Extension -> Int
 energy = unsafeField "energy"
@@ -14,5 +13,5 @@ energy = unsafeField "energy"
 energyCapacity :: Extension -> Int
 energyCapacity = unsafeField "energyCapacity"
 
-toExtension :: forall a. Structure a -> Maybe Extension
-toExtension = unsafeCast structure_extension
+toExtension :: AnyStructure -> Maybe Extension
+toExtension = fromAnyStructure

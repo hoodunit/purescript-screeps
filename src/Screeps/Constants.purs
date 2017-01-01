@@ -17,9 +17,9 @@ foreign import find_sources_active :: FindType Source
 foreign import find_sources :: FindType Source
 foreign import find_dropped_energy :: FindType Resource
 foreign import find_dropped_resources :: FindType Resource
-foreign import find_structures :: FindType (Structure Unit)
-foreign import find_my_structures :: forall a. FindType (Structure a)
-foreign import find_hostile_structures :: FindType (Structure Unit)
+foreign import find_structures :: FindType AnyStructure
+foreign import find_my_structures :: FindType AnyStructure
+foreign import find_hostile_structures :: FindType AnyStructure
 foreign import find_flags :: FindType Flag
 foreign import find_construction_sites :: FindType ConstructionSite
 foreign import find_my_spawns :: FindType Spawn
@@ -45,7 +45,7 @@ foreign import look_energy :: LookType Resource
 foreign import look_resources :: LookType Resource
 foreign import look_sources :: LookType Source
 foreign import look_minerals :: LookType Mineral
-foreign import look_structures :: LookType (Structure Unit)
+foreign import look_structures :: LookType AnyStructure
 foreign import look_flags :: LookType Flag
 foreign import look_construction_sites :: LookType ConstructionSite
 foreign import look_nukes :: LookType Nuke
@@ -143,26 +143,6 @@ foreign import link_loss_ratio :: Number
 foreign import storage_capacity :: Int
 foreign import storage_hits :: Int
 
-foreign import structure_spawn :: StructureType
-foreign import structure_extension :: StructureType
-foreign import structure_road :: StructureType
-foreign import structure_wall :: StructureType
-foreign import structure_rampart :: StructureType
-foreign import structure_keeper_lair :: StructureType
-foreign import structure_portal :: StructureType
-foreign import structure_controller :: StructureType
-foreign import structure_link :: StructureType
-foreign import structure_storage :: StructureType
-foreign import structure_tower :: StructureType
-foreign import structure_observer :: StructureType
-foreign import structure_power_bank :: StructureType
-foreign import structure_power_spawn :: StructureType
-foreign import structure_extractor :: StructureType
-foreign import structure_lab :: StructureType
-foreign import structure_terminal :: StructureType
-foreign import structure_container :: StructureType
-foreign import structure_nuker :: StructureType
-
 foreign import construction_cost ::
   { spawn :: Int
   , extension :: Int
@@ -188,7 +168,8 @@ foreign import controller_levels ::
   , "4" :: Int
   , "5" :: Int
   , "6" :: Int
-  , "7" :: Int }
+  , "7" :: Int
+  , "8" :: Int }
 foreign import controller_structures ::
   { spawn :: StructureInfo
   , extension :: StructureInfo

@@ -4,11 +4,10 @@ module Screeps.Link where
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_link)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, unsafeField)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (Link, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (Link, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
 
 cooldown :: Link -> Int
@@ -26,5 +25,5 @@ transferEnergy = runThisEffFn1 "transferEnergy"
 transferEnergyAmt :: forall e. Link -> Link -> Int -> Eff (cmd :: CMD | e) ReturnCode
 transferEnergyAmt = runThisEffFn2 "transferEnergy"
 
-toLink :: forall a. Structure a -> Maybe Link
-toLink = unsafeCast structure_link
+toLink :: AnyStructure -> Maybe Link
+toLink = fromAnyStructure

@@ -3,9 +3,8 @@ module Screeps.Extractor where
 
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_extractor)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (Extractor, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (Extractor, AnyStructure)
 
-toExtractor :: forall a. Structure a -> Maybe Extractor
-toExtractor = unsafeCast structure_extractor
+toExtractor :: AnyStructure -> Maybe Extractor
+toExtractor = fromAnyStructure

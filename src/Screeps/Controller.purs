@@ -4,11 +4,10 @@ module Screeps.Controller where
 import Data.Maybe (Maybe)
 import Control.Monad.Eff (Eff)
 
-import Screeps.Constants (structure_controller)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, unsafeField)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (Controller, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (Controller, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
 
 level :: Controller -> Int
@@ -32,5 +31,5 @@ upgradeBlocked = unsafeField "upgradeBlocked"
 unclaim :: forall e. Controller -> Eff (cmd :: CMD | e) ReturnCode
 unclaim = runThisEffFn0 "unclaim"
 
-toController :: forall a. Structure a -> Maybe Controller
-toController = unsafeCast structure_controller
+toController :: AnyStructure -> Maybe Controller
+toController = fromAnyStructure

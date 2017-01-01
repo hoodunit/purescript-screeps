@@ -3,10 +3,9 @@ module Screeps.Portal where
 
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_portal)
 import Screeps.FFI (unsafeField)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (Portal, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (Portal, AnyStructure)
 import Screeps.RoomPosition.Type (RoomPosition)
 
 destination :: Portal -> RoomPosition
@@ -15,5 +14,5 @@ destination = unsafeField "destination"
 ticksToDecay :: Portal -> Int
 ticksToDecay = unsafeField "ticksToDecay"
 
-toPortal :: forall a. Structure a -> Maybe Portal
-toPortal = unsafeCast structure_portal
+toPortal :: AnyStructure -> Maybe Portal
+toPortal = fromAnyStructure

@@ -8,7 +8,7 @@ import Data.StrMap as StrMap
 
 import Screeps.Effects (CMD, TICK, TIME)
 import Screeps.ReturnCode (ReturnCode)
-import Screeps.Types (ConstructionSite, Creep, Flag, GameGlobal, Id, Room, Spawn, Structure, WorldMap)
+import Screeps.Types --(ConstructionSite, Creep, Flag, GameGlobal, Id, Room, Spawn, Structure, WorldMap)
 import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 import Screeps.Market (Market)
 
@@ -51,7 +51,7 @@ rooms = unsafeField "rooms"
 spawns :: GameGlobal -> StrMap.StrMap Spawn
 spawns = unsafeField "spawns"
 
-structures :: GameGlobal -> StrMap.StrMap (Structure Unit)
+structures :: GameGlobal -> StrMap.StrMap AnyStructure
 structures = unsafeField "structures"
 
 time :: GameGlobal -> Int

@@ -7,10 +7,9 @@ import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_spawn)
 import Screeps.Effects (CMD)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (BodyPartType, Creep, Spawn, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
 import Screeps.ReturnCode (ReturnCode)
 
@@ -67,5 +66,5 @@ recycleCreep = runThisEffFn1 "recycleCreep"
 renewCreep :: forall e. Spawn -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 renewCreep = runThisEffFn1 "renewCreep"
 
-toSpawn :: forall a. Structure a -> Maybe Spawn
-toSpawn = unsafeCast structure_spawn
+toSpawn :: AnyStructure -> Maybe Spawn
+toSpawn = fromAnyStructure

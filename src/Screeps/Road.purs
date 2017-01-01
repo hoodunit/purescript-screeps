@@ -3,13 +3,13 @@ module Screeps.Road where
 
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_road)
 import Screeps.FFI (unsafeField)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (Road, Structure)
+import Screeps.Structure (fromAnyStructure)
+import Screeps.Types (Road, AnyStructure)
 
 ticksToDecay :: Road -> Int
 ticksToDecay = unsafeField "ticksToDecay"
 
-toRoad :: forall a. Structure a -> Maybe Road
-toRoad = unsafeCast structure_road
+toRoad :: AnyStructure -> Maybe Road
+toRoad = fromAnyStructure
+
