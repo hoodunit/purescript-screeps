@@ -64,11 +64,6 @@ foreign import structure_terminal :: StructureType
 foreign import structure_container :: StructureType
 foreign import structure_nuker :: StructureType
 
-foreign import data Controller :: *
-instance ownedController       :: OwnedStructure Controller where
-instance structureController   ::      Structure Controller where
-  _structureType _ = structure_controller
-
 foreign import data Container  :: *
 instance structureContainer    ::      Structure Container where
   _structureType _ = structure_container

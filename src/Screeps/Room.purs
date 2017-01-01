@@ -6,11 +6,11 @@ import Control.Monad.Eff (Eff)
 import Data.Array as Array
 import Data.Either (Either(Left,Right))
 import Data.Maybe (Maybe(Just, Nothing))
-import Data.StrMap as StrMap
-import Data.Tuple (Tuple(Tuple))
+--import Data.StrMap as StrMap
 
 import Screeps.Effects (CMD, TICK)
-import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, Room, Storage, StructureType, TargetPosition(..), Terminal)
+import Screeps.Types (Color, FilterFn, FindType, LookType, Mode, Path, Room, Storage, StructureType, TargetPosition(..), Terminal)
+import Screeps.Controller (Controller)
 import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 import Screeps.ReturnCode (ReturnCode)
