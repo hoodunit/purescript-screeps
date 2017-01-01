@@ -63,9 +63,6 @@ foreign import data Creep  :: *
 instance creepIsRoomObject :: RoomObject     Creep where
 instance creepIsOwned      :: Owned      Creep
 
-foreign import data Flag   :: *
-instance objectFlag        :: RoomObject     Flag where
-
 foreign import data Nuke :: *
 instance objectNuke      :: RoomObject     Nuke where
 
