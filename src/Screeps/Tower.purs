@@ -2,6 +2,8 @@
 module Screeps.Tower where
 
 import Control.Monad.Eff (Eff)
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
@@ -10,7 +12,7 @@ import Screeps.Id
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Refillable
 import Screeps.ReturnCode
-import Screeps.Types --(class Structure, Creep, AnyStructure, Tower)
+import Screeps.Types
 
 foreign import data Tower :: *
 instance objectTower      :: RoomObject Tower
@@ -18,6 +20,8 @@ instance ownedTower       :: Owned      Tower
 instance towerHasId       :: HasId      Tower
   where
     validate = instanceOf "StructureTower"
+instance encodeTower      :: EncodeJson Tower where encodeJson = encodeJsonWithId
+instance decodeTower      :: DecodeJson Tower where decodeJson = decodeJsonWithId
 instance structuralTower  :: Structural Tower
 instance refillableTower  :: Refillable Tower
 instance structureTower   :: Structure  Tower where

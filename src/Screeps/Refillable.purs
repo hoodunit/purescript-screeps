@@ -1,11 +1,13 @@
 -- | Corresponds to the Screeps API [StructureExtension](http://support.screeps.com/hc/en-us/articles/207711949-StructureExtension)
 module Screeps.Refillable where
 
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.HeytingAlgebra
 
 import Screeps.FFI (unsafeField, instanceOf)
-import Screeps.Id (class HasId)
-import Screeps.Types -- (Extension, AnyStructure)
+import Screeps.Id
+import Screeps.Types
 
 class ( Structure a
       , Owned     a ) <= Refillable a
@@ -21,6 +23,8 @@ instance anyRefillableHasId        :: HasId      AnyRefillable
               || instanceOf "StructureNuker"      o
               || instanceOf "StructureLink"       o
               || instanceOf "StructureLab"        o
+instance encodeRefillable          :: EncodeJson AnyRefillable where encodeJson = encodeJsonWithId
+instance decodeRefillable          :: DecodeJson AnyRefillable where decodeJson = decodeJsonWithId
 instance refillableIsStructural    :: Structural AnyRefillable
 instance refillableIsOwned         :: Owned      AnyRefillable
 instance refillableIsStructure     :: Structure  AnyRefillable where

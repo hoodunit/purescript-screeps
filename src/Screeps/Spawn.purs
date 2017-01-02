@@ -3,14 +3,15 @@ module Screeps.Spawn where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
                    , unsafeField, instanceOf)
-import Screeps.Id (class HasId)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
 import Screeps.Refillable (class Refillable)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
@@ -27,6 +28,8 @@ instance ownedSpawn       :: Owned      Spawn
 instance spawnHasId       :: HasId      Spawn
   where
     validate = instanceOf "StructureSpawn"
+instance encodeSpawn      :: EncodeJson Spawn where encodeJson = encodeJsonWithId
+instance decodeSpawn      :: DecodeJson Spawn where decodeJson = decodeJsonWithId
 instance structuralSpawn  :: Structural Spawn
 instance refillableSpawn  :: Refillable Spawn
 instance structureSpawn   :: Structure  Spawn where

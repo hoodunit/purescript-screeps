@@ -1,6 +1,8 @@
 -- | Corresponds to the Screeps API [StructurePowerBank](http://support.screeps.com/hc/en-us/articles/207712729-StructurePowerBank)
 module Screeps.PowerBank where
 
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Maybe (Maybe)
 
 import Screeps.Decays    (class Decays)
@@ -15,6 +17,8 @@ instance ownedPowerBank        :: Owned      PowerBank
 instance structuralPowerBank   :: Structural PowerBank
 instance powerBankHasId        :: HasId      PowerBank where
     validate = instanceOf "StructurePowerBank"
+instance encodePowerBank       :: EncodeJson PowerBank where encodeJson = encodeJsonWithId
+instance decodePowerBank       :: DecodeJson PowerBank where decodeJson = decodeJsonWithId
 instance structurePowerBank    :: Structure  PowerBank where
     _structureType _ = structure_power_bank
 instance decaysPowerBank       :: Decays     PowerBank

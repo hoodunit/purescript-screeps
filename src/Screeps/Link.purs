@@ -1,6 +1,8 @@
 -- | Corresponds to the Screeps API [StructureLink](http://support.screeps.com/hc/en-us/articles/208436275-StructureLink)
 module Screeps.Link where
 
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 

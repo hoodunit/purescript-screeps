@@ -1,13 +1,15 @@
 -- | Corresponds to the Screeps API [StructureRampart](http://support.screeps.com/hc/en-us/articles/207712959-StructureRampart)
 module Screeps.Rampart where
 
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Decays  (class Decays)
 import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField, instanceOf)
-import Screeps.Id (class HasId)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(Rampart, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
@@ -17,6 +19,8 @@ instance objectRampart      :: RoomObject Rampart
 instance ownedRampart       :: Owned      Rampart
 instance rampartHasId       :: HasId      Rampart where
   validate = instanceOf "StructureRampart"
+instance encodeRampart      :: EncodeJson Rampart where encodeJson = encodeJsonWithId
+instance decodeRampart      :: DecodeJson Rampart where decodeJson = decodeJsonWithId
 instance structuralRampart  :: Structural Rampart
 instance decaysRampart      :: Decays     Rampart
 instance structureRampart   :: Structure  Rampart where

@@ -2,6 +2,8 @@
 module Screeps.PowerSpawn where
 
 import Control.Monad.Eff (Eff)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
@@ -19,6 +21,8 @@ instance structuralPowerSpawn  :: Structural PowerSpawn
 instance powerSpawnHasId       :: HasId      PowerSpawn
   where
     validate = instanceOf "StructurePowerSpawn"
+instance encodePowerSpawn      :: EncodeJson PowerSpawn where encodeJson = encodeJsonWithId
+instance decodePowerSpawn      :: DecodeJson PowerSpawn where decodeJson = decodeJsonWithId
 instance refillablePowerSpawn  :: Refillable PowerSpawn
 instance structurePowerSpawn   :: Structure  PowerSpawn
   where

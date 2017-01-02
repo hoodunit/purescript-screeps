@@ -2,12 +2,14 @@
 module Screeps.Types where
 
 import Prelude (class Eq, class Show, show, (<>), (==))
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 import Data.StrMap as StrMap
 import Type.Proxy
 
 import Screeps.Direction(Direction)
-import Screeps.Id(class HasId)
+import Screeps.Id(class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.FFI(instanceOf)
 import Screeps.RoomPosition.Type (RoomPosition)
 
@@ -33,9 +35,11 @@ foreign import data AnyStructure  :: *
 instance anyStructureHasId        :: HasId      AnyStructure
   where
     validate = instanceOf "Structure"
+instance encodeAnyStructure       :: EncodeJson AnyStructure where encodeJson = encodeJsonWithId
+instance decodeAnyStructure       :: DecodeJson AnyStructure where decodeJson = decodeJsonWithId
 instance anyStructureIsRoomObject :: RoomObject AnyStructure
 instance anyStructureIsStructural :: Structural AnyStructure
-instance anyStructure :: Structure AnyStructure where
+instance anyStructure             :: Structure  AnyStructure where
   _structureType _ = StructureType "<unknown>"
 
 --  where myStructureType :: StructureType

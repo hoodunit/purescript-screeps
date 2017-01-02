@@ -1,6 +1,8 @@
 -- | Corresponds to the Screeps API [StructureLab](http://support.screeps.com/hc/en-us/articles/208436195-StructureLab)
 module Screeps.Lab where
 
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
@@ -12,7 +14,7 @@ import Screeps.Refillable (class Refillable)
 import Screeps.Structure  (fromAnyStructure)
 import Screeps.Types      --(Creep, Lab, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
-import Screeps.Id         (class HasId)
+import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
 
 foreign import data Lab :: *
 instance objectLab      ::      RoomObject Lab where
