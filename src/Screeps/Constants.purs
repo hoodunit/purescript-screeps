@@ -3,17 +3,6 @@ module Screeps.Constants where
 import Data.StrMap as StrMap
 import Screeps.Types
 
-foreign import color_red :: Color
-foreign import color_purple :: Color
-foreign import color_blue :: Color
-foreign import color_cyan :: Color
-foreign import color_green :: Color
-foreign import color_yellow :: Color
-foreign import color_orange :: Color
-foreign import color_brown :: Color
-foreign import color_grey :: Color
-foreign import color_white :: Color
-
 foreign import obstacle_object_types :: Array String
 
 foreign import creep_life_time :: Int

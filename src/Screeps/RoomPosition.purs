@@ -8,9 +8,10 @@ import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
+import Screeps.Color (Color)
 import Screeps.Effects (CMD)
 import Screeps.FindType (FindType, LookType, Path)
-import Screeps.Types (Color, FilterFn, StructureType, TargetPosition(..))
+import Screeps.Types (FilterFn, StructureType, TargetPosition(..))
 import Screeps.Direction (Direction)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3,

@@ -96,11 +96,6 @@ derive instance genericMode :: Generic Mode
 instance eqMode :: Eq Mode where eq = gEq
 instance showMode :: Show Mode where show = gShow
 
-newtype Color = Color Int
-derive instance genericColor :: Generic Color
-instance eqColor :: Eq Color where eq = gEq
-instance showColor :: Show Color where show = gShow
-
 --------------------------------
 -- Helper types and functions --
 --------------------------------
