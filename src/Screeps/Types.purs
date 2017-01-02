@@ -8,6 +8,7 @@ import Type.Proxy
 
 import Screeps.Direction(Direction)
 import Screeps.Id(class HasId)
+import Screeps.FFI(instanceOf)
 import Screeps.RoomPosition.Type (RoomPosition)
 
 foreign import data GameGlobal :: *
@@ -30,6 +31,8 @@ class ( RoomObject a
 foreign import data AnyStructure  :: *
 
 instance anyStructureHasId        :: HasId      AnyStructure
+  where
+    validate = instanceOf "Structure"
 instance anyStructureIsRoomObject :: RoomObject AnyStructure
 instance anyStructureIsStructural :: Structural AnyStructure
 instance anyStructure :: Structure AnyStructure where

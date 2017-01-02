@@ -5,7 +5,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField)
+import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Stores    (class Stores)
 import Screeps.Structure (fromAnyStructure)
@@ -16,6 +16,8 @@ foreign import data Terminal :: *
 instance objectTerminal      :: RoomObject Terminal
 instance ownedTerminal       :: Owned      Terminal
 instance terminalHasId       :: HasId      Terminal
+  where
+    validate = instanceOf "StructureTerminal"
 instance structuralTerminal  :: Structural Terminal
 instance terminalStores      :: Stores     Terminal
 instance structureTerminal   :: Structure  Terminal where

@@ -3,14 +3,15 @@ module Screeps.KeeperLair where
 
 import Data.Maybe (Maybe)
 
-import Screeps.FFI (unsafeField)
+import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (KeeperLair, AnyStructure)
 
 foreign import data KeeperLair :: *
 instance objectKeeperLair      :: RoomObject KeeperLair
-instance keeperLairHasId       :: HasId      KeeperLair
+instance keeperLairHasId       :: HasId      KeeperLair where
+  validate = instanceOf "StructureKeeperLair"
 instance ownedKeeperLair       :: Owned      KeeperLair -- TODO: check it!
 instance structuralKeeperLair  :: Structural KeeperLair
 instance structureKeeperLair   :: Structure  KeeperLair where

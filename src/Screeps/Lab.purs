@@ -7,22 +7,23 @@ import Data.Maybe (Maybe)
 import Screeps.Constants  (lab_cooldown)
 import Screeps.Coolsdown  (class Coolsdown)
 import Screeps.Effects    (CMD)
-import Screeps.FFI        (runThisEffFn1, runThisEffFn2, unsafeField)
+import Screeps.FFI        (runThisEffFn1, runThisEffFn2, unsafeField, instanceOf)
 import Screeps.Refillable (class Refillable)
 import Screeps.Structure  (fromAnyStructure)
 import Screeps.Types      --(Creep, Lab, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Id         (class HasId)
 
-foreign import data Lab        :: *
-instance objectLab       ::      RoomObject Lab where
-instance ownedLab              :: Owned Lab where
-instance structuralLab   ::     Structural Lab where
-instance refillableLab   ::     Refillable Lab where
-instance labHasId        ::     HasId      Lab where
+foreign import data Lab :: *
+instance objectLab      ::      RoomObject Lab where
+instance ownedLab       :: Owned Lab where
+instance structuralLab  ::     Structural Lab where
+instance refillableLab  ::     Refillable Lab where
+instance labHasId       ::     HasId      Lab where
+  validate = instanceOf "StructureLab"
 instance coolsdownLab   ::     Coolsdown Lab where
   expectedCooldown = lab_cooldown
-instance structureLab          ::      Structure Lab where
+instance structureLab   ::      Structure Lab where
   _structureType _ = structure_lab
 
 mineralAmount :: Lab -> Int

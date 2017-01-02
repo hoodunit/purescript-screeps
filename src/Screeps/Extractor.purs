@@ -3,6 +3,7 @@ module Screeps.Extractor where
 
 import Data.Maybe (Maybe)
 
+import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (Extractor, AnyStructure)
@@ -10,7 +11,8 @@ import Screeps.Types -- (Extractor, AnyStructure)
 foreign import data Extractor  :: *
 instance objectExtractor       :: RoomObject Extractor
 instance ownedExtractor        :: Owned      Extractor
-instance extractorHasId        :: HasId      Extractor
+instance extractorHasId        :: HasId      Extractor where
+  validate = instanceOf "StructureExtractor"
 instance structuralExtractor   :: Structural Extractor
 instance structureExtractor    :: Structure  Extractor where
   _structureType _ = structure_extractor

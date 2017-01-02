@@ -3,6 +3,7 @@ module Screeps.Container where
 
 import Data.Maybe (Maybe)
 
+import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Stores    (class Stores)
@@ -12,6 +13,8 @@ foreign import data Container :: *
 
 instance objectContainer      :: RoomObject Container
 instance containerHasId       :: HasId      Container
+  where
+    validate = instanceOf "StructureContainer"
 instance structuralContainer  :: Structural Container
 instance storeInContainer     :: Stores     Container
 instance structureContainer   :: Structure  Container where

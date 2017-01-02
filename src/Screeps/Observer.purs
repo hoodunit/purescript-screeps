@@ -5,7 +5,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn1)
+import Screeps.FFI (runThisEffFn1, instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (Observer, AnyStructure)
@@ -14,7 +14,8 @@ import Screeps.ReturnCode (ReturnCode)
 foreign import data Observer :: *
 instance objectObserver      :: RoomObject Observer
 instance ownedObserver       :: Owned      Observer
-instance observerHasId       :: HasId      Observer
+instance observerHasId       :: HasId      Observer where
+  validate = instanceOf "StructureObserver"
 instance structuralObserver  :: Structural Observer
 instance structureObserver   :: Structure  Observer where
   _structureType _ = structure_observer

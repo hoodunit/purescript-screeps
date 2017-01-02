@@ -7,7 +7,7 @@ import Data.Maybe (Maybe)
 import Screeps.Constants (nuker_cooldown)
 import Screeps.Coolsdown (class Coolsdown)
 import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn1, unsafeField)
+import Screeps.FFI (runThisEffFn1, unsafeField, instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(Nuker, AnyStructure)
@@ -18,7 +18,8 @@ import Screeps.ReturnCode (ReturnCode)
 foreign import data Nuker :: *
 instance objectNuker      :: RoomObject Nuker
 instance ownedNuker       :: Owned      Nuker
-instance nukerHasId       :: HasId      Nuker
+instance nukerHasId       :: HasId      Nuker where
+  validate = instanceOf "StructureNuker"
 instance structuralNuker  :: Structural Nuker
 instance refillableNuker  :: Refillable Nuker
 instance coolsdownNuker   :: Coolsdown  Nuker where

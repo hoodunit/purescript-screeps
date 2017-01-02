@@ -48,3 +48,6 @@ foreign import selectMaybesImpl :: forall a. (Maybe a -> Boolean) -> (Maybe a ->
 
 selectMaybes :: forall a. a -> JsObject
 selectMaybes obj = unsafePartial $ selectMaybesImpl isJust fromJust obj
+
+foreign import instanceOf :: forall a. String -> a -> Boolean
+
