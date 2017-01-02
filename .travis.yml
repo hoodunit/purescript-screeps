@@ -3,7 +3,7 @@ sudo: false
 node_js:
     - "5"
 before_install:
-  - "npm install -g bower purescript pulp psa"
+  - "npm install -g bower purescript pulp purescript-psa"
 script:
   - "bower install"
   # Can't "pulp test", as the Test.Main.main exits with 1; it's not a
