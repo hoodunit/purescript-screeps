@@ -12,8 +12,8 @@ import Screeps.Id
 import Screeps.Refillable
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject (class RoomObject)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types --(AnyStructure)
+import Screeps.Structure
+import Screeps.Types
 
 foreign import data PowerSpawn :: *
 instance objectPowerSpawn      :: RoomObject PowerSpawn

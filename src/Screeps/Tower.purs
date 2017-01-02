@@ -9,7 +9,7 @@ import Data.Maybe (Maybe)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, instanceOf)
 import Screeps.Id
-import Screeps.Structure (fromAnyStructure)
+import Screeps.Structure
 import Screeps.Refillable
 import Screeps.ReturnCode
 import Screeps.RoomObject (class RoomObject)

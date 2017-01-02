@@ -15,7 +15,8 @@ import Screeps.Nuke    (Nuke)
 import Screeps.Resource(Resource)
 import Screeps.Source  (Source)
 import Screeps.Spawn   (Spawn)
-import Screeps.Types   (AnyStructure, Creep, Terrain)
+import Screeps.Structure
+import Screeps.Types   (Creep, Terrain)
 
 newtype FindType a = FindType Int
 

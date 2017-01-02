@@ -10,8 +10,8 @@ import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Stores    (class Stores)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types -- (ResourceType(ResourceType), AnyStructure, Terminal)
+import Screeps.Structure
+import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject (class RoomObject)
 

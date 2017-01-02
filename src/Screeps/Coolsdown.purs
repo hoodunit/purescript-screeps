@@ -1,7 +1,7 @@
 module Screeps.Coolsdown where
 
 import Screeps.FFI (unsafeField)
-import Screeps.Types (class Structure)
+import Screeps.Structure (class Structure)
 
 class Structure a <= Coolsdown a where
   expectedCooldown :: Int

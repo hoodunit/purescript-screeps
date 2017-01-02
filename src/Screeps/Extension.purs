@@ -9,8 +9,8 @@ import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
 import Screeps.Refillable (class Refillable)
 import Screeps.RoomObject (class RoomObject)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types -- (Extension, AnyStructure)
+import Screeps.Structure
+import Screeps.Types
 
 foreign import data Extension  :: *
 instance objectExtension       :: RoomObject Extension

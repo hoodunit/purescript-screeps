@@ -9,7 +9,7 @@ import Data.Maybe (Maybe)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
-import Screeps.Structure (fromAnyStructure)
+import Screeps.Structure
 import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject (class RoomObject)

@@ -4,7 +4,7 @@ module Screeps.Room where
 import Prelude
 import Control.Monad.Eff (Eff)
 import Data.Either (Either(Left,Right))
-import Data.Maybe (Maybe(Just, Nothing))
+import Data.Maybe (Maybe(..))
 
 import Screeps.Color (Color)
 import Screeps.Effects (CMD, TICK)

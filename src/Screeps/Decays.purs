@@ -1,7 +1,7 @@
 module Screeps.Decays where
 
 import Screeps.FFI (unsafeField)
-import Screeps.Types (class Structure)
+import Screeps.Structure (class Structure)
 
 class Structure a <= Decays a
 

@@ -12,6 +12,7 @@ import Screeps.Flag       (Flag)
 import Screeps.Market     (Market)
 import Screeps.RoomObject (Room, class RoomObject)
 import Screeps.Spawn      (Spawn)
+import Screeps.Structure
 
 foreign import unsafeGameField :: forall a e. String -> Eff (tick :: TICK | e) a
 

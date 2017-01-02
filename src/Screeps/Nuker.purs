@@ -11,8 +11,8 @@ import Screeps.Coolsdown (class Coolsdown)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types --(Nuker, AnyStructure)
+import Screeps.Structure
+import Screeps.Types
 import Screeps.RoomObject (class RoomObject)
 import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.Refillable (class Refillable)

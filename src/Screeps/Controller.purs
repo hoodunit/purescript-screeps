@@ -11,9 +11,8 @@ import Screeps.FFI (runThisEffFn0, unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.Progress (class Progress)
 import Screeps.RoomObject (class RoomObject)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types ( AnyStructure
-                     , structure_controller
+import Screeps.Structure
+import Screeps.Types ( structure_controller
                      , class Owned
                      , class Structure
                      , class Structural )

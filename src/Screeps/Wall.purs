@@ -7,8 +7,8 @@ import Data.Maybe (Maybe)
 
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types --(AnyStructure, Wall)
+import Screeps.Structure
+import Screeps.Types
 import Screeps.RoomObject (class RoomObject)
 
 foreign import data Wall       :: *

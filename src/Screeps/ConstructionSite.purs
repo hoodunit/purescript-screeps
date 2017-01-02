@@ -11,6 +11,7 @@ import Screeps.Progress (class Progress)
 import Screeps.Types --(ConstructionSite, Id, StructureType)
 import Screeps.FFI (runThisEffFn0, instanceOf)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.Structure  (class Structural, class Structure)
 import Screeps.RoomObject (class RoomObject)
 
 foreign import data ConstructionSite  :: *

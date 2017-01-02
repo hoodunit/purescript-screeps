@@ -9,11 +9,8 @@ import Screeps.FFI (instanceOf)
 import Screeps.Decays    ( class Decays )
 import Screeps.Id
 import Screeps.RoomObject (class RoomObject)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types     ( AnyStructure
-                         , class Structure
-                         , class Structural
-                         , structure_road   )
+import Screeps.Structure
+import Screeps.Types
 
 foreign import data Road :: *
 instance objectRoad      :: RoomObject Road

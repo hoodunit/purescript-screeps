@@ -8,7 +8,7 @@ import Data.Maybe (Maybe)
 import Screeps.Decays    (class Decays)
 import Screeps.FFI       (unsafeField, instanceOf)
 import Screeps.Id
-import Screeps.Structure (fromAnyStructure)
+import Screeps.Structure
 import Screeps.Types
 import Screeps.RoomObject (class RoomObject)
 

@@ -3,14 +3,66 @@ module Screeps.Structure where
 
 import Prelude
 import Control.Monad.Eff (Eff)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Generic (class Generic, gEq, gShow)
 import Data.Maybe (Maybe(Just, Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 import Type.Proxy
 
 import Screeps.Effects    (CMD)
+import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject
 import Screeps.Types -- (Id, Structure, StructureType)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
+
+class Structural     a -- has `structureType` - Structure or ConstructionSite
+
+class ( RoomObject a
+      , Structural a
+      , HasId      a ) <= Structure      a where
+    _structureType :: Proxy a -> StructureType
+
+--  where myStructureType :: StructureType
+-- | This class fixes an omission in original hierarchy class,
+--   where both Structure and ConstructionSite share the field `structureType`
+newtype StructureType = StructureType String
+derive instance genericStructureType :: Generic StructureType
+instance eqStructureType   :: Eq   StructureType where eq   = gEq
+instance showStructureType :: Show StructureType where show = gShow
+
+foreign import structure_spawn       :: StructureType
+foreign import structure_extension   :: StructureType
+foreign import structure_road        :: StructureType
+foreign import structure_wall        :: StructureType
+foreign import structure_rampart     :: StructureType
+foreign import structure_keeper_lair :: StructureType
+foreign import structure_portal      :: StructureType
+foreign import structure_controller  :: StructureType
+foreign import structure_link        :: StructureType
+foreign import structure_storage     :: StructureType
+foreign import structure_tower       :: StructureType
+foreign import structure_observer    :: StructureType
+foreign import structure_power_bank  :: StructureType
+foreign import structure_power_spawn :: StructureType
+foreign import structure_extractor   :: StructureType
+foreign import structure_lab         :: StructureType
+foreign import structure_terminal    :: StructureType
+foreign import structure_container   :: StructureType
+foreign import structure_nuker       :: StructureType
+
+foreign import data AnyStructure  :: *
+
+instance anyStructureHasId        :: HasId      AnyStructure
+  where
+    validate = instanceOf "Structure"
+instance encodeAnyStructure       :: EncodeJson AnyStructure where encodeJson = encodeJsonWithId
+instance decodeAnyStructure       :: DecodeJson AnyStructure where decodeJson = decodeJsonWithId
+instance anyStructureIsRoomObject :: RoomObject AnyStructure
+instance anyStructureIsStructural :: Structural AnyStructure
+instance anyStructure             :: Structure  AnyStructure where
+  _structureType _ = StructureType "<unknown>"
 
 hits :: forall a. Structure a => a -> Int
 hits = unsafeField "hits"

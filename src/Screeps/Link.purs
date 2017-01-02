@@ -12,7 +12,7 @@ import Screeps.Decays (class Decays)
 import Screeps.Effects (CMD)
 import Screeps.Id
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, instanceOf)
-import Screeps.Structure (fromAnyStructure)
+import Screeps.Structure
 import Screeps.Types
 import Screeps.Refillable (class Refillable)
 import Screeps.ReturnCode (ReturnCode)

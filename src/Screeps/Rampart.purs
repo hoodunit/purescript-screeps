@@ -10,8 +10,8 @@ import Screeps.Decays  (class Decays)
 import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types --(Rampart, AnyStructure)
+import Screeps.Structure
+import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject (class RoomObject)
 
