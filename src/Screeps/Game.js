@@ -1,3 +1,20 @@
 "use strict";
 
-exports.getGameGlobal = function(){ return Game; }
+exports.unsafeGameField = function (fieldName) {
+    return function() { return Game[fieldName]; }
+}
+exports.getUsed = function () {
+    return Game.cpu.getUsed();
+}
+exports.notify  = function (msg) {
+    function () {
+        return Game.notify(msg);
+    }
+}
+exports.notify_ = function (msg) {
+    return function(interval) {
+        return function() {
+            return Game.notify(msg, interval);
+        }
+    }
+}

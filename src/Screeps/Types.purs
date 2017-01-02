@@ -11,8 +11,6 @@ import Screeps.Id(class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.FFI(instanceOf)
 import Screeps.RoomPosition.Type (RoomPosition)
 
-foreign import data GameGlobal :: *
-
 foreign import data Room :: *
 foreign import data WorldMap :: *
 

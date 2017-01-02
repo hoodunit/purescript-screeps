@@ -3,72 +3,62 @@ module Screeps.Game where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Data.Maybe (Maybe)
 import Data.StrMap as StrMap
 
 import Screeps.ConstructionSite (ConstructionSite)
 import Screeps.Effects (CMD, TICK, TIME)
 import Screeps.Types
 import Screeps.Flag    (Flag)
-import Screeps.FFI     (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
 import Screeps.Market  (Market)
 import Screeps.Spawn   (Spawn)
-import Screeps.Id
 
-foreign import getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal
+foreign import unsafeGameField :: forall a e. String -> Eff (tick :: TICK | e) a
 
 type Gcl =
-  { level :: Int
-  , progress :: Int
+  { level         :: Int
+  , progress      :: Int
   , progressTotal :: Int }
 
 type Cpu =
-  { limit :: Int
+  { limit     :: Int
   , tickLimit :: Int
-  , bucket :: Int }
+  , bucket    :: Int }
 
-constructionSites :: GameGlobal -> StrMap.StrMap ConstructionSite
-constructionSites = unsafeField "constructionSites"
+constructionSites :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap ConstructionSite)
+constructionSites = unsafeGameField "constructionSites"
 
-cpu :: GameGlobal -> Cpu
-cpu = unsafeField "cpu"
+cpu :: forall e. Eff (tick :: TICK | e) Cpu
+cpu = unsafeGameField "cpu"
 
-creeps :: GameGlobal -> StrMap.StrMap Creep
-creeps = unsafeField "creeps"
+creeps :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Creep)
+creeps = unsafeGameField "creeps"
 
-flags :: GameGlobal -> StrMap.StrMap Flag
-flags = unsafeField "flags"
+flags :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Flag)
+flags = unsafeGameField "flags"
 
-gcl :: GameGlobal -> Gcl
-gcl = unsafeField "gcl"
+gcl :: forall e. Eff (tick :: TICK | e) Gcl
+gcl = unsafeGameField "gcl"
 
-map :: GameGlobal -> WorldMap
-map = unsafeField "map"
+map :: forall e. Eff (tick :: TICK | e) WorldMap
+map = unsafeGameField "map"
 
-market :: GameGlobal -> Market
-market = unsafeField "market"
+market :: forall e. Eff (tick :: TICK | e) Market
+market = unsafeGameField "market"
 
-rooms :: GameGlobal -> StrMap.StrMap Room
-rooms = unsafeField "rooms"
+rooms :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Room)
+rooms = unsafeGameField "rooms"
 
-spawns :: GameGlobal -> StrMap.StrMap Spawn
-spawns = unsafeField "spawns"
+spawns :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Spawn)
+spawns = unsafeGameField "spawns"
 
-structures :: GameGlobal -> StrMap.StrMap AnyStructure
-structures = unsafeField "structures"
+structures :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap AnyStructure)
+structures = unsafeGameField "structures"
 
-time :: GameGlobal -> Int
-time = unsafeField "time"
+time :: forall e. Eff (tick :: TICK | e) Int
+time = unsafeGameField "time"
 
-getUsed :: forall e. GameGlobal -> Eff (time :: TIME | e) Number
-getUsed game = runThisEffFn0 "getUsed" (cpu game)
+foreign import getUsedCpu :: forall e. Eff (time :: TIME | e) Number
 
--- | Phase this out - it is unsafe without explicit checking of Id!
-getObjectById :: forall a. GameGlobal -> Id a -> Maybe a
-getObjectById game id = toMaybe $ runThisFn1 "getObjectById" game id
+foreign import notify :: forall e. String -> Eff (cmd :: CMD | e) Unit
 
-notify :: forall e. GameGlobal -> String -> Eff (cmd :: CMD | e) Unit
-notify game msg = runThisEffFn1 "notify" game msg
-
-notify' :: forall e. GameGlobal -> String -> Int -> Eff (cmd :: CMD | e) Unit
-notify' game msg groupInterval = runThisEffFn2 "notify" game msg groupInterval
+foreign import notify_ :: forall e. String -> Int -> Eff (cmd :: CMD | e) Unit
