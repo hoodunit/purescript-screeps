@@ -3,7 +3,7 @@
 exports.unsafeGameField = function (fieldName) {
     return function() { return Game[fieldName]; }
 }
-exports.getUsed = function () {
+exports.getUsedCpu = function () {
     return Game.cpu.getUsed();
 }
 exports.notify  = function (msg) {

@@ -4,9 +4,10 @@ module Screeps.Resource where
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 
-import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
-import Screeps.Types (class RoomObject, ResourceType)
 import Screeps.FFI (unsafeField, instanceOf)
+import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
+import Screeps.RoomObject (class RoomObject)
+import Screeps.Types (ResourceType)
 
 foreign import data Resource :: *
 instance objectResource      :: RoomObject Resource

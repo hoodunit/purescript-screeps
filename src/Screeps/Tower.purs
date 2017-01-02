@@ -12,6 +12,7 @@ import Screeps.Id
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Refillable
 import Screeps.ReturnCode
+import Screeps.RoomObject (class RoomObject)
 import Screeps.Types
 
 foreign import data Tower :: *

@@ -9,6 +9,7 @@ import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(AnyStructure, Wall)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Wall       :: *
 instance objectWall       ::      RoomObject Wall

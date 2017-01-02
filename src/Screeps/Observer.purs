@@ -12,6 +12,7 @@ import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Observer :: *
 instance objectObserver      :: RoomObject Observer

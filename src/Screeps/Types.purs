@@ -9,15 +9,10 @@ import Type.Proxy
 
 import Screeps.Id(class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.FFI(instanceOf)
+import Screeps.RoomObject
 import Screeps.RoomPosition.Type (RoomPosition)
 
-foreign import data Room :: *
 foreign import data WorldMap :: *
-
--- | Any `RoomObject` with a location, and room containing it. 
-class RoomObject     a
-
-foreign import data AnyRoomObject :: *
 
 class Structural     a -- has `structureType` - Structure or ConstructionSite
 
@@ -64,7 +59,7 @@ foreign import structure_container :: StructureType
 foreign import structure_nuker :: StructureType
 
 foreign import data Creep  :: *
-instance creepIsRoomObject :: RoomObject     Creep where
+instance creepIsRoomObject :: RoomObject Creep where
 instance creepIsOwned      :: Owned      Creep
 
 newtype ResourceType = ResourceType String

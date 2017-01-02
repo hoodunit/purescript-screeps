@@ -7,7 +7,8 @@ import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Screeps.FFI         (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Regenerates (class Regenerates)
-import Screeps.Types       (ResourceType, class RoomObject)
+import Screeps.RoomObject  (class RoomObject)
+import Screeps.Types       (ResourceType)
 
 foreign import data Mineral :: *
 instance objectMineral      :: RoomObject  Mineral

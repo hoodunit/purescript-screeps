@@ -13,6 +13,7 @@ import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(Rampart, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Rampart :: *
 instance objectRampart      :: RoomObject Rampart

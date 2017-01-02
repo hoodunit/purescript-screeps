@@ -10,6 +10,7 @@ import Screeps.Id
 import Screeps.Types
 
 import Screeps.FFI (unsafeField, instanceOf)
+import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (Extension, AnyStructure)
 

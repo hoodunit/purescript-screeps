@@ -4,10 +4,11 @@ module Screeps.Source where
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 
-import Screeps.Regenerates (class Regenerates)
-import Screeps.Types --(Id, Sourcve)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
+import Screeps.Regenerates (class Regenerates)
+import Screeps.RoomObject (class RoomObject)
+import Screeps.Types --(Id, Sourcve)
 
 foreign import data Source :: *
 instance objectSource      :: RoomObject  Source

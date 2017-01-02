@@ -14,6 +14,7 @@ import Screeps.Refillable (class Refillable)
 import Screeps.Structure  (fromAnyStructure)
 import Screeps.Types      --(Creep, Lab, AnyStructure)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
 
 foreign import data Lab :: *

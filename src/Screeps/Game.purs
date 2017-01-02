@@ -6,11 +6,12 @@ import Control.Monad.Eff (Eff)
 import Data.StrMap as StrMap
 
 import Screeps.ConstructionSite (ConstructionSite)
-import Screeps.Effects (CMD, TICK, TIME)
+import Screeps.Effects    (CMD, TICK, TIME)
 import Screeps.Types
-import Screeps.Flag    (Flag)
-import Screeps.Market  (Market)
-import Screeps.Spawn   (Spawn)
+import Screeps.Flag       (Flag)
+import Screeps.Market     (Market)
+import Screeps.RoomObject (Room, class RoomObject)
+import Screeps.Spawn      (Spawn)
 
 foreign import unsafeGameField :: forall a e. String -> Eff (tick :: TICK | e) a
 

@@ -8,9 +8,10 @@ import Data.Maybe (Maybe)
 import Screeps.Decays (class Decays)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
+import Screeps.RoomObject (class RoomObject)
+import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(AnyStructure, structure_portal)
-import Screeps.RoomPosition.Type (RoomPosition)
 
 foreign import data Portal :: *
 instance objectPortal      :: RoomObject Portal

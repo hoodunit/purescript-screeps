@@ -11,6 +11,7 @@ import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Refillable
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(AnyStructure)
 

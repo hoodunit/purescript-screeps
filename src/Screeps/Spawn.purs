@@ -13,10 +13,11 @@ import Screeps.Effects (CMD)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
                    , unsafeField, instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
-import Screeps.Refillable (class Refillable)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
+import Screeps.Refillable (class Refillable)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 type CreepInfo =
   { name :: String

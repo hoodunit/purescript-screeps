@@ -7,6 +7,7 @@ import Data.Maybe (Maybe)
 
 import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
+import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (Extractor, AnyStructure)
 

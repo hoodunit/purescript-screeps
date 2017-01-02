@@ -8,10 +8,11 @@ import Data.Maybe (Maybe(Just, Nothing))
 
 import Screeps.Color (Color)
 import Screeps.Effects (CMD, TICK)
-import Screeps.Types (FilterFn, Mode, Room, StructureType, TargetPosition(..))
+import Screeps.Types (FilterFn, Mode, StructureType, TargetPosition(..))
 import Screeps.Controller (Controller)
 import Screeps.FindType (FindType, LookType, Path)
 import Screeps.RoomPosition.Type (RoomPosition)
+import Screeps.RoomObject (Room, class RoomObject)
 import Screeps.Storage (Storage)
 import Screeps.Terminal   (Terminal)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5,

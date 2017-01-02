@@ -8,6 +8,7 @@ import Screeps.Types
 import Screeps.Color (Color)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, unsafeField)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Flag :: *
 instance objectFlag      :: RoomObject Flag

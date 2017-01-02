@@ -8,11 +8,11 @@ import Data.Maybe (Maybe)
 import Screeps.FFI (instanceOf)
 import Screeps.Decays    ( class Decays )
 import Screeps.Id
+import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types     ( AnyStructure
                          , class Structure
                          , class Structural
-                         , class RoomObject
                          , structure_road   )
 
 foreign import data Road :: *

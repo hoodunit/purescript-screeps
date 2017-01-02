@@ -13,6 +13,7 @@ import Screeps.Stores    (class Stores)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (ResourceType(ResourceType), AnyStructure, Terminal)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Terminal :: *
 instance objectTerminal      :: RoomObject Terminal

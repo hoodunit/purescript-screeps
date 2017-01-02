@@ -7,7 +7,7 @@ import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.Regenerates (class Regenerates)
-import Screeps.Types (class RoomObject)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Nuke :: *
 instance objectNuke      :: RoomObject  Nuke

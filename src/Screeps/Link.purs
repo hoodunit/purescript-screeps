@@ -13,9 +13,10 @@ import Screeps.Effects (CMD)
 import Screeps.Id
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, instanceOf)
 import Screeps.Structure (fromAnyStructure)
-import Screeps.Types -- (AnyStructure)
+import Screeps.Types
 import Screeps.Refillable (class Refillable)
 import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 foreign import data Link :: *
 instance objectLink      :: RoomObject Link
