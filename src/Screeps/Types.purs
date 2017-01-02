@@ -5,7 +5,6 @@ import Prelude (class Eq, class Show, show, (<>), (==))
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Generic (class Generic, gEq, gShow)
-import Data.StrMap as StrMap
 import Type.Proxy
 
 import Screeps.Id(class HasId, encodeJsonWithId, decodeJsonWithId)
@@ -101,8 +100,6 @@ newtype Color = Color Int
 derive instance genericColor :: Generic Color
 instance eqColor :: Eq Color where eq = gEq
 instance showColor :: Show Color where show = gShow
-
-type StructureInfo = StrMap.StrMap Int
 
 --------------------------------
 -- Helper types and functions --

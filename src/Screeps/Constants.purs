@@ -1,5 +1,6 @@
 module Screeps.Constants where
 
+import Data.StrMap as StrMap
 import Screeps.Types
 
 foreign import color_red :: Color
@@ -113,6 +114,9 @@ foreign import controller_levels ::
   , "6" :: Int
   , "7" :: Int
   , "8" :: Int }
+
+type StructureInfo = StrMap.StrMap Int
+
 foreign import controller_structures ::
   { spawn :: StructureInfo
   , extension :: StructureInfo
