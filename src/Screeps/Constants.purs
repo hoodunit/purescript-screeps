@@ -1,9 +1,6 @@
 module Screeps.Constants where
 
-import Prelude
-
 import Screeps.Types
-import Screeps.RoomPosition.Type
 
 foreign import color_red :: Color
 foreign import color_purple :: Color

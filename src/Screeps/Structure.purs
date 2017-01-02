@@ -41,7 +41,7 @@ toAnyStructure  = unsafeCoerce
 fromAnyStructure :: forall a. Structure a => AnyStructure -> Maybe a
 fromAnyStructure = from' Proxy
   where
-    from'      :: forall a. Structure a => Proxy a -> AnyStructure -> Maybe a
+    from'      :: Structure a => Proxy a -> AnyStructure -> Maybe a
     from' proxy = unsafeCast $ _structureType proxy
 
 asAnyStructure :: forall a. Structure a => a -> AnyStructure

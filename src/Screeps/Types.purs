@@ -2,8 +2,6 @@
 module Screeps.Types where
 
 import Prelude (class Eq, class Show, show, (<>), (==))
-import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
-import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 import Data.StrMap as StrMap
 import Type.Proxy

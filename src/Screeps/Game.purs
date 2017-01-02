@@ -8,12 +8,11 @@ import Data.StrMap as StrMap
 
 import Screeps.ConstructionSite (ConstructionSite)
 import Screeps.Effects (CMD, TICK, TIME)
-import Screeps.ReturnCode (ReturnCode)
-import Screeps.Types --(ConstructionSite, Creep, Flag, GameGlobal, Id, Room, Spawn, Structure, WorldMap)
-import Screeps.Flag (Flag)
-import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
-import Screeps.Market (Market)
-import Screeps.Spawn  (Spawn)
+import Screeps.Types
+import Screeps.Flag    (Flag)
+import Screeps.FFI     (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
+import Screeps.Market  (Market)
+import Screeps.Spawn   (Spawn)
 import Screeps.Id
 
 foreign import getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal

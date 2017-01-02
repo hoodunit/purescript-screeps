@@ -15,6 +15,7 @@ instance constructionSiteIsRoomObject :: RoomObject ConstructionSite
 instance constructionSiteIsStructural :: Structural ConstructionSite
 instance constructionSiteProgress     :: Progress   ConstructionSite
 instance constructionSiteIsOwned      :: Owned      ConstructionSite
+instance constructionSiteHasId        :: HasId      ConstructionSite
 
 remove :: forall e. ConstructionSite -> Eff (cmd :: CMD | e) ReturnCode
 remove = runThisEffFn0 "remove"

@@ -7,8 +7,9 @@ import Screeps.FFI (unsafeField)
 import Screeps.Id
 
 foreign import data Source :: *
-instance objectSource      :: RoomObject Source
-instance sourceHasId       :: HasId      Source
+instance objectSource      :: RoomObject  Source
+instance sourceHasId       :: HasId       Source
+instance sourceRegenerates :: Regenerates Source
 
 energy :: Source -> Int
 energy = unsafeField "energy"

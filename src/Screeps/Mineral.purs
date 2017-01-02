@@ -9,6 +9,7 @@ import Screeps.Types       (ResourceType, class RoomObject)
 foreign import data Mineral :: *
 instance objectMineral      :: RoomObject  Mineral
 instance mineralRegenerates :: Regenerates Mineral
+instance mineralHasId       :: HasId       Mineral
 
 mineralAmount :: Mineral -> Int
 mineralAmount = unsafeField "mineralAmount"

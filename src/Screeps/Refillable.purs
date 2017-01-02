@@ -1,8 +1,6 @@
 -- | Corresponds to the Screeps API [StructureExtension](http://support.screeps.com/hc/en-us/articles/207711949-StructureExtension)
 module Screeps.Refillable where
 
-import Data.Maybe (Maybe)
-
 import Screeps.FFI (unsafeField)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
