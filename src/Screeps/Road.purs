@@ -3,6 +3,7 @@ module Screeps.Road where
 
 import Data.Maybe (Maybe)
 
+import Screeps.FFI (instanceOf)
 import Screeps.Decays    ( class Decays )
 import Screeps.Id
 import Screeps.Structure (fromAnyStructure)
@@ -16,6 +17,8 @@ foreign import data Road :: *
 instance objectRoad      :: RoomObject Road
 instance structuralRoad  :: Structural Road
 instance roadHasId       :: HasId      Road
+  where
+    validate = instanceOf "StructureRoad"
 instance roadDecays      :: Decays     Road
 instance structureRoad   :: Structure  Road where
   _structureType _ = structure_road

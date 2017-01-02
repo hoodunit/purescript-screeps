@@ -3,12 +3,14 @@ module Screeps.Source where
 
 import Screeps.Regenerates (class Regenerates)
 import Screeps.Types --(Id, Sourcve)
-import Screeps.FFI (unsafeField)
+import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
 
 foreign import data Source :: *
 instance objectSource      :: RoomObject  Source
 instance sourceHasId       :: HasId       Source
+  where
+    validate = instanceOf "Source"
 instance sourceRegenerates :: Regenerates Source
 
 energy :: Source -> Int

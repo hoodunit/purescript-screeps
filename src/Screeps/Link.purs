@@ -9,22 +9,23 @@ import Screeps.Coolsdown (class Coolsdown)
 import Screeps.Decays (class Decays)
 import Screeps.Effects (CMD)
 import Screeps.Id
-import Screeps.FFI (runThisEffFn1, runThisEffFn2)
+import Screeps.FFI (runThisEffFn1, runThisEffFn2, instanceOf)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (AnyStructure)
 import Screeps.Refillable (class Refillable)
 import Screeps.ReturnCode (ReturnCode)
 
-foreign import data Link       :: *
-instance objectLink       ::      RoomObject Link where
-instance ownedLink             :: Owned Link where
-instance structuralLink   ::     Structural Link where
-instance linkDecays       ::     Decays     Link where
-instance linkCoolsdown    ::     Coolsdown  Link where
+foreign import data Link :: *
+instance objectLink      :: RoomObject Link
+instance ownedLink       :: Owned      Link
+instance structuralLink  :: Structural Link
+instance linkDecays      :: Decays     Link
+instance linkCoolsdown   :: Coolsdown  Link where
   expectedCooldown = link_cooldown
-instance linkHasId             :: HasId Link where
-instance refillableLink   ::     Refillable Link where
-instance structureLink         ::      Structure Link where
+instance linkHasId       :: HasId Link      where
+  validate = instanceOf "StructureLink"
+instance refillableLink  :: Refillable Link
+instance structureLink   :: Structure  Link where
   _structureType _ = structure_link
 
 transferEnergy :: forall e. Link -> Link -> Eff (cmd :: CMD | e) ReturnCode

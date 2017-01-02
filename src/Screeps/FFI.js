@@ -255,3 +255,10 @@ exports.selectMaybesImpl = function(isJust){
         }
     }
 }
+
+exports.instanceOf = function (className) {
+    return function (object) {
+        var global = (1,eval)('this');
+        return object instanceof global[className];
+    }
+}

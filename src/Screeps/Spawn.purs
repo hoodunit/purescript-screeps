@@ -8,11 +8,12 @@ import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
+import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
+                   , unsafeField, instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Refillable (class Refillable)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types -- (BodyPartType, Creep, Spawn, AnyStructure, class Structure)
-import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
 import Screeps.ReturnCode (ReturnCode)
 
 type CreepInfo =
@@ -24,6 +25,8 @@ foreign import data Spawn :: *
 instance objectSpawn      :: RoomObject Spawn
 instance ownedSpawn       :: Owned      Spawn
 instance spawnHasId       :: HasId      Spawn
+  where
+    validate = instanceOf "StructureSpawn"
 instance structuralSpawn  :: Structural Spawn
 instance refillableSpawn  :: Refillable Spawn
 instance structureSpawn   :: Structure  Spawn where

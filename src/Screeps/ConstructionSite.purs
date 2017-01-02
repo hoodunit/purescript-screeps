@@ -7,7 +7,7 @@ import Screeps.Effects (CMD)
 import Screeps.Id (class HasId)
 import Screeps.Progress (class Progress)
 import Screeps.Types --(ConstructionSite, Id, StructureType)
-import Screeps.FFI (runThisEffFn0)
+import Screeps.FFI (runThisEffFn0, instanceOf)
 import Screeps.ReturnCode (ReturnCode)
 
 foreign import data ConstructionSite  :: *
@@ -16,6 +16,8 @@ instance constructionSiteIsStructural :: Structural ConstructionSite
 instance constructionSiteProgress     :: Progress   ConstructionSite
 instance constructionSiteIsOwned      :: Owned      ConstructionSite
 instance constructionSiteHasId        :: HasId      ConstructionSite
+  where
+    validate = instanceOf "ConstructionSite"
 
 remove :: forall e. ConstructionSite -> Eff (cmd :: CMD | e) ReturnCode
 remove = runThisEffFn0 "remove"

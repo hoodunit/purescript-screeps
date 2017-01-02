@@ -5,7 +5,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Refillable
 import Screeps.ReturnCode (ReturnCode)
@@ -13,13 +13,16 @@ import Screeps.Structure (fromAnyStructure)
 import Screeps.Types --(AnyStructure)
 
 foreign import data PowerSpawn :: *
-instance objectPowerSpawn       ::      RoomObject PowerSpawn where
-instance ownedPowerSpawn       :: Owned PowerSpawn where
-instance structuralPowerSpawn   ::     Structural PowerSpawn where
-instance powerSpawnHasId        ::     HasId      PowerSpawn where
-instance refillablePowerSpawn   ::     Refillable PowerSpawn where
-instance structurePowerSpawn   ::      Structure PowerSpawn where
-  _structureType _ = structure_power_spawn
+instance objectPowerSpawn      :: RoomObject PowerSpawn
+instance ownedPowerSpawn       :: Owned      PowerSpawn
+instance structuralPowerSpawn  :: Structural PowerSpawn
+instance powerSpawnHasId       :: HasId      PowerSpawn
+  where
+    validate = instanceOf "StructurePowerSpawn"
+instance refillablePowerSpawn  :: Refillable PowerSpawn
+instance structurePowerSpawn   :: Structure  PowerSpawn
+  where
+    _structureType _ = structure_power_spawn
 
 power :: PowerSpawn -> Int
 power = unsafeField "power"

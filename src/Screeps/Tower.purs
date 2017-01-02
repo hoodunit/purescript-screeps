@@ -5,17 +5,19 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
 
 import Screeps.Effects (CMD)
+import Screeps.FFI (runThisEffFn1, runThisEffFn2, instanceOf)
 import Screeps.Id
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Refillable
 import Screeps.ReturnCode
 import Screeps.Types --(class Structure, Creep, AnyStructure, Tower)
-import Screeps.FFI (runThisEffFn1, runThisEffFn2)
 
 foreign import data Tower :: *
 instance objectTower      :: RoomObject Tower
 instance ownedTower       :: Owned      Tower
 instance towerHasId       :: HasId      Tower
+  where
+    validate = instanceOf "StructureTower"
 instance structuralTower  :: Structural Tower
 instance refillableTower  :: Refillable Tower
 instance structureTower   :: Structure  Tower where

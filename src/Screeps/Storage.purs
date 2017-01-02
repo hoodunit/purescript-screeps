@@ -3,6 +3,7 @@ module Screeps.Storage where
 
 import Data.Maybe (Maybe)
 
+import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId)
 import Screeps.Structure (fromAnyStructure)
 import Screeps.Types
@@ -12,6 +13,8 @@ foreign import data Storage :: *
 instance objectStorage      :: RoomObject Storage
 instance ownedStorage       :: Owned      Storage
 instance storageHasId       :: HasId      Storage
+  where
+    validate = instanceOf "StructureStorage"
 instance structuralStorage  :: Structural Storage
 instance storageStores      :: Stores     Storage
 instance structureStorage   :: Structure  Storage where

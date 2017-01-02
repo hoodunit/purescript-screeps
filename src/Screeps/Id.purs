@@ -1,20 +1,25 @@
-module Screeps.Id(Id(..), class HasId, id) where
+module Screeps.Id(Id(..), class HasId, id, validate, getObjectById) where
 
-import Control.Category           ((<<<))
-import Control.Monad.Eff          (Eff)
+--import Control.Category           ((<<<))
+--import Control.Monad              ((>=>))
+--import Control.Monad.Eff          (Eff)
 
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Either
 import Data.Functor               ((<$>))
 import Data.Generic               (class Generic,    gEq, gShow)
 import Data.Eq                    (class Eq)
 import Data.Maybe                 (Maybe(..))
-import Data.Show                  (class Show)
+import Data.Monoid                ((<>))
+import Data.Show                  (class Show, show)
 
 import Screeps.FFI                (unsafeField)
-import Screeps.Effects            (TICK)
+--import Screeps.Effects            (TICK)
 
-class HasId a
+class HasId a where
+  -- Check that object is valid
+  validate :: a -> Boolean
 
 newtype Id a = Id String
 
@@ -22,20 +27,24 @@ newtype Id a = Id String
 id :: forall a. HasId a => a -> Id a
 id  = unsafeField "id"
 
--- | Id as string.
-idAsString :: forall a. Id a -> String
-idAsString (Id s) = s
+-- | Get the object from an Id, if it passes validation.
+getObjectById  :: forall a. HasId a => Id a -> Either String a
+getObjectById i = case unsafeGetObjectById i of
+                       Nothing             -> Left  ( "Object with id " <> show i <> " no longer exists" )
+                       Just o | validate o -> Right    o
+                       Just _              -> Left  ( "Object with given id failed type validation" )
 
 -- | This is unsafe method, for restoring objects by id stored in memory.
 -- | WARNING: This is somewhat unsafe method, since the object is never checked for its type!
 foreign import unsafeGetObjectById :: forall a. Id a -> Maybe a
 
 -- | WARNING: This is somewhat unsafe method, since the object should be checked for its type!
-foreign import unsafeGetObjectByIdEff :: forall a e. Eff (tick :: TICK | e) (Id a) -> (Maybe a)
+--foreign import unsafeGetObjectByIdEff :: forall a e. Eff (tick :: TICK | e) (Id a) -> (Maybe a)
 
 derive instance genericId    :: Generic    (Id a)
 instance        eqId         :: Eq         (Id a) where eq                = gEq
 instance        showId       :: Show       (Id a) where show              = gShow
+-- | Encode and decode as JSON String.
 instance        decodeJsonId :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
 instance        encodeJsonId :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
 
