@@ -1,9 +1,11 @@
-module Screeps.Id(Id(..), class HasId, id, validate, getObjectById) where
+module Screeps.Id(Id(..), class HasId, id, validate, getObjectById
+                 , encodeJsonWithId
+                 , decodeJsonWithId
+                 ) where
 
---import Control.Category           ((<<<))
---import Control.Monad              ((>=>))
---import Control.Monad.Eff          (Eff)
+import Control.Monad              ((>=>))
 
+import Data.Argonaut.Core         (Json)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either
@@ -41,10 +43,17 @@ foreign import unsafeGetObjectById :: forall a. Id a -> Maybe a
 -- | WARNING: This is somewhat unsafe method, since the object should be checked for its type!
 --foreign import unsafeGetObjectByIdEff :: forall a e. Eff (tick :: TICK | e) (Id a) -> (Maybe a)
 
-derive instance genericId    :: Generic    (Id a)
-instance        eqId         :: Eq         (Id a) where eq                = gEq
-instance        showId       :: Show       (Id a) where show              = gShow
+derive instance genericId       :: Generic    (Id a)
+instance        eqId            :: Eq         (Id a) where eq                = gEq
+instance        showId          :: Show       (Id a) where show              = gShow
 -- | Encode and decode as JSON String.
-instance        decodeJsonId :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
-instance        encodeJsonId :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
+instance        decodeJsonId    :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
+instance        encodeJsonId    :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
+
+-- * For making class instances of objects with `HasId` easily:
+encodeJsonWithId  :: forall a. HasId a => a    -> Json
+encodeJsonWithId a = encodeJson (id a)
+
+decodeJsonWithId :: forall a. HasId a => Json -> Either String a
+decodeJsonWithId  = decodeJson >=> getObjectById
 
