@@ -13,7 +13,9 @@ import Screeps.FindType (FindType, LookType, Path)
 import Screeps.Types (Color, FilterFn, StructureType, TargetPosition(..))
 import Screeps.Direction (Direction)
 import Screeps.ReturnCode (ReturnCode)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3,
+                    runThisFn1,    runThisFn2,    runThisFn3,
+                    selectMaybes,  toMaybe)
 import Screeps.Room (PathOptions)
 import Screeps.RoomPosition.Type (RoomPosition)
 
