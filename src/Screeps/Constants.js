@@ -13,17 +13,6 @@ exports.color_white = COLOR_WHITE;
 
 exports.obstacle_object_types = OBSTACLE_OBJECT_TYPES;
 
-exports.part_move = MOVE;
-exports.part_work = WORK;
-exports.part_carry = CARRY;
-exports.part_attack = ATTACK;
-exports.part_ranged_attack = RANGED_ATTACK;
-exports.part_tough = TOUGH;
-exports.part_heal = HEAL;
-exports.part_claim = CLAIM;
-
-exports.bodypart_cost = BODYPART_COST;
-
 exports.creep_life_time = CREEP_LIFE_TIME;
 exports.creep_claim_life_time = CREEP_CLAIM_LIFE_TIME;
 exports.creep_corpse_rate = CREEP_CORPSE_RATE;

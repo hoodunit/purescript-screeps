@@ -8,6 +8,7 @@ import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
+import Screeps.BodyPartType (BodyPartType)
 import Screeps.Effects (CMD)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
                    , unsafeField, instanceOf)

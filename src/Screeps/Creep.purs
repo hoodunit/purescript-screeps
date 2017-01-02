@@ -9,6 +9,7 @@ import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
 import Data.StrMap (StrMap)
 
+import Screeps.BodyPartType (BodyPartType)
 import Screeps.ConstructionSite (ConstructionSite)
 import Screeps.Controller (Controller)
 import Screeps.Direction (Direction)
@@ -21,7 +22,7 @@ import Screeps.Resource   (Resource)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Room (PathOptions)
 import Screeps.Source     (Source)
-import Screeps.Types (BodyPartType, Creep, ResourceType, class Structure, TargetPosition(..))
+import Screeps.Types (Creep, ResourceType, class Structure, TargetPosition(..))
 
 --foreign import data CreepCargo :: *
 type CreepCargo = StrMap Int

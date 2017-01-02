@@ -15,25 +15,6 @@ foreign import color_white :: Color
 
 foreign import obstacle_object_types :: Array String
 
-foreign import part_move :: BodyPartType
-foreign import part_work :: BodyPartType
-foreign import part_carry :: BodyPartType
-foreign import part_attack :: BodyPartType
-foreign import part_ranged_attack :: BodyPartType
-foreign import part_tough :: BodyPartType
-foreign import part_heal :: BodyPartType
-foreign import part_claim :: BodyPartType
-
-foreign import bodypart_cost ::
-  { move :: Int
-  , work :: Int
-  , attack :: Int
-  , carry :: Int
-  , heal :: Int
-  , ranged_attack :: Int
-  , tough :: Int
-  , claim :: Int }
-
 foreign import creep_life_time :: Int
 foreign import creep_claim_life_time :: Int
 foreign import creep_corpse_rate :: Int

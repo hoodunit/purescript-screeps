@@ -97,11 +97,6 @@ derive instance genericMode :: Generic Mode
 instance eqMode :: Eq Mode where eq = gEq
 instance showMode :: Show Mode where show = gShow
 
-newtype BodyPartType = BodyPartType String
-derive instance genericBodyPartType :: Generic BodyPartType
-instance eqBodyPartType :: Eq BodyPartType where eq = gEq
-instance showBodyPartType :: Show BodyPartType where show = gShow
-
 newtype Color = Color Int
 derive instance genericColor :: Generic Color
 instance eqColor :: Eq Color where eq = gEq
