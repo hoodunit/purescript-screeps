@@ -11,8 +11,9 @@ import Unsafe.Coerce (unsafeCoerce)
 import Screeps.Color (Color)
 import Screeps.Effects (CMD)
 import Screeps.FindType (FindType, LookType, Path)
-import Screeps.Types (FilterFn, StructureType, TargetPosition(..))
+import Screeps.Types (FilterFn, TargetPosition(..))
 import Screeps.Direction (Direction)
+import Screeps.Structure (StructureType)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3,
                     runThisFn1,    runThisFn2,    runThisFn3,

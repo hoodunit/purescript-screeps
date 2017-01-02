@@ -12,10 +12,7 @@ import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.Progress (class Progress)
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
-import Screeps.Types ( structure_controller
-                     , class Owned
-                     , class Structure
-                     , class Structural )
+import Screeps.Types ( class Owned )
 import Screeps.ReturnCode (ReturnCode)
 
 foreign import data Controller :: *

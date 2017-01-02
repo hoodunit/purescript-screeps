@@ -11,8 +11,8 @@ import Screeps.Types
 
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.RoomObject (class RoomObject)
-import Screeps.Structure (fromAnyStructure)
-import Screeps.Types -- (Extension, AnyStructure)
+import Screeps.Structure
+import Screeps.Types
 
 class ( Structure a
       , Owned     a ) <= Refillable a

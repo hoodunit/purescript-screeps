@@ -22,7 +22,8 @@ import Screeps.Resource   (Resource)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Room (PathOptions)
 import Screeps.Source     (Source)
-import Screeps.Types (Creep, ResourceType, class Structure, TargetPosition(..))
+import Screeps.Structure (class Structure)
+import Screeps.Types (Creep, ResourceType, TargetPosition(..))
 
 --foreign import data CreepCargo :: *
 type CreepCargo = StrMap Int
