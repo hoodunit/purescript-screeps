@@ -8,7 +8,6 @@ import Data.Generic (class Generic, gEq, gShow)
 import Data.StrMap as StrMap
 import Type.Proxy
 
-import Screeps.Direction(Direction)
 import Screeps.Id(class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.FFI(instanceOf)
 import Screeps.RoomPosition.Type (RoomPosition)
@@ -70,16 +69,6 @@ foreign import structure_nuker :: StructureType
 foreign import data Creep  :: *
 instance creepIsRoomObject :: RoomObject     Creep where
 instance creepIsOwned      :: Owned      Creep
-
--- | Derived markers
-type Path = Array PathStep
-
-type PathStep =
-  { x :: Int
-  , y :: Int
-  , dx :: Number
-  , dy :: Number
-  , direction :: Direction }
 
 newtype ResourceType = ResourceType String
 derive instance genericResourceType :: Generic ResourceType

@@ -14,13 +14,14 @@ import Screeps.Controller (Controller)
 import Screeps.Direction (Direction)
 import Screeps.Effects (CMD, MEMORY)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
+import Screeps.FindType (Path)
 import Screeps.Id
 import Screeps.Mineral   (Mineral)
 import Screeps.Resource   (Resource)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Room (PathOptions)
 import Screeps.Source     (Source)
-import Screeps.Types (BodyPartType, Creep, Path, ResourceType, class Structure, TargetPosition(..))
+import Screeps.Types (BodyPartType, Creep, ResourceType, class Structure, TargetPosition(..))
 
 --foreign import data CreepCargo :: *
 type CreepCargo = StrMap Int

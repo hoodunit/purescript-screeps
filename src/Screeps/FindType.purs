@@ -7,6 +7,7 @@ import Data.Show   (class Show, show)
 
 import Screeps.RoomPosition.Type (RoomPosition)
 import Screeps.ConstructionSite (ConstructionSite)
+import Screeps.Direction(Direction)
 --import Screeps.Creep (Creep)
 import Screeps.Flag    (Flag)
 import Screeps.Mineral (Mineral)
@@ -102,4 +103,14 @@ instance showLookType :: Show (LookType a) where
 lookEq :: forall a b. LookType a -> LookType b -> Boolean 
 lookEq (LookType a) (LookType b) = a == b
 infixr 3 lookEq as =-=
+
+-- | Derived markers
+type Path = Array PathStep
+
+type PathStep =
+  { x :: Int
+  , y :: Int
+  , dx :: Number
+  , dy :: Number
+  , direction :: Direction }
 
