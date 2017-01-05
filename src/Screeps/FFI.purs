@@ -7,8 +7,11 @@ import Data.Maybe (Maybe(Just, Nothing), isJust, fromJust, maybe)
 import Data.Function.Uncurried (Fn3, runFn3)
 import Partial.Unsafe (unsafePartial)
 
+unsafeOptField :: forall obj val. String -> obj -> Maybe val
+unsafeOptField = unsafeOptField_helper Nothing Just
+
 foreign import unsafeField :: forall obj val. String -> obj -> val
-foreign import unsafeOptField :: forall obj val. String -> obj -> Maybe val
+foreign import unsafeOptField_helper :: forall obj val r. r -> (val -> r) -> String -> obj -> r
 foreign import unsafeGetFieldEff :: forall obj val eff. String -> obj -> Eff eff val
 foreign import unsafeSetFieldEff :: forall obj val eff. String -> obj -> val -> Eff eff Unit
 foreign import unsafeDeleteFieldEff :: forall obj eff. String -> obj -> Eff eff Unit

@@ -8,7 +8,7 @@ import Data.Generic (class Generic, gEq, gShow)
 import Type.Proxy
 
 import Screeps.Id  (class HasId, encodeJsonWithId, decodeJsonWithId)
-import Screeps.FFI (instanceOf)
+--import Screeps.FFI (instanceOf)
 import Screeps.RoomObject
 import Screeps.RoomPosition.Type (RoomPosition)
 

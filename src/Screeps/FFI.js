@@ -8,13 +8,17 @@ exports.unsafeField = function(key){
   }
 }
 
-exports.unsafeOptField = function(key){
-  return function(obj){
-    var r= obj[key];
-    if (_.isUndefined (r)) {
-        return Nothing( );
-    } else {
-        return Just   (r);
+exports.unsafeOptField_helper = function(Just) {
+  return function(Nothing) {
+    return function(key){
+        return function(obj){
+        var r= obj[key];
+        if (_.isUndefined (r)) {
+            return Nothing( );
+        } else {
+            return Just   (r);
+        }
+      }
     }
   }
 }
