@@ -77,16 +77,16 @@ findTypeEq (FindType a) (FindType b) = a == b
 infixr 3 findTypeEq as ===
 
 newtype LookType a = LookType String
-foreign import look_creeps :: LookType Creep
-foreign import look_energy :: LookType Resource
-foreign import look_resources :: LookType Resource
-foreign import look_sources :: LookType Source
-foreign import look_minerals :: LookType Mineral
-foreign import look_structures :: LookType AnyStructure
-foreign import look_flags :: LookType Flag
+foreign import look_creeps             :: LookType Creep
+foreign import look_energy             :: LookType Resource
+foreign import look_resources          :: LookType Resource
+foreign import look_sources            :: LookType Source
+foreign import look_minerals           :: LookType Mineral
+foreign import look_structures         :: LookType AnyStructure
+foreign import look_flags              :: LookType Flag
 foreign import look_construction_sites :: LookType ConstructionSite
-foreign import look_nukes :: LookType Nuke
-foreign import look_terrain :: LookType Terrain
+foreign import look_nukes              :: LookType Nuke
+foreign import look_terrain            :: LookType Terrain
 
 instance showLookType :: Show (LookType a) where
   show f | f=-=look_creeps             = "look_creeps" 
