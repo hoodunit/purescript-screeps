@@ -23,6 +23,6 @@ exports.findExitToImpl = function(room){
 }
 
 exports.debugIt = function (arg) {
-  console.log(JSON.stringify(arg));
+  console.log("Debug it:", JSON.stringify(arg));
   return arg;
 }
