@@ -2,8 +2,8 @@ module Screeps.Stores where
 
 import Data.Function (($))
 --import Data.StrMap
-import Screeps.FFI   (unsafeField)
-import Screeps.Types (ResourceType(ResourceType))
+import Screeps.FFI      (unsafeField)
+import Screeps.Resource (ResourceType(ResourceType))
 
 -- | Or Store == StrMap Int?
 foreign import data Store :: *

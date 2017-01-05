@@ -9,9 +9,10 @@ import Data.Maybe (Maybe)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
 import Screeps.Id
-import Screeps.Stores    (class Stores)
+import Screeps.Stores     (class Stores)
 import Screeps.Structure
-import Screeps.Types
+import Screeps.Types      (class Owned)
+import Screeps.Resource   (ResourceType)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject (class RoomObject)
 
