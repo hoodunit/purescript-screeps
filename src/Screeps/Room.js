@@ -22,7 +22,9 @@ exports.findExitToImpl = function(room){
   }
 }
 
-exports.debugIt = function (arg) {
-  console.log("Debug it:", JSON.stringify(arg));
-  return arg;
+exports.debugIt = function (name) {
+  return function (arg) {
+    console.log("Debug", name+":", JSON.stringify(arg));
+    return arg;
+  }
 }
