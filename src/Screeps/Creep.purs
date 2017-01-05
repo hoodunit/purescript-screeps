@@ -2,27 +2,30 @@
 module Screeps.Creep where
 
 import Prelude
-import Control.Monad.Eff (Eff)
-import Data.Argonaut.Decode (class DecodeJson, decodeJson)
-import Data.Argonaut.Encode (class EncodeJson, encodeJson)
-import Data.Either (Either)
-import Data.Maybe (Maybe(Nothing))
-import Data.StrMap (StrMap)
+import Control.Monad.Eff           (Eff)
+import Control.Monad.Eff.Exception (EXCEPTION)
+import Data.Argonaut.Decode        (class DecodeJson, decodeJson)
+import Data.Argonaut.Encode        (class EncodeJson, encodeJson)
+import Data.Either                 (Either)
+import Data.Maybe                  (Maybe(Nothing))
+import Data.StrMap                 (StrMap)
 
 import Screeps.BodyPartType (BodyPartType)
+import Screeps.Constants    (resource_energy)
 import Screeps.ConstructionSite (ConstructionSite)
-import Screeps.Controller (Controller)
-import Screeps.Direction (Direction)
-import Screeps.Effects (CMD, MEMORY)
+import Screeps.Controller   (Controller)
+import Screeps.Direction    (Direction)
+import Screeps.Effects      (CMD, MEMORY)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
-import Screeps.FindType (Path)
-import Screeps.Mineral   (Mineral)
-import Screeps.Resource   (Resource)
-import Screeps.ReturnCode (ReturnCode)
-import Screeps.Room (PathOptions)
-import Screeps.Source     (Source)
-import Screeps.Structure (class Structure)
-import Screeps.Types (Creep, ResourceType, TargetPosition(..))
+import Screeps.FindType     (Path)
+import Screeps.Mineral      (Mineral)
+import Screeps.Refillable   (class Refillable)
+import Screeps.Resource     (Resource)
+import Screeps.ReturnCode   (ReturnCode)
+import Screeps.Room         (PathOptions)
+import Screeps.Source       (Source)
+import Screeps.Structure    (class Structure)
+import Screeps.Types        (Creep, ResourceType, TargetPosition(..))
 
 --foreign import data CreepCargo :: *
 type CreepCargo = StrMap Int
@@ -197,6 +200,17 @@ transferToStructure = runThisEffFn2 "transfer"
 
 transferAmtToStructure :: forall a e. Structure a => Creep -> a -> ResourceType -> Int -> Eff (cmd :: CMD | e) ReturnCode
 transferAmtToStructure = runThisEffFn3 "transfer"
+
+-- | Refill a structure that is refillable.
+refill :: forall e a. ( Refillable a
+                      , Structure  a )
+       => Creep
+       ->          a
+       -> Eff ( cmd :: CMD
+              , err :: EXCEPTION
+              | e                )
+              ReturnCode
+refill creep structure = transferToStructure creep structure resource_energy
 
 upgradeController :: forall e. Creep -> Controller -> Eff (cmd :: CMD | e) ReturnCode
 upgradeController = runThisEffFn1 "upgradeController"

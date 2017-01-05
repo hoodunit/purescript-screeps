@@ -1,16 +1,17 @@
 -- | Corresponds to the Screeps API [StructureExtension](http://support.screeps.com/hc/en-us/articles/207711949-StructureExtension)
 module Screeps.Refillable where
 
+import Control.Monad.Eff.Exception(EXCEPTION)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.HeytingAlgebra
+import Data.Maybe                 (Maybe(..))
+import Data.Ord                   ((<))
+import Unsafe.Coerce              (unsafeCoerce)
 
-import Screeps.FFI (unsafeField, instanceOf)
+import Screeps.FFI                (unsafeField, instanceOf)
 import Screeps.Id
-import Screeps.Types
-
-import Screeps.FFI (unsafeField, instanceOf)
-import Screeps.RoomObject (class RoomObject)
+import Screeps.RoomObject         (class RoomObject)
 import Screeps.Structure
 import Screeps.Types
 
@@ -41,4 +42,17 @@ energy = unsafeField "energy"
 
 energyCapacity :: forall a. Refillable a => a -> Int
 energyCapacity = unsafeField "energyCapacity"
+
+-- | Checks that structure is any `Refillable`.
+toRefillable :: forall s. Structure s => s -> Maybe AnyRefillable
+toRefillable r = if validate  s
+                    then Just s
+                    else Nothing
+  where
+    s :: AnyRefillable
+    s  = unsafeCoerce r
+
+-- | Check whether `Refillable` is not at full capacity
+isNotFull  :: forall a. Refillable a => a -> Boolean
+isNotFull x = energy x < energyCapacity x
 
