@@ -4,6 +4,7 @@ module Screeps.KeeperLair where
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Data.Maybe (Maybe)
+import Data.Show (class Show, show)
 
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
@@ -19,6 +20,9 @@ instance ownedKeeperLair       :: Owned      KeeperLair -- TODO: check it!
 instance structuralKeeperLair  :: Structural KeeperLair
 instance structureKeeperLair   :: Structure  KeeperLair where
   _structureType _ = structure_keeper_lair
+instance encodeKeeperLair      :: EncodeJson KeeperLair where encodeJson = encodeJsonWithId
+instance decodeKeeperLair      :: DecodeJson KeeperLair where decodeJson = decodeJsonWithId
+instance showKeeperLair        :: Show       KeeperLair where show = showStructure
 
 ticksToSpawn :: KeeperLair -> Int
 ticksToSpawn = unsafeField "ticksToSpawn"

@@ -5,6 +5,7 @@ import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe)
+import Data.Show (class Show, show)
 
 import Screeps.Constants  (lab_cooldown)
 import Screeps.Coolsdown  (class Coolsdown)
@@ -28,6 +29,9 @@ instance coolsdownLab   ::     Coolsdown Lab where
   expectedCooldown = lab_cooldown
 instance structureLab   ::      Structure Lab where
   _structureType _ = structure_lab
+instance encodeLab      :: EncodeJson Lab where encodeJson = encodeJsonWithId
+instance decodeLab      :: DecodeJson Lab where decodeJson = decodeJsonWithId
+instance showLab        :: Show       Lab where show = showStructure
 
 mineralAmount :: Lab -> Int
 mineralAmount = unsafeField "mineralAmount"

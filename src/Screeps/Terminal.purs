@@ -5,6 +5,7 @@ import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Data.Maybe (Maybe)
+import Data.Show  (class Show, show)
 
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
@@ -28,6 +29,7 @@ instance structuralTerminal  :: Structural Terminal
 instance terminalStores      :: Stores     Terminal
 instance structureTerminal   :: Structure  Terminal where
   _structureType _ = structure_terminal
+instance showTerminal        :: Show       Terminal where  show = showStructure
 
 send :: forall e. Terminal -> ResourceType -> Int -> String -> Eff ( cmd :: CMD | e) ReturnCode
 send term res amount destRoomName = runThisEffFn3 "send" term res amount destRoomName
