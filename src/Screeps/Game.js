@@ -7,7 +7,7 @@ exports.getUsedCpu = function () {
     return Game.cpu.getUsed();
 }
 exports.notify  = function (msg) {
-    function () {
+    return function() {
         return Game.notify(msg);
     }
 }
