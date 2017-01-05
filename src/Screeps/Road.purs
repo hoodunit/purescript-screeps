@@ -4,13 +4,13 @@ module Screeps.Road where
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Maybe (Maybe)
+import Data.Show  (class Show)
 
 import Screeps.FFI (instanceOf)
 import Screeps.Decays    ( class Decays )
 import Screeps.Id
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
-import Screeps.Types
 
 foreign import data Road :: *
 instance objectRoad      :: RoomObject Road
@@ -21,6 +21,7 @@ instance roadHasId       :: HasId      Road
 instance roadDecays      :: Decays     Road
 instance structureRoad   :: Structure  Road where
   _structureType _ = structure_road
+instance showRoad        :: Show       Road where show = showStructure
 
 toRoad :: AnyStructure -> Maybe Road
 toRoad = fromAnyStructure
