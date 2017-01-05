@@ -8,6 +8,7 @@ import Data.Function.Uncurried (Fn3, runFn3)
 import Partial.Unsafe (unsafePartial)
 
 foreign import unsafeField :: forall obj val. String -> obj -> val
+foreign import unsafeOptField :: forall obj val. String -> obj -> Maybe val
 foreign import unsafeGetFieldEff :: forall obj val eff. String -> obj -> Eff eff val
 foreign import unsafeSetFieldEff :: forall obj val eff. String -> obj -> val -> Eff eff Unit
 foreign import unsafeDeleteFieldEff :: forall obj eff. String -> obj -> Eff eff Unit

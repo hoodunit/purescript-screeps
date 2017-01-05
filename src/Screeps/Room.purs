@@ -2,23 +2,28 @@
 module Screeps.Room where
 
 import Prelude
-import Control.Monad.Eff (Eff)
-import Data.Either (Either(Left,Right))
-import Data.Maybe (Maybe(..))
+import Control.Monad.Eff                (Eff)
+--import Data.Traversable                 (traverse)
+import Data.Argonaut.Core               (Json, toArray)
+--import Data.Argonaut.Decode.Class       (class DecodeJson, decodeJson)
+--import Data.Argonaut.Decode.Combinators ((.??), (.?))
+import Data.Either                      (Either(Left,Right))
+import Data.Maybe                       (Maybe(..), maybe)
 
-import Screeps.Color (Color)
-import Screeps.Effects (CMD, TICK)
-import Screeps.Types (FilterFn, Mode, TargetPosition(..))
-import Screeps.Controller (Controller)
-import Screeps.FindType (FindType, LookType, Path)
-import Screeps.RoomPosition.Type (RoomPosition, x, y)
-import Screeps.RoomObject (Room, class RoomObject)
-import Screeps.Storage (Storage)
-import Screeps.Structure (StructureType)
-import Screeps.Terminal   (Terminal)
+import Screeps.Color                    (Color)
+import Screeps.Effects                  (CMD, TICK)
+import Screeps.Types                    (FilterFn, Mode, TargetPosition(..), Terrain)
+import Screeps.Controller               (Controller)
+import Screeps.FindType                 (FindType, LookType, Path)
+import Screeps.RoomPosition.Type        (RoomPosition, x, y)
+import Screeps.RoomObject               (Room, class RoomObject)
+import Screeps.Storage                  (Storage)
+import Screeps.Structure                (StructureType)
+import Screeps.Terminal                 (Terminal)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5,
                     runThisFn1,    runThisFn2,    runThisFn3,    runThisFn6,
-                    selectMaybes,  toMaybe,       unsafeField)
+                    selectMaybes,  toMaybe,
+                    unsafeField,   unsafeOptField)
 import Screeps.ReturnCode (ReturnCode)
 
 foreign import data RoomGlobal :: *
@@ -138,15 +143,44 @@ getPositionAt = runThisFn2 "getPositionAt"
 -- lookAt omitted - use lookForAt
 -- lookAtArea omitted - use lookForAtArea
 
-lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> Array a
-lookForAt room lookType (TargetPt  x' y') = runThisFn3 "lookForAt" room lookType x' y'
-lookForAt room lookType (TargetPos pos  ) = runThisFn2 "lookForAt" room lookType pos
-lookForAt room lookType (TargetObj obj  ) = runThisFn2 "lookForAt" room lookType obj
+data LookResult a = LookResult {
+    resultType    :: LookType a
+  , terrain       :: Maybe Terrain
+  , structureType :: Maybe StructureType
+  , x             :: Int
+  , y             :: Int
+  }
+
+decodeLookResults :: forall a. Json
+                  -> Either String
+                           (Array (LookResult a))
+decodeLookResults = maybe (Left      "Top object is not an array")
+                          (Right <<< map decodeIt                )
+                <<< toArray
+
+decodeIt :: forall a. Json -> LookResult a
+decodeIt o = LookResult { resultType, terrain, structureType, x, y }
+  where
+    resultType    = unsafeField    "type"          o
+    terrain       = unsafeOptField "terrain"       o
+    structureType = unsafeOptField "structureType" o
+    x             = unsafeField    "x"             o
+    y             = unsafeField    "y"             o
+
+lookForAt :: forall                   a.
+             Room
+          -> LookType                 a
+          -> TargetPosition           a
+          -> Either String
+                   (Array (LookResult a))
+lookForAt room lookType (TargetPt  x' y') = decodeLookResults $ runThisFn3 "lookForAt" room lookType x' y'
+lookForAt room lookType (TargetPos pos  ) = decodeLookResults $ runThisFn2 "lookForAt" room lookType pos
+lookForAt room lookType (TargetObj obj  ) = decodeLookResults $ runThisFn2 "lookForAt" room lookType obj
 
 -- TODO: Make it nicer, by selecting x/y from two positions.
-lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Array a
-lookForAtArea r ty top left bot right = runThisFn6 "lookForAt" r ty top left bot right true
+lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
+lookForAtArea r ty top left bot right = decodeLookResults $ runThisFn6 "lookForAt" r ty top left bot right true
 
-lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Array a
+lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
 lookForInRange r ty p range = lookForAtArea r ty (y p-range) (x p-range) (y p+range) (x p+range)
     
