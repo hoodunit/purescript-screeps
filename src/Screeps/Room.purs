@@ -179,9 +179,13 @@ lookForAt room lookType (TargetObj obj  ) = decodeLookResults $ runThisFn2 "look
 
 -- TODO: Make it nicer, by selecting x/y from two positions.
 lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
-lookForAtArea r ty top left bot right = decodeLookResults $ debugIt "result" $ runThisFn6 "lookForAt" r ty top left bot right true
+lookForAtArea r ty top left bot right = decodeLookResults
+                                      $ debugIt "result"
+                                      $ debugRunThisFn6 "lookForAt" r ty top left bot right true
 
 foreign import debugIt :: forall a. String -> a -> a
+
+foreign import debugRunThisFn6 :: forall this a b c d e f g. String -> this -> a -> b -> c -> d -> e -> f -> g
 
 lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
 lookForInRange r ty p range = lookForAtArea r ty (debugIt "y min" (y p-range))

@@ -28,3 +28,24 @@ exports.debugIt = function (name) {
     return arg;
   }
 }
+
+exports.debugRunThisFn6 = function(key){
+  return function(self){
+    return function(a){
+      return function(b){
+        return function(c){
+          return function(d){
+            return function(e){
+              return function(f){
+                var result=self[key](a, b, c, d, e, f);
+                console.log("DEBUGGING:", JSON.stringify(result));
+                return result
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
