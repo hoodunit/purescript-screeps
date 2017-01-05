@@ -36,6 +36,7 @@ instance structuralSpawn  :: Structural Spawn
 instance refillableSpawn  :: Refillable Spawn
 instance structureSpawn   :: Structure  Spawn where
   _structureType _ = structure_spawn
+instance showSpawn :: Show Spawn              where show = showStructure
 
 memory :: forall props. Spawn -> { | props }
 memory = unsafeField "memory"

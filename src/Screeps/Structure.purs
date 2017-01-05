@@ -30,7 +30,7 @@ class ( RoomObject a
 newtype StructureType = StructureType String
 derive instance genericStructureType :: Generic StructureType
 instance eqStructureType   :: Eq   StructureType where eq   = gEq
-instance showStructureType :: Show StructureType where show = gShow
+instance showStructureType :: Show StructureType where show (StructureType strTy) = strTy
 
 foreign import structure_spawn       :: StructureType
 foreign import structure_extension   :: StructureType
@@ -51,6 +51,10 @@ foreign import structure_lab         :: StructureType
 foreign import structure_terminal    :: StructureType
 foreign import structure_container   :: StructureType
 foreign import structure_nuker       :: StructureType
+
+showStructure  :: forall s. Structure s
+               => s -> String
+showStructure s = show (structureType s) <> "@" <> show (pos s)
 
 foreign import data AnyStructure  :: *
 

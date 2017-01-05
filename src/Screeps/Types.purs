@@ -23,8 +23,7 @@ instance creepIsOwned      :: Owned      Creep
 newtype ResourceType = ResourceType String
 derive instance genericResourceType :: Generic ResourceType
 instance eqResourceType   :: Eq   ResourceType where eq = gEq
-instance showResourceType :: Show ResourceType where
-  show (ResourceType s) = s
+instance showResourceType :: Show ResourceType where show (ResourceType s) = s
 
 newtype TerrainMask = TerrainMask Int
 derive instance genericTerrainMask :: Generic TerrainMask
