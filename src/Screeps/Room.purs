@@ -167,29 +167,25 @@ decodeIt o = LookResult { resultType, terrain, structureType, x, y }
     x             = unsafeField    "x"             o
     y             = unsafeField    "y"             o
 
-lookForAt :: forall                   a.
+lookForAt :: forall         a.
              Room
-          -> LookType                 a
-          -> TargetPosition           a
+          -> LookType       a
+          -> TargetPosition a
           -> Either String
-                   (Array (LookResult a))
-lookForAt room lookType (TargetPt  x' y') = decodeLookResults $ runThisFn3 "lookForAt" room lookType x' y'
-lookForAt room lookType (TargetPos pos  ) = decodeLookResults $ runThisFn2 "lookForAt" room lookType pos
-lookForAt room lookType (TargetObj obj  ) = decodeLookResults $ runThisFn2 "lookForAt" room lookType obj
+                   (Array   a)
+lookForAt room lookType (TargetPt  x' y') = runThisFn3 "lookForAt" room lookType x' y'
+lookForAt room lookType (TargetPos pos  ) = runThisFn2 "lookForAt" room lookType pos
+lookForAt room lookType (TargetObj obj  ) = runThisFn2 "lookForAt" room lookType obj
 
 -- TODO: Make it nicer, by selecting x/y from two positions.
 lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
 lookForAtArea r ty top left bot right = decodeLookResults
-                                      $ debugIt "result"
-                                      $ debugRunThisFn6 "lookForAt" r ty top left bot right true
-
-foreign import debugIt :: forall a. String -> a -> a
-
-foreign import debugRunThisFn6 :: forall this a b c d e f g. String -> this -> a -> b -> c -> d -> e -> f -> g
+                                      -- $ debugIt "result"
+                                      $ runThisFn6 "lookForAtArea" r ty top left bot right true
 
 lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
-lookForInRange r ty p range = lookForAtArea r ty (debugIt "y min" (y p-range))
-                                                 (debugIt "x min" (x p-range))
-                                                 (debugIt "y max" (y p+range))
-                                                 (debugIt "x max" (x p+range))
-    
+lookForInRange r ty p range = lookForAtArea r ty (y p-range)
+                                                 (x p-range)
+                                                 (y p+range)
+                                                 (x p+range)
+
