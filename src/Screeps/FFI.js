@@ -8,13 +8,13 @@ exports.unsafeField = function(key){
   }
 }
 
-exports.unsafeOptField_helper = function(Just) {
-  return function(Nothing) {
+exports.unsafeOptField_helper = function(Nothing) {
+  return function(Just) {
     return function(key){
         return function(obj){
         var r= obj[key];
         if (_.isUndefined (r)) {
-            return Nothing( );
+            return Nothing;
         } else {
             return Just   (r);
         }
