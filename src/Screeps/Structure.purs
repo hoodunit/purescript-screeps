@@ -5,8 +5,9 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
-import Data.Generic (class Generic, gEq, gShow)
-import Data.Maybe (Maybe(Just, Nothing))
+import Data.Generic  (class Generic, gEq, gShow)
+import Data.Maybe    (Maybe(Just, Nothing))
+import Data.Semigroup((<>))
 import Unsafe.Coerce (unsafeCoerce)
 import Type.Proxy
 
@@ -14,7 +15,7 @@ import Screeps.Effects    (CMD)
 import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject
-import Screeps.Types -- (Id, Structure, StructureType)
+--import Screeps.Types -- (Id, Structure, StructureType)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
 
 class Structural     a -- has `structureType` - Structure or ConstructionSite

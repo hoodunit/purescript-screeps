@@ -5,8 +5,8 @@ import Prelude (class Eq, class Show, show, (<>), (==))
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Generic (class Generic, gEq, gShow)
-import Type.Proxy
 
+import Screeps.FFI (instanceOf)
 import Screeps.Id  (class HasId, encodeJsonWithId, decodeJsonWithId)
 import Screeps.RoomObject
 import Screeps.RoomPosition.Type (RoomPosition)
@@ -16,8 +16,12 @@ foreign import data WorldMap :: *
 class Owned          a -- my, owned
 
 foreign import data Creep  :: *
-instance creepIsRoomObject :: RoomObject Creep where
+instance creepIsRoomObject :: RoomObject Creep
 instance creepIsOwned      :: Owned      Creep
+instance creepHasId        :: HasId      Creep where
+  validate = instanceOf "Creep"
+instance encodeCreep       :: EncodeJson Creep where encodeJson = encodeJsonWithId
+instance decodeCreep       :: DecodeJson Creep where decodeJson = decodeJsonWithId
 
 newtype TerrainMask = TerrainMask Int
 derive instance genericTerrainMask :: Generic TerrainMask
