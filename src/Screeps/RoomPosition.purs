@@ -63,19 +63,31 @@ unwrapContext (OfType findType) = unsafeCoerce findType
 unwrapContext (OfObj objects) = unsafeCoerce objects
 unwrapContext (OfPos positions) = unsafeCoerce positions
 
-createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createConstructionSite :: forall e. RoomPosition
+                       -> StructureType
+                       -> Eff ( cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 createConstructionSite = runThisEffFn1 "createConstructionSite"
 
-createFlag :: forall e. RoomPosition -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlag :: forall e. RoomPosition
+           -> Eff ( cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 createFlag = runThisEffFn0 "createFlag"
 
-createFlagWithName :: forall e. RoomPosition -> String -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithName :: forall e. RoomPosition
+                   -> String
+                   -> Eff ( cmd :: CMD
+                          , err :: EXCEPTION | e) ReturnCode
 createFlagWithName pos name = runThisEffFn1 "createFlag" pos name
 
-createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColor :: forall e. RoomPosition
+                    -> String
+                    -> Color
+                    -> Eff ( cmd :: CMD
+                           , err :: EXCEPTION | e) ReturnCode
 createFlagWithColor pos name color = runThisEffFn2 "createFlag" pos name color
 
-createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color
+                     -> Eff ( cmd :: CMD
+                            , err :: EXCEPTION | e) ReturnCode
 createFlagWithColors pos name color secondaryColor = runThisEffFn3 "createFlag" pos name color secondaryColor
 
 findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)
