@@ -1,6 +1,8 @@
 module Screeps.Constants where
 
 import Data.StrMap as StrMap
+
+import Screeps.IntMap (IntMap)
 import Screeps.Types
 
 foreign import obstacle_object_types :: Array String
@@ -26,14 +28,15 @@ foreign import dismantle_cost :: Int
 foreign import rampart_decay_amount :: Int
 foreign import rampart_decay_time :: Int
 foreign import rampart_hits :: Int
-foreign import rampart_hits_max ::
-  { "2" :: Int
+-- | From 2 to 8
+foreign import rampart_hits_max :: IntMap Int
+{-  { "2" :: Int
   , "3" :: Int
   , "4" :: Int
   , "5" :: Int
   , "6" :: Int
   , "7" :: Int
-  , "8" :: Int }
+  , "8" :: Int }-}
 
 foreign import energy_regen_time :: Int
 foreign import energy_decay :: Int
@@ -51,8 +54,9 @@ foreign import wall_hits :: Int
 foreign import wall_hits_max :: Int
 
 foreign import extension_hits :: Int
-foreign import extension_energy_capacity ::
-  { "0" :: Int
+-- | From 0 to 8
+foreign import extension_energy_capacity :: IntMap Int
+{-  { "0" :: Int
   , "1" :: Int
   , "2" :: Int
   , "3" :: Int
@@ -60,7 +64,7 @@ foreign import extension_energy_capacity ::
   , "5" :: Int
   , "6" :: Int
   , "7" :: Int
-  , "8" :: Int }
+  , "8" :: Int }-}
 
 foreign import road_hits :: Int
 foreign import road_wearout :: Int
@@ -94,15 +98,8 @@ foreign import construction_cost ::
   , nuker :: Int }
 foreign import construction_cost_road_swamp_ratio :: Int
 
-foreign import controller_levels ::
-  { "1" :: Int
-  , "2" :: Int
-  , "3" :: Int
-  , "4" :: Int
-  , "5" :: Int
-  , "6" :: Int
-  , "7" :: Int
-  , "8" :: Int }
+-- | 1 to 8
+foreign import controller_levels :: IntMap Int
 
 type StructureInfo = StrMap.StrMap Int
 
