@@ -11,7 +11,7 @@ import Unsafe.Coerce (unsafeCoerce)
 import Type.Proxy
 
 import Screeps.Effects    (CMD)
-import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId)
+import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
@@ -28,7 +28,7 @@ class ( RoomObject a
 --   where both Structure and ConstructionSite share the field `structureType`
 newtype StructureType = StructureType String
 derive instance genericStructureType :: Generic StructureType
-instance eqStructureType   :: Eq   StructureType where eq   = gEq
+derive newtype instance eqStructureType   :: Eq   StructureType
 instance showStructureType :: Show StructureType where show (StructureType strTy) = strTy
 
 foreign import structure_spawn       :: StructureType
@@ -62,6 +62,7 @@ instance anyStructureHasId        :: HasId      AnyStructure
     validate = instanceOf "Structure"
 instance encodeAnyStructure       :: EncodeJson AnyStructure where encodeJson = encodeJsonWithId
 instance decodeAnyStructure       :: DecodeJson AnyStructure where decodeJson = decodeJsonWithId
+instance eqAnyStructure           :: Eq         AnyStructure where eq         = eqById
 instance anyStructureIsRoomObject :: RoomObject AnyStructure
 instance anyStructureIsStructural :: Structural AnyStructure
 instance anyStructure             :: Structure  AnyStructure where

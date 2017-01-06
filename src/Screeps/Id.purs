@@ -5,6 +5,7 @@ module Screeps.Id ( Id(..)
                   , getObjectById
                   , encodeJsonWithId
                   , decodeJsonWithId
+                  , eqById
                   ) where
 
 import Control.Category           ((<<<))
@@ -57,7 +58,11 @@ instance        showId          :: Show       (Id a) where show              = g
 instance        decodeJsonId    :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
 instance        encodeJsonId    :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
 
-eqById :: forall a. HasId a => a -> a -> Boolean
+eqById :: forall a.
+          HasId  a
+       =>        a
+       ->        a
+       -> Boolean
 eqById  = (==) `on` id
 
 -- * For making class instances of objects with `HasId` easily:

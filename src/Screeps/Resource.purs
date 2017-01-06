@@ -3,19 +3,19 @@ module Screeps.Resource where
 
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
-import Data.Eq              (class Eq,     (==))
+--import Data.Eq              (class Eq,     (==))
 import Data.Generic         (class Generic, gEq)
 import Data.Monoid          ((<>))
 import Data.Show            (class Show,       show)
 
 import Screeps.FFI (unsafeField, instanceOf)
-import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
+import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.RoomObject (class RoomObject)
 
 -- * Resource types
 newtype ResourceType = ResourceType String
 derive instance genericResourceType :: Generic ResourceType
-instance        eqResourceType      :: Eq      ResourceType where eq = gEq
+--instance        eqResourceType      :: Eq      ResourceType where eq = eqById
 instance        showResourceType    :: Show    ResourceType where show (ResourceType s) = s
 
 foreign import resource_energy :: ResourceType
