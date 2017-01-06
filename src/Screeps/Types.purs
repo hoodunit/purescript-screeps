@@ -6,7 +6,7 @@ import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 
-import Screeps.FFI (instanceOf)
+import Screeps.FFI (instanceOf, unsafeField)
 import Screeps.Id  (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.RoomObject
 import Screeps.RoomPosition.Type (RoomPosition)
@@ -19,6 +19,7 @@ foreign import data Creep  :: *
 instance creepIsRoomObject :: RoomObject Creep
 instance creepIsOwned      :: Owned      Creep
 instance creepEq           :: Eq         Creep where eq = eqById
+instance showCreepEq       :: Show       Creep where show c = unsafeField "name" c <> "@" <> show (pos c)
 instance creepHasId        :: HasId      Creep where
   validate = instanceOf "Creep"
 instance encodeCreep       :: EncodeJson Creep where encodeJson = encodeJsonWithId
