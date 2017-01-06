@@ -5,9 +5,10 @@ import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Maybe         (Maybe)
 import Data.Show          (class Show)
+import Data.Eq            (class Eq)
 
 import Screeps.FFI        (instanceOf)
-import Screeps.Id         (class HasId, decodeJsonWithId, encodeJsonWithId)
+import Screeps.Id         (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
 import Screeps.Stores     (class Stores)
@@ -23,6 +24,7 @@ instance storeInContainer     :: Stores     Container
 instance structureContainer   :: Structure  Container where
   _structureType _ = structure_container
 instance showContainer        :: Show       Container where show = showStructure
+instance eqContainer          :: Eq         Container where eq   = eqById
 
 toContainer :: AnyStructure -> Maybe Container
 toContainer  = fromAnyStructure
