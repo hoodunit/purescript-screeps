@@ -15,9 +15,10 @@ import Data.Argonaut.Core         (Json)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either
+import Data.Function              (on)
 import Data.Functor               ((<$>))
 import Data.Generic               (class Generic,    gEq, gShow)
-import Data.Eq                    (class Eq)
+import Data.Eq                    (class Eq, (==))
 import Data.Maybe                 (Maybe(..))
 import Data.Monoid                ((<>))
 import Data.Show                  (class Show, show)
@@ -55,6 +56,9 @@ instance        showId          :: Show       (Id a) where show              = g
 -- | Encode and decode as JSON String.
 instance        decodeJsonId    :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
 instance        encodeJsonId    :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
+
+eqById :: forall a. HasId a => a -> a -> Boolean
+eqById  = (==) `on` id
 
 -- * For making class instances of objects with `HasId` easily:
 encodeJsonWithId  :: forall a. HasId a => a    -> Json

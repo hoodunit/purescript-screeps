@@ -21,7 +21,9 @@ instance roadHasId       :: HasId      Road
 instance roadDecays      :: Decays     Road
 instance structureRoad   :: Structure  Road where
   _structureType _ = structure_road
-instance showRoad        :: Show       Road where show = showStructure
+instance showRoad        :: Show       Road where show       = showStructure
+instance decodeRoad      :: DecodeJson Road where decodeJson = decodeJsonWithId
+instance encodeRoad      :: EncodeJson Road where encodeJson = encodeJsonWithId
 
 toRoad :: AnyStructure -> Maybe Road
 toRoad = fromAnyStructure
