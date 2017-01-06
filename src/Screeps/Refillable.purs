@@ -3,9 +3,11 @@ module Screeps.Refillable where
 
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.HeytingAlgebra
 import Data.Maybe                 (Maybe(..))
 import Data.Ord                   ((<))
+import Data.Show
 import Unsafe.Coerce              (unsafeCoerce)
 
 import Screeps.FFI                (unsafeField, instanceOf)
@@ -32,6 +34,8 @@ instance encodeRefillable          :: EncodeJson AnyRefillable where encodeJson 
 instance decodeRefillable          :: DecodeJson AnyRefillable where decodeJson = decodeJsonWithId
 instance refillableIsStructural    :: Structural AnyRefillable
 instance refillableIsOwned         :: Owned      AnyRefillable
+instance showRefillable            :: Show       AnyRefillable where show       = showStructure
+instance eqRefillable              :: Eq         AnyRefillable where eq         = eqById
 instance refillableIsStructure     :: Structure  AnyRefillable where
   _structureType _ = StructureType "<refillable>"
 instance anyRefillable             :: Refillable AnyRefillable

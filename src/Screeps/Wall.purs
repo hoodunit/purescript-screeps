@@ -3,7 +3,9 @@ module Screeps.Wall where
 
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Maybe (Maybe)
+import Data.Show
 
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
@@ -17,11 +19,13 @@ instance ownedWall             :: Owned      Wall
 instance wallHasId             :: HasId      Wall
   where
     validate = instanceOf "StructureWall"
-instance encodeWall       :: EncodeJson Wall where encodeJson = encodeJsonWithId
-instance decodeWall       :: DecodeJson Wall where decodeJson = decodeJsonWithId
-instance structuralWall        :: Structural Wall
-instance structureWall         :: Structure  Wall where
+instance encodeWall      :: EncodeJson Wall where encodeJson = encodeJsonWithId
+instance decodeWall      :: DecodeJson Wall where decodeJson = decodeJsonWithId
+instance structuralWall  :: Structural Wall
+instance structureWall   :: Structure  Wall where
   _structureType _ = structure_wall
+instance eqWall          :: Eq         Wall where eq   = eqById
+instance showWall        :: Show       Wall where show = showStructure
 
 ticksToLive :: Wall -> Int
 ticksToLive = unsafeField "ticksToLive"

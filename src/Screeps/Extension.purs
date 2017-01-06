@@ -3,10 +3,12 @@ module Screeps.Extension where
 
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Maybe (Maybe)
+import Data.Show
 
 import Screeps.FFI (instanceOf)
-import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.Refillable (class Refillable)
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
@@ -22,6 +24,8 @@ instance encodeExtension       :: EncodeJson Extension where encodeJson = encode
 instance decodeExtension       :: DecodeJson Extension where decodeJson = decodeJsonWithId
 instance structuralExtension   :: Structural Extension
 instance refillableExtension   :: Refillable Extension
+instance eqExtension           :: Eq         Extension where eq   = eqById
+instance showExtension         :: Show       Extension where show = showStructure
 instance structureExtension    :: Structure  Extension where
   _structureType _ = structure_extension
 

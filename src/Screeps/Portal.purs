@@ -3,7 +3,9 @@ module Screeps.Portal where
 
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Maybe (Maybe)
+import Data.Show
 
 import Screeps.Decays (class Decays)
 import Screeps.FFI (unsafeField, instanceOf)
@@ -24,6 +26,8 @@ instance encodePortal      :: EncodeJson Portal where encodeJson = encodeJsonWit
 instance decodePortal      :: DecodeJson Portal where decodeJson = decodeJsonWithId
 instance structurePortal   :: Structure  Portal where
   _structureType _ = structure_portal
+instance eqPortal          :: Eq         Portal where eq   = eqById
+instance showPortal        :: Show       Portal where show = showStructure
 
 destination :: Portal -> RoomPosition
 destination = unsafeField "destination"

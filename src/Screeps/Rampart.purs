@@ -4,12 +4,14 @@ module Screeps.Rampart where
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
+import Data.Eq
 import Data.Maybe (Maybe)
+import Data.Show
 
 import Screeps.Decays  (class Decays)
 import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField, instanceOf)
-import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.Structure
 import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
@@ -26,6 +28,8 @@ instance structuralRampart  :: Structural Rampart
 instance decaysRampart      :: Decays     Rampart
 instance structureRampart   :: Structure  Rampart where
   _structureType _ = structure_rampart
+instance eqRampart          :: Eq         Rampart where eq   = eqById
+instance showRampart        :: Show       Rampart where show = showStructure
 
 isPublic :: Rampart -> Boolean
 isPublic = unsafeField "isPublic"

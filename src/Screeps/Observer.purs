@@ -4,11 +4,13 @@ module Screeps.Observer where
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
+import Data.Eq
 import Data.Maybe (Maybe)
+import Data.Show
 
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, instanceOf)
-import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
+import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.Structure
 import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
@@ -24,6 +26,8 @@ instance decodeObserver      :: DecodeJson Observer where decodeJson = decodeJso
 instance structuralObserver  :: Structural Observer
 instance structureObserver   :: Structure  Observer where
   _structureType _ = structure_observer
+instance eqObserver          :: Eq         Observer where eq   = eqById
+instance showObserver        :: Show       Observer where show = showStructure
 
 observeRoom :: forall e. Observer -> String -> Eff (cmd :: CMD | e) ReturnCode
 observeRoom obs roomName = runThisEffFn1 "observeRoom" obs roomName

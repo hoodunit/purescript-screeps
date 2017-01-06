@@ -3,10 +3,12 @@ module Screeps.Extractor where
 
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Maybe (Maybe)
+import Data.Show
 
 import Screeps.FFI (instanceOf)
-import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
 import Screeps.Types
@@ -21,6 +23,8 @@ instance decodeExtractor       :: DecodeJson Extractor where decodeJson = decode
 instance structuralExtractor   :: Structural Extractor
 instance structureExtractor    :: Structure  Extractor where
   _structureType _ = structure_extractor
+instance eqExtractor           :: Eq         Extractor where eq   = eqById
+instance showExtractor         :: Show       Extractor where show = showStructure
 
 toExtractor :: AnyStructure -> Maybe Extractor
 toExtractor = fromAnyStructure
