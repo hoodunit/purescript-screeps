@@ -16,7 +16,7 @@ import Screeps.Stores     (class Stores)
 foreign import data Container :: *
 
 instance objectContainer      :: RoomObject Container
-instance containerHasId       :: HasId      Container where validate = instanceOf "StructureContainer"
+instance containerHasId       :: HasId      Container where validate   = instanceOf "StructureContainer"
 instance encodeContainer      :: EncodeJson Container where encodeJson = encodeJsonWithId
 instance decodeContainer      :: DecodeJson Container where decodeJson = decodeJsonWithId
 instance structuralContainer  :: Structural Container
