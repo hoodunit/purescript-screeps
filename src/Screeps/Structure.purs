@@ -67,6 +67,7 @@ instance anyStructureIsRoomObject :: RoomObject AnyStructure
 instance anyStructureIsStructural :: Structural AnyStructure
 instance anyStructure             :: Structure  AnyStructure where
   _structureType _ = StructureType "<unknown>"
+instance showAnyStructure         :: Show       AnyStructure where show       = showStructure
 
 hits :: forall a. Structure a => a -> Int
 hits = unsafeField "hits"
