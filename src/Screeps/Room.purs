@@ -168,8 +168,7 @@ lookForAt :: forall         a.
              Room
           -> LookType       a
           -> TargetPosition a
-          -> Either String
-                   (Array   a)
+          -> (Array   a)
 lookForAt room lookType (TargetPt  x' y') = runThisFn3 "lookForAt" room lookType x' y'
 lookForAt room lookType (TargetPos pos  ) = runThisFn2 "lookForAt" room lookType pos
 lookForAt room lookType (TargetObj obj  ) = runThisFn2 "lookForAt" room lookType obj
