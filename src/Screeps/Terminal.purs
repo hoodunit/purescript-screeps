@@ -4,11 +4,12 @@ module Screeps.Terminal where
 import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show  (class Show, show)
 
-import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
+import Screeps.Effects    (CMD)
+import Screeps.FFI        (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Stores     (class Stores)
 import Screeps.Structure
@@ -23,6 +24,7 @@ instance ownedTerminal       :: Owned      Terminal
 instance terminalHasId       :: HasId      Terminal
   where
     validate = instanceOf "StructureTerminal"
+instance eqTerminal          :: Eq         Terminal where eq = eqById
 instance encodeTerminal      :: EncodeJson Terminal where encodeJson = encodeJsonWithId
 instance decodeTerminal      :: DecodeJson Terminal where decodeJson = decodeJsonWithId
 instance structuralTerminal  :: Structural Terminal

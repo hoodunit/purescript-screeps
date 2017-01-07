@@ -4,11 +4,12 @@ module Screeps.ConstructionSite where
 import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Semigroup             ((<>))
 import Data.Show                  (class Show, show)
 
 import Screeps.Effects (CMD)
-import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, id)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, id, eqById)
 import Screeps.Progress (class Progress)
 import Screeps.Types --(ConstructionSite, Id, StructureType)
 import Screeps.FFI (runThisEffFn0, instanceOf)
@@ -26,6 +27,7 @@ instance constructionSiteHasId        :: HasId      ConstructionSite
     validate = instanceOf "ConstructionSite"
 instance encodeConstructionSite       :: EncodeJson ConstructionSite where encodeJson = encodeJsonWithId
 instance decodeConstructionSite       :: DecodeJson ConstructionSite where decodeJson = decodeJsonWithId
+instance eqConstructionSite           :: Eq         ConstructionSite where eq = eqById
 instance showConstructionSite         :: Show       ConstructionSite where
   show c = "construction of " <> show (structureType c)
         <> "@"  <> show (pos c)

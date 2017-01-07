@@ -3,11 +3,12 @@ module Screeps.KeeperLair where
 
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show (class Show, show)
 
 import Screeps.FFI (unsafeField, instanceOf)
-import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
+import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
 import Screeps.Types
@@ -16,6 +17,7 @@ foreign import data KeeperLair :: *
 instance objectKeeperLair      :: RoomObject KeeperLair
 instance keeperLairHasId       :: HasId      KeeperLair where
   validate = instanceOf "StructureKeeperLair"
+instance eqKeeperLair           :: Eq         KeeperLair where eq = eqById
 instance ownedKeeperLair       :: Owned      KeeperLair -- TODO: check it!
 instance structuralKeeperLair  :: Structural KeeperLair
 instance structureKeeperLair   :: Structure  KeeperLair where

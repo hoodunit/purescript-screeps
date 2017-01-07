@@ -6,13 +6,14 @@ import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either (Either(Left, Right))
+import Data.Eq
 import Data.Maybe (Maybe)
 
 import Screeps.BodyPartType (BodyPartType)
 import Screeps.Effects (CMD)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
                    , unsafeField, instanceOf)
-import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.Structure
 import Screeps.Types
 import Screeps.Refillable (class Refillable)
@@ -30,6 +31,7 @@ instance ownedSpawn       :: Owned      Spawn
 instance spawnHasId       :: HasId      Spawn
   where
     validate = instanceOf "StructureSpawn"
+instance eqSpawn           :: Eq         Spawn where eq = eqById
 instance encodeSpawn      :: EncodeJson Spawn where encodeJson = encodeJsonWithId
 instance decodeSpawn      :: DecodeJson Spawn where decodeJson = decodeJsonWithId
 instance structuralSpawn  :: Structural Spawn

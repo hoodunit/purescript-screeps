@@ -4,6 +4,7 @@ module Screeps.Lab where
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Control.Monad.Eff (Eff)
+import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show (class Show, show)
 
@@ -16,18 +17,19 @@ import Screeps.Structure
 import Screeps.Types
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject (class RoomObject)
-import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId)
+import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 
 foreign import data Lab :: *
-instance objectLab      ::      RoomObject Lab where
-instance ownedLab       :: Owned Lab where
-instance structuralLab  ::     Structural Lab where
-instance refillableLab  ::     Refillable Lab where
-instance labHasId       ::     HasId      Lab where
+instance objectLab      :: RoomObject Lab
+instance ownedLab       :: Owned      Lab
+instance structuralLab  :: Structural Lab
+instance refillableLab  :: Refillable Lab
+instance labHasId       :: HasId      Lab where
   validate = instanceOf "StructureLab"
-instance coolsdownLab   ::     Coolsdown Lab where
+instance eqLab          :: Eq        Lab where eq = eqById
+instance coolsdownLab   :: Coolsdown Lab where
   expectedCooldown = lab_cooldown
-instance structureLab   ::      Structure Lab where
+instance structureLab   :: Structure Lab where
   _structureType _ = structure_lab
 instance encodeLab      :: EncodeJson Lab where encodeJson = encodeJsonWithId
 instance decodeLab      :: DecodeJson Lab where decodeJson = decodeJsonWithId
