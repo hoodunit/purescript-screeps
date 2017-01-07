@@ -101,7 +101,8 @@ foreign import construction_cost_road_swamp_ratio :: Int
 -- | 1 to 8
 foreign import controller_levels :: IntMap Int
 
-type StructureInfo = StrMap.StrMap Int
+-- | Number of structures available on each level
+type StructureInfo = IntMap Int
 
 foreign import controller_structures ::
   { spawn :: StructureInfo
