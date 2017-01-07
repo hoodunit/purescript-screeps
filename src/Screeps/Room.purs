@@ -3,10 +3,7 @@ module Screeps.Room where
 
 import Prelude
 import Control.Monad.Eff                (Eff)
---import Data.Traversable                 (traverse)
 import Data.Argonaut.Core               (Json, toArray)
---import Data.Argonaut.Decode.Class       (class DecodeJson, decodeJson)
---import Data.Argonaut.Decode.Combinators ((.??), (.?))
 import Data.Either                      (Either(Left,Right))
 import Data.Maybe                       (Maybe(..), maybe)
 
