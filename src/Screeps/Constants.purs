@@ -1,7 +1,5 @@
 module Screeps.Constants where
 
-import Data.StrMap as StrMap
-
 import Screeps.IntMap (IntMap)
 import Screeps.Types
 
@@ -104,6 +102,7 @@ foreign import controller_levels :: IntMap Int
 -- | Number of structures available on each level
 type StructureInfo = IntMap Int
 
+-- | NOTE: there is better interface Screeps.Structure.numStructures
 foreign import controller_structures ::
   { spawn :: StructureInfo
   , extension :: StructureInfo

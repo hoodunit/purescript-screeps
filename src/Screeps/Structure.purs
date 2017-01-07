@@ -103,3 +103,6 @@ fromAnyStructure = from' Proxy
 
 asAnyStructure :: forall a. Structure a => a -> AnyStructure
 asAnyStructure = unsafeCoerce
+
+foreign import numStructures :: StructureType -> Int -> Int
+

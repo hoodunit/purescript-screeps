@@ -18,3 +18,8 @@ exports.structure_terminal = STRUCTURE_TERMINAL;
 exports.structure_container = STRUCTURE_CONTAINER;
 exports.structure_nuker = STRUCTURE_NUKER;
 
+exports.numStructures=function (structureType) {
+  return function (level) {
+    return CONTROLLER_STRUCTURES[structureType][level];
+  }
+}
