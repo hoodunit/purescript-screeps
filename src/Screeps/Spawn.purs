@@ -6,7 +6,7 @@ import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either (Either(Left, Right))
-import Data.Eq
+--import Data.Eq     (class Eq)
 import Data.Maybe (Maybe)
 
 import Screeps.BodyPartType (BodyPartType)
@@ -31,7 +31,7 @@ instance ownedSpawn       :: Owned      Spawn
 instance spawnHasId       :: HasId      Spawn
   where
     validate = instanceOf "StructureSpawn"
-instance eqSpawn           :: Eq         Spawn where eq = eqById
+instance eqSpawn          :: Eq         Spawn where eq = eqById
 instance encodeSpawn      :: EncodeJson Spawn where encodeJson = encodeJsonWithId
 instance decodeSpawn      :: DecodeJson Spawn where decodeJson = decodeJsonWithId
 instance structuralSpawn  :: Structural Spawn

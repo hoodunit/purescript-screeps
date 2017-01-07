@@ -8,9 +8,9 @@ module Screeps.Id ( Id(..)
                   , eqById
                   ) where
 
-import Control.Category           ((<<<))
+--import Control.Category           ((<<<))
 import Control.Monad              ((>=>))
-import Control.Monad.Eff          (Eff)
+--import Control.Monad.Eff          (Eff)
 
 import Data.Argonaut.Core         (Json)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
