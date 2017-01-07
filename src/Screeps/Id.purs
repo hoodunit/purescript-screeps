@@ -52,8 +52,8 @@ foreign import unsafeGetObjectById :: forall a r. r -> (a -> r) -> Id a -> r
 --foreign import unsafeGetObjectByIdEff :: forall a e. Eff (tick :: TICK | e) (Id a) -> (Maybe a)
 
 derive instance genericId       :: Generic    (Id a)
-instance        eqId            :: Eq         (Id a) where eq                = gEq
-instance        showId          :: Show       (Id a) where show              = gShow
+derive newtype instance eqId    :: Eq         (Id a)
+instance        showId          :: Show       (Id a) where show (Id i)       = "Id #" <> i
 -- | Encode and decode as JSON String.
 instance        decodeJsonId    :: DecodeJson (Id a) where decodeJson  json  = Id <$> decodeJson json
 instance        encodeJsonId    :: EncodeJson (Id a) where encodeJson (Id a) = encodeJson a
