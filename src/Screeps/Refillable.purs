@@ -59,3 +59,7 @@ toRefillable r = if validate  s
 isNotFull  :: forall a. Refillable a => a -> Boolean
 isNotFull x = energy x < energyCapacity x
 
+-- | Check whether `Refillable` is not at full capacity
+isFull  :: forall a. Refillable a => a -> Boolean
+isFull x = energy x == energyCapacity x
+
