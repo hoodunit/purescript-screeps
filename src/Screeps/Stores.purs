@@ -1,14 +1,55 @@
 module Screeps.Stores where
 
-import Data.Function (($))
---import Data.StrMap
-import Screeps.FFI      (unsafeField)
-import Screeps.Resource (ResourceType(ResourceType))
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Eq             (class Eq)
+import Data.Function       (($))
+import Data.HeytingAlgebra ((||))
+import Data.Maybe          (Maybe(..))
+import Data.Show
+
+import Unsafe.Coerce       (unsafeCoerce)
+
+import Screeps.Id          (class HasId, eqById, validate, encodeJsonWithId, decodeJsonWithId)
+import Screeps.FFI         (unsafeField, instanceOf)
+import Screeps.Resource    (ResourceType(ResourceType))
+import Screeps.RoomObject  (class RoomObject)
+import Screeps.Structure   (class Structure, class Structural, showStructure, StructureType(..))
+import Screeps.Types       (class Owned)
 
 -- | Or Store == StrMap Int?
 foreign import data Store :: *
 
 class Stores a
+
+foreign import data AnyStore :: *
+
+instance objectAnyStore       :: RoomObject AnyStore
+instance ownedAnyStore        :: Owned      AnyStore
+instance anyStoreHasId        :: HasId      AnyStore
+  where
+    validate o = instanceOf "StructureStorage"   o
+              || instanceOf "StructureContainer" o
+              || instanceOf "StructureTerminal"  o
+instance encodeAnyStore       :: EncodeJson AnyStore where encodeJson = encodeJsonWithId
+instance decodeAnyStore       :: DecodeJson AnyStore where decodeJson = decodeJsonWithId
+instance eqAnyStore           :: Eq         AnyStore where eq         = eqById
+instance anyStoreIsStructural :: Structural AnyStore
+instance anyStoreIsStructure  :: Structure  AnyStore where
+  _structureType _ = StructureType "<unknown>"
+instance showAnyStore         :: Show       AnyStore where show       = showStructure
+instance anyStoreStores       :: Stores     AnyStore
+
+toAnyStore :: forall    s.
+              Structure s
+           =>           s
+           -> Maybe     AnyStore
+toAnyStore s = if validate  s'
+                  then Just s'
+                  else Nothing
+  where
+    s' :: AnyStore
+    s'  = unsafeCoerce s
 
 store :: forall a. Stores a => a -> Store
 store  = unsafeField "store"
