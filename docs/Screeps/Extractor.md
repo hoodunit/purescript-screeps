@@ -12,8 +12,13 @@ data Extractor :: *
 ``` purescript
 RoomObject Extractor
 Owned Extractor
+HasId Extractor
+EncodeJson Extractor
+DecodeJson Extractor
 Structural Extractor
 Structure Extractor
+Eq Extractor
+Show Extractor
 ```
 
 #### `toExtractor`

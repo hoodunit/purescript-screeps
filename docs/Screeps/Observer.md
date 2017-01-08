@@ -12,8 +12,13 @@ data Observer :: *
 ``` purescript
 RoomObject Observer
 Owned Observer
+HasId Observer
+EncodeJson Observer
+DecodeJson Observer
 Structural Observer
 Structure Observer
+Eq Observer
+Show Observer
 ```
 
 #### `observeRoom`

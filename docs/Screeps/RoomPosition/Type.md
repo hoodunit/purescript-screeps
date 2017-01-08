@@ -9,6 +9,7 @@ data RoomPosition :: *
 ##### Instances
 ``` purescript
 Show RoomPosition
+Eq RoomPosition
 ```
 
 #### `roomName`

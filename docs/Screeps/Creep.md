@@ -74,18 +74,6 @@ hits :: Creep -> Int
 hitsMax :: Creep -> Int
 ```
 
-#### `getId`
-
-``` purescript
-getId :: Creep -> Id Creep
-```
-
-#### `getIdAsStr`
-
-``` purescript
-getIdAsStr :: Creep -> String
-```
-
 #### `my`
 
 ``` purescript
@@ -319,6 +307,14 @@ transferToStructure :: forall a e. Structure a => Creep -> a -> ResourceType -> 
 ``` purescript
 transferAmtToStructure :: forall a e. Structure a => Creep -> a -> ResourceType -> Int -> Eff (cmd :: CMD | e) ReturnCode
 ```
+
+#### `refill`
+
+``` purescript
+refill :: forall e a. (Refillable a, Structure a) => Creep -> a -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
+```
+
+Refill a structure that is refillable.
 
 #### `upgradeController`
 

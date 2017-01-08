@@ -14,7 +14,12 @@ RoomObject Portal
 Owned Portal
 Structural Portal
 Decays Portal
+HasId Portal
+EncodeJson Portal
+DecodeJson Portal
 Structure Portal
+Eq Portal
+Show Portal
 ```
 
 #### `destination`

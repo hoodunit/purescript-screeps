@@ -6,6 +6,14 @@ Functions for using particular types are defined in their own modules.
 
 ### Re-exported from Screeps.Constants:
 
+#### `StructureInfo`
+
+``` purescript
+type StructureInfo = IntMap Int
+```
+
+Number of structures available on each level
+
 #### `wall_hits_max`
 
 ``` purescript
@@ -192,264 +200,6 @@ road_decay_time :: Int
 road_decay_amount :: Int
 ```
 
-#### `resource_zynthium_oxide`
-
-``` purescript
-resource_zynthium_oxide :: ResourceType
-```
-
-#### `resource_zynthium_keanite`
-
-``` purescript
-resource_zynthium_keanite :: ResourceType
-```
-
-#### `resource_zynthium_hydride`
-
-``` purescript
-resource_zynthium_hydride :: ResourceType
-```
-
-#### `resource_zynthium_alkalide`
-
-``` purescript
-resource_zynthium_alkalide :: ResourceType
-```
-
-#### `resource_zynthium_acid`
-
-``` purescript
-resource_zynthium_acid :: ResourceType
-```
-
-#### `resource_zynthium`
-
-``` purescript
-resource_zynthium :: ResourceType
-```
-
-#### `resource_utrium_oxide`
-
-``` purescript
-resource_utrium_oxide :: ResourceType
-```
-
-#### `resource_utrium_lemergite`
-
-``` purescript
-resource_utrium_lemergite :: ResourceType
-```
-
-#### `resource_utrium_hydride`
-
-``` purescript
-resource_utrium_hydride :: ResourceType
-```
-
-#### `resource_utrium_alkalide`
-
-``` purescript
-resource_utrium_alkalide :: ResourceType
-```
-
-#### `resource_utrium_acid`
-
-``` purescript
-resource_utrium_acid :: ResourceType
-```
-
-#### `resource_utrium`
-
-``` purescript
-resource_utrium :: ResourceType
-```
-
-#### `resource_power`
-
-``` purescript
-resource_power :: ResourceType
-```
-
-#### `resource_oxygen`
-
-``` purescript
-resource_oxygen :: ResourceType
-```
-
-#### `resource_lemergium_oxide`
-
-``` purescript
-resource_lemergium_oxide :: ResourceType
-```
-
-#### `resource_lemergium_hydride`
-
-``` purescript
-resource_lemergium_hydride :: ResourceType
-```
-
-#### `resource_lemergium_alkalide`
-
-``` purescript
-resource_lemergium_alkalide :: ResourceType
-```
-
-#### `resource_lemergium_acid`
-
-``` purescript
-resource_lemergium_acid :: ResourceType
-```
-
-#### `resource_lemergium`
-
-``` purescript
-resource_lemergium :: ResourceType
-```
-
-#### `resource_keanium_oxide`
-
-``` purescript
-resource_keanium_oxide :: ResourceType
-```
-
-#### `resource_keanium_hydride`
-
-``` purescript
-resource_keanium_hydride :: ResourceType
-```
-
-#### `resource_keanium_alkalide`
-
-``` purescript
-resource_keanium_alkalide :: ResourceType
-```
-
-#### `resource_keanium_acid`
-
-``` purescript
-resource_keanium_acid :: ResourceType
-```
-
-#### `resource_keanium`
-
-``` purescript
-resource_keanium :: ResourceType
-```
-
-#### `resource_hydroxide`
-
-``` purescript
-resource_hydroxide :: ResourceType
-```
-
-#### `resource_hydrogen`
-
-``` purescript
-resource_hydrogen :: ResourceType
-```
-
-#### `resource_ghodium_oxide`
-
-``` purescript
-resource_ghodium_oxide :: ResourceType
-```
-
-#### `resource_ghodium_hydride`
-
-``` purescript
-resource_ghodium_hydride :: ResourceType
-```
-
-#### `resource_ghodium_alkalide`
-
-``` purescript
-resource_ghodium_alkalide :: ResourceType
-```
-
-#### `resource_ghodium_acid`
-
-``` purescript
-resource_ghodium_acid :: ResourceType
-```
-
-#### `resource_ghodium`
-
-``` purescript
-resource_ghodium :: ResourceType
-```
-
-#### `resource_energy`
-
-``` purescript
-resource_energy :: ResourceType
-```
-
-#### `resource_catalyzed_zynthium_alkalide`
-
-``` purescript
-resource_catalyzed_zynthium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_zynthium_acid`
-
-``` purescript
-resource_catalyzed_zynthium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_utrium_alkalide`
-
-``` purescript
-resource_catalyzed_utrium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_utrium_acid`
-
-``` purescript
-resource_catalyzed_utrium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_lemergium_alkalide`
-
-``` purescript
-resource_catalyzed_lemergium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_lemergium_acid`
-
-``` purescript
-resource_catalyzed_lemergium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_keanium_alkalide`
-
-``` purescript
-resource_catalyzed_keanium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_keanium_acid`
-
-``` purescript
-resource_catalyzed_keanium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_ghodium_alkalide`
-
-``` purescript
-resource_catalyzed_ghodium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_ghodium_acid`
-
-``` purescript
-resource_catalyzed_ghodium_acid :: ResourceType
-```
-
-#### `resource_catalyst`
-
-``` purescript
-resource_catalyst :: ResourceType
-```
-
 #### `repair_power`
 
 ``` purescript
@@ -477,8 +227,10 @@ ranged_attack_power :: Int
 #### `rampart_hits_max`
 
 ``` purescript
-rampart_hits_max :: { 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+rampart_hits_max :: IntMap Int
 ```
+
+From 2 to 8
 
 #### `rampart_hits`
 
@@ -556,54 +308,6 @@ power_bank_capacity_max :: Int
 
 ``` purescript
 power_bank_capacity_crit :: Number
-```
-
-#### `part_work`
-
-``` purescript
-part_work :: BodyPartType
-```
-
-#### `part_tough`
-
-``` purescript
-part_tough :: BodyPartType
-```
-
-#### `part_ranged_attack`
-
-``` purescript
-part_ranged_attack :: BodyPartType
-```
-
-#### `part_move`
-
-``` purescript
-part_move :: BodyPartType
-```
-
-#### `part_heal`
-
-``` purescript
-part_heal :: BodyPartType
-```
-
-#### `part_claim`
-
-``` purescript
-part_claim :: BodyPartType
-```
-
-#### `part_carry`
-
-``` purescript
-part_carry :: BodyPartType
-```
-
-#### `part_attack`
-
-``` purescript
-part_attack :: BodyPartType
 ```
 
 #### `obstacle_object_types`
@@ -837,8 +541,10 @@ extension_hits :: Int
 #### `extension_energy_capacity`
 
 ``` purescript
-extension_energy_capacity :: { 0 :: Int, 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+extension_energy_capacity :: IntMap Int
 ```
+
+From 0 to 8
 
 #### `energy_regen_time`
 
@@ -894,6 +600,8 @@ creep_claim_life_time :: Int
 controller_structures :: { spawn :: StructureInfo, extension :: StructureInfo, road :: StructureInfo, constructedWall :: StructureInfo, rampart :: StructureInfo, link :: StructureInfo, storage :: StructureInfo, tower :: StructureInfo, observer :: StructureInfo, powerSpawn :: StructureInfo, extractor :: StructureInfo, lab :: StructureInfo, terminal :: StructureInfo, container :: StructureInfo, nuker :: StructureInfo }
 ```
 
+NOTE: there is better interface Screeps.Structure.numStructures
+
 #### `controller_reserve_max`
 
 ``` purescript
@@ -915,8 +623,10 @@ controller_max_upgrade_per_tick :: Int
 #### `controller_levels`
 
 ``` purescript
-controller_levels :: { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+controller_levels :: IntMap Int
 ```
+
+1 to 8
 
 #### `controller_downgrade`
 
@@ -978,66 +688,6 @@ construction_cost_road_swamp_ratio :: Int
 construction_cost :: { spawn :: Int, extension :: Int, road :: Int, constructedWall :: Int, rampart :: Int, link :: Int, storage :: Int, tower :: Int, observer :: Int, powerSpawn :: Int, extractor :: Int, lab :: Int, terminal :: Int, container :: Int, nuker :: Int }
 ```
 
-#### `color_yellow`
-
-``` purescript
-color_yellow :: Color
-```
-
-#### `color_white`
-
-``` purescript
-color_white :: Color
-```
-
-#### `color_red`
-
-``` purescript
-color_red :: Color
-```
-
-#### `color_purple`
-
-``` purescript
-color_purple :: Color
-```
-
-#### `color_orange`
-
-``` purescript
-color_orange :: Color
-```
-
-#### `color_grey`
-
-``` purescript
-color_grey :: Color
-```
-
-#### `color_green`
-
-``` purescript
-color_green :: Color
-```
-
-#### `color_cyan`
-
-``` purescript
-color_cyan :: Color
-```
-
-#### `color_brown`
-
-``` purescript
-color_brown :: Color
-```
-
-#### `color_blue`
-
-``` purescript
-color_blue :: Color
-```
-
 #### `carry_capacity`
 
 ``` purescript
@@ -1048,12 +698,6 @@ carry_capacity :: Int
 
 ``` purescript
 build_power :: Int
-```
-
-#### `bodypart_cost`
-
-``` purescript
-bodypart_cost :: { move :: Int, work :: Int, attack :: Int, carry :: Int, heal :: Int, ranged_attack :: Int, tough :: Int, claim :: Int }
 ```
 
 #### `attack_power`
@@ -1141,60 +785,6 @@ data TargetPosition a
   | TargetPos RoomPosition
 ```
 
-#### `StructureType`
-
-``` purescript
-newtype StructureType
-  = StructureType String
-```
-
-##### Instances
-``` purescript
-Generic StructureType
-Eq StructureType
-Show StructureType
-```
-
-#### `StructureInfo`
-
-``` purescript
-type StructureInfo = StrMap Int
-```
-
-#### `Room`
-
-``` purescript
-data Room :: *
-```
-
-#### `ResourceType`
-
-``` purescript
-newtype ResourceType
-  = ResourceType String
-```
-
-##### Instances
-``` purescript
-Generic ResourceType
-Eq ResourceType
-Show ResourceType
-```
-
-#### `PathStep`
-
-``` purescript
-type PathStep = { x :: Int, y :: Int, dx :: Number, dy :: Number, direction :: Direction }
-```
-
-#### `Path`
-
-``` purescript
-type Path = Array PathStep
-```
-
-Derived markers
-
 #### `Mode`
 
 ``` purescript
@@ -1207,28 +797,6 @@ newtype Mode
 Generic Mode
 Eq Mode
 Show Mode
-```
-
-#### `Id`
-
-``` purescript
-newtype Id a
-  = Id String
-```
-
-##### Instances
-``` purescript
-Generic (Id a)
-Eq (Id a)
-Show (Id a)
-DecodeJson (Id a)
-EncodeJson (Id a)
-```
-
-#### `GameGlobal`
-
-``` purescript
-data GameGlobal :: *
 ```
 
 #### `FilterFn`
@@ -1247,53 +815,11 @@ data Creep :: *
 ``` purescript
 RoomObject Creep
 Owned Creep
-```
-
-#### `Color`
-
-``` purescript
-newtype Color
-  = Color Int
-```
-
-##### Instances
-``` purescript
-Generic Color
-Eq Color
-Show Color
-```
-
-#### `BodyPartType`
-
-``` purescript
-newtype BodyPartType
-  = BodyPartType String
-```
-
-##### Instances
-``` purescript
-Generic BodyPartType
-Eq BodyPartType
-Show BodyPartType
-```
-
-#### `AnyStructure`
-
-``` purescript
-data AnyStructure :: *
-```
-
-##### Instances
-``` purescript
-RoomObject AnyStructure
-Structural AnyStructure
-Structure AnyStructure
-```
-
-#### `AnyRoomObject`
-
-``` purescript
-data AnyRoomObject :: *
+Eq Creep
+Show Creep
+HasId Creep
+EncodeJson Creep
+DecodeJson Creep
 ```
 
 #### `Owned`
@@ -1302,161 +828,8 @@ data AnyRoomObject :: *
 class Owned a 
 ```
 
-This class fixes an omission in original hierarchy class,
-
 ##### Instances
 ``` purescript
 Owned Creep
-```
-
-#### `RoomObject`
-
-``` purescript
-class RoomObject a 
-```
-
-Any `RoomObject` with a location, and room containing it. 
-
-##### Instances
-``` purescript
-RoomObject AnyStructure
-RoomObject Creep
-```
-
-#### `Structural`
-
-``` purescript
-class Structural a 
-```
-
-##### Instances
-``` purescript
-Structural AnyStructure
-```
-
-#### `Structure`
-
-``` purescript
-class (RoomObject a, Structural a) <= Structure a  where
-  _structureType :: Proxy a -> StructureType
-```
-
-##### Instances
-``` purescript
-Structure AnyStructure
-```
-
-#### `structure_wall`
-
-``` purescript
-structure_wall :: StructureType
-```
-
-#### `structure_tower`
-
-``` purescript
-structure_tower :: StructureType
-```
-
-#### `structure_terminal`
-
-``` purescript
-structure_terminal :: StructureType
-```
-
-#### `structure_storage`
-
-``` purescript
-structure_storage :: StructureType
-```
-
-#### `structure_spawn`
-
-``` purescript
-structure_spawn :: StructureType
-```
-
-#### `structure_road`
-
-``` purescript
-structure_road :: StructureType
-```
-
-#### `structure_rampart`
-
-``` purescript
-structure_rampart :: StructureType
-```
-
-#### `structure_power_spawn`
-
-``` purescript
-structure_power_spawn :: StructureType
-```
-
-#### `structure_power_bank`
-
-``` purescript
-structure_power_bank :: StructureType
-```
-
-#### `structure_portal`
-
-``` purescript
-structure_portal :: StructureType
-```
-
-#### `structure_observer`
-
-``` purescript
-structure_observer :: StructureType
-```
-
-#### `structure_nuker`
-
-``` purescript
-structure_nuker :: StructureType
-```
-
-#### `structure_link`
-
-``` purescript
-structure_link :: StructureType
-```
-
-#### `structure_lab`
-
-``` purescript
-structure_lab :: StructureType
-```
-
-#### `structure_keeper_lair`
-
-``` purescript
-structure_keeper_lair :: StructureType
-```
-
-#### `structure_extractor`
-
-``` purescript
-structure_extractor :: StructureType
-```
-
-#### `structure_extension`
-
-``` purescript
-structure_extension :: StructureType
-```
-
-#### `structure_controller`
-
-``` purescript
-structure_controller :: StructureType
-```
-
-#### `structure_container`
-
-``` purescript
-structure_container :: StructureType
 ```
 

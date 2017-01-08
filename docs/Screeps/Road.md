@@ -12,8 +12,13 @@ data Road :: *
 ``` purescript
 RoomObject Road
 Structural Road
+HasId Road
+Eq Road
 Decays Road
 Structure Road
+Show Road
+DecodeJson Road
+EncodeJson Road
 ```
 
 #### `toRoad`

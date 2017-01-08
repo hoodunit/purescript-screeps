@@ -166,10 +166,41 @@ findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> PathOptions o -> 
 getPositionAt :: Room -> Int -> Int -> RoomPosition
 ```
 
+#### `LookResult`
+
+``` purescript
+data LookResult a
+  = LookResult { resultType :: LookType a, terrain :: Maybe Terrain, structureType :: Maybe StructureType, x :: Int, y :: Int }
+```
+
+#### `decodeLookResults`
+
+``` purescript
+decodeLookResults :: forall a. Json -> Either String (Array (LookResult a))
+```
+
+#### `decodeIt`
+
+``` purescript
+decodeIt :: forall a. Json -> LookResult a
+```
+
 #### `lookForAt`
 
 ``` purescript
-lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> Array a
+lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> (Array a)
+```
+
+#### `lookForAtArea`
+
+``` purescript
+lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
+```
+
+#### `lookForInRange`
+
+``` purescript
+lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
 ```
 
 

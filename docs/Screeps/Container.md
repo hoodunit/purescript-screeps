@@ -11,9 +11,14 @@ data Container :: *
 ##### Instances
 ``` purescript
 RoomObject Container
+HasId Container
+EncodeJson Container
+DecodeJson Container
 Structural Container
 Stores Container
 Structure Container
+Show Container
+Eq Container
 ```
 
 #### `toContainer`

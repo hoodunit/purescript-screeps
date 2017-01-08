@@ -14,6 +14,37 @@ Or Store == StrMap Int?
 class Stores a 
 ```
 
+##### Instances
+``` purescript
+Stores AnyStore
+```
+
+#### `AnyStore`
+
+``` purescript
+data AnyStore :: *
+```
+
+##### Instances
+``` purescript
+RoomObject AnyStore
+Owned AnyStore
+HasId AnyStore
+EncodeJson AnyStore
+DecodeJson AnyStore
+Eq AnyStore
+Structural AnyStore
+Structure AnyStore
+Show AnyStore
+Stores AnyStore
+```
+
+#### `toAnyStore`
+
+``` purescript
+toAnyStore :: forall s. Structure s => s -> Maybe AnyStore
+```
+
 #### `store`
 
 ``` purescript

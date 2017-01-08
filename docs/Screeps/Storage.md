@@ -12,8 +12,13 @@ data Storage :: *
 ``` purescript
 RoomObject Storage
 Owned Storage
+HasId Storage
+EncodeJson Storage
+DecodeJson Storage
 Structural Storage
 Stores Storage
+Show Storage
+Eq Storage
 Structure Storage
 ```
 

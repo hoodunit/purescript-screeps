@@ -14,12 +14,11 @@ RoomObject ConstructionSite
 Structural ConstructionSite
 Progress ConstructionSite
 Owned ConstructionSite
-```
-
-#### `id`
-
-``` purescript
-id :: ConstructionSite -> Id ConstructionSite
+HasId ConstructionSite
+EncodeJson ConstructionSite
+DecodeJson ConstructionSite
+Eq ConstructionSite
+Show ConstructionSite
 ```
 
 #### `remove`

@@ -248,4 +248,18 @@ lookEq :: forall a b. LookType a -> LookType b -> Boolean
 infixr 3 lookEq as =-=
 ```
 
+#### `Path`
+
+``` purescript
+type Path = Array PathStep
+```
+
+Derived markers
+
+#### `PathStep`
+
+``` purescript
+type PathStep = { x :: Int, y :: Int, dx :: Number, dy :: Number, direction :: Direction }
+```
+
 

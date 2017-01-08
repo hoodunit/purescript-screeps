@@ -12,7 +12,12 @@ data Controller :: *
 ``` purescript
 RoomObject Controller
 Owned Controller
+HasId Controller
+EncodeJson Controller
+DecodeJson Controller
 Structural Controller
+Eq Controller
+Show Controller
 Progress Controller
 Structure Controller
 ```

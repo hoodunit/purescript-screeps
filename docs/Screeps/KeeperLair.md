@@ -11,9 +11,14 @@ data KeeperLair :: *
 ##### Instances
 ``` purescript
 RoomObject KeeperLair
+HasId KeeperLair
+Eq KeeperLair
 Owned KeeperLair
 Structural KeeperLair
 Structure KeeperLair
+EncodeJson KeeperLair
+DecodeJson KeeperLair
+Show KeeperLair
 ```
 
 #### `ticksToSpawn`

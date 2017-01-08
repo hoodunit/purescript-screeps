@@ -12,9 +12,14 @@ data Terminal :: *
 ``` purescript
 RoomObject Terminal
 Owned Terminal
+HasId Terminal
+Eq Terminal
+EncodeJson Terminal
+DecodeJson Terminal
 Structural Terminal
 Stores Terminal
 Structure Terminal
+Show Terminal
 ```
 
 #### `send`

@@ -12,9 +12,14 @@ data Tower :: *
 ``` purescript
 RoomObject Tower
 Owned Tower
+HasId Tower
+EncodeJson Tower
+DecodeJson Tower
 Structural Tower
 Refillable Tower
 Structure Tower
+Eq Tower
+Show Tower
 ```
 
 #### `attack`

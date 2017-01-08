@@ -11,6 +11,12 @@ data Source :: *
 ##### Instances
 ``` purescript
 RoomObject Source
+HasId Source
+EncodeJson Source
+DecodeJson Source
+Regenerates Source
+Show Source
+Eq Source
 ```
 
 #### `energy`
@@ -19,16 +25,12 @@ RoomObject Source
 energy :: Source -> Int
 ```
 
+Energy, but only with a way out. Not like `Refillable`.
+
 #### `energyCapacity`
 
 ``` purescript
 energyCapacity :: Source -> Int
-```
-
-#### `id`
-
-``` purescript
-id :: Source -> Id Source
 ```
 
 

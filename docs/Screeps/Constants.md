@@ -1,123 +1,9 @@
 ## Module Screeps.Constants
 
-#### `color_red`
-
-``` purescript
-color_red :: Color
-```
-
-#### `color_purple`
-
-``` purescript
-color_purple :: Color
-```
-
-#### `color_blue`
-
-``` purescript
-color_blue :: Color
-```
-
-#### `color_cyan`
-
-``` purescript
-color_cyan :: Color
-```
-
-#### `color_green`
-
-``` purescript
-color_green :: Color
-```
-
-#### `color_yellow`
-
-``` purescript
-color_yellow :: Color
-```
-
-#### `color_orange`
-
-``` purescript
-color_orange :: Color
-```
-
-#### `color_brown`
-
-``` purescript
-color_brown :: Color
-```
-
-#### `color_grey`
-
-``` purescript
-color_grey :: Color
-```
-
-#### `color_white`
-
-``` purescript
-color_white :: Color
-```
-
 #### `obstacle_object_types`
 
 ``` purescript
 obstacle_object_types :: Array String
-```
-
-#### `part_move`
-
-``` purescript
-part_move :: BodyPartType
-```
-
-#### `part_work`
-
-``` purescript
-part_work :: BodyPartType
-```
-
-#### `part_carry`
-
-``` purescript
-part_carry :: BodyPartType
-```
-
-#### `part_attack`
-
-``` purescript
-part_attack :: BodyPartType
-```
-
-#### `part_ranged_attack`
-
-``` purescript
-part_ranged_attack :: BodyPartType
-```
-
-#### `part_tough`
-
-``` purescript
-part_tough :: BodyPartType
-```
-
-#### `part_heal`
-
-``` purescript
-part_heal :: BodyPartType
-```
-
-#### `part_claim`
-
-``` purescript
-part_claim :: BodyPartType
-```
-
-#### `bodypart_cost`
-
-``` purescript
-bodypart_cost :: { move :: Int, work :: Int, attack :: Int, carry :: Int, heal :: Int, ranged_attack :: Int, tough :: Int, claim :: Int }
 ```
 
 #### `creep_life_time`
@@ -237,8 +123,10 @@ rampart_hits :: Int
 #### `rampart_hits_max`
 
 ``` purescript
-rampart_hits_max :: { 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+rampart_hits_max :: IntMap Int
 ```
+
+From 2 to 8
 
 #### `energy_regen_time`
 
@@ -315,8 +203,10 @@ extension_hits :: Int
 #### `extension_energy_capacity`
 
 ``` purescript
-extension_energy_capacity :: { 0 :: Int, 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+extension_energy_capacity :: IntMap Int
 ```
+
+From 0 to 8
 
 #### `road_hits`
 
@@ -399,14 +289,26 @@ construction_cost_road_swamp_ratio :: Int
 #### `controller_levels`
 
 ``` purescript
-controller_levels :: { 1 :: Int, 2 :: Int, 3 :: Int, 4 :: Int, 5 :: Int, 6 :: Int, 7 :: Int, 8 :: Int }
+controller_levels :: IntMap Int
 ```
+
+1 to 8
+
+#### `StructureInfo`
+
+``` purescript
+type StructureInfo = IntMap Int
+```
+
+Number of structures available on each level
 
 #### `controller_structures`
 
 ``` purescript
 controller_structures :: { spawn :: StructureInfo, extension :: StructureInfo, road :: StructureInfo, constructedWall :: StructureInfo, rampart :: StructureInfo, link :: StructureInfo, storage :: StructureInfo, tower :: StructureInfo, observer :: StructureInfo, powerSpawn :: StructureInfo, extractor :: StructureInfo, lab :: StructureInfo, terminal :: StructureInfo, container :: StructureInfo, nuker :: StructureInfo }
 ```
+
+NOTE: there is better interface Screeps.Structure.numStructures
 
 #### `controller_downgrade`
 
@@ -796,264 +698,6 @@ nuke_range :: Int
 
 ``` purescript
 nuke_damage :: { 0 :: Int, 1 :: Int, 4 :: Int }
-```
-
-#### `resource_energy`
-
-``` purescript
-resource_energy :: ResourceType
-```
-
-#### `resource_power`
-
-``` purescript
-resource_power :: ResourceType
-```
-
-#### `resource_hydrogen`
-
-``` purescript
-resource_hydrogen :: ResourceType
-```
-
-#### `resource_oxygen`
-
-``` purescript
-resource_oxygen :: ResourceType
-```
-
-#### `resource_utrium`
-
-``` purescript
-resource_utrium :: ResourceType
-```
-
-#### `resource_lemergium`
-
-``` purescript
-resource_lemergium :: ResourceType
-```
-
-#### `resource_keanium`
-
-``` purescript
-resource_keanium :: ResourceType
-```
-
-#### `resource_zynthium`
-
-``` purescript
-resource_zynthium :: ResourceType
-```
-
-#### `resource_catalyst`
-
-``` purescript
-resource_catalyst :: ResourceType
-```
-
-#### `resource_ghodium`
-
-``` purescript
-resource_ghodium :: ResourceType
-```
-
-#### `resource_hydroxide`
-
-``` purescript
-resource_hydroxide :: ResourceType
-```
-
-#### `resource_zynthium_keanite`
-
-``` purescript
-resource_zynthium_keanite :: ResourceType
-```
-
-#### `resource_utrium_lemergite`
-
-``` purescript
-resource_utrium_lemergite :: ResourceType
-```
-
-#### `resource_utrium_hydride`
-
-``` purescript
-resource_utrium_hydride :: ResourceType
-```
-
-#### `resource_utrium_oxide`
-
-``` purescript
-resource_utrium_oxide :: ResourceType
-```
-
-#### `resource_keanium_hydride`
-
-``` purescript
-resource_keanium_hydride :: ResourceType
-```
-
-#### `resource_keanium_oxide`
-
-``` purescript
-resource_keanium_oxide :: ResourceType
-```
-
-#### `resource_lemergium_hydride`
-
-``` purescript
-resource_lemergium_hydride :: ResourceType
-```
-
-#### `resource_lemergium_oxide`
-
-``` purescript
-resource_lemergium_oxide :: ResourceType
-```
-
-#### `resource_zynthium_hydride`
-
-``` purescript
-resource_zynthium_hydride :: ResourceType
-```
-
-#### `resource_zynthium_oxide`
-
-``` purescript
-resource_zynthium_oxide :: ResourceType
-```
-
-#### `resource_ghodium_hydride`
-
-``` purescript
-resource_ghodium_hydride :: ResourceType
-```
-
-#### `resource_ghodium_oxide`
-
-``` purescript
-resource_ghodium_oxide :: ResourceType
-```
-
-#### `resource_utrium_acid`
-
-``` purescript
-resource_utrium_acid :: ResourceType
-```
-
-#### `resource_utrium_alkalide`
-
-``` purescript
-resource_utrium_alkalide :: ResourceType
-```
-
-#### `resource_keanium_acid`
-
-``` purescript
-resource_keanium_acid :: ResourceType
-```
-
-#### `resource_keanium_alkalide`
-
-``` purescript
-resource_keanium_alkalide :: ResourceType
-```
-
-#### `resource_lemergium_acid`
-
-``` purescript
-resource_lemergium_acid :: ResourceType
-```
-
-#### `resource_lemergium_alkalide`
-
-``` purescript
-resource_lemergium_alkalide :: ResourceType
-```
-
-#### `resource_zynthium_acid`
-
-``` purescript
-resource_zynthium_acid :: ResourceType
-```
-
-#### `resource_zynthium_alkalide`
-
-``` purescript
-resource_zynthium_alkalide :: ResourceType
-```
-
-#### `resource_ghodium_acid`
-
-``` purescript
-resource_ghodium_acid :: ResourceType
-```
-
-#### `resource_ghodium_alkalide`
-
-``` purescript
-resource_ghodium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_utrium_acid`
-
-``` purescript
-resource_catalyzed_utrium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_utrium_alkalide`
-
-``` purescript
-resource_catalyzed_utrium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_keanium_acid`
-
-``` purescript
-resource_catalyzed_keanium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_keanium_alkalide`
-
-``` purescript
-resource_catalyzed_keanium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_lemergium_acid`
-
-``` purescript
-resource_catalyzed_lemergium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_lemergium_alkalide`
-
-``` purescript
-resource_catalyzed_lemergium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_zynthium_acid`
-
-``` purescript
-resource_catalyzed_zynthium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_zynthium_alkalide`
-
-``` purescript
-resource_catalyzed_zynthium_alkalide :: ResourceType
-```
-
-#### `resource_catalyzed_ghodium_acid`
-
-``` purescript
-resource_catalyzed_ghodium_acid :: ResourceType
-```
-
-#### `resource_catalyzed_ghodium_alkalide`
-
-``` purescript
-resource_catalyzed_ghodium_alkalide :: ResourceType
 ```
 
 

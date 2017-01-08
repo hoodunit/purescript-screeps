@@ -15,8 +15,12 @@ Owned Link
 Structural Link
 Decays Link
 Coolsdown Link
+HasId Link
 Refillable Link
 Structure Link
+EncodeJson Link
+DecodeJson Link
+Show Link
 ```
 
 #### `transferEnergy`

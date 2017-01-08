@@ -12,9 +12,14 @@ data Rampart :: *
 ``` purescript
 RoomObject Rampart
 Owned Rampart
+HasId Rampart
+EncodeJson Rampart
+DecodeJson Rampart
 Structural Rampart
 Decays Rampart
 Structure Rampart
+Eq Rampart
+Show Rampart
 ```
 
 #### `isPublic`

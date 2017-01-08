@@ -13,8 +13,13 @@ data PowerBank :: *
 RoomObject PowerBank
 Owned PowerBank
 Structural PowerBank
-Decays PowerBank
+HasId PowerBank
+EncodeJson PowerBank
+DecodeJson PowerBank
 Structure PowerBank
+Decays PowerBank
+Eq PowerBank
+Show PowerBank
 ```
 
 #### `power`

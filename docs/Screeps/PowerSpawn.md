@@ -13,8 +13,13 @@ data PowerSpawn :: *
 RoomObject PowerSpawn
 Owned PowerSpawn
 Structural PowerSpawn
+HasId PowerSpawn
+EncodeJson PowerSpawn
+DecodeJson PowerSpawn
 Refillable PowerSpawn
 Structure PowerSpawn
+Eq PowerSpawn
+Show PowerSpawn
 ```
 
 #### `power`

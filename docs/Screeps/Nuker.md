@@ -12,10 +12,15 @@ data Nuker :: *
 ``` purescript
 RoomObject Nuker
 Owned Nuker
+HasId Nuker
+EncodeJson Nuker
+DecodeJson Nuker
 Structural Nuker
 Refillable Nuker
 Coolsdown Nuker
 Structure Nuker
+Eq Nuker
+Show Nuker
 ```
 
 #### `ghodium`

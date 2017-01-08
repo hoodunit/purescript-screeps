@@ -12,8 +12,13 @@ data Extension :: *
 ``` purescript
 RoomObject Extension
 Owned Extension
+HasId Extension
+EncodeJson Extension
+DecodeJson Extension
 Structural Extension
 Refillable Extension
+Eq Extension
+Show Extension
 Structure Extension
 ```
 

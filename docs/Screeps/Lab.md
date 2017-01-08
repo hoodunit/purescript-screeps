@@ -14,8 +14,13 @@ RoomObject Lab
 Owned Lab
 Structural Lab
 Refillable Lab
+HasId Lab
+Eq Lab
 Coolsdown Lab
 Structure Lab
+EncodeJson Lab
+DecodeJson Lab
+Show Lab
 ```
 
 #### `mineralAmount`

@@ -63,31 +63,31 @@ unwrapContext :: forall a b. FindContext a -> b
 #### `createConstructionSite`
 
 ``` purescript
-createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlag`
 
 ``` purescript
-createFlag :: forall e. RoomPosition -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlag :: forall e. RoomPosition -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlagWithName`
 
 ``` purescript
-createFlagWithName :: forall e. RoomPosition -> String -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithName :: forall e. RoomPosition -> String -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlagWithColor`
 
 ``` purescript
-createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlagWithColors`
 
 ``` purescript
-createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `findClosestByPath`

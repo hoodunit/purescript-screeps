@@ -18,9 +18,14 @@ data Spawn :: *
 ``` purescript
 RoomObject Spawn
 Owned Spawn
+HasId Spawn
+Eq Spawn
+EncodeJson Spawn
+DecodeJson Spawn
 Structural Spawn
 Refillable Spawn
 Structure Spawn
+Show Spawn
 ```
 
 #### `memory`

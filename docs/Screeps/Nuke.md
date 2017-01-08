@@ -11,13 +11,10 @@ data Nuke :: *
 ##### Instances
 ``` purescript
 RoomObject Nuke
+HasId Nuke
+EncodeJson Nuke
+DecodeJson Nuke
 Regenerates Nuke
-```
-
-#### `id`
-
-``` purescript
-id :: Nuke -> Id Nuke
 ```
 
 #### `launchRoomName`
