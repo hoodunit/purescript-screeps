@@ -61,4 +61,12 @@ isNotFull :: forall a. Refillable a => a -> Boolean
 
 Check whether `Refillable` is not at full capacity
 
+#### `isFull`
+
+``` purescript
+isFull :: forall a. Refillable a => a -> Boolean
+```
+
+Check whether `Refillable` is not at full capacity
+
 
