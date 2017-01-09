@@ -1,5 +1,13 @@
 module Screeps.RoomPosition.Type where
 
+import Control.Monad
+
+import Data.Argonaut.Core (jsonEmptyObject)
+import Data.Argonaut.Encode
+import Data.Argonaut.Encode.Combinators
+import Data.Argonaut.Decode
+import Data.Argonaut.Decode.Combinators
+import Data.Function       (($))
 import Data.HeytingAlgebra ((&&))
 import Data.Eq             (class Eq, (==))
 import Data.Monoid         ((<>))
@@ -8,6 +16,8 @@ import Data.Show           (class Show, show)
 import Screeps.FFI
 
 foreign import data RoomPosition :: *
+
+foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 
 roomName :: RoomPosition -> String
 roomName = unsafeField "roomName"
@@ -25,4 +35,19 @@ instance eqRomPosition :: Eq RoomPosition where
   eq a b = x        a == x        b
         && y        a == y        b
         && roomName a == roomName b
+
+instance encodeRoomPosition :: EncodeJson RoomPosition where
+  encodeJson aPos = do
+       "x"        := x        aPos
+    ~> "y"        := y        aPos
+    ~> "roomName" := roomName aPos
+    ~> jsonEmptyObject
+
+instance decodeRoomPosition :: DecodeJson RoomPosition where
+  decodeJson json = do
+    obj       <- decodeJson json
+    cx        <- obj .? "x"
+    cy        <- obj .? "y"
+    croomName <- obj .? "roomName"
+    pure      $ mkRoomPosition cx cy croomName
 

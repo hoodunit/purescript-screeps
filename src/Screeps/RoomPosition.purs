@@ -21,11 +21,9 @@ import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3,
 import Screeps.Room (PathOptions)
 import Screeps.RoomPosition.Type (RoomPosition)
 
-foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
-
-data FindContext a =
-  OfType (FindType a) |
-  OfObj  (Array    a) | -- should be RoomObject a
+data      FindContext a =
+  OfType (FindType    a     ) |
+  OfObj  (Array       a     ) | -- should be RoomObject a
   OfPos  (Array RoomPosition)
 
 tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
