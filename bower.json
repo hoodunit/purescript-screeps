@@ -1,6 +1,6 @@
 {
   "name": "purescript-screeps-classy",
-  "version" : "0.2.1",
+  "version": "0.2.1",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -11,18 +11,19 @@
     "test.md"
   ],
   "dependencies": {
-     "purescript-console"        : "^2.0.0"
-    ,"purescript-functions"      : "^2.0.0"
-    ,"purescript-maybe"          : "^2.0.1"
-    ,"purescript-argonaut-core"  : "^2.0.1"
-    ,"purescript-argonaut-codecs": "^2.0.0"
-    ,"purescript-unsafe-coerce"  : "^2.0.0"
-    ,"purescript-partial"        : "^1.2.0"
-    ,"purescript-exceptions"     : "^2.0.0"
-    ,"purescript-psci-support"   : "^2.0.0"
-    ,"purescript-generics"       : "^3.2.0"
+    "purescript-console": "^2.0.0",
+    "purescript-functions": "^2.0.0",
+    "purescript-maybe": "^2.0.1",
+    "purescript-argonaut-core": "^2.0.1",
+    "purescript-argonaut-codecs": "^2.0.0",
+    "purescript-unsafe-coerce": "^2.0.0",
+    "purescript-partial": "^1.2.0",
+    "purescript-exceptions": "^2.0.0",
+    "purescript-psci-support": "^2.0.0",
+    "purescript-generics": "^3.2.0",
+    "purescript-refs": "^2.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support"    : "^2.0.0"
+    "purescript-psci-support": "^2.0.0"
   }
 }
