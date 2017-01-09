@@ -20,8 +20,8 @@ class Structural     a -- has `structureType` - Structure or ConstructionSite
 
 class ( RoomObject a
       , Structural a
-      , HasId      a ) <= Structure      a where
-    _structureType :: Proxy a -> StructureType
+      , HasId      a ) <= Structure a where
+    _structureType     :: Proxy     a -> StructureType
 
 --  where myStructureType :: StructureType
 -- | This class fixes an omission in original hierarchy class,

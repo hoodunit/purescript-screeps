@@ -28,15 +28,15 @@ foreign import getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
 
 -- TODO: costCallback option
 type PathOptions o =
-  { ignoreCreeps :: Maybe Boolean
-  , ignoreDestructibleStructures :: Maybe Boolean
-  , ignoreRoads :: Maybe Boolean
-  , ignore :: Maybe (Array RoomPosition)
-  , avoid :: Maybe (Array RoomPosition)
-  , maxOps :: Maybe Int
-  , heuristicWeight :: Maybe Number
-  , serialize :: Maybe Boolean
-  , maxRooms :: Maybe Int
+  { ignoreCreeps                 :: Maybe  Boolean
+  , ignoreDestructibleStructures :: Maybe  Boolean
+  , ignoreRoads                  :: Maybe  Boolean
+  , ignore                       :: Maybe (Array RoomPosition)
+  , avoid                        :: Maybe (Array RoomPosition)
+  , maxOps                       :: Maybe  Int
+  , heuristicWeight              :: Maybe  Number
+  , serialize                    :: Maybe  Boolean
+  , maxRooms                     :: Maybe  Int
   | o }
 
 pathOpts :: PathOptions ()

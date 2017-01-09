@@ -59,9 +59,9 @@ closestPathOpts =
   }
 
 unwrapContext :: forall a b. FindContext a -> b
-unwrapContext (OfType findType) = unsafeCoerce findType
-unwrapContext (OfObj objects) = unsafeCoerce objects
-unwrapContext (OfPos positions) = unsafeCoerce positions
+unwrapContext (OfType findType ) = unsafeCoerce findType
+unwrapContext (OfObj  objects  ) = unsafeCoerce objects
+unwrapContext (OfPos  positions) = unsafeCoerce positions
 
 createConstructionSite :: forall e. RoomPosition
                        -> StructureType
