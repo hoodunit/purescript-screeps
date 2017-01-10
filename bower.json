@@ -1,6 +1,7 @@
 {
   "name": "purescript-screeps-classy",
-  "version": "0.2.1",
+  "version": "1.1.0",
+  "description": "Screeps.com binding - can program your Screeps AI with PureScript classes!",
   "ignore": [
     "**/.*",
     "node_modules",
