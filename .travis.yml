@@ -6,6 +6,7 @@ before_install:
   - "npm install -g bower purescript pulp purescript-psa"
 script:
   - "bower install"
-  # Can't "pulp test", as the Test.Main.main exits with 1; it's not a
-  # # test definition so much as an example of use.
   - "pulp build"
+  # Can't "pulp test", for two reasons:
+  # * Do not have mock Screeps API yet
+  # * as the Test.Main.main exits with 1; it's not a test definition so much as an example of use.
