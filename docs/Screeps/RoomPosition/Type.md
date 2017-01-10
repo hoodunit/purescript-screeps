@@ -10,6 +10,14 @@ data RoomPosition :: *
 ``` purescript
 Show RoomPosition
 Eq RoomPosition
+EncodeJson RoomPosition
+DecodeJson RoomPosition
+```
+
+#### `mkRoomPosition`
+
+``` purescript
+mkRoomPosition :: Int -> Int -> String -> RoomPosition
 ```
 
 #### `roomName`

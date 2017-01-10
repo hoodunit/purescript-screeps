@@ -2,12 +2,6 @@
 
 Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-us/articles/203079201-RoomPosition)
 
-#### `mkRoomPosition`
-
-``` purescript
-mkRoomPosition :: Int -> Int -> String -> RoomPosition
-```
-
 #### `FindContext`
 
 ``` purescript

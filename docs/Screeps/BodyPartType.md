@@ -68,4 +68,28 @@ part_claim :: BodyPartType
 bodypart_cost :: { move :: Int, work :: Int, attack :: Int, carry :: Int, heal :: Int, ranged_attack :: Int, tough :: Int, claim :: Int }
 ```
 
+#### `Body`
+
+``` purescript
+type Body = Array BodyPartType
+```
+
+#### `Cost`
+
+``` purescript
+type Cost = Int
+```
+
+#### `bodyCost`
+
+``` purescript
+bodyCost :: Body -> Cost
+```
+
+#### `bodyPartCost`
+
+``` purescript
+bodyPartCost :: BodyPartType -> Cost
+```
+
 
