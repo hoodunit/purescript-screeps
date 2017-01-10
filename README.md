@@ -38,5 +38,5 @@ Additionally there are generic `AnyStructure`, `AnyRefillable` objects that can 
 ## Status
 
 * Market API still not implemented
-* Will need to add exception-based error handline, where each error will throw an exception.
+* Will need to add exception-based error handling, where each error will throw an exception.
 

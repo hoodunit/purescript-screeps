@@ -2,15 +2,14 @@ module Screeps.Id ( Id(..)
                   , class HasId
                   , id
                   , validate
+                  , unsafeGetObjectById -- until Deposit is in the API
                   , getObjectById
                   , encodeJsonWithId
                   , decodeJsonWithId
                   , eqById
                   ) where
 
---import Control.Category           ((<<<))
 import Control.Monad              ((>=>))
---import Control.Monad.Eff          (Eff)
 
 import Data.Argonaut.Core         (Json)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
