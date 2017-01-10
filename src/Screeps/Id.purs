@@ -38,14 +38,17 @@ id  = unsafeField "id"
 
 -- | Get the object from an Id, if it passes validation.
 getObjectById  :: forall a. HasId a => Id a -> Either String a
-getObjectById i = case unsafeGetObjectById Nothing Just i of
+getObjectById i = case unsafeGetObjectById i of
                        Nothing             -> Left  ( "Object with id " <> show i <> " no longer exists" )
                        Just o | validate o -> Right    o
                        Just _              -> Left  ( "Object with given id failed type validation" )
 
+unsafeGetObjectById :: forall a. Id a -> Maybe a
+unsafeGetObjectById  = unsafeGetObjectById_helper Nothing Just 
+
 -- | This is unsafe method, for restoring objects by id stored in memory.
 -- | WARNING: This is somewhat unsafe method, since the object is never checked for its type!
-foreign import unsafeGetObjectById :: forall a r. r -> (a -> r) -> Id a -> r
+foreign import unsafeGetObjectById_helper :: forall a r. r -> (a -> r) -> Id a -> r
 
 -- | WARNING: This is somewhat unsafe method, since the object should be checked for its type!
 --foreign import unsafeGetObjectByIdEff :: forall a e. Eff (tick :: TICK | e) (Id a) -> (Maybe a)

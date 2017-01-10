@@ -1,6 +1,6 @@
 "use strict";
 
-exports.unsafeGetObjectById=function(Nothing) {
+exports.unsafeGetObjectById_helper=function(Nothing) {
     return function (Just) {
         return function (id) {
             var result = Game.getObjectById(id);
