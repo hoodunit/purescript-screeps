@@ -3,6 +3,8 @@ module Screeps.Mineral where
 
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Monoid          ((<>))
+import Data.Show            (class Show,       show)
 
 import Screeps.FFI         (unsafeField, instanceOf)
 import Screeps.Id
@@ -18,6 +20,8 @@ instance mineralHasId       :: HasId       Mineral
     validate = instanceOf "Mineral"
 instance encodeMineral       :: EncodeJson Mineral where encodeJson = encodeJsonWithId
 instance decodeMineral       :: DecodeJson Mineral where decodeJson = decodeJsonWithId
+instance showMineral         :: Show       Mineral where
+  show m = show (mineralAmount m) <> " " <> show (mineralType m)
 
 mineralAmount :: Mineral -> Int
 mineralAmount = unsafeField "mineralAmount"
