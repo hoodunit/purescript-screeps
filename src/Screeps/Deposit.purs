@@ -35,6 +35,8 @@ instance decodeDeposit          :: DecodeJson AnyDeposit where decodeJson = deco
 instance showDeposit            :: Show       AnyDeposit where show       = caseDeposit show show
 instance eqDeposit              :: Eq         AnyDeposit where eq         = eqById
 instance anyDeposit             :: Deposit    AnyDeposit
+instance mineralIsDeposit       :: Deposit    Mineral.Mineral
+instance sourceIsDeposit        :: Deposit    Source.Source
 
 caseDeposit ::  forall  d          a.
                 Deposit d
