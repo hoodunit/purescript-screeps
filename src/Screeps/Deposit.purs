@@ -7,18 +7,19 @@ import Data.Eq
 import Data.Function                  (($))
 import Data.HeytingAlgebra
 import Data.Maybe                     (Maybe(..))
-import Data.Ord                       ((<))
 import Data.Show
 import Unsafe.Coerce                  (unsafeCoerce)
+import Control.Monad.Eff
 import Control.Monad.Eff.Exception.Unsafe as U
 
-import Screeps.FFI                    (unsafeField, instanceOf)
+import Screeps.Effects                (CMD)
+import Screeps.FFI                    (unsafeField, instanceOf, runThisEffFn1)
 import Screeps.Id
 import Screeps.Mineral    as Mineral
 import Screeps.Resource
 import Screeps.RoomObject             (class RoomObject)
 import Screeps.Source     as Source
-import Screeps.Structure
+--import Screeps.Structure
 import Screeps.Types
 
 class Deposit a
@@ -45,9 +46,15 @@ caseDeposit srcCase _       ad | instanceOf "Source"  ad = srcCase $ unsafeCoerc
 caseDeposit _       minCase ad | instanceOf "Mineral" ad = minCase $ unsafeCoerce ad
 caseDeposit _       _       _                            = U.unsafeThrow "This is not a deposit!"
 
-amount :: forall a.
+harvestDeposit :: forall                  e  a.
+                  Creep
+               -> AnyDeposit
+               -> Eff        (cmd :: CMD| e) a
+harvestDeposit  = runThisEffFn1 "harvest"
+
+amount :: forall  a.
           Deposit a
-       => a
+       =>         a
        -> Int
 amount  = caseDeposit Source.energy Mineral.mineralAmount
 
