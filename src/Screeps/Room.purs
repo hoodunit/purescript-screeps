@@ -8,23 +8,41 @@ import Data.Either                      (Either(Left,Right))
 import Data.Maybe                       (Maybe(..), maybe)
 
 import Screeps.Color                    (Color)
-import Screeps.Effects                  (CMD, TICK)
-import Screeps.Types                    (FilterFn, Mode, TargetPosition(..), Terrain)
 import Screeps.Controller               (Controller)
-import Screeps.FindType                 (FindType, LookType, Path)
-import Screeps.RoomPosition.Type        (RoomPosition, x, y)
-import Screeps.RoomObject               (Room, class RoomObject)
-import Screeps.Storage                  (Storage)
-import Screeps.Structure                (StructureType)
-import Screeps.Terminal                 (Terminal)
+import Screeps.Effects                  (CMD, TICK)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5,
                     runThisFn1,    runThisFn2,    runThisFn3,    runThisFn6,
                     selectMaybes,  toMaybe,
-                    unsafeField,   unsafeOptField)
-import Screeps.ReturnCode (ReturnCode)
+                    unsafeField,   unsafeOptField, instanceOf)
+import Screeps.FindType                 (FindType, LookType, Path)
+import Screeps.Id
+import Screeps.RoomObject               (Room, class RoomObject)
+import Screeps.RoomPosition.Type        (RoomPosition, x, y)
+import Screeps.Storage                  (Storage)
+import Screeps.Structure                (StructureType)
+import Screeps.Terminal                 (Terminal)
+import Screeps.Types                    (FilterFn, Mode, TargetPosition(..), Terrain)
+import Screeps.ReturnCode               (ReturnCode)
+import Unsafe.Coerce                    (unsafeCoerce)
+
+foreign import data AnyRoomObject :: *
+instance anyRoomObject         :: RoomObject AnyRoomObject
+instance anyRoomObjectHasId    :: HasId      AnyRoomObject where
+  validate = instanceOf "RoomObject"
+
+fromAnyRoomObject :: forall ro.
+                     HasId  ro
+                  => AnyRoomObject
+                  -> Maybe ro
+fromAnyRoomObject ro =
+    if validate    o
+       then Just   o
+       else Nothing
+  where
+    o = unsafeCoerce ro
 
 foreign import data RoomGlobal :: *
-foreign import getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
+foreign import   getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
 
 -- TODO: costCallback option
 type PathOptions o =
@@ -41,15 +59,15 @@ type PathOptions o =
 
 pathOpts :: PathOptions ()
 pathOpts =
-  { ignoreCreeps: Nothing
+  { ignoreCreeps:                 Nothing
   , ignoreDestructibleStructures: Nothing
-  , ignoreRoads: Nothing
-  , ignore: Nothing
-  , avoid: Nothing
-  , maxOps: Nothing
-  , heuristicWeight: Nothing
-  , serialize: Nothing
-  , maxRooms: Nothing }
+  , ignoreRoads:                  Nothing
+  , ignore:                       Nothing
+  , avoid:                        Nothing
+  , maxOps:                       Nothing
+  , heuristicWeight:              Nothing
+  , serialize:                    Nothing
+  , maxRooms:                     Nothing }
 
 controller :: Room -> Maybe Controller
 controller room = toMaybe $ unsafeField "controller" room
@@ -61,7 +79,7 @@ energyCapacityAvailable :: Room -> Int
 energyCapacityAvailable = unsafeField "energyCapacityAvailable"
 
 memory :: forall props. Room -> { | props }
-memory = unsafeField "energyAvailable"
+memory = unsafeField "memory"
 
 mode :: Room -> Mode
 mode = unsafeField "mode"

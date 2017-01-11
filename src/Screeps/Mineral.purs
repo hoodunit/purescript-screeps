@@ -24,19 +24,19 @@ instance showMineral         :: Show       Mineral where
   show m = show (mineralAmount m) <> " " <> show (mineralType m)
 
 mineralAmount :: Mineral -> Int
-mineralAmount = unsafeField "mineralAmount"
+mineralAmount  = unsafeField "mineralAmount"
 
 mineralType :: Mineral -> ResourceType
-mineralType = unsafeField "mineralType"
+mineralType  = unsafeField "mineralType"
 
-foreign import resource_hydrogen :: ResourceType
-foreign import resource_oxygen :: ResourceType
-foreign import resource_utrium :: ResourceType
+foreign import resource_hydrogen  :: ResourceType
+foreign import resource_oxygen    :: ResourceType
+foreign import resource_utrium    :: ResourceType
 foreign import resource_lemergium :: ResourceType
-foreign import resource_keanium :: ResourceType
-foreign import resource_zynthium :: ResourceType
-foreign import resource_catalyst :: ResourceType
-foreign import resource_ghodium :: ResourceType
+foreign import resource_keanium   :: ResourceType
+foreign import resource_zynthium  :: ResourceType
+foreign import resource_catalyst  :: ResourceType
+foreign import resource_ghodium   :: ResourceType
 
 foreign import resource_hydroxide :: ResourceType
 foreign import resource_zynthium_keanite :: ResourceType

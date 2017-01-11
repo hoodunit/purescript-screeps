@@ -27,9 +27,9 @@ class ( RoomObject a
 -- | This class fixes an omission in original hierarchy class,
 --   where both Structure and ConstructionSite share the field `structureType`
 newtype StructureType = StructureType String
-derive instance genericStructureType :: Generic StructureType
-derive newtype instance eqStructureType   :: Eq   StructureType
-instance showStructureType :: Show StructureType where show (StructureType strTy) = strTy
+derive         instance genericStructureType :: Generic StructureType
+derive newtype instance eqStructureType      :: Eq      StructureType
+instance                showStructureType    :: Show    StructureType where show (StructureType strTy) = strTy
 
 foreign import structure_spawn       :: StructureType
 foreign import structure_extension   :: StructureType
