@@ -54,11 +54,11 @@ harvestDeposit :: forall                  e  a.
                -> Eff        (cmd :: CMD| e) a
 harvestDeposit  = runThisEffFn1 "harvest"
 
-amount :: forall  a.
-          Deposit a
-       =>         a
-       -> Int
-amount  = caseDeposit Source.energy Mineral.mineralAmount
+depositLeft :: forall  a.
+               Deposit a
+            =>         a
+            -> Int
+depositLeft  = caseDeposit Source.energy Mineral.mineralAmount
 
 depositType :: forall  d.
                Deposit d
