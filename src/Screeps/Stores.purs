@@ -51,6 +51,11 @@ toAnyStore s = if validate  s'
     s' :: AnyStore
     s'  = unsafeCoerce s
 
+asAnyStore :: forall s.
+              Stores s
+           => s -> AnyStore
+asAnyStore = unsafeCoerce
+
 store :: forall a. Stores a => a -> Store
 store  = unsafeField "store"
 

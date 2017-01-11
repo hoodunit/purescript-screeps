@@ -75,3 +75,7 @@ toDeposit r = if validate s
     s :: AnyDeposit
     s  = unsafeCoerce r
 
+asDeposit :: forall s.
+             Deposit s
+          => s -> AnyDeposit
+asDeposit  = unsafeCoerce
