@@ -67,15 +67,15 @@ depositType :: forall  d.
 depositType  = caseDeposit (\_ -> resource_energy)
                             Mineral.mineralType
 
-toDeposit :: forall r. RoomObject r => r -> Maybe AnyDeposit
-toDeposit r = if validate s
-                then Just s
-                else Nothing
+toAnyDeposit :: forall r. RoomObject r => r -> Maybe AnyDeposit
+toAnyDeposit r = if validate s
+                    then Just s
+                    else Nothing
   where
     s :: AnyDeposit
     s  = unsafeCoerce r
 
-asDeposit :: forall s.
-             Deposit s
-          => s -> AnyDeposit
-asDeposit  = unsafeCoerce
+asAnyDeposit :: forall s.
+                Deposit s
+             => s -> AnyDeposit
+asAnyDeposit  = unsafeCoerce
