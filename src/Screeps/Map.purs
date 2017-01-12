@@ -3,7 +3,6 @@ module Screeps.Map where
 
 import Prelude
 
-import Control.Monad.Eff.Unsafe (unsafePerformEff)
 import Data.Array   as Array
 import Data.Int                 (fromString)
 import Data.Maybe
@@ -54,7 +53,7 @@ type ExitToRoom =
   , room :: RoomName }
 
 describeExits :: RoomName -> Maybe ExitsInfo
-describeExits name = toMaybe $ runThisFn1 "describeExits" (unsafePerformEff Game.map) name
+describeExits name = toMaybe $ runThisFn1 "describeExits" Game.map name
 
 -- TODO: options
 findExit  :: Room -> Room -> ReturnCode

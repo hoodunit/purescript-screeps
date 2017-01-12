@@ -38,11 +38,10 @@ creeps = unsafeGameField "creeps"
 flags :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Flag)
 flags = unsafeGameField "flags"
 
-gcl :: forall e. Eff (tick :: TICK | e) Gcl
-gcl = unsafeGameField "gcl"
 
-map :: forall e. Eff (tick :: TICK | e) WorldMap
-map = unsafeGameField "map"
+foreign import gcl :: Gcl
+
+foreign import map :: WorldMap
 
 market :: forall e. Eff (tick :: TICK | e) Market
 market = unsafeGameField "market"

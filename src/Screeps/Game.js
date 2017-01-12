@@ -3,6 +3,8 @@
 exports.unsafeGameField = function (fieldName) {
     return function() { return Game[fieldName]; }
 }
+exports.map = Game.map;
+exports.gcl = Game.gcl;
 exports.getUsedCpu = function () {
     return Game.cpu.getUsed();
 }
