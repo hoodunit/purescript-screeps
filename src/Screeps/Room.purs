@@ -85,9 +85,6 @@ memory = unsafeField "memory"
 mode :: Room -> Mode
 mode = unsafeField "mode"
 
-name :: Room -> RoomName
-name = unsafeField "name"
-
 storage :: Room -> Maybe Storage
 storage room = toMaybe $ unsafeField "storage" room
 
