@@ -16,13 +16,14 @@ import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, 
                     unsafeField,   unsafeOptField, instanceOf)
 import Screeps.FindType                 (FindType, LookType, Path)
 import Screeps.Id
+import Screeps.Names
+import Screeps.ReturnCode               (ReturnCode)
 import Screeps.RoomObject               (Room, class RoomObject)
-import Screeps.RoomPosition.Type        (RoomPosition, x, y)
+import Screeps.RoomPosition.Type        (RoomPosition, x, y, mkRoomPosition)
 import Screeps.Storage                  (Storage)
 import Screeps.Structure                (StructureType)
 import Screeps.Terminal                 (Terminal)
 import Screeps.Types                    (FilterFn, Mode, TargetPosition(..), Terrain)
-import Screeps.ReturnCode               (ReturnCode)
 import Unsafe.Coerce                    (unsafeCoerce)
 
 foreign import data AnyRoomObject :: *
@@ -202,4 +203,8 @@ lookForInRange r ty p range = lookForAtArea r ty (y p-range)
                                                  (x p-range)
                                                  (y p+range)
                                                  (x p+range)
+
+-- | Geographic centre of a room with a given name.
+geoCentre   :: RoomName -> RoomPosition
+geoCentre rn = mkRoomPosition 24 24 $ show rn
 

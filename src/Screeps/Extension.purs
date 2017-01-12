@@ -4,11 +4,14 @@ module Screeps.Extension where
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Eq
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe, fromMaybe)
+import Data.Ord
 import Data.Show
 
+import Screeps.Constants (extension_energy_capacity)
 import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
+import Screeps.IntMap as IntMap
 import Screeps.Refillable (class Refillable)
 import Screeps.RoomObject (class RoomObject)
 import Screeps.Structure
@@ -31,3 +34,10 @@ instance structureExtension    :: Structure  Extension where
 
 toExtension :: AnyStructure -> Maybe Extension
 toExtension = fromAnyStructure
+
+-- | Extension capacity on a given room control level.
+extensionCapacity :: Int -> Int
+extensionCapacity level | level > 8 = extensionCapacity 8
+extensionCapacity level             = 0
+                          `fromMaybe` IntMap.lookup level extension_energy_capacity
+
