@@ -11,7 +11,6 @@ import Data.Maybe                  (Maybe(Nothing))
 import Data.StrMap                 (StrMap)
 
 import Screeps.BodyPartType     (BodyPartType)
-import Screeps.Resource         (Resource, ResourceType, resource_energy)
 import Screeps.ConstructionSite (ConstructionSite)
 import Screeps.Controller       (Controller)
 import Screeps.Direction        (Direction)
@@ -20,7 +19,9 @@ import Screeps.FFI              (runThisEffFn0, runThisEffFn1, runThisEffFn2, ru
                                  selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
 import Screeps.FindType         (Path)
 import Screeps.Mineral          (Mineral)
+import Screeps.Names
 import Screeps.Refillable       (class Refillable)
+import Screeps.Resource         (Resource, ResourceType, resource_energy)
 import Screeps.ReturnCode       (ReturnCode)
 import Screeps.Room             (PathOptions)
 import Screeps.Source           (Source)
@@ -81,7 +82,7 @@ hitsMax = unsafeField "hitsMax"
 my :: Creep -> Boolean
 my = unsafeField "my"
 
-name :: Creep -> String
+name :: Creep -> CreepName
 name = unsafeField "name"
 
 owner :: Creep -> { username :: String }

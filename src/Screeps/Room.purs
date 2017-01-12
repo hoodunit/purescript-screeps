@@ -85,7 +85,7 @@ memory = unsafeField "memory"
 mode :: Room -> Mode
 mode = unsafeField "mode"
 
-name :: Room -> String
+name :: Room -> RoomName
 name = unsafeField "name"
 
 storage :: Room -> Maybe Storage
@@ -206,5 +206,5 @@ lookForInRange r ty p range = lookForAtArea r ty (y p-range)
 
 -- | Geographic centre of a room with a given name.
 geoCentre   :: RoomName -> RoomPosition
-geoCentre rn = mkRoomPosition 24 24 $ show rn
+geoCentre rn = mkRoomPosition 24 24 rn
 

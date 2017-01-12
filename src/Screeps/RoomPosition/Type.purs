@@ -14,12 +14,13 @@ import Data.Monoid         ((<>))
 import Data.Show           (class Show, show)
 
 import Screeps.FFI
+import Screeps.Names
 
 foreign import data RoomPosition :: *
 
-foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
+foreign import mkRoomPosition :: Int -> Int -> RoomName -> RoomPosition
 
-roomName :: RoomPosition -> String
+roomName :: RoomPosition -> RoomName
 roomName = unsafeField "roomName"
 
 x :: RoomPosition -> Int
@@ -29,9 +30,9 @@ y :: RoomPosition -> Int
 y = unsafeField "y"
 
 instance showRoomPosition :: Show RoomPosition where
-  show pos = show (x pos) <> "," <> show (y pos) <> ":" <> roomName pos
+  show pos = show (x pos) <> "," <> show (y pos) <> ":" <> show (roomName pos)
 
-instance eqRomPosition :: Eq RoomPosition where
+instance eqRoomPosition :: Eq RoomPosition where
   eq a b = x        a == x        b
         && y        a == y        b
         && roomName a == roomName b
