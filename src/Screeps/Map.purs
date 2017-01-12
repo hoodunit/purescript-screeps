@@ -3,20 +3,21 @@ module Screeps.Map where
 
 import Prelude
 
+import Control.Monad.Eff.Unsafe (unsafePerformEff)
 import Data.Array   as Array
-import Data.Int               (fromString)
+import Data.Int                 (fromString)
 import Data.Maybe
 import Data.StrMap  as StrMap
 import Data.Tuple
 
 import Screeps.Direction
-import Screeps.FFI            (toMaybe, runThisFn1, runThisFn2, runThisFn3)
-import Screeps.FindType       (FindType)
+import Screeps.FFI              (toMaybe, runThisFn1, runThisFn2, runThisFn3)
+import Screeps.FindType         (FindType)
 import Screeps.Game as Game
 import Screeps.Names
-import Screeps.ReturnCode     (ReturnCode)
-import Screeps.RoomObject     (Room, class RoomObject)
-import Screeps.Types          (TargetPosition(..), Terrain)
+import Screeps.ReturnCode       (ReturnCode)
+import Screeps.RoomObject       (Room, class RoomObject)
+import Screeps.Types            (TargetPosition(..), Terrain)
 
 newtype DirMap a = DirMap (StrMap.StrMap a)
 
@@ -53,7 +54,7 @@ type ExitToRoom =
   , room :: RoomName }
 
 describeExits :: RoomName -> Maybe ExitsInfo
-describeExits name = toMaybe $ runThisFn2 "describeExits" Game.map name
+describeExits name = toMaybe $ runThisFn1 "describeExits" (unsafePerformEff Game.map) name
 
 -- TODO: options
 findExit  :: Room -> Room -> ReturnCode
