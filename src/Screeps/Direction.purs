@@ -24,7 +24,7 @@ instance eqDirection :: Eq Direction where eq = gEq
 instance showDirection :: Show Direction
   where
     show d | d==top          = "top"
-    show d | d==top          = "bottom"
+    show d | d==bottom       = "bottom"
     show d | d==left         = "left"
     show d | d==right        = "right"
     show d | d==top_left     = "top_left"
