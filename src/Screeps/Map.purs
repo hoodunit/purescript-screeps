@@ -4,11 +4,10 @@ module Screeps.Map where
 import Prelude
 
 import Data.Array   as Array
-import Data.Functor           ((<$>))
 import Data.Int               (fromString)
 import Data.Maybe
-import Data.Show              (show)
 import Data.StrMap  as StrMap
+import Data.Tuple
 
 import Screeps.Direction
 import Screeps.FFI            (toMaybe, runThisFn1, runThisFn2, runThisFn3)
@@ -25,6 +24,13 @@ keys           :: forall a.
                   DirMap a
                -> Array Direction
 keys (DirMap m) = Array.catMaybes ((map Direction <<< fromString) <$> StrMap.keys m)
+
+toArray           :: forall                 a.
+                     DirMap                 a
+                  -> Array (Tuple Direction a)
+toArray (DirMap m) = Array.catMaybes (parseDir <$> StrMap.toUnfoldable m)
+  where
+    parseDir (Tuple k v) = Tuple <$> (Direction <$> fromString k) <*> pure v
 
 lookup             :: forall a.
                       Direction
@@ -72,5 +78,5 @@ getTerrainAt (TargetPt x y) roomName = runThisFn3 "getTerrainAt" Game.map x y ro
 getTerrainAt (TargetPos pos) roomName = runThisFn2 "getTerrainAt" Game.map pos roomName
 getTerrainAt (TargetObj obj) roomName = runThisFn2 "getTerrainAt" Game.map obj roomName
 
-isRoomProtected :: RoomName -> Boolean
-isRoomProtected roomName = runThisFn1 "isRoomProtected" Game.map roomName
+isRoomAvailable :: RoomName -> Boolean
+isRoomAvailable roomName = runThisFn1 "isRoomProtected" Game.map roomName
