@@ -79,4 +79,4 @@ getTerrainAt (TargetPos pos) roomName = runThisFn2 "getTerrainAt" Game.map pos r
 getTerrainAt (TargetObj obj) roomName = runThisFn2 "getTerrainAt" Game.map obj roomName
 
 isRoomAvailable :: RoomName -> Boolean
-isRoomAvailable roomName = runThisFn1 "isRoomProtected" Game.map roomName
+isRoomAvailable roomName = runThisFn1 "isRoomAvailable" Game.map roomName

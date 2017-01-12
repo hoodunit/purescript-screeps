@@ -2,14 +2,10 @@ module Screeps.Path where
 
 import Control.Monad.Eff
 import Data.Argonaut.Core (Json)
-import Data.Array
-import Data.Generic
 import Data.Show
 import Data.Unit
 
 import Screeps.FFI
-import Screeps.Path
-import Screeps.RoomObject
 import Screeps.RoomPosition.Type
 
 -- * Tile cost
@@ -29,11 +25,6 @@ newtype PathFinderResult = PathFinderResult {
   , cost       :: Int
   , incomplete :: Boolean
   }
-
---derive instance genericPathFinderTarget :: Generic PathFinderTarget
---derive instance genericPathFinderResult :: Generic PathFinderResult
---derive instance showPathFinderTarget :: Show PathFinderTarget --where show = gShow
---derive instance showPathFinderResult :: Show PathFinderResult --where show = gShow
 
 newtype PathFinderTarget = PathFinderTarget {
     pos   :: RoomPosition
@@ -72,7 +63,8 @@ foreign import newCostMatrix :: forall              e.
 
 foreign import infinity :: Number
 
-defaultPathFinderOpts = PathFinderOpts {
+defaultPathFinderOpts :: forall a. PathFinderOpts a
+defaultPathFinderOpts  = PathFinderOpts {
       roomCallback:    allDefaultCosts
     , plainCost:       1
     , swampCost:       5

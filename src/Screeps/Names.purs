@@ -10,6 +10,7 @@ import Data.Show (class Show)
 -- | RoomName allows to enumerate rooms even if they are not active.
 newtype RoomName = RoomName String
 
+asRoomName :: String -> RoomName
 asRoomName = RoomName
 
 derive newtype instance eqRoomName   :: Eq   RoomName
@@ -20,6 +21,7 @@ instance              decodeRoomName :: DecodeJson RoomName where decodeJson = m
 -- | CreepName allows to enumerate creeps that are yet dead
 newtype CreepName = CreepName String
 
+asCreepName :: String -> CreepName
 asCreepName = CreepName
 
 derive newtype instance eqCreepName   :: Eq   CreepName
