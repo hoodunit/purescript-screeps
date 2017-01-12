@@ -53,7 +53,7 @@ type ExitToRoom =
   , room :: RoomName }
 
 describeExits :: RoomName -> Maybe ExitsInfo
-describeExits name = toMaybe $ runThisFn1 "describeExits" Game.map name
+describeExits name = toMaybe $ runThisFn2 "describeExits" Game.map name
 
 -- TODO: options
 findExit  :: Room -> Room -> ReturnCode
