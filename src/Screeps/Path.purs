@@ -7,6 +7,7 @@ import Data.Unit
 
 import Screeps.FFI
 import Screeps.RoomPosition.Type
+import Screeps.Names (RoomName)
 
 -- * Tile cost
 type TileCost = Int
@@ -74,7 +75,7 @@ defaultPathFinderOpts  = PathFinderOpts {
     , heuristicWeight: 1.2
     }
 
-type RoomCallback e = String -- ^ Room name
+type RoomCallback e = RoomName -- ^ Room name
                    -> Eff (path :: PATH | e)
                            CostMatrix
 

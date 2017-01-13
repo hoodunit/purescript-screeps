@@ -16,14 +16,16 @@ cached :: forall a. Cache
        -> PF.RoomCallback (ref :: REF | a) -- (String -> Eff ( ref :: REF | a ) CostMatrix )
        -> PF.RoomCallback (ref :: REF | a) -- String -> Eff ( ref :: REF | a ) CostMatrix
 cached (Cache cache) act roomName = do
-    r <- StrMap.lookup roomName <$> readRef cache
+    r <- StrMap.lookup key <$> readRef cache
     case r of
          Nothing -> do
            v <- act roomName
-           modifyRef cache $ StrMap.insert roomName v
+           modifyRef cache $ StrMap.insert key v
            pure v
          Just   v ->
            pure v
+  where
+    key = show roomName
 
 newCache :: forall e. Eff ( ref :: REF | e ) Cache
 newCache =  Cache <$> newRef StrMap.empty
