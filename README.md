@@ -32,7 +32,7 @@ To deploy your code you need to expose it to Screeps from the exported CommonJS 
 Module documentation is [here](https://github.com/mgajda/purescript-screeps/tree/master/docs).
 
 In most cases you will import `Screeps`, which contains all of the major types, and then one or more of the other modules. Most modules correspond directly to a Screeps API object.
-Methods that repeat between objects have gained their own classes that have different names from original Screeps classes: `Refillable`, `Owned`, `Decays`, and `Progress`.
+Methods that repeat between objects have gained their own classes that have different names from original Screeps classes: `Refillable`, `Deposit`, `Owned`, `Decays`, and `Progress`.
 Additionally there are generic `AnyStructure`, `AnyRefillable` objects that can be used to target any object of specific class, and keep them in a single list.
 
 ## Status

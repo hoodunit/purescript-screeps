@@ -53,7 +53,7 @@ inRange :: RoomPosition -> Int -> PathFinderTarget
 #### `usePathFinder`
 
 ``` purescript
-usePathFinder :: forall e. Boolean -> Eff (path :: PATH | e) Unit
+usePathFinder :: forall e. Eff (path :: PATH | e) Unit
 ```
 
 #### `CostMatrix`
@@ -89,7 +89,7 @@ defaultPathFinderOpts :: forall a. PathFinderOpts a
 #### `RoomCallback`
 
 ``` purescript
-type RoomCallback e = String -> Eff (path :: PATH | e) CostMatrix
+type RoomCallback e = RoomName -> Eff (path :: PATH | e) CostMatrix
 ```
 
 #### `allDefaultCosts`
