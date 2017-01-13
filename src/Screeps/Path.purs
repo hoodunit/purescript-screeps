@@ -47,8 +47,7 @@ inRange aPos range = PathFinderTarget {
                      }
 
 foreign import usePathFinder :: forall              e.
-                                Boolean
-                             -> Eff (path :: PATH | e) Unit
+                                Eff (path :: PATH | e) Unit
 
 foreign import data CostMatrix :: *
 
