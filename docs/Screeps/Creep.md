@@ -83,7 +83,7 @@ my :: Creep -> Boolean
 #### `name`
 
 ``` purescript
-name :: Creep -> String
+name :: Creep -> CreepName
 ```
 
 #### `owner`

@@ -39,6 +39,12 @@ getObjectById :: forall a. HasId a => Id a -> Either String a
 
 Get the object from an Id, if it passes validation.
 
+#### `unsafeGetObjectById`
+
+``` purescript
+unsafeGetObjectById :: forall a. Id a -> Maybe a
+```
+
 #### `eqById`
 
 ``` purescript

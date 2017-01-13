@@ -47,13 +47,13 @@ flags :: forall e. Eff (tick :: TICK | e) (StrMap Flag)
 #### `gcl`
 
 ``` purescript
-gcl :: forall e. Eff (tick :: TICK | e) Gcl
+gcl :: Gcl
 ```
 
 #### `map`
 
 ``` purescript
-map :: forall e. Eff (tick :: TICK | e) WorldMap
+map :: WorldMap
 ```
 
 #### `market`

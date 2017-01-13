@@ -2,6 +2,24 @@
 
 Corresponds to the Screeps API [Room](http://support.screeps.com/hc/en-us/articles/203079011-Room)
 
+#### `AnyRoomObject`
+
+``` purescript
+data AnyRoomObject :: *
+```
+
+##### Instances
+``` purescript
+RoomObject AnyRoomObject
+HasId AnyRoomObject
+```
+
+#### `fromAnyRoomObject`
+
+``` purescript
+fromAnyRoomObject :: forall ro. HasId ro => AnyRoomObject -> Maybe ro
+```
+
 #### `RoomGlobal`
 
 ``` purescript
@@ -54,12 +72,6 @@ memory :: forall props. Room -> {  | props }
 
 ``` purescript
 mode :: Room -> Mode
-```
-
-#### `name`
-
-``` purescript
-name :: Room -> String
 ```
 
 #### `storage`
@@ -202,5 +214,13 @@ lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Eit
 ``` purescript
 lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
 ```
+
+#### `geoCentre`
+
+``` purescript
+geoCentre :: RoomName -> RoomPosition
+```
+
+Geographic centre of a room with a given name.
 
 

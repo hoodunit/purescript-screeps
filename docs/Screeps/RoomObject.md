@@ -8,6 +8,13 @@ Corresponds to the Screeps API [RoomObject](http://support.screeps.com/hc/en-us/
 data Room :: *
 ```
 
+##### Instances
+``` purescript
+Show Room
+EncodeJson Room
+DecodeJson Room
+```
+
 #### `RoomObject`
 
 ``` purescript
@@ -19,6 +26,18 @@ Any `RoomObject` with a location, and room containing it.
 ##### Instances
 ``` purescript
 RoomObject AnyRoomObject
+```
+
+#### `name`
+
+``` purescript
+name :: Room -> RoomName
+```
+
+#### `lookupRoom`
+
+``` purescript
+lookupRoom :: forall e. RoomName -> Eff e (NullOrUndefined Room)
 ```
 
 #### `AnyRoomObject`

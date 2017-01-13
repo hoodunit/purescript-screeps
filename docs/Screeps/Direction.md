@@ -14,6 +14,8 @@ newtype Direction
 Generic Direction
 Eq Direction
 Show Direction
+EncodeJson Direction
+DecodeJson Direction
 ```
 
 #### `top`

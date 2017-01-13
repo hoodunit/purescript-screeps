@@ -17,13 +17,13 @@ DecodeJson RoomPosition
 #### `mkRoomPosition`
 
 ``` purescript
-mkRoomPosition :: Int -> Int -> String -> RoomPosition
+mkRoomPosition :: Int -> Int -> RoomName -> RoomPosition
 ```
 
 #### `roomName`
 
 ``` purescript
-roomName :: RoomPosition -> String
+roomName :: RoomPosition -> RoomName
 ```
 
 #### `x`

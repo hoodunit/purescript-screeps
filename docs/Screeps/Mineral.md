@@ -15,6 +15,7 @@ Regenerates Mineral
 HasId Mineral
 EncodeJson Mineral
 DecodeJson Mineral
+Show Mineral
 ```
 
 #### `mineralAmount`

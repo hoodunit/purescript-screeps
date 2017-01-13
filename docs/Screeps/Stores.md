@@ -45,6 +45,12 @@ Stores AnyStore
 toAnyStore :: forall s. Structure s => s -> Maybe AnyStore
 ```
 
+#### `asAnyStore`
+
+``` purescript
+asAnyStore :: forall s. Stores s => s -> AnyStore
+```
+
 #### `store`
 
 ``` purescript

@@ -28,4 +28,12 @@ Structure Extension
 toExtension :: AnyStructure -> Maybe Extension
 ```
 
+#### `extensionCapacity`
+
+``` purescript
+extensionCapacity :: Int -> Int
+```
+
+Extension capacity on a given room control level.
+
 

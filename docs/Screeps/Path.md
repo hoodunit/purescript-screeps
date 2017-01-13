@@ -83,7 +83,7 @@ infinity :: Number
 #### `defaultPathFinderOpts`
 
 ``` purescript
-defaultPathFinderOpts :: forall t9786. PathFinderOpts t9786
+defaultPathFinderOpts :: forall a. PathFinderOpts a
 ```
 
 #### `RoomCallback`
