@@ -1,5 +1,7 @@
 exports.usePathFinder=function(enabled) {
-    return PathFinder.use(enabled);
+    return function () {
+        return PathFinder.use=enabled;
+    }
 }
 exports.deserialize=function(json) {
     return PathFinder.CostMatrix.deserialize(json);
