@@ -7,6 +7,7 @@ import Data.Eq              (class Eq,         (==))
 import Data.Generic         (class Generic,    gEq)
 import Data.Monoid          ((<>))
 import Data.Show            (class Show,       show)
+import Data.StrMap
 
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)

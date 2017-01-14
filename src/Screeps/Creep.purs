@@ -25,6 +25,7 @@ import Screeps.Resource         (Resource, ResourceType, resource_energy)
 import Screeps.ReturnCode       (ReturnCode)
 import Screeps.Room             (PathOptions)
 import Screeps.Source           (Source)
+import Screeps.Stores
 import Screeps.Structure        (class Structure)
 import Screeps.Types            (Creep, TargetPosition(..))
 
@@ -59,7 +60,7 @@ moveOpts =
 body :: Creep -> Array BodyPart
 body creep = unsafeField "body" creep
 
-carry :: Creep -> CreepCargo
+carry :: Creep -> Store
 carry = unsafeField "carry"
 
 amtCarrying :: Creep -> ResourceType -> Int

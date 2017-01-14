@@ -4,9 +4,11 @@ import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Eq             (class Eq)
 import Data.Function       (($))
+import Data.Functor        ((<$>))
 import Data.HeytingAlgebra ((||))
 import Data.Maybe          (Maybe(..))
 import Data.Show
+import Data.StrMap     as StrMap
 
 import Unsafe.Coerce       (unsafeCoerce)
 
@@ -16,9 +18,6 @@ import Screeps.Resource    (ResourceType(ResourceType))
 import Screeps.RoomObject  (class RoomObject)
 import Screeps.Structure   (class Structure, class Structural, showStructure, StructureType(..))
 import Screeps.Types       (class Owned)
-
--- | Or Store == StrMap Int?
-foreign import data Store :: *
 
 class Stores a
 
@@ -64,4 +63,11 @@ storeGet s (ResourceType res) = unsafeField res $ store s
 
 storeCapacity :: forall a. Stores a => a -> Int
 storeCapacity  = unsafeField "storeCapacity"
+
+newtype Store = Store (StrMap.StrMap Int)
+derive newtype instance showCarry :: Show Store
+
+heldResources (Store c)                  = ResourceType <$> StrMap.keys c
+
+amountHeld    (Store c) (ResourceType r) = StrMap.lookup r c
 
