@@ -13,7 +13,8 @@ import Data.Function (($))
 import Data.Maybe
 import Data.Monoid
 import Data.Show
-import Data.StrMap as StrMap
+--import Data.StrMap as StrMap
+import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Id
 import Screeps.FFI (unsafeField, toMaybe, NullOrUndefined, instanceOf)
@@ -58,3 +59,8 @@ room = unsafeField "room"
 
 pos :: forall a. RoomObject a => a -> RoomPosition
 pos = unsafeField "pos"
+
+asAnyRoomObject :: forall     ro.
+                   RoomObject ro
+                => ro -> AnyRoomObject
+asAnyRoomObject  = unsafeCoerce
