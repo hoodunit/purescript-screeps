@@ -15,7 +15,8 @@ import Data.Monoid
 import Data.Show
 import Data.StrMap as StrMap
 
-import Screeps.FFI (unsafeField, toMaybe, NullOrUndefined)
+import Screeps.Id
+import Screeps.FFI (unsafeField, toMaybe, NullOrUndefined, instanceOf)
 import Screeps.Names
 import Screeps.RoomPosition.Type (RoomPosition)
 
@@ -37,16 +38,20 @@ foreign import lookupRoom :: forall e. RoomName -> Eff e (NullOrUndefined Room)
 
 instance decodeJson :: DecodeJson Room where
   decodeJson           json = do
-    name <- decodeJson json
-    case unsafePerformEff $ try $ map toMaybe $ lookupRoom name of
-         Left   err      -> Left  $ "Cannot access the room: " <> show name
+    roomNam <- decodeJson json
+    case unsafePerformEff $ try $ map toMaybe $ lookupRoom roomNam of
+         Left   err      -> Left  $ "Cannot access the room: " <> show roomNam
                                  <> " because of: "            <> show err
-         Right (Nothing) -> Left  $ "Cannot access room: "     <> show name
+         Right (Nothing) -> Left  $ "Cannot access room: "     <> show roomNam
          Right (Just r ) -> Right   r
 
 foreign import data AnyRoomObject :: *
 
-instance anyRoomObject :: RoomObject AnyRoomObject
+instance anyRoomObject       :: RoomObject AnyRoomObject
+instance anyRoomObjectHasId  :: HasId      AnyRoomObject where
+  validate = instanceOf "RoomObject"
+instance encodeAnyRoomObject :: EncodeJson AnyRoomObject where encodeJson = encodeJsonWithId
+instance decodeAnyRoomObject :: DecodeJson AnyRoomObject where decodeJson = decodeJsonWithId
 
 room :: forall a. RoomObject a => a -> Room
 room = unsafeField "room"

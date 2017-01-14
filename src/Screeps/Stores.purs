@@ -67,7 +67,9 @@ storeCapacity  = unsafeField "storeCapacity"
 newtype Store = Store (StrMap.StrMap Int)
 derive newtype instance showCarry :: Show Store
 
+heldResources :: Store -> Array ResourceType
 heldResources (Store c)                  = ResourceType <$> StrMap.keys c
 
+amountHeld :: Store -> ResourceType -> Maybe Int
 amountHeld    (Store c) (ResourceType r) = StrMap.lookup r c
 
