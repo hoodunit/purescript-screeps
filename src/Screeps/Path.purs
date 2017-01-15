@@ -39,10 +39,10 @@ target aPos = PathFinderTarget {
               , range: 0
               }
 
-inRange           :: RoomPosition
-                  -> Int
+inRange           :: Int
+                  -> RoomPosition
                   -> PathFinderTarget
-inRange aPos range = PathFinderTarget {
+inRange range aPos = PathFinderTarget {
                        pos  : aPos
                      , range: range
                      }
