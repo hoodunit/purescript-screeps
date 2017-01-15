@@ -42,9 +42,6 @@ fromAnyRoomObject ro =
   where
     o = unsafeCoerce ro
 
-foreign import data RoomGlobal :: *
-foreign import   getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
-
 -- TODO: costCallback option
 type PathOptions o =
   { ignoreCreeps                 :: Maybe  Boolean
@@ -91,11 +88,13 @@ storage room = toMaybe $ unsafeField "storage" room
 terminal :: Room -> Maybe Terminal
 terminal room = toMaybe $ unsafeField "terminal" room
 
-serializePath :: RoomGlobal -> Path -> String
-serializePath = runThisFn1 "serializePath"
+foreign import roomGlobal :: {}
 
-deserializePath :: RoomGlobal -> String -> Path
-deserializePath = runThisFn1 "deserializePath"
+serializePath :: Path -> String
+serializePath = runThisFn1 "serializePath" roomGlobal
+
+deserializePath :: String -> Path
+deserializePath = runThisFn1 "deserializePath" roomGlobal
 
 createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
 createConstructionSite room (TargetPt x' y') strucType = runThisEffFn3 "createConstructionSite" room x' y' strucType
