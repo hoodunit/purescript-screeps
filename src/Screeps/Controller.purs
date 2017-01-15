@@ -37,6 +37,18 @@ level = unsafeField "level"
 reservation :: Controller -> Int
 reservation = unsafeField "reservation"
 
+activateSafeMode :: forall e. Controller -> Eff (cmd :: CMD | e) ReturnCode
+activateSafeMode  = runThisEffFn0 "activateSafeMode"
+
+safeMode :: Controller -> Int
+safeMode  = unsafeField "safeMode"
+
+safeModeAvailable :: Controller -> Int
+safeModeAvailable  = unsafeField "safeModeAvailable"
+
+safeModeCooldown :: Controller -> Int
+safeModeCooldown  = unsafeField "safeModeCooldown"
+
 ticksToDowngrade :: Controller -> Int
 ticksToDowngrade = unsafeField "ticksToDowngrade"
 

@@ -188,6 +188,7 @@ lookForAt room lookType (TargetPt  x' y') = runThisFn3 "lookForAt" room lookType
 lookForAt room lookType (TargetPos pos  ) = runThisFn2 "lookForAt" room lookType pos
 lookForAt room lookType (TargetObj obj  ) = runThisFn2 "lookForAt" room lookType obj
 
+-- TODO: Make obsolete, since this function is buggy
 -- TODO: Make it nicer, by selecting x/y from two positions.
 lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
 lookForAtArea r ty top left bot right = decodeLookResults
