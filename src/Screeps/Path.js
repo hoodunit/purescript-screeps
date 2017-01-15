@@ -2,7 +2,9 @@ exports.usePathFinder=function() {
     return PathFinder.use(true);
 }
 exports.deserialize=function(json) {
-    return PathFinder.CostMatrix.deserialize(json);
+    return function () {
+        return PathFinder.CostMatrix.deserialize(json);
+    }
 }
 exports.search=function(from) {
     return     function(to  ) {

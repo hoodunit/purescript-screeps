@@ -1,7 +1,13 @@
 module Screeps.Path where
 
 import Control.Monad.Eff
+import Control.Monad.Eff.Unsafe
+import Control.Monad.Eff.Exception
 import Data.Argonaut.Core (Json)
+import Data.Argonaut.Encode.Class
+import Data.Argonaut.Decode.Class
+import Data.Either
+import Data.Function (($))
 import Data.Show
 import Data.Unit
 
@@ -118,12 +124,20 @@ newtype SerializedCostMatrix = SerializedCostMatrix Json
 
 derive newtype instance showSerializedCostMatrix :: Show SerializedCostMatrix
 
-serialize :: forall              e.
-             CostMatrix
-          -> Eff (path :: PATH | e) SerializedCostMatrix
-serialize  = runThisEffFn0 "serialize"
+serialize :: CostMatrix
+          -> SerializedCostMatrix
+serialize  = runThisFn0 "serialize"
 
-foreign import deserialize :: forall              e.
-                              SerializedCostMatrix
-                           -> Eff (path :: PATH | e) CostMatrix
+foreign import deserialize :: forall                  e. SerializedCostMatrix
+                           -> Eff (err :: EXCEPTION | e)           CostMatrix
+
+instance encodeCostMatrix :: EncodeJson CostMatrix where
+  encodeJson cm = case serialize cm of
+                       SerializedCostMatrix scm -> scm
+
+instance decodeCostMatrix :: DecodeJson CostMatrix where
+  decodeJson json = do
+    case unsafePerformEff $ try $ deserialize $ SerializedCostMatrix json of
+         Left  err -> Left  $ show err
+         Right r   -> Right   r
 
