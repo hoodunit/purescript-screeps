@@ -9,6 +9,7 @@ import Data.Maybe (Maybe)
 import Data.Show
 
 import Screeps.Decays  (class Decays)
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
@@ -30,6 +31,7 @@ instance structureRampart   :: Structure  Rampart where
   _structureType _ = structure_rampart
 instance eqRampart          :: Eq         Rampart where eq   = eqById
 instance showRampart        :: Show       Rampart where show = showStructure
+instance destructibleRampart :: Destructible Rampart
 
 isPublic :: Rampart -> Boolean
 isPublic = unsafeField "isPublic"

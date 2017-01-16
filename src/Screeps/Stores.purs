@@ -12,6 +12,7 @@ import Data.StrMap     as StrMap
 
 import Unsafe.Coerce       (unsafeCoerce)
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Id          (class HasId, eqById, validate, encodeJsonWithId, decodeJsonWithId)
 import Screeps.FFI         (unsafeField, instanceOf)
 import Screeps.Resource    (ResourceType(ResourceType))
@@ -38,6 +39,7 @@ instance anyStoreIsStructure  :: Structure  AnyStore where
   _structureType _ = StructureType "<unknown>"
 instance showAnyStore         :: Show       AnyStore where show       = showStructure
 instance anyStoreStores       :: Stores     AnyStore
+instance destructibleAnyStore :: Destructible AnyStore
 
 toAnyStore :: forall    s.
               Structure s

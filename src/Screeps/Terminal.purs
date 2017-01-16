@@ -8,6 +8,7 @@ import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show  (class Show, show)
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects    (CMD)
 import Screeps.FFI        (runThisEffFn3, runThisEffFn4, unsafeField, instanceOf)
 import Screeps.Id
@@ -32,6 +33,7 @@ instance terminalStores      :: Stores     Terminal
 instance structureTerminal   :: Structure  Terminal where
   _structureType _ = structure_terminal
 instance showTerminal        :: Show       Terminal where  show = showStructure
+instance destructibleTerminal :: Destructible Terminal
 
 send :: forall e. Terminal -> ResourceType -> Int -> String -> Eff ( cmd :: CMD | e) ReturnCode
 send term res amount destRoomName = runThisEffFn3 "send" term res amount destRoomName

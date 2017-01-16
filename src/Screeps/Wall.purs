@@ -7,6 +7,7 @@ import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show
 
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Structure
@@ -26,6 +27,7 @@ instance structureWall   :: Structure  Wall where
   _structureType _ = structure_wall
 instance eqWall          :: Eq         Wall where eq   = eqById
 instance showWall        :: Show       Wall where show = showStructure
+instance destructibleWall :: Destructible Wall
 
 ticksToLive :: Wall -> Int
 ticksToLive = unsafeField "ticksToLive"

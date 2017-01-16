@@ -9,6 +9,7 @@ import Data.Show            (class Show,       show)
 
 import Screeps.Constants  (link_cooldown)
 import Screeps.Coolsdown  (class Coolsdown)
+import Screeps.Destructible (class Destructible)
 import Screeps.Decays     (class Decays)
 import Screeps.Effects    (CMD)
 import Screeps.Id
@@ -34,6 +35,7 @@ instance structureLink   :: Structure  Link where
 instance encodeLink      :: EncodeJson Link where encodeJson = encodeJsonWithId
 instance decodeLink      :: DecodeJson Link where decodeJson = decodeJsonWithId
 instance showLink        :: Show       Link where show       = showStructure
+instance destructibleLink :: Destructible Link
 
 transferEnergy :: forall e. Link -> Link -> Eff (cmd :: CMD | e) ReturnCode
 transferEnergy = runThisEffFn1 "transferEnergy"

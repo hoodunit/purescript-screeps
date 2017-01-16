@@ -10,6 +10,7 @@ import Data.Show (class Show, show)
 
 import Screeps.Constants  (lab_cooldown)
 import Screeps.Coolsdown  (class Coolsdown)
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects    (CMD)
 import Screeps.FFI        (runThisEffFn1, runThisEffFn2, unsafeField, instanceOf)
 import Screeps.Refillable (class Refillable)
@@ -34,6 +35,7 @@ instance structureLab   :: Structure Lab where
 instance encodeLab      :: EncodeJson Lab where encodeJson = encodeJsonWithId
 instance decodeLab      :: DecodeJson Lab where decodeJson = decodeJsonWithId
 instance showLab        :: Show       Lab where show = showStructure
+instance destructibleLab :: Destructible Lab
 
 mineralAmount :: Lab -> Int
 mineralAmount = unsafeField "mineralAmount"

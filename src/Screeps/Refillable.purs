@@ -10,6 +10,7 @@ import Data.Ord                   ((<))
 import Data.Show
 import Unsafe.Coerce              (unsafeCoerce)
 
+import Screeps.Destructible       (class Destructible)
 import Screeps.FFI                (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.RoomObject         (class RoomObject)
@@ -39,6 +40,7 @@ instance eqRefillable              :: Eq         AnyRefillable where eq         
 instance refillableIsStructure     :: Structure  AnyRefillable where
   _structureType _ = StructureType "<refillable>"
 instance anyRefillable             :: Refillable AnyRefillable
+instance destructibleRefillable    :: Destructible AnyRefillable
 
 energy :: forall a. Refillable a => a -> Int
 energy = unsafeField "energy"

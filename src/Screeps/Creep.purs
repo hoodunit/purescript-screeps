@@ -74,20 +74,8 @@ carryCapacity = unsafeField "carryCapacity"
 fatigue :: Creep -> Int
 fatigue = unsafeField "fatigue"
 
-hits :: Creep -> Int
-hits = unsafeField "hits"
-
-hitsMax :: Creep -> Int
-hitsMax = unsafeField "hitsMax"
-
-my :: Creep -> Boolean
-my = unsafeField "my"
-
 name :: Creep -> CreepName
 name = unsafeField "name"
-
-owner :: Creep -> { username :: String }
-owner = unsafeField "owner"
 
 saying :: Creep -> Maybe String
 saying c = toMaybe $ unsafeField "saying" c

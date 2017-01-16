@@ -9,6 +9,7 @@ import Data.Maybe (Maybe)
 import Data.Show
 
 import Screeps.Effects (CMD)
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI (runThisEffFn0, unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.Progress (class Progress)
@@ -30,6 +31,7 @@ instance showController        :: Show       Controller where show = showStructu
 instance progressController    :: Progress   Controller
 instance structureController   :: Structure  Controller where
   _structureType _ = structure_controller
+instance destructibleController :: Destructible Controller
 
 level :: Controller -> Int
 level = unsafeField "level"

@@ -10,6 +10,7 @@ import Data.Show
 
 import Screeps.Constants (nuker_cooldown)
 import Screeps.Coolsdown (class Coolsdown)
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
@@ -35,6 +36,7 @@ instance structureNuker        ::      Structure Nuker where
   _structureType _ = structure_nuker
 instance eqNuker          :: Eq         Nuker where eq   = eqById
 instance showNuker        :: Show       Nuker where show = showStructure
+instance destructibleNuker :: Destructible Nuker
 
 ghodium :: Nuker -> Int
 ghodium = unsafeField "ghodium"

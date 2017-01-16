@@ -9,6 +9,7 @@ import Data.Ord
 import Data.Show
 
 import Screeps.Constants (extension_energy_capacity)
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.IntMap as IntMap
@@ -31,6 +32,7 @@ instance eqExtension           :: Eq         Extension where eq   = eqById
 instance showExtension         :: Show       Extension where show = showStructure
 instance structureExtension    :: Structure  Extension where
   _structureType _ = structure_extension
+instance destructibleExtension :: Destructible Extension
 
 toExtension :: AnyStructure -> Maybe Extension
 toExtension = fromAnyStructure

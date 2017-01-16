@@ -8,6 +8,7 @@ import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, runThisEffFn2, instanceOf)
 import Screeps.Id
@@ -31,6 +32,7 @@ instance structureTower   :: Structure  Tower where
   _structureType _ = structure_tower
 instance eqTower          :: Eq         Tower where eq   = eqById
 instance showTower        :: Show       Tower where show = showStructure
+instance destructibleTower :: Destructible Tower
 
 attack :: forall e. Tower -> Creep -> Eff ( cmd :: CMD | e) ReturnCode
 attack = runThisEffFn1 "attack"

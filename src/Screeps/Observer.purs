@@ -8,6 +8,7 @@ import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn1, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
@@ -28,6 +29,7 @@ instance structureObserver   :: Structure  Observer where
   _structureType _ = structure_observer
 instance eqObserver          :: Eq         Observer where eq   = eqById
 instance showObserver        :: Show       Observer where show = showStructure
+instance destructibleObserver :: Destructible Observer
 
 observeRoom :: forall e. Observer -> String -> Eff (cmd :: CMD | e) ReturnCode
 observeRoom obs roomName = runThisEffFn1 "observeRoom" obs roomName

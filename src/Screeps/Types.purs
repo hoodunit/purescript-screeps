@@ -6,6 +6,7 @@ import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Generic (class Generic, gEq, gShow)
 
+import Screeps.Destructible     (class Destructible)
 import Screeps.FFI (instanceOf, unsafeField)
 import Screeps.Id  (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.RoomObject
@@ -16,14 +17,15 @@ foreign import data WorldMap :: *
 class Owned          a -- my, owned
 
 foreign import data Creep  :: *
-instance creepIsRoomObject :: RoomObject Creep
-instance creepIsOwned      :: Owned      Creep
-instance creepEq           :: Eq         Creep where eq = eqById
-instance showCreepEq       :: Show       Creep where show c = unsafeField "name" c <> "@" <> show (pos c)
-instance creepHasId        :: HasId      Creep where
+instance creepIsRoomObject :: RoomObject   Creep
+instance creepIsOwned      :: Owned        Creep
+instance creepEq           :: Eq           Creep where eq = eqById
+instance showCreepEq       :: Show         Creep where show c = unsafeField "name" c <> "@" <> show (pos c)
+instance creepHasId        :: HasId        Creep where
   validate = instanceOf "Creep"
-instance encodeCreep       :: EncodeJson Creep where encodeJson = encodeJsonWithId
-instance decodeCreep       :: DecodeJson Creep where decodeJson = decodeJsonWithId
+instance encodeCreep       :: EncodeJson   Creep where encodeJson = encodeJsonWithId
+instance decodeCreep       :: DecodeJson   Creep where decodeJson = decodeJsonWithId
+instance destructibleCreep :: Destructible Creep
 
 newtype TerrainMask = TerrainMask Int
 derive instance genericTerrainMask :: Generic TerrainMask

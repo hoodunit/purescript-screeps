@@ -10,6 +10,7 @@ import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.BodyPartType (BodyPartType)
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
 import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
                    , unsafeField, instanceOf)
@@ -39,6 +40,7 @@ instance refillableSpawn  :: Refillable Spawn
 instance structureSpawn   :: Structure  Spawn where
   _structureType _ = structure_spawn
 instance showSpawn :: Show Spawn              where show = showStructure
+instance destructibleSpawn :: Destructible Spawn
 
 memory :: forall props. Spawn -> { | props }
 memory = unsafeField "memory"

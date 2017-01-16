@@ -7,6 +7,7 @@ import Data.Eq
 import Data.Maybe           (Maybe)
 import Data.Show
 
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.RoomObject (class RoomObject)
@@ -28,6 +29,7 @@ instance showStorage        :: Show       Storage where show = showStructure
 instance eqStorage          :: Eq         Storage where eq   = eqById
 instance structureStorage   :: Structure  Storage where
   _structureType _ = structure_storage
+instance destructibleStorage :: Destructible Storage
 
 toStorage :: AnyStructure -> Maybe Storage
 toStorage = fromAnyStructure

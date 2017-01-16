@@ -10,6 +10,7 @@ import Data.Maybe    (Maybe(Just, Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 import Type.Proxy
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects    (CMD)
 import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
 import Screeps.ReturnCode (ReturnCode)
@@ -68,12 +69,7 @@ instance anyStructureIsStructural :: Structural AnyStructure
 instance anyStructure             :: Structure  AnyStructure where
   _structureType _ = StructureType "<unknown>"
 instance showAnyStructure         :: Show       AnyStructure where show       = showStructure
-
-hits :: forall a. Structure a => a -> Int
-hits = unsafeField "hits"
-
-hitsMax :: forall a. Structure a => a -> Int
-hitsMax = unsafeField "hitsMax"
+instance destructibleAnyStructure :: Destructible AnyStructure
 
 structureType :: forall a. Structural a => a -> StructureType
 structureType = unsafeField "structureType"

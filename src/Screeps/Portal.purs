@@ -8,6 +8,7 @@ import Data.Maybe (Maybe)
 import Data.Show
 
 import Screeps.Decays (class Decays)
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.RoomObject (class RoomObject)
@@ -28,6 +29,7 @@ instance structurePortal   :: Structure  Portal where
   _structureType _ = structure_portal
 instance eqPortal          :: Eq         Portal where eq   = eqById
 instance showPortal        :: Show       Portal where show = showStructure
+instance destructiblePortal :: Destructible Portal
 
 destination :: Portal -> RoomPosition
 destination = unsafeField "destination"

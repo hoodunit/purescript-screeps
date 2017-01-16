@@ -8,6 +8,7 @@ import Data.Maybe (Maybe)
 import Data.Show
 
 import Screeps.Decays    (class Decays)
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI       (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Structure
@@ -27,6 +28,7 @@ instance structurePowerBank    :: Structure  PowerBank where
 instance decaysPowerBank       :: Decays     PowerBank
 instance eqPowerBank           :: Eq         PowerBank where eq   = eqById
 instance showPowerBank         :: Show       PowerBank where show = showStructure
+instance destructiblePowerBank :: Destructible PowerBank
 
 power :: PowerBank -> Int
 power  = unsafeField "power"

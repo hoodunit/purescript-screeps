@@ -16,6 +16,7 @@ import Data.Show
 --import Data.StrMap as StrMap
 import Unsafe.Coerce (unsafeCoerce)
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Id
 import Screeps.FFI (unsafeField, toMaybe, NullOrUndefined, instanceOf)
 import Screeps.Names

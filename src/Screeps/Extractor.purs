@@ -7,6 +7,7 @@ import Data.Eq
 import Data.Maybe (Maybe)
 import Data.Show
 
+import Screeps.Destructible (class Destructible)
 import Screeps.FFI (instanceOf)
 import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
 import Screeps.RoomObject (class RoomObject)
@@ -25,6 +26,7 @@ instance structureExtractor    :: Structure  Extractor where
   _structureType _ = structure_extractor
 instance eqExtractor           :: Eq         Extractor where eq   = eqById
 instance showExtractor         :: Show       Extractor where show = showStructure
+instance destructibleExtractor :: Destructible Extractor
 
 toExtractor :: AnyStructure -> Maybe Extractor
 toExtractor = fromAnyStructure

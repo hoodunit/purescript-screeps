@@ -8,6 +8,7 @@ import Data.Eq
 import Data.Show
 import Data.Maybe (Maybe)
 
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
 import Screeps.Id
@@ -27,6 +28,7 @@ instance powerSpawnHasId       :: HasId      PowerSpawn
 instance encodePowerSpawn      :: EncodeJson PowerSpawn where encodeJson = encodeJsonWithId
 instance decodePowerSpawn      :: DecodeJson PowerSpawn where decodeJson = decodeJsonWithId
 instance refillablePowerSpawn  :: Refillable PowerSpawn
+instance destructiblePowerSpawn  :: Destructible PowerSpawn
 instance structurePowerSpawn   :: Structure  PowerSpawn
   where
     _structureType _ = structure_power_spawn
