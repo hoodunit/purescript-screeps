@@ -161,9 +161,6 @@ moveTo' creep (TargetPt x y) opts = runThisEffFn3 "moveTo" creep x y (selectMayb
 moveTo' creep (TargetPos pos) opts = runThisEffFn2 "moveTo" creep pos (selectMaybes opts)
 moveTo' creep (TargetObj obj) opts = runThisEffFn2 "moveTo" creep obj (selectMaybes opts)
 
-notifyWhenAttacked :: forall e. Creep -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
-notifyWhenAttacked = runThisEffFn1 "notifyWhenAttacked"
-
 pickup :: forall e. Creep -> Resource -> Eff (cmd :: CMD | e) ReturnCode
 pickup = runThisEffFn1 "pickup"
 

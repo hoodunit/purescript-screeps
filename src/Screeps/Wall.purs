@@ -15,7 +15,7 @@ import Screeps.RoomObject (class RoomObject)
 
 foreign import data Wall       :: *
 instance objectWall       ::      RoomObject Wall
-instance ownedWall             :: Owned      Wall
+--instance ownedWall             :: Owned      Wall
 instance wallHasId             :: HasId      Wall
   where
     validate = instanceOf "StructureWall"

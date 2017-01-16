@@ -84,9 +84,6 @@ destroy = runThisEffFn0 "destroy"
 isActive :: forall a e. Structure a => a -> Eff (cmd :: CMD | e) Boolean
 isActive = runThisEffFn0 "isActive"
 
-notifyWhenAttacked :: forall a e. Structure a => a -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
-notifyWhenAttacked = runThisEffFn1 "notifyWhenAttacked"
-
 unsafeCast :: forall a. Structure a => StructureType -> AnyStructure -> Maybe a
 unsafeCast t struc
   | structureType struc == t = Just $ unsafeCoerce struc
