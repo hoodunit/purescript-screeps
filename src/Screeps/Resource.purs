@@ -11,7 +11,7 @@ import Data.Show            (class Show,       show)
 
 import Screeps.FFI (unsafeField, instanceOf)
 import Screeps.Id (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
-import Screeps.RoomObject (class RoomObject)
+import Screeps.RoomObject (class RoomObject, pos)
 
 -- * Resource types
 newtype ResourceType = ResourceType String
@@ -31,7 +31,7 @@ instance eqResource          :: Eq         Resource where eq = eqById
 instance encodeResource      :: EncodeJson Resource where encodeJson = encodeJsonWithId
 instance decodeResource      :: DecodeJson Resource where decodeJson = decodeJsonWithId
 instance showResource        :: Show       Resource where
-  show re = show (amount re) <> " " <> show (resourceType re)
+  show re = show (amount re) <> " " <> show (resourceType re) <> "@" <> show (pos re)
 
 amount :: Resource -> Int
 amount = unsafeField "amount"

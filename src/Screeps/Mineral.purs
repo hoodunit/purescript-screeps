@@ -9,7 +9,7 @@ import Data.Show            (class Show,       show)
 import Screeps.FFI         (unsafeField, instanceOf)
 import Screeps.Id
 import Screeps.Regenerates (class Regenerates)
-import Screeps.RoomObject  (class RoomObject)
+import Screeps.RoomObject  (class RoomObject, pos)
 import Screeps.Resource    (ResourceType)
 
 foreign import data Mineral :: *
@@ -21,7 +21,7 @@ instance mineralHasId       :: HasId       Mineral
 instance encodeMineral       :: EncodeJson Mineral where encodeJson = encodeJsonWithId
 instance decodeMineral       :: DecodeJson Mineral where decodeJson = decodeJsonWithId
 instance showMineral         :: Show       Mineral where
-  show m = show (mineralAmount m) <> " " <> show (mineralType m)
+  show m = show (mineralType m) <> "@" <> show (pos m)
 
 mineralAmount :: Mineral -> Int
 mineralAmount  = unsafeField "mineralAmount"
