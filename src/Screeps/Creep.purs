@@ -7,7 +7,7 @@ import Control.Monad.Eff.Exception (EXCEPTION)
 import Data.Argonaut.Decode        (class DecodeJson, decodeJson)
 import Data.Argonaut.Encode        (class EncodeJson, encodeJson)
 import Data.Either                 (Either)
-import Data.Maybe                  (Maybe(Nothing))
+import Data.Maybe                  (Maybe(..))
 import Data.StrMap                 (StrMap)
 
 import Screeps.BodyPartType     (BodyPartType)
@@ -16,10 +16,12 @@ import Screeps.Controller       (Controller)
 import Screeps.Direction        (Direction)
 import Screeps.Effects          (CMD, MEMORY)
 import Screeps.FFI              (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn1,
-                                 selectMaybes, toMaybe, unsafeGetFieldEff, unsafeField, unsafeSetFieldEff)
+                                 selectMaybes, toMaybe,
+                                 unsafeGetFieldEff, unsafeField, unsafeOptField, unsafeSetFieldEff)
 import Screeps.FindType         (Path)
 import Screeps.Mineral          (Mineral)
 import Screeps.Names
+import Screeps.Owned            (owner)
 import Screeps.Refillable       (class Refillable)
 import Screeps.Resource         (Resource, ResourceType, resource_energy)
 import Screeps.ReturnCode       (ReturnCode)
@@ -74,8 +76,13 @@ carryCapacity = unsafeField "carryCapacity"
 fatigue :: Creep -> Int
 fatigue = unsafeField "fatigue"
 
-name :: Creep -> CreepName
-name = unsafeField "name"
+name  :: Creep -> CreepName
+name c = case unsafeOptField "name" c of
+              Nothing -> asCreepName $ showOwner $ owner c
+              Just n  -> n
+  where
+    showOwner  Nothing          = "<unowned creep>"
+    showOwner (Just {username}) = "<" <> username <> ">"
 
 saying :: Creep -> Maybe String
 saying c = toMaybe $ unsafeField "saying" c
