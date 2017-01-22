@@ -1,3 +1,9 @@
+-- | This module implements PathFinder API.
+-- |
+-- | WARNING: While PathFinder accepts any number of target objects,
+-- |          excessive GC may occur if there are too many.
+-- |          API author advises to sort targets by uniform distance [Screeps.Coord],
+-- |          and use only first 10 or so.
 module Screeps.Path where
 
 import Control.Monad.Eff
@@ -21,6 +27,7 @@ type TileCost = Int
 defaultTerrainCost :: TileCost
 defaultTerrainCost  = 0
 
+-- | Indicates an unwalkable tile.
 unwalkable :: TileCost
 unwalkable  = 255
 
@@ -85,6 +92,7 @@ type RoomCallback e = RoomName -- ^ Room name
                    -> Eff (path :: PATH | e)
                            CostMatrix
 
+-- | Empty callback - just use default terrain cost.
 allDefaultCosts          :: forall e. RoomCallback e
 allDefaultCosts _roomName = newCostMatrix
 
@@ -100,6 +108,7 @@ newtype PathFinderOpts e = PathFinderOpts {
   }
 
 -- * Cost matrix
+-- | Set a given coordinate to any cost.
 set :: forall              e.
        CostMatrix
     -> Int
@@ -108,6 +117,8 @@ set :: forall              e.
     -> Eff (path :: PATH | e) Unit
 set  = runThisEffFn3 "set"
 
+-- | Get current cost of any coordinate.
+-- | Zero indicates default terrain cost.
 get :: forall              e.
        CostMatrix
     -> Int
@@ -115,15 +126,18 @@ get :: forall              e.
     -> Eff (path :: PATH | e) TileCost
 get  = runThisEffFn2 "get"
 
+-- | Clone cost matrix.
 clone :: forall              e.
                                 CostMatrix
       -> Eff (path :: PATH | e) CostMatrix
 clone  = runThisEffFn0 "clone"
 
+-- | Serialized cost matrix, suitable for `JSON.stringify`.
 newtype SerializedCostMatrix = SerializedCostMatrix Json
 
 derive newtype instance showSerializedCostMatrix :: Show SerializedCostMatrix
 
+-- | Serialize cost matrix for storage in `Memory`.
 serialize :: CostMatrix
           -> SerializedCostMatrix
 serialize  = runThisFn0 "serialize"
