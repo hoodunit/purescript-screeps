@@ -12,7 +12,7 @@ import Type.Proxy
 
 import Screeps.Destructible (class Destructible)
 import Screeps.Effects    (CMD)
-import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId, eqById)
+import Screeps.Id         (class HasId, encodeJsonWithId, decodeJsonWithId, eqById, validate)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.RoomObject
 import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
@@ -87,6 +87,14 @@ unsafeCast t struc
 
 toAnyStructure :: forall a. Structure a => a -> AnyStructure
 toAnyStructure  = unsafeCoerce
+
+fromRoomObject   :: AnyRoomObject -> Maybe AnyStructure
+fromRoomObject ro = if validate  stru
+                       then Just stru
+                       else Nothing
+  where
+    stru :: AnyStructure
+    stru  = unsafeCoerce ro
 
 fromAnyStructure :: forall a. Structure a => AnyStructure -> Maybe a
 fromAnyStructure = from' Proxy

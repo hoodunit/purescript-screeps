@@ -5,17 +5,19 @@ import Control.Monad.Eff (Eff)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Eq
+import Data.Maybe                 (Maybe(..))
 import Data.Semigroup             ((<>))
 import Data.Show                  (class Show, show)
+import Unsafe.Coerce              (unsafeCoerce)
 
 import Screeps.Effects (CMD)
-import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, id, eqById)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, id, eqById, validate)
 import Screeps.Progress (class Progress)
 import Screeps.Types --(ConstructionSite, Id, StructureType)
 import Screeps.FFI (runThisEffFn0, instanceOf)
 import Screeps.ReturnCode (ReturnCode)
 import Screeps.Structure  (class Structural, structureType, class Structure)
-import Screeps.RoomObject (class RoomObject, pos)
+import Screeps.RoomObject (class RoomObject, pos, AnyRoomObject)
 
 foreign import data ConstructionSite  :: *
 instance constructionSiteIsRoomObject :: RoomObject ConstructionSite
@@ -35,3 +37,12 @@ instance showConstructionSite         :: Show       ConstructionSite where
 
 remove :: forall e. ConstructionSite -> Eff (cmd :: CMD | e) ReturnCode
 remove = runThisEffFn0 "remove"
+
+toConstructionSite   :: AnyRoomObject
+                     -> Maybe ConstructionSite
+toConstructionSite ro = if validate cons
+                          then Just cons
+                          else Nothing
+  where
+    cons :: ConstructionSite
+    cons  = unsafeCoerce ro
