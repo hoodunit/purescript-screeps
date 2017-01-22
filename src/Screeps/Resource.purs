@@ -15,8 +15,9 @@ import Screeps.RoomObject (class RoomObject, pos)
 
 -- * Resource types
 newtype ResourceType = ResourceType String
-derive instance genericResourceType :: Generic ResourceType
-instance        showResourceType    :: Show    ResourceType where show (ResourceType s) = s
+derive instance genericResourceType    :: Generic ResourceType
+derive newtype instance eqResourceType :: Eq ResourceType
+instance        showResourceType       :: Show    ResourceType where show (ResourceType s) = s
 
 foreign import resource_energy :: ResourceType
 foreign import resource_power  :: ResourceType
