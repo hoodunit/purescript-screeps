@@ -2,10 +2,22 @@
 
 Internal helper module for JavaScript FFI
 
+#### `unsafeOptField`
+
+``` purescript
+unsafeOptField :: forall obj val. String -> obj -> Maybe val
+```
+
 #### `unsafeField`
 
 ``` purescript
 unsafeField :: forall obj val. String -> obj -> val
+```
+
+#### `unsafeOptField_helper`
+
+``` purescript
+unsafeOptField_helper :: forall obj val r. r -> (val -> r) -> String -> obj -> r
 ```
 
 #### `unsafeGetFieldEff`
@@ -186,6 +198,12 @@ selectMaybesImpl :: forall a. (Maybe a -> Boolean) -> (Maybe a -> a) -> a -> JsO
 
 ``` purescript
 selectMaybes :: forall a. a -> JsObject
+```
+
+#### `instanceOf`
+
+``` purescript
+instanceOf :: forall a. String -> a -> Boolean
 ```
 
 

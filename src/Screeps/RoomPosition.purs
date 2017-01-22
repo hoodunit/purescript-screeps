@@ -1,19 +1,30 @@
 -- | Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-us/articles/203079201-RoomPosition)
 module Screeps.RoomPosition where
 
-import Prelude
+import Prelude ((<$>), (<<<))
 import Control.Monad.Eff (Eff, runPure)
-import Control.Monad.Eff.Exception (EXCEPTION, Error, error, try)
-import Data.Either (Either(Left, Right))
-import Data.Maybe (Maybe(Nothing), maybe)
+import Control.Monad.Eff.Exception (EXCEPTION, Error, try)
+import Data.Either (Either)
+import Data.Maybe (Maybe(Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
+import Screeps.Color (Color)
 import Screeps.Effects (CMD)
-import Screeps.Types (Color, Direction, FilterFn, FindContext(..), FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, TargetPosition(..), StructureType)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FindType (FindType, LookType, Path)
+import Screeps.Types (FilterFn, TargetPosition(..))
+import Screeps.Direction (Direction)
+import Screeps.Structure (StructureType)
+import Screeps.ReturnCode (ReturnCode)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3,
+                    runThisFn1,    runThisFn2,    runThisFn3,
+                    selectMaybes,  toMaybe)
 import Screeps.Room (PathOptions)
+import Screeps.RoomPosition.Type (RoomPosition)
 
-foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
+data      FindContext a =
+  OfType (FindType    a     ) |
+  OfObj  (Array       a     ) | -- should be RoomObject a
+  OfPos  (Array RoomPosition)
 
 tryPure :: forall a. Eff (err :: EXCEPTION) a -> Either Error a
 tryPure = runPure <<< try
@@ -46,32 +57,35 @@ closestPathOpts =
   }
 
 unwrapContext :: forall a b. FindContext a -> b
-unwrapContext (OfType findType) = unsafeCoerce findType
-unwrapContext (OfObj objects) = unsafeCoerce objects
-unwrapContext (OfPos positions) = unsafeCoerce positions
+unwrapContext (OfType findType ) = unsafeCoerce findType
+unwrapContext (OfObj  objects  ) = unsafeCoerce objects
+unwrapContext (OfPos  positions) = unsafeCoerce positions
 
-roomName :: RoomPosition -> String
-roomName = unsafeField "roomName"
-
-x :: RoomPosition -> Int
-x = unsafeField "x"
-
-y :: RoomPosition -> Int
-y = unsafeField "y"
-
-createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createConstructionSite :: forall e. RoomPosition
+                       -> StructureType
+                       -> Eff ( cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 createConstructionSite = runThisEffFn1 "createConstructionSite"
 
-createFlag :: forall e. RoomPosition -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlag :: forall e. RoomPosition
+           -> Eff ( cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 createFlag = runThisEffFn0 "createFlag"
 
-createFlagWithName :: forall e. RoomPosition -> String -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithName :: forall e. RoomPosition
+                   -> String
+                   -> Eff ( cmd :: CMD
+                          , err :: EXCEPTION | e) ReturnCode
 createFlagWithName pos name = runThisEffFn1 "createFlag" pos name
 
-createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColor :: forall e. RoomPosition
+                    -> String
+                    -> Color
+                    -> Eff ( cmd :: CMD
+                           , err :: EXCEPTION | e) ReturnCode
 createFlagWithColor pos name color = runThisEffFn2 "createFlag" pos name color
 
-createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff ( cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color
+                     -> Eff ( cmd :: CMD
+                            , err :: EXCEPTION | e) ReturnCode
 createFlagWithColors pos name color secondaryColor = runThisEffFn3 "createFlag" pos name color secondaryColor
 
 findClosestByPath :: forall a. RoomPosition -> FindContext a -> Either Error (Maybe a)

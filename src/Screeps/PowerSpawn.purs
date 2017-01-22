@@ -2,19 +2,38 @@
 module Screeps.PowerSpawn where
 
 import Control.Monad.Eff (Eff)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Eq
+import Data.Show
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_power_spawn)
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (PowerSpawn, ReturnCode, Structure)
+import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField, instanceOf)
+import Screeps.Id
+import Screeps.Refillable
+import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
+import Screeps.Structure
+import Screeps.Types
 
-energy :: PowerSpawn -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: PowerSpawn -> Int
-energyCapacity = unsafeField "energyCapacity"
+foreign import data PowerSpawn :: *
+instance objectPowerSpawn      :: RoomObject PowerSpawn
+instance ownedPowerSpawn       :: Owned      PowerSpawn
+instance structuralPowerSpawn  :: Structural PowerSpawn
+instance powerSpawnHasId       :: HasId      PowerSpawn
+  where
+    validate = instanceOf "StructurePowerSpawn"
+instance encodePowerSpawn      :: EncodeJson PowerSpawn where encodeJson = encodeJsonWithId
+instance decodePowerSpawn      :: DecodeJson PowerSpawn where decodeJson = decodeJsonWithId
+instance refillablePowerSpawn  :: Refillable PowerSpawn
+instance destructiblePowerSpawn  :: Destructible PowerSpawn
+instance structurePowerSpawn   :: Structure  PowerSpawn
+  where
+    _structureType _ = structure_power_spawn
+instance eqPowerSpawn          :: Eq         PowerSpawn where eq   = eqById
+instance showPowerSpawn        :: Show       PowerSpawn where show = showStructure
 
 power :: PowerSpawn -> Int
 power = unsafeField "power"
@@ -28,5 +47,6 @@ createPowerCreep spawn name = runThisEffFn1 "createPowerCreep" spawn name
 processPower :: forall e. PowerSpawn -> Eff (cmd :: CMD | e) ReturnCode
 processPower = runThisEffFn0 "processPower"
 
-toPowerSpawn :: forall a. Structure a -> Maybe PowerSpawn
-toPowerSpawn = unsafeCast structure_power_spawn
+toPowerSpawn :: AnyStructure -> Maybe PowerSpawn
+toPowerSpawn = fromAnyStructure
+

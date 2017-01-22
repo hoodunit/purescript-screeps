@@ -2,6 +2,7 @@
 module Screeps.Memory where
 
 import Prelude
+import Data.Argonaut.Core   (Json)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Parser (jsonParser)
@@ -17,6 +18,11 @@ foreign import getMemoryGlobal :: forall e. Eff (tick :: TICK | e) MemoryGlobal
 
 foreign import data RawMemoryGlobal :: *
 foreign import getRawMemoryGlobal :: forall e. Eff (tick :: TICK | e) RawMemoryGlobal
+
+foreign import getObjectMemory :: String -> String -> String -> Json
+foreign import setObjectMemory :: forall e.
+                                  String -> String -> String -> Json
+                               -> Eff (memory :: MEMORY | e) Unit
 
 get :: forall a e. (DecodeJson a) => MemoryGlobal -> String -> Eff ( memory :: MEMORY | e ) (Either String a)
 get memoryGlobal key = decodeJson <$> unsafeGetFieldEff key memoryGlobal

@@ -2,16 +2,24 @@
 
 Corresponds to the Screeps API [StructureTower](http://support.screeps.com/hc/en-us/articles/208437105-StructureTower)
 
-#### `energy`
+#### `Tower`
 
 ``` purescript
-energy :: Tower -> Int
+data Tower :: *
 ```
 
-#### `energyCapacity`
-
+##### Instances
 ``` purescript
-energyCapacity :: Tower -> Int
+RoomObject Tower
+Owned Tower
+HasId Tower
+EncodeJson Tower
+DecodeJson Tower
+Structural Tower
+Refillable Tower
+Structure Tower
+Eq Tower
+Show Tower
 ```
 
 #### `attack`
@@ -29,7 +37,7 @@ heal :: forall e. Tower -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 #### `repair`
 
 ``` purescript
-repair :: forall a e. Tower -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+repair :: forall a e. Structure a => Tower -> a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `transferEnergy`
@@ -47,7 +55,7 @@ transferEnergyAmt :: forall e. Tower -> Creep -> Int -> Eff (cmd :: CMD | e) Ret
 #### `toTower`
 
 ``` purescript
-toTower :: forall a. Structure a -> Maybe Tower
+toTower :: AnyStructure -> Maybe Tower
 ```
 
 

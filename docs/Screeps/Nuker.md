@@ -2,16 +2,25 @@
 
 Corresponds to the Screeps API [StructureNuker](http://support.screeps.com/hc/en-us/articles/208488255-StructureNuker)
 
-#### `energy`
+#### `Nuker`
 
 ``` purescript
-energy :: Nuker -> Int
+data Nuker :: *
 ```
 
-#### `energyCapacity`
-
+##### Instances
 ``` purescript
-energyCapacity :: Nuker -> Int
+RoomObject Nuker
+Owned Nuker
+HasId Nuker
+EncodeJson Nuker
+DecodeJson Nuker
+Structural Nuker
+Refillable Nuker
+Coolsdown Nuker
+Structure Nuker
+Eq Nuker
+Show Nuker
 ```
 
 #### `ghodium`
@@ -26,12 +35,6 @@ ghodium :: Nuker -> Int
 ghodiumCapacity :: Nuker -> Int
 ```
 
-#### `cooldown`
-
-``` purescript
-cooldown :: Nuker -> Int
-```
-
 #### `launchNuke`
 
 ``` purescript
@@ -41,7 +44,7 @@ launchNuke :: forall e. Nuker -> RoomPosition -> Eff (cmd :: CMD | e) ReturnCode
 #### `toNuker`
 
 ``` purescript
-toNuker :: forall a. Structure a -> Maybe Nuker
+toNuker :: AnyStructure -> Maybe Nuker
 ```
 
 

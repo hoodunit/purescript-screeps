@@ -2,6 +2,24 @@
 
 Corresponds to the Screeps API [Room](http://support.screeps.com/hc/en-us/articles/203079011-Room)
 
+#### `AnyRoomObject`
+
+``` purescript
+data AnyRoomObject :: *
+```
+
+##### Instances
+``` purescript
+RoomObject AnyRoomObject
+HasId AnyRoomObject
+```
+
+#### `fromAnyRoomObject`
+
+``` purescript
+fromAnyRoomObject :: forall ro. HasId ro => AnyRoomObject -> Maybe ro
+```
+
 #### `RoomGlobal`
 
 ``` purescript
@@ -54,12 +72,6 @@ memory :: forall props. Room -> {  | props }
 
 ``` purescript
 mode :: Room -> Mode
-```
-
-#### `name`
-
-``` purescript
-name :: Room -> String
 ```
 
 #### `storage`
@@ -166,10 +178,49 @@ findPath' :: forall o. Room -> RoomPosition -> RoomPosition -> PathOptions o -> 
 getPositionAt :: Room -> Int -> Int -> RoomPosition
 ```
 
+#### `LookResult`
+
+``` purescript
+data LookResult a
+  = LookResult { resultType :: LookType a, terrain :: Maybe Terrain, structureType :: Maybe StructureType, x :: Int, y :: Int }
+```
+
+#### `decodeLookResults`
+
+``` purescript
+decodeLookResults :: forall a. Json -> Either String (Array (LookResult a))
+```
+
+#### `decodeIt`
+
+``` purescript
+decodeIt :: forall a. Json -> LookResult a
+```
+
 #### `lookForAt`
 
 ``` purescript
-lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> Array a
+lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> (Array a)
 ```
+
+#### `lookForAtArea`
+
+``` purescript
+lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
+```
+
+#### `lookForInRange`
+
+``` purescript
+lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
+```
+
+#### `geoCentre`
+
+``` purescript
+geoCentre :: RoomName -> RoomPosition
+```
+
+Geographic centre of a room with a given name.
 
 

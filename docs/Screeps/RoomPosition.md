@@ -2,10 +2,13 @@
 
 Corresponds to the Screeps API [RoomPosition](http://support.screeps.com/hc/en-us/articles/203079201-RoomPosition)
 
-#### `mkRoomPosition`
+#### `FindContext`
 
 ``` purescript
-mkRoomPosition :: Int -> Int -> String -> RoomPosition
+data FindContext a
+  = OfType (FindType a)
+  | OfObj (Array a)
+  | OfPos (Array RoomPosition)
 ```
 
 #### `tryPure`
@@ -51,52 +54,34 @@ closestPathOpts :: ClosestPathOptions
 unwrapContext :: forall a b. FindContext a -> b
 ```
 
-#### `roomName`
-
-``` purescript
-roomName :: RoomPosition -> String
-```
-
-#### `x`
-
-``` purescript
-x :: RoomPosition -> Int
-```
-
-#### `y`
-
-``` purescript
-y :: RoomPosition -> Int
-```
-
 #### `createConstructionSite`
 
 ``` purescript
-createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createConstructionSite :: forall e. RoomPosition -> StructureType -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlag`
 
 ``` purescript
-createFlag :: forall e. RoomPosition -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlag :: forall e. RoomPosition -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlagWithName`
 
 ``` purescript
-createFlagWithName :: forall e. RoomPosition -> String -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithName :: forall e. RoomPosition -> String -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlagWithColor`
 
 ``` purescript
-createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColor :: forall e. RoomPosition -> String -> Color -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `createFlagWithColors`
 
 ``` purescript
-createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff (cmd :: CMD, exception :: EXCEPTION | e) ReturnCode
+createFlagWithColors :: forall e. RoomPosition -> String -> Color -> Color -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
 ```
 
 #### `findClosestByPath`

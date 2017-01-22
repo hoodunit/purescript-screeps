@@ -3,26 +3,44 @@ module Screeps.Spawn where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
 import Data.Either (Either(Left, Right))
+--import Data.Eq     (class Eq)
 import Data.Maybe (Maybe)
 
-import Screeps.Constants (structure_spawn)
+import Screeps.BodyPartType (BodyPartType)
+import Screeps.Destructible (class Destructible)
 import Screeps.Effects (CMD)
-import Screeps.Structure (unsafeCast)
-import Screeps.Types (BodyPartType, Creep, ReturnCode, Spawn, Structure)
-import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
+import Screeps.FFI (NullOrUndefined, runThisEffFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable
+                   , unsafeField, instanceOf)
+import Screeps.Id (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
+import Screeps.Structure
+import Screeps.Types
+import Screeps.Refillable (class Refillable)
+import Screeps.ReturnCode (ReturnCode)
+import Screeps.RoomObject (class RoomObject)
 
 type CreepInfo =
   { name :: String
   , needTime :: Int
   , remainingTime :: Int }
 
-energy :: Spawn -> Int
-energy = unsafeField "energy"
-
-energyCapacity :: Spawn -> Int
-energyCapacity = unsafeField "energyCapacity"
+foreign import data Spawn :: *
+instance objectSpawn      :: RoomObject Spawn
+instance ownedSpawn       :: Owned      Spawn
+instance spawnHasId       :: HasId      Spawn
+  where
+    validate = instanceOf "StructureSpawn"
+instance eqSpawn          :: Eq         Spawn where eq = eqById
+instance encodeSpawn      :: EncodeJson Spawn where encodeJson = encodeJsonWithId
+instance decodeSpawn      :: DecodeJson Spawn where decodeJson = decodeJsonWithId
+instance structuralSpawn  :: Structural Spawn
+instance refillableSpawn  :: Refillable Spawn
+instance structureSpawn   :: Structure  Spawn where
+  _structureType _ = structure_spawn
+instance showSpawn :: Show Spawn              where show = showStructure
+instance destructibleSpawn :: Destructible Spawn
 
 memory :: forall props. Spawn -> { | props }
 memory = unsafeField "memory"
@@ -66,5 +84,5 @@ recycleCreep = runThisEffFn1 "recycleCreep"
 renewCreep :: forall e. Spawn -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 renewCreep = runThisEffFn1 "renewCreep"
 
-toSpawn :: forall a. Structure a -> Maybe Spawn
-toSpawn = unsafeCast structure_spawn
+toSpawn :: AnyStructure -> Maybe Spawn
+toSpawn = fromAnyStructure

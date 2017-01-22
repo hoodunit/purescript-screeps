@@ -2,22 +2,38 @@
 
 Corresponds to the Screeps API [StructureExtension](http://support.screeps.com/hc/en-us/articles/207711949-StructureExtension)
 
-#### `energy`
+#### `Extension`
 
 ``` purescript
-energy :: Extension -> Int
+data Extension :: *
 ```
 
-#### `energyCapacity`
-
+##### Instances
 ``` purescript
-energyCapacity :: Extension -> Int
+RoomObject Extension
+Owned Extension
+HasId Extension
+EncodeJson Extension
+DecodeJson Extension
+Structural Extension
+Refillable Extension
+Eq Extension
+Show Extension
+Structure Extension
 ```
 
 #### `toExtension`
 
 ``` purescript
-toExtension :: forall a. Structure a -> Maybe Extension
+toExtension :: AnyStructure -> Maybe Extension
 ```
+
+#### `extensionCapacity`
+
+``` purescript
+extensionCapacity :: Int -> Int
+```
+
+Extension capacity on a given room control level.
 
 

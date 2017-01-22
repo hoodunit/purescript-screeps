@@ -2,10 +2,35 @@
 
 Corresponds to the Screeps API [Map](http://support.screeps.com/hc/en-us/articles/203079191-Map)
 
+#### `DirMap`
+
+``` purescript
+newtype DirMap a
+  = DirMap (StrMap a)
+```
+
+#### `keys`
+
+``` purescript
+keys :: forall a. DirMap a -> Array Direction
+```
+
+#### `toArray`
+
+``` purescript
+toArray :: forall a. DirMap a -> Array (Tuple Direction a)
+```
+
+#### `lookup`
+
+``` purescript
+lookup :: forall a. Direction -> DirMap a -> Maybe a
+```
+
 #### `ExitsInfo`
 
 ``` purescript
-type ExitsInfo = { 1 :: String, 3 :: String, 5 :: String, 7 :: String }
+type ExitsInfo = DirMap RoomName
 ```
 
 #### `RoomRoute`
@@ -17,13 +42,13 @@ type RoomRoute = Array ExitToRoom
 #### `ExitToRoom`
 
 ``` purescript
-type ExitToRoom = { exit :: FindType Unit, room :: String }
+type ExitToRoom = { exit :: FindType Unit, room :: RoomName }
 ```
 
 #### `describeExits`
 
 ``` purescript
-describeExits :: String -> Maybe ExitsInfo
+describeExits :: RoomName -> Maybe ExitsInfo
 ```
 
 #### `findExit`
@@ -35,7 +60,7 @@ findExit :: Room -> Room -> ReturnCode
 #### `findExit'`
 
 ``` purescript
-findExit' :: String -> String -> ReturnCode
+findExit' :: RoomName -> RoomName -> ReturnCode
 ```
 
 #### `findRoute`
@@ -47,25 +72,25 @@ findRoute :: Room -> Room -> RoomRoute
 #### `findRoute'`
 
 ``` purescript
-findRoute' :: String -> String -> RoomRoute
+findRoute' :: RoomName -> RoomName -> RoomRoute
 ```
 
 #### `getRoomLinearDistance`
 
 ``` purescript
-getRoomLinearDistance :: String -> String -> Int
+getRoomLinearDistance :: RoomName -> RoomName -> Int
 ```
 
 #### `getTerrainAt`
 
 ``` purescript
-getTerrainAt :: forall a. TargetPosition a -> String -> Terrain
+getTerrainAt :: forall a. TargetPosition a -> RoomName -> Terrain
 ```
 
-#### `isRoomProtected`
+#### `isRoomAvailable`
 
 ``` purescript
-isRoomProtected :: String -> Boolean
+isRoomAvailable :: RoomName -> Boolean
 ```
 
 

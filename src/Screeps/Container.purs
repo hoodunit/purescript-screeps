@@ -1,23 +1,33 @@
 -- | Corresponds to the Screeps API [StructureContainer](http://support.screeps.com/hc/en-us/articles/208435885-StructureContainer)
 module Screeps.Container where
 
-import Data.Maybe (Maybe)
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Maybe         (Maybe)
+import Data.Show          (class Show)
+import Data.Eq            (class Eq)
 
-import Screeps.Structure (unsafeCast)
-import Screeps.Constants (structure_container)
-import Screeps.Types (Container, ResourceType(ResourceType), Structure)
-import Screeps.FFI (unsafeField)
+import Screeps.Destructible (class Destructible)
+import Screeps.FFI        (instanceOf)
+import Screeps.Id         (class HasId, decodeJsonWithId, encodeJsonWithId, eqById)
+import Screeps.RoomObject (class RoomObject)
+import Screeps.Structure
+import Screeps.Stores     (class Stores)
 
-foreign import data Store :: *
+foreign import data Container :: *
 
-store :: Container -> Store
-store = unsafeField "store"
+instance objectContainer      :: RoomObject Container
+instance containerHasId       :: HasId      Container where validate   = instanceOf "StructureContainer"
+instance encodeContainer      :: EncodeJson Container where encodeJson = encodeJsonWithId
+instance decodeContainer      :: DecodeJson Container where decodeJson = decodeJsonWithId
+instance structuralContainer  :: Structural Container
+instance storeInContainer     :: Stores     Container
+instance structureContainer   :: Structure  Container where
+  _structureType _ = structure_container
+instance showContainer        :: Show       Container where show = showStructure
+instance eqContainer          :: Eq         Container where eq   = eqById
+instance destructibleContainer :: Destructible Container
 
-storeGet :: Container -> ResourceType -> Int
-storeGet s (ResourceType res) = unsafeField res (store s)
+toContainer :: AnyStructure -> Maybe Container
+toContainer  = fromAnyStructure
 
-storeCapacity :: Container -> Int
-storeCapacity = unsafeField "storeCapacity"
-
-toContainer :: forall a. Structure a -> Maybe Container
-toContainer = unsafeCast structure_container

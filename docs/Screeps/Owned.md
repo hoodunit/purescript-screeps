@@ -1,17 +1,17 @@
-## Module Screeps.OwnedStructure
+## Module Screeps.Owned
 
 Corresponds to the Screeps API [OwnedStructure](http://support.screeps.com/hc/en-us/articles/207710979-OwnedStructure)
 
 #### `my`
 
 ``` purescript
-my :: forall a. OwnedStructure a -> Boolean
+my :: forall a. Owned a => a -> Boolean
 ```
 
 #### `owner`
 
 ``` purescript
-owner :: forall a. OwnedStructure a -> Maybe { username :: String }
+owner :: forall a. Owned a => a -> Maybe { username :: String }
 ```
 
 

@@ -2,6 +2,17 @@
 
 Corresponds to the Screeps API [Flag](http://support.screeps.com/hc/en-us/articles/203079181-Flag)
 
+#### `Flag`
+
+``` purescript
+data Flag :: *
+```
+
+##### Instances
+``` purescript
+RoomObject Flag
+```
+
 #### `color`
 
 ``` purescript

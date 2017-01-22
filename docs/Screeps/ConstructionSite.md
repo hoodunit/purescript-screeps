@@ -2,40 +2,23 @@
 
 Corresponds to the Screeps API [ConstructionSite](http://support.screeps.com/hc/en-us/articles/203016342-ConstructionSite)
 
-#### `id`
+#### `ConstructionSite`
 
 ``` purescript
-id :: ConstructionSite -> Id ConstructionSite
+data ConstructionSite :: *
 ```
 
-#### `my`
-
+##### Instances
 ``` purescript
-my :: ConstructionSite -> Boolean
-```
-
-#### `owner`
-
-``` purescript
-owner :: ConstructionSite -> { username :: String }
-```
-
-#### `progress`
-
-``` purescript
-progress :: ConstructionSite -> Int
-```
-
-#### `progressTotal`
-
-``` purescript
-progressTotal :: ConstructionSite -> Int
-```
-
-#### `structureType`
-
-``` purescript
-structureType :: ConstructionSite -> StructureType
+RoomObject ConstructionSite
+Structural ConstructionSite
+Progress ConstructionSite
+Owned ConstructionSite
+HasId ConstructionSite
+EncodeJson ConstructionSite
+DecodeJson ConstructionSite
+Eq ConstructionSite
+Show ConstructionSite
 ```
 
 #### `remove`

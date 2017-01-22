@@ -2,44 +2,70 @@
 module Screeps.Room where
 
 import Prelude
-import Control.Monad.Eff (Eff)
-import Data.Array as Array
-import Data.Either (Either(Left,Right))
-import Data.Maybe (Maybe(Just, Nothing))
-import Data.StrMap as StrMap
-import Data.Tuple (Tuple(Tuple))
+import Control.Monad.Eff                (Eff)
+import Data.Argonaut.Core               (Json, toArray)
+import Data.Either                      (Either(Left,Right))
+import Data.Maybe                       (Maybe(..), maybe)
 
-import Screeps.Effects (CMD, TICK)
-import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, TargetPosition(..), Terminal)
-import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.Color                    (Color)
+import Screeps.Controller               (Controller)
+import Screeps.Effects                  (CMD, TICK)
+import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5,
+                    runThisFn1,    runThisFn2,    runThisFn3,    runThisFn6,
+                    selectMaybes,  toMaybe,
+                    unsafeField,   unsafeOptField, instanceOf)
+import Screeps.FindType                 (FindType, LookType, Path)
+import Screeps.Id
+import Screeps.Names
+import Screeps.ReturnCode               (ReturnCode)
+import Screeps.RoomObject               (Room, class RoomObject)
+import Screeps.RoomPosition.Type        (RoomPosition, x, y, mkRoomPosition)
+import Screeps.Storage                  (Storage)
+import Screeps.Structure                (StructureType)
+import Screeps.Terminal                 (Terminal)
+import Screeps.Types                    (FilterFn, Mode, TargetPosition(..), Terrain)
+import Unsafe.Coerce                    (unsafeCoerce)
 
-foreign import data RoomGlobal :: *
-foreign import getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
+foreign import data AnyRoomObject :: *
+instance anyRoomObject         :: RoomObject AnyRoomObject
+instance anyRoomObjectHasId    :: HasId      AnyRoomObject where
+  validate = instanceOf "RoomObject"
+
+fromAnyRoomObject :: forall ro.
+                     HasId  ro
+                  => AnyRoomObject
+                  -> Maybe ro
+fromAnyRoomObject ro =
+    if validate    o
+       then Just   o
+       else Nothing
+  where
+    o = unsafeCoerce ro
 
 -- TODO: costCallback option
 type PathOptions o =
-  { ignoreCreeps :: Maybe Boolean
-  , ignoreDestructibleStructures :: Maybe Boolean
-  , ignoreRoads :: Maybe Boolean
-  , ignore :: Maybe (Array RoomPosition)
-  , avoid :: Maybe (Array RoomPosition)
-  , maxOps :: Maybe Int
-  , heuristicWeight :: Maybe Number
-  , serialize :: Maybe Boolean
-  , maxRooms :: Maybe Int
+  { ignoreCreeps                 :: Maybe  Boolean
+  , ignoreDestructibleStructures :: Maybe  Boolean
+  , ignoreRoads                  :: Maybe  Boolean
+  , ignore                       :: Maybe (Array RoomPosition)
+  , avoid                        :: Maybe (Array RoomPosition)
+  , maxOps                       :: Maybe  Int
+  , heuristicWeight              :: Maybe  Number
+  , serialize                    :: Maybe  Boolean
+  , maxRooms                     :: Maybe  Int
   | o }
 
 pathOpts :: PathOptions ()
 pathOpts =
-  { ignoreCreeps: Nothing
+  { ignoreCreeps:                 Nothing
   , ignoreDestructibleStructures: Nothing
-  , ignoreRoads: Nothing
-  , ignore: Nothing
-  , avoid: Nothing
-  , maxOps: Nothing
-  , heuristicWeight: Nothing
-  , serialize: Nothing
-  , maxRooms: Nothing }
+  , ignoreRoads:                  Nothing
+  , ignore:                       Nothing
+  , avoid:                        Nothing
+  , maxOps:                       Nothing
+  , heuristicWeight:              Nothing
+  , serialize:                    Nothing
+  , maxRooms:                     Nothing }
 
 controller :: Room -> Maybe Controller
 controller room = toMaybe $ unsafeField "controller" room
@@ -51,13 +77,10 @@ energyCapacityAvailable :: Room -> Int
 energyCapacityAvailable = unsafeField "energyCapacityAvailable"
 
 memory :: forall props. Room -> { | props }
-memory = unsafeField "energyAvailable"
+memory = unsafeField "memory"
 
 mode :: Room -> Mode
 mode = unsafeField "mode"
-
-name :: Room -> String
-name = unsafeField "name"
 
 storage :: Room -> Maybe Storage
 storage room = toMaybe $ unsafeField "storage" room
@@ -65,11 +88,13 @@ storage room = toMaybe $ unsafeField "storage" room
 terminal :: Room -> Maybe Terminal
 terminal room = toMaybe $ unsafeField "terminal" room
 
-serializePath :: RoomGlobal -> Path -> String
-serializePath = runThisFn1 "serializePath"
+foreign import roomGlobal :: {}
 
-deserializePath :: RoomGlobal -> String -> Path
-deserializePath = runThisFn1 "deserializePath"
+serializePath :: Path -> String
+serializePath = runThisFn1 "serializePath" roomGlobal
+
+deserializePath :: String -> Path
+deserializePath = runThisFn1 "deserializePath" roomGlobal
 
 createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
 createConstructionSite room (TargetPt x' y') strucType = runThisEffFn3 "createConstructionSite" room x' y' strucType
@@ -130,11 +155,53 @@ getPositionAt = runThisFn2 "getPositionAt"
 -- lookAt omitted - use lookForAt
 -- lookAtArea omitted - use lookForAtArea
 
-lookForAt :: forall a. Room -> LookType a -> TargetPosition a -> Array a
-lookForAt room lookType (TargetPt x' y') = runThisFn3 "lookForAt" room lookType x' y'
-lookForAt room lookType (TargetPos pos) = runThisFn2 "lookForAt" room lookType pos
-lookForAt room lookType (TargetObj obj) = runThisFn2 "lookForAt" room lookType obj
+data LookResult a = LookResult {
+    resultType    :: LookType a
+  , terrain       :: Maybe Terrain
+  , structureType :: Maybe StructureType
+  , x             :: Int
+  , y             :: Int
+  }
 
--- TODO: implement this
--- lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Boolean -> Array a
--- lookForAtArea r t top left bot right asArray = runThisFn6 "lookForAt" r t top left bot right asArray
+decodeLookResults :: forall a. Json
+                  -> Either String
+                           (Array (LookResult a))
+decodeLookResults = maybe (Left      "Top object is not an array")
+                          (Right <<< map decodeIt                )
+                <<< toArray
+
+decodeIt :: forall a. Json -> LookResult a
+decodeIt o = LookResult { resultType, terrain, structureType, x, y }
+  where
+    resultType    = unsafeField    "type"          o
+    terrain       = unsafeOptField "terrain"       o
+    structureType = unsafeOptField "structureType" o
+    x             = unsafeField    "x"             o
+    y             = unsafeField    "y"             o
+
+lookForAt :: forall         a.
+             Room
+          -> LookType       a
+          -> TargetPosition a
+          -> (Array   a)
+lookForAt room lookType (TargetPt  x' y') = runThisFn3 "lookForAt" room lookType x' y'
+lookForAt room lookType (TargetPos pos  ) = runThisFn2 "lookForAt" room lookType pos
+lookForAt room lookType (TargetObj obj  ) = runThisFn2 "lookForAt" room lookType obj
+
+-- TODO: Make obsolete, since this function is buggy
+-- TODO: Make it nicer, by selecting x/y from two positions.
+lookForAtArea :: forall a. Room -> LookType a -> Int -> Int -> Int -> Int -> Either String (Array (LookResult a))
+lookForAtArea r ty top left bot right = decodeLookResults
+                                      -- $ debugIt "result"
+                                      $ runThisFn6 "lookForAtArea" r ty top left bot right true
+
+lookForInRange :: forall a. Room -> LookType a -> RoomPosition -> Int -> Either String (Array (LookResult a))
+lookForInRange r ty p range = lookForAtArea r ty (y p-range)
+                                                 (x p-range)
+                                                 (y p+range)
+                                                 (x p+range)
+
+-- | Geographic centre of a room with a given name.
+geoCentre   :: RoomName -> RoomPosition
+geoCentre rn = mkRoomPosition 24 24 rn
+

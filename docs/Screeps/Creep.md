@@ -5,7 +5,7 @@ Corresponds to the Screeps API [Creep](http://support.screeps.com/hc/en-us/artic
 #### `CreepCargo`
 
 ``` purescript
-data CreepCargo :: *
+type CreepCargo = StrMap Int
 ```
 
 #### `BodyPart`
@@ -74,18 +74,6 @@ hits :: Creep -> Int
 hitsMax :: Creep -> Int
 ```
 
-#### `getId`
-
-``` purescript
-getId :: Creep -> Id Creep
-```
-
-#### `getIdAsStr`
-
-``` purescript
-getIdAsStr :: Creep -> String
-```
-
 #### `my`
 
 ``` purescript
@@ -95,7 +83,7 @@ my :: Creep -> Boolean
 #### `name`
 
 ``` purescript
-name :: Creep -> String
+name :: Creep -> CreepName
 ```
 
 #### `owner`
@@ -131,13 +119,13 @@ attackCreep :: forall e. Creep -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 #### `attackStructure`
 
 ``` purescript
-attackStructure :: forall a e. Creep -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+attackStructure :: forall a e. Structure a => Creep -> a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `attackController`
 
 ``` purescript
-attackController :: forall a e. Creep -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+attackController :: forall a e. Structure a => Creep -> a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `build`
@@ -155,13 +143,13 @@ cancelOrder :: forall e. Creep -> String -> Eff (cmd :: CMD | e) ReturnCode
 #### `claimController`
 
 ``` purescript
-claimController :: forall a e. Creep -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+claimController :: forall e. Creep -> Controller -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `dismantle`
 
 ``` purescript
-dismantle :: forall a e. Creep -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+dismantle :: forall a e. Structure a => Creep -> a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `drop`
@@ -257,7 +245,7 @@ rangedAttackCreep :: forall e. Creep -> Creep -> Eff (cmd :: CMD | e) ReturnCode
 #### `rangedAttackStructure`
 
 ``` purescript
-rangedAttackStructure :: forall a e. Creep -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+rangedAttackStructure :: forall a e. Structure a => Creep -> a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `rangedHeal`
@@ -275,7 +263,7 @@ rangedMassAttack :: forall e. Creep -> Eff (cmd :: CMD | e) ReturnCode
 #### `repair`
 
 ``` purescript
-repair :: forall a e. Creep -> Structure a -> Eff (cmd :: CMD | e) ReturnCode
+repair :: forall a e. Structure a => Creep -> a -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `reserveController`
@@ -311,14 +299,22 @@ transferToCreep :: forall e. Creep -> Creep -> ResourceType -> Int -> Eff (cmd :
 #### `transferToStructure`
 
 ``` purescript
-transferToStructure :: forall a e. Creep -> Structure a -> ResourceType -> Eff (cmd :: CMD | e) ReturnCode
+transferToStructure :: forall a e. Structure a => Creep -> a -> ResourceType -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `transferAmtToStructure`
 
 ``` purescript
-transferAmtToStructure :: forall a e. Creep -> Structure a -> ResourceType -> Int -> Eff (cmd :: CMD | e) ReturnCode
+transferAmtToStructure :: forall a e. Structure a => Creep -> a -> ResourceType -> Int -> Eff (cmd :: CMD | e) ReturnCode
 ```
+
+#### `refill`
+
+``` purescript
+refill :: forall e a. (Refillable a, Structure a) => Creep -> a -> Eff (cmd :: CMD, err :: EXCEPTION | e) ReturnCode
+```
+
+Refill a structure that is refillable.
 
 #### `upgradeController`
 
@@ -329,13 +325,13 @@ upgradeController :: forall e. Creep -> Controller -> Eff (cmd :: CMD | e) Retur
 #### `withdraw`
 
 ``` purescript
-withdraw :: forall a e. Creep -> Structure a -> ResourceType -> Eff (cmd :: CMD | e) ReturnCode
+withdraw :: forall a e. Structure a => Creep -> a -> ResourceType -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 #### `withdrawAmt`
 
 ``` purescript
-withdrawAmt :: forall a e. Creep -> Structure a -> ResourceType -> Int -> Eff (cmd :: CMD | e) ReturnCode
+withdrawAmt :: forall a e. Structure a => Creep -> a -> ResourceType -> Int -> Eff (cmd :: CMD | e) ReturnCode
 ```
 
 

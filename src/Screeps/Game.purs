@@ -3,66 +3,63 @@ module Screeps.Game where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Data.Maybe (Maybe)
 import Data.StrMap as StrMap
 
-import Screeps.Effects (CMD, TICK, TIME)
-import Screeps.Types (ConstructionSite, Creep, Flag, GameGlobal, Id, Market, ReturnCode, Room, Spawn, Structure, WorldMap)
-import Screeps.FFI (toMaybe, runThisEffFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
+import Screeps.ConstructionSite (ConstructionSite)
+import Screeps.Effects    (CMD, TICK, TIME)
+import Screeps.Types
+import Screeps.Flag       (Flag)
+import Screeps.Market     (Market)
+import Screeps.RoomObject (Room, class RoomObject)
+import Screeps.Spawn      (Spawn)
+import Screeps.Structure
 
-foreign import getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal
+foreign import unsafeGameField :: forall a e. String -> Eff (tick :: TICK | e) a
 
 type Gcl =
-  { level :: Int
-  , progress :: Int
+  { level         :: Int
+  , progress      :: Int
   , progressTotal :: Int }
 
 type Cpu =
-  { limit :: Int
+  { limit     :: Int
   , tickLimit :: Int
-  , bucket :: Int }
+  , bucket    :: Int }
 
-constructionSites :: GameGlobal -> StrMap.StrMap ConstructionSite
-constructionSites = unsafeField "constructionSites"
+constructionSites :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap ConstructionSite)
+constructionSites = unsafeGameField "constructionSites"
 
-cpu :: GameGlobal -> Cpu
-cpu = unsafeField "cpu"
+cpu :: forall e. Eff (tick :: TICK | e) Cpu
+cpu = unsafeGameField "cpu"
 
-creeps :: GameGlobal -> StrMap.StrMap Creep
-creeps = unsafeField "creeps"
+creeps :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Creep)
+creeps = unsafeGameField "creeps"
 
-flags :: GameGlobal -> StrMap.StrMap Flag
-flags = unsafeField "flags"
+flags :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Flag)
+flags = unsafeGameField "flags"
 
-gcl :: GameGlobal -> Gcl
-gcl = unsafeField "gcl"
 
-map :: GameGlobal -> WorldMap
-map = unsafeField "map"
+foreign import gcl :: Gcl
 
-market :: GameGlobal -> Market
-market = unsafeField "market"
+foreign import map :: WorldMap
 
-rooms :: GameGlobal -> StrMap.StrMap Room
-rooms = unsafeField "rooms"
+market :: forall e. Eff (tick :: TICK | e) Market
+market = unsafeGameField "market"
 
-spawns :: GameGlobal -> StrMap.StrMap Spawn
-spawns = unsafeField "spawns"
+rooms :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Room)
+rooms = unsafeGameField "rooms"
 
-structures :: GameGlobal -> StrMap.StrMap (Structure Unit)
-structures = unsafeField "structures"
+spawns :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap Spawn)
+spawns = unsafeGameField "spawns"
 
-time :: GameGlobal -> Int
-time = unsafeField "time"
+structures :: forall e. Eff (tick :: TICK | e) (StrMap.StrMap AnyStructure)
+structures = unsafeGameField "structures"
 
-getUsed :: forall e. GameGlobal -> Eff (time :: TIME | e) Number
-getUsed game = runThisEffFn0 "getUsed" (cpu game)
+time :: forall e. Eff (tick :: TICK | e) Int
+time = unsafeGameField "time"
 
-getObjectById :: forall a. GameGlobal -> Id a -> Maybe a
-getObjectById game id = toMaybe $ runThisFn1 "getObjectById" game id
+foreign import getUsedCpu :: forall e. Eff (time :: TIME | e) Number
 
-notify :: forall e. GameGlobal -> String -> Eff (cmd :: CMD | e) Unit
-notify game msg = runThisEffFn1 "notify" game msg
+foreign import notify :: forall e. String -> Eff (cmd :: CMD | e) Unit
 
-notify' :: forall e. GameGlobal -> String -> Int -> Eff (cmd :: CMD | e) Unit
-notify' game msg groupInterval = runThisEffFn2 "notify" game msg groupInterval
+foreign import notify_ :: forall e. String -> Int -> Eff (cmd :: CMD | e) Unit

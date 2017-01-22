@@ -2,22 +2,25 @@
 
 Corresponds to the Screeps API [StructureLink](http://support.screeps.com/hc/en-us/articles/208436275-StructureLink)
 
-#### `cooldown`
+#### `Link`
 
 ``` purescript
-cooldown :: Link -> Int
+data Link :: *
 ```
 
-#### `energy`
-
+##### Instances
 ``` purescript
-energy :: Link -> Int
-```
-
-#### `energyCapacity`
-
-``` purescript
-energyCapacity :: Link -> Int
+RoomObject Link
+Owned Link
+Structural Link
+Decays Link
+Coolsdown Link
+HasId Link
+Refillable Link
+Structure Link
+EncodeJson Link
+DecodeJson Link
+Show Link
 ```
 
 #### `transferEnergy`
@@ -35,7 +38,7 @@ transferEnergyAmt :: forall e. Link -> Link -> Int -> Eff (cmd :: CMD | e) Retur
 #### `toLink`
 
 ``` purescript
-toLink :: forall a. Structure a -> Maybe Link
+toLink :: AnyStructure -> Maybe Link
 ```
 
 

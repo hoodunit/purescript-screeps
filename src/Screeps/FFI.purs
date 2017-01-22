@@ -7,7 +7,12 @@ import Data.Maybe (Maybe(Just, Nothing), isJust, fromJust, maybe)
 import Data.Function.Uncurried (Fn3, runFn3)
 import Partial.Unsafe (unsafePartial)
 
+unsafeOptField :: forall obj val. String -> obj -> Maybe val
+unsafeOptField = unsafeOptField_helper Nothing Just
+
+foreign import unsafeIntField :: forall obj. String -> obj -> Int
 foreign import unsafeField :: forall obj val. String -> obj -> val
+foreign import unsafeOptField_helper :: forall obj val r. r -> (val -> r) -> String -> obj -> r
 foreign import unsafeGetFieldEff :: forall obj val eff. String -> obj -> Eff eff val
 foreign import unsafeSetFieldEff :: forall obj val eff. String -> obj -> val -> Eff eff Unit
 foreign import unsafeDeleteFieldEff :: forall obj eff. String -> obj -> Eff eff Unit
@@ -48,3 +53,6 @@ foreign import selectMaybesImpl :: forall a. (Maybe a -> Boolean) -> (Maybe a ->
 
 selectMaybes :: forall a. a -> JsObject
 selectMaybes obj = unsafePartial $ selectMaybesImpl isJust fromJust obj
+
+foreign import instanceOf :: forall a. String -> a -> Boolean
+

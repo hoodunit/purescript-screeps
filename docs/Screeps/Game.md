@@ -2,10 +2,10 @@
 
 Corresponds to the Screeps API [Game](http://support.screeps.com/hc/en-us/articles/203016382-Game)
 
-#### `getGameGlobal`
+#### `unsafeGameField`
 
 ``` purescript
-getGameGlobal :: forall e. Eff (tick :: TICK | e) GameGlobal
+unsafeGameField :: forall a e. String -> Eff (tick :: TICK | e) a
 ```
 
 #### `Gcl`
@@ -23,91 +23,85 @@ type Cpu = { limit :: Int, tickLimit :: Int, bucket :: Int }
 #### `constructionSites`
 
 ``` purescript
-constructionSites :: GameGlobal -> StrMap ConstructionSite
+constructionSites :: forall e. Eff (tick :: TICK | e) (StrMap ConstructionSite)
 ```
 
 #### `cpu`
 
 ``` purescript
-cpu :: GameGlobal -> Cpu
+cpu :: forall e. Eff (tick :: TICK | e) Cpu
 ```
 
 #### `creeps`
 
 ``` purescript
-creeps :: GameGlobal -> StrMap Creep
+creeps :: forall e. Eff (tick :: TICK | e) (StrMap Creep)
 ```
 
 #### `flags`
 
 ``` purescript
-flags :: GameGlobal -> StrMap Flag
+flags :: forall e. Eff (tick :: TICK | e) (StrMap Flag)
 ```
 
 #### `gcl`
 
 ``` purescript
-gcl :: GameGlobal -> Gcl
+gcl :: Gcl
 ```
 
 #### `map`
 
 ``` purescript
-map :: GameGlobal -> WorldMap
+map :: WorldMap
 ```
 
 #### `market`
 
 ``` purescript
-market :: GameGlobal -> Market
+market :: forall e. Eff (tick :: TICK | e) Market
 ```
 
 #### `rooms`
 
 ``` purescript
-rooms :: GameGlobal -> StrMap Room
+rooms :: forall e. Eff (tick :: TICK | e) (StrMap Room)
 ```
 
 #### `spawns`
 
 ``` purescript
-spawns :: GameGlobal -> StrMap Spawn
+spawns :: forall e. Eff (tick :: TICK | e) (StrMap Spawn)
 ```
 
 #### `structures`
 
 ``` purescript
-structures :: GameGlobal -> StrMap (Structure Unit)
+structures :: forall e. Eff (tick :: TICK | e) (StrMap AnyStructure)
 ```
 
 #### `time`
 
 ``` purescript
-time :: GameGlobal -> Int
+time :: forall e. Eff (tick :: TICK | e) Int
 ```
 
-#### `getUsed`
+#### `getUsedCpu`
 
 ``` purescript
-getUsed :: forall e. GameGlobal -> Eff (time :: TIME | e) Number
-```
-
-#### `getObjectById`
-
-``` purescript
-getObjectById :: forall a. GameGlobal -> Id a -> Maybe a
+getUsedCpu :: forall e. Eff (time :: TIME | e) Number
 ```
 
 #### `notify`
 
 ``` purescript
-notify :: forall e. GameGlobal -> String -> Eff (cmd :: CMD | e) Unit
+notify :: forall e. String -> Eff (cmd :: CMD | e) Unit
 ```
 
-#### `notify'`
+#### `notify_`
 
 ``` purescript
-notify' :: forall e. GameGlobal -> String -> Int -> Eff (cmd :: CMD | e) Unit
+notify_ :: forall e. String -> Int -> Eff (cmd :: CMD | e) Unit
 ```
 
 

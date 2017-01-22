@@ -8,6 +8,27 @@ exports.unsafeField = function(key){
   }
 }
 
+exports.unsafeIntField = function(key){
+  return function(obj){
+    return obj[key]|0;
+  }
+}
+
+exports.unsafeOptField_helper = function(Nothing) {
+  return function(Just) {
+    return function(key){
+        return function(obj){
+        var r= obj[key];
+        if (_.isUndefined (r)) {
+            return Nothing;
+        } else {
+            return Just   (r);
+        }
+      }
+    }
+  }
+}
+
 exports.unsafeGetFieldEff = function(key){
   return function(obj){
     return function(){
@@ -253,5 +274,12 @@ exports.selectMaybesImpl = function(isJust){
             }
             return newObj;
         }
+    }
+}
+
+exports.instanceOf = function (className) {
+    return function (object) {
+        var global = (1,eval)('this');
+        return object instanceof global[className];
     }
 }
