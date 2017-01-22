@@ -14,7 +14,7 @@ import Unsafe.Coerce       (unsafeCoerce)
 
 import Screeps.Destructible (class Destructible)
 import Screeps.Id          (class HasId, eqById, validate, encodeJsonWithId, decodeJsonWithId)
-import Screeps.FFI         (unsafeField, instanceOf)
+import Screeps.FFI         (unsafeField, unsafeIntField, instanceOf)
 import Screeps.Resource    (ResourceType(ResourceType))
 import Screeps.RoomObject  (class RoomObject)
 import Screeps.Structure   (class Structure, class Structural, showStructure, StructureType(..))
@@ -61,7 +61,7 @@ store :: forall a. Stores a => a -> Store
 store  = unsafeField "store"
 
 storeGet                     :: forall a. Stores a => a -> ResourceType -> Int
-storeGet s (ResourceType res) = unsafeField res $ store s
+storeGet s (ResourceType res) = unsafeIntField res $ store s
 
 storeCapacity :: forall a. Stores a => a -> Int
 storeCapacity  = unsafeField "storeCapacity"

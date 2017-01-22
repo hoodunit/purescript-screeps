@@ -8,6 +8,12 @@ exports.unsafeField = function(key){
   }
 }
 
+exports.unsafeIntField = function(key){
+  return function(obj){
+    return obj[key]|0;
+  }
+}
+
 exports.unsafeOptField_helper = function(Nothing) {
   return function(Just) {
     return function(key){

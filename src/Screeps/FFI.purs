@@ -10,6 +10,7 @@ import Partial.Unsafe (unsafePartial)
 unsafeOptField :: forall obj val. String -> obj -> Maybe val
 unsafeOptField = unsafeOptField_helper Nothing Just
 
+foreign import unsafeIntField :: forall obj. String -> obj -> Int
 foreign import unsafeField :: forall obj val. String -> obj -> val
 foreign import unsafeOptField_helper :: forall obj val r. r -> (val -> r) -> String -> obj -> r
 foreign import unsafeGetFieldEff :: forall obj val eff. String -> obj -> Eff eff val
