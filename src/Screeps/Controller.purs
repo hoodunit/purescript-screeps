@@ -2,11 +2,11 @@
 module Screeps.Controller where
 
 import Data.Maybe (Maybe)
-import Control.Monad.Eff (Eff)
+import Effect
 
 import Screeps.Constants (structure_controller)
 import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffFn0, unsafeField)
+import Screeps.FFI (runThisEffectFn0, unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (Controller, ReturnCode, Structure)
 
@@ -28,8 +28,8 @@ ticksToDowngrade = unsafeField "ticksToDowngrade"
 upgradeBlocked :: Controller -> Int
 upgradeBlocked = unsafeField "upgradeBlocked"
 
-unclaim :: forall e. Controller -> Eff (cmd :: CMD | e) ReturnCode
-unclaim = runThisEffFn0 "unclaim"
+unclaim :: forall e. Controller -> Effect ReturnCode
+unclaim = runThisEffectFn0 "unclaim"
 
 toController :: forall a. Structure a -> Maybe Controller
 toController = unsafeCast structure_controller

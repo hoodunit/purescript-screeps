@@ -1,11 +1,11 @@
 -- | Corresponds to the Screeps API [ConstructionSite](http://support.screeps.com/hc/en-us/articles/203016342-ConstructionSite)
 module Screeps.ConstructionSite where
 
-import Control.Monad.Eff (Eff)
+import Effect
 
 import Screeps.Effects (CMD)
 import Screeps.Types (ConstructionSite, Id, ReturnCode, StructureType)
-import Screeps.FFI (runThisEffFn0, unsafeField)
+import Screeps.FFI (runThisEffectFn0, unsafeField)
 
 id :: ConstructionSite -> Id ConstructionSite
 id = unsafeField "id"
@@ -25,5 +25,5 @@ progressTotal = unsafeField "progressTotal"
 structureType :: ConstructionSite -> StructureType
 structureType = unsafeField "structureType"
 
-remove :: forall e. ConstructionSite -> Eff (cmd :: CMD | e) ReturnCode
-remove = runThisEffFn0 "remove"
+remove :: forall e. ConstructionSite -> Effect ReturnCode
+remove = runThisEffectFn0 "remove"

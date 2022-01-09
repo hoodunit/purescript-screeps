@@ -2,13 +2,13 @@
 module Screeps.Structure where
 
 import Prelude
-import Control.Monad.Eff (Eff)
+import Effect
 import Data.Maybe (Maybe(Just, Nothing))
 import Unsafe.Coerce (unsafeCoerce)
 
 import Screeps.Effects (CMD)
 import Screeps.Types (Id, ReturnCode, Structure, StructureType)
-import Screeps.FFI (runThisEffFn0, runThisEffFn1, unsafeField)
+import Screeps.FFI (runThisEffectFn0, runThisEffFn1, unsafeField)
 
 hits :: forall a. Structure a -> Int
 hits = unsafeField "hits"
@@ -22,14 +22,14 @@ id = unsafeField "id"
 structureType :: forall a. Structure a -> StructureType
 structureType = unsafeField "structureType"
 
-destroy :: forall a e. Structure a -> Eff (cmd :: CMD | e) ReturnCode
-destroy = runThisEffFn0 "destroy"
+destroy :: forall a e. Structure a -> Effect ReturnCode
+destroy = runThisEffectFn0 "destroy"
 
-isActive :: forall a e. Structure a -> Eff (cmd :: CMD | e) Boolean
-isActive = runThisEffFn0 "isActive"
+isActive :: forall a e. Structure a -> Effect Boolean
+isActive = runThisEffectFn0 "isActive"
 
-notifyWhenAttacked :: forall a e. Structure a -> Boolean -> Eff (cmd :: CMD | e) ReturnCode
-notifyWhenAttacked = runThisEffFn1 "notifyWhenAttacked"
+notifyWhenAttacked :: forall a e. Structure a -> Boolean -> Effect ReturnCode
+notifyWhenAttacked = runThisEffectFn1 "notifyWhenAttacked"
 
 unsafeCast :: forall a b. StructureType -> Structure a -> Maybe b
 unsafeCast t struc

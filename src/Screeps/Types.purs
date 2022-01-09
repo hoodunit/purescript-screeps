@@ -4,16 +4,19 @@ module Screeps.Types where
 import Prelude
 import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
-import Data.Generic (class Generic, gEq, gShow)
+
+import Data.Generic.Rep (class Generic)
+import Data.Eq.Generic (genericEq)
+import Data.Show.Generic (genericShow)
 import Data.Maybe (Maybe)
-import Data.StrMap as StrMap
+import Foreign.Object (Object)
 
-foreign import data GameGlobal :: *
+foreign import data GameGlobal :: Type
 
-foreign import data Market :: *
-foreign import data Room :: *
-foreign import data RoomPosition :: *
-foreign import data WorldMap :: *
+foreign import data Market :: Type
+foreign import data Room :: Type
+foreign import data RoomPosition :: Type
+foreign import data WorldMap :: Type
 
 type RoomObject a = RawRoomObject a
 type Structure a = RoomObject (RawStructure a)
@@ -47,37 +50,37 @@ type Nuke = RoomObject RawNuke
 type Resource = RoomObject RawResource
 type Source = RoomObject RawSource
 
-foreign import data RawOwnedStructure :: * -> *
-foreign import data RawRoomObject :: * -> *
-foreign import data RawStructure :: * -> *
+foreign import data RawOwnedStructure :: Type -> Type
+foreign import data RawRoomObject :: Type -> Type
+foreign import data RawStructure :: Type -> Type
 
-foreign import data RawContainer :: *
-foreign import data RawController :: *
-foreign import data RawExtension :: *
-foreign import data RawExtractor :: *
-foreign import data RawKeeperLair :: *
-foreign import data RawLab :: *
-foreign import data RawLink :: *
-foreign import data RawNuker :: *
-foreign import data RawObserver :: *
-foreign import data RawPortal :: *
-foreign import data RawPowerBank :: *
-foreign import data RawPowerSpawn :: *
-foreign import data RawRampart :: *
-foreign import data RawRoad :: *
-foreign import data RawSpawn :: *
-foreign import data RawStorage :: *
-foreign import data RawTerminal :: *
-foreign import data RawTower :: *
-foreign import data RawWall :: *
+foreign import data RawContainer :: Type
+foreign import data RawController :: Type
+foreign import data RawExtension :: Type
+foreign import data RawExtractor :: Type
+foreign import data RawKeeperLair :: Type
+foreign import data RawLab :: Type
+foreign import data RawLink :: Type
+foreign import data RawNuker :: Type
+foreign import data RawObserver :: Type
+foreign import data RawPortal :: Type
+foreign import data RawPowerBank :: Type
+foreign import data RawPowerSpawn :: Type
+foreign import data RawRampart :: Type
+foreign import data RawRoad :: Type
+foreign import data RawSpawn :: Type
+foreign import data RawStorage :: Type
+foreign import data RawTerminal :: Type
+foreign import data RawTower :: Type
+foreign import data RawWall :: Type
 
-foreign import data RawConstructionSite :: *
-foreign import data RawCreep :: *
-foreign import data RawFlag :: *
-foreign import data RawMineral :: *
-foreign import data RawNuke :: *
-foreign import data RawResource :: *
-foreign import data RawSource :: *
+foreign import data RawConstructionSite :: Type
+foreign import data RawCreep :: Type
+foreign import data RawFlag :: Type
+foreign import data RawMineral :: Type
+foreign import data RawNuke :: Type
+foreign import data RawResource :: Type
+foreign import data RawSource :: Type
 
 type Path = Array PathStep -- or String?
 
@@ -90,63 +93,63 @@ type PathStep =
 
 newtype ReturnCode = ReturnCode Int
 derive instance genericReturnCode :: Generic ReturnCode
-instance eqReturnCode :: Eq ReturnCode where eq = gEq
+instance eqReturnCode :: Eq ReturnCode where eq = genericEq
 instance showReturnCode :: Show ReturnCode where
   show (ReturnCode n) = show n
 
 newtype ResourceType = ResourceType String
 derive instance genericResourceType :: Generic ResourceType
-instance eqResourceType :: Eq ResourceType where eq = gEq
+instance eqResourceType :: Eq ResourceType where eq = genericEq
 instance showResourceType :: Show ResourceType where
   show (ResourceType s) = s
 
 newtype StructureType = StructureType String
 derive instance genericStructureType :: Generic StructureType
-instance eqStructureType :: Eq StructureType where eq = gEq
-instance showStructureType :: Show StructureType where show = gShow
+instance eqStructureType :: Eq StructureType where eq = genericEq
+instance showStructureType :: Show StructureType where show = genericShow
 
 newtype TerrainMask = TerrainMask Int
 derive instance genericTerrainMask :: Generic TerrainMask
-instance eqTerrainMask :: Eq TerrainMask where eq = gEq
-instance showTerrainMask :: Show TerrainMask where show = gShow
+instance eqTerrainMask :: Eq TerrainMask where eq = genericEq
+instance showTerrainMask :: Show TerrainMask where show = genericShow
 
 newtype Terrain = Terrain String
 derive instance genericTerrain :: Generic Terrain
-instance eqTerrain :: Eq Terrain where eq = gEq
+instance eqTerrain :: Eq Terrain where eq = genericEq
 instance showTerrain :: Show Terrain
   where show (Terrain s) = s
 
 newtype Mode = Mode String
 derive instance genericMode :: Generic Mode
-instance eqMode :: Eq Mode where eq = gEq
-instance showMode :: Show Mode where show = gShow
+instance eqMode :: Eq Mode where eq = genericEq
+instance showMode :: Show Mode where show = genericShow
 
 newtype Id a = Id String
 derive instance genericId :: Generic (Id a)
-instance eqId :: Eq (Id a) where eq = gEq
-instance showId :: Show (Id a) where show = gShow
+instance eqId :: Eq (Id a) where eq = genericEq
+instance showId :: Show (Id a) where show = genericShow
 instance decodeJsonId :: DecodeJson (Id a) where decodeJson = gDecodeJson
 instance encodeJsonId :: EncodeJson (Id a) where encodeJson = gEncodeJson
 
 newtype Direction = Direction Int
 derive instance genericDirection :: Generic Direction
-instance eqDirection :: Eq Direction where eq = gEq
-instance showDirection :: Show Direction where show = gShow
+instance eqDirection :: Eq Direction where eq = genericEq
+instance showDirection :: Show Direction where show = genericShow
 
 newtype BodyPartType = BodyPartType String
 derive instance genericBodyPartType :: Generic BodyPartType
-instance eqBodyPartType :: Eq BodyPartType where eq = gEq
-instance showBodyPartType :: Show BodyPartType where show = gShow
+instance eqBodyPartType :: Eq BodyPartType where eq = genericEq
+instance showBodyPartType :: Show BodyPartType where show = genericShow
 
 newtype Color = Color Int
 derive instance genericColor :: Generic Color
-instance eqColor :: Eq Color where eq = gEq
-instance showColor :: Show Color where show = gShow
+instance eqColor :: Eq Color where eq = genericEq
+instance showColor :: Show Color where show = genericShow
 
 newtype LookType a = LookType String
 newtype FindType a = FindType Int
 
-type StructureInfo = StrMap.StrMap Int
+type StructureInfo = Object Int
 
 -----------------
 -- Helper types and functions

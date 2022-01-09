@@ -1,23 +1,23 @@
 -- | Internal helper module for JavaScript FFI
 module Screeps.FFI where
 
-import Prelude
-import Control.Monad.Eff (Eff)
+import Prelude (Unit, ($))
+import Effect (Effect)
 import Data.Maybe (Maybe(Just, Nothing), isJust, fromJust, maybe)
 import Data.Function.Uncurried (Fn3, runFn3)
 import Partial.Unsafe (unsafePartial)
 
 foreign import unsafeField :: forall obj val. String -> obj -> val
-foreign import unsafeGetFieldEff :: forall obj val eff. String -> obj -> Eff eff val
-foreign import unsafeSetFieldEff :: forall obj val eff. String -> obj -> val -> Eff eff Unit
-foreign import unsafeDeleteFieldEff :: forall obj eff. String -> obj -> Eff eff Unit
-foreign import runThisEffFn0 :: forall eff this a. String -> this -> Eff eff a
-foreign import runThisEffFn1 :: forall eff this a b. String -> this -> a -> Eff eff b
-foreign import runThisEffFn2 :: forall eff this a b c. String -> this -> a -> b -> Eff eff c
-foreign import runThisEffFn3 :: forall eff this a b c d. String -> this -> a -> b -> c -> Eff eff d
-foreign import runThisEffFn4 :: forall eff this a b c d e. String -> this -> a -> b -> c -> d -> Eff eff e
-foreign import runThisEffFn5 :: forall eff this a b c d e f. String -> this -> a -> b -> c -> d -> e -> Eff eff f
-foreign import runThisEffFn6 :: forall eff this a b c d e f g. String -> this -> a -> b -> c -> d -> e -> f -> Eff eff g
+foreign import unsafeGetFieldEffect :: forall obj val. String -> obj -> Effect val
+foreign import unsafeSetFieldEffect :: forall obj val. String -> obj -> val -> Effect Unit
+foreign import unsafeDeleteFieldEffect :: forall obj. String -> obj -> Effect Unit
+foreign import runThisEffectFn0 :: forall this a. String -> this -> Effect a
+foreign import runThisEffectFn1 :: forall this a b. String -> this -> a -> Effect b
+foreign import runThisEffectFn2 :: forall this a b c. String -> this -> a -> b -> Effect c
+foreign import runThisEffectFn3 :: forall this a b c d. String -> this -> a -> b -> c -> Effect d
+foreign import runThisEffectFn4 :: forall this a b c d e. String -> this -> a -> b -> c -> d -> Effect e
+foreign import runThisEffectFn5 :: forall this a b c d e f. String -> this -> a -> b -> c -> d -> e -> Effect f
+foreign import runThisEffectFn6 :: forall this a b c d e f g. String -> this -> a -> b -> c -> d -> e -> f -> Effect g
 foreign import runThisFn0 :: forall this a. String -> this -> a
 foreign import runThisFn1 :: forall this a b. String -> this -> a -> b
 foreign import runThisFn2 :: forall this a b c. String -> this -> a -> b -> c
@@ -26,7 +26,7 @@ foreign import runThisFn4 :: forall this a b c d e. String -> this -> a -> b -> 
 foreign import runThisFn5 :: forall this a b c d e f. String -> this -> a -> b -> c -> d -> e -> f
 foreign import runThisFn6 :: forall this a b c d e f g. String -> this -> a -> b -> c -> d -> e -> f -> g
 
-foreign import data NullOrUndefined :: * -> *
+foreign import data NullOrUndefined :: Type -> Type
 foreign import null :: forall a. NullOrUndefined a
 foreign import undefined :: forall a. NullOrUndefined a
 foreign import notNullOrUndefined :: forall a. a -> NullOrUndefined a
@@ -43,7 +43,7 @@ toNullable = maybe null notNullOrUndefined
 toUndefinable :: forall a. Maybe a -> NullOrUndefined a
 toUndefinable = maybe undefined notNullOrUndefined
 
-foreign import data JsObject :: *
+foreign import data JsObject :: Type
 foreign import selectMaybesImpl :: forall a. (Maybe a -> Boolean) -> (Maybe a -> a) -> a -> JsObject
 
 selectMaybes :: forall a. a -> JsObject
