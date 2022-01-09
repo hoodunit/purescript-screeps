@@ -3,7 +3,6 @@ module Screeps.ConstructionSite where
 
 import Effect
 
-import Screeps.Effects (CMD)
 import Screeps.Types (ConstructionSite, Id, ReturnCode, StructureType)
 import Screeps.FFI (runThisEffectFn0, unsafeField)
 

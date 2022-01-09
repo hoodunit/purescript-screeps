@@ -2,8 +2,10 @@
 module Screeps.Types where
 
 import Prelude
-import Data.Argonaut.Decode (class DecodeJson, decodeJson, gDecodeJson)
-import Data.Argonaut.Encode (class EncodeJson, encodeJson, gEncodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Argonaut.Decode.Decoders (decodeString)
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Encode.Encoders (encodeString)
 
 import Data.Generic.Rep (class Generic)
 import Data.Eq.Generic (genericEq)
@@ -92,61 +94,66 @@ type PathStep =
   , direction :: Direction }
 
 newtype ReturnCode = ReturnCode Int
-derive instance genericReturnCode :: Generic ReturnCode
+derive instance genericReturnCode :: Generic ReturnCode _
 instance eqReturnCode :: Eq ReturnCode where eq = genericEq
 instance showReturnCode :: Show ReturnCode where
   show (ReturnCode n) = show n
 
 newtype ResourceType = ResourceType String
-derive instance genericResourceType :: Generic ResourceType
+derive instance genericResourceType :: Generic ResourceType _
 instance eqResourceType :: Eq ResourceType where eq = genericEq
 instance showResourceType :: Show ResourceType where
   show (ResourceType s) = s
 
 newtype StructureType = StructureType String
-derive instance genericStructureType :: Generic StructureType
+derive instance genericStructureType :: Generic StructureType _
 instance eqStructureType :: Eq StructureType where eq = genericEq
 instance showStructureType :: Show StructureType where show = genericShow
 
 newtype TerrainMask = TerrainMask Int
-derive instance genericTerrainMask :: Generic TerrainMask
+derive instance genericTerrainMask :: Generic TerrainMask _
 instance eqTerrainMask :: Eq TerrainMask where eq = genericEq
 instance showTerrainMask :: Show TerrainMask where show = genericShow
 
 newtype Terrain = Terrain String
-derive instance genericTerrain :: Generic Terrain
+derive instance genericTerrain :: Generic Terrain _
 instance eqTerrain :: Eq Terrain where eq = genericEq
 instance showTerrain :: Show Terrain
   where show (Terrain s) = s
 
 newtype Mode = Mode String
-derive instance genericMode :: Generic Mode
+derive instance genericMode :: Generic Mode _
 instance eqMode :: Eq Mode where eq = genericEq
 instance showMode :: Show Mode where show = genericShow
 
+newtype Id :: Type -> Type
 newtype Id a = Id String
-derive instance genericId :: Generic (Id a)
+getId :: forall a. Id a -> String
+getId (Id x) = x
+derive instance genericId :: Generic (Id a) _
 instance eqId :: Eq (Id a) where eq = genericEq
 instance showId :: Show (Id a) where show = genericShow
-instance decodeJsonId :: DecodeJson (Id a) where decodeJson = gDecodeJson
-instance encodeJsonId :: EncodeJson (Id a) where encodeJson = gEncodeJson
+instance decodeJsonId :: DecodeJson (Id a) where decodeJson x = Id <$> decodeString x
+instance encodeJsonId :: EncodeJson (Id a) where encodeJson = encodeString <<< getId
 
 newtype Direction = Direction Int
-derive instance genericDirection :: Generic Direction
+derive instance genericDirection :: Generic Direction _
 instance eqDirection :: Eq Direction where eq = genericEq
 instance showDirection :: Show Direction where show = genericShow
 
 newtype BodyPartType = BodyPartType String
-derive instance genericBodyPartType :: Generic BodyPartType
+derive instance genericBodyPartType :: Generic BodyPartType _
 instance eqBodyPartType :: Eq BodyPartType where eq = genericEq
 instance showBodyPartType :: Show BodyPartType where show = genericShow
 
 newtype Color = Color Int
-derive instance genericColor :: Generic Color
+derive instance genericColor :: Generic Color _
 instance eqColor :: Eq Color where eq = genericEq
 instance showColor :: Show Color where show = genericShow
 
+newtype LookType :: Type -> Type
 newtype LookType a = LookType String
+newtype FindType :: Type -> Type
 newtype FindType a = FindType Int
 
 type StructureInfo = Object Int

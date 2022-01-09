@@ -5,7 +5,6 @@ import Data.Maybe (Maybe)
 import Effect
 
 import Screeps.Constants (structure_controller)
-import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffectFn0, unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (Controller, ReturnCode, Structure)

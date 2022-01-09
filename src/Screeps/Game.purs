@@ -6,9 +6,8 @@ import Effect
 import Data.Maybe (Maybe)
 import Foreign.Object (Object)
 
-import Screeps.Effects (CMD, TICK, TIME)
 import Screeps.Types (ConstructionSite, Creep, Flag, GameGlobal, Id, Market, ReturnCode, Room, Spawn, Structure, WorldMap)
-import Screeps.FFI (toMaybe, runThisEffectFn0, runThisEffFn1, runThisEffFn2, runThisFn0, runThisFn1, unsafeField)
+import Screeps.FFI (toMaybe, runThisEffectFn0, runThisEffectFn1, runThisEffectFn2, runThisFn0, runThisFn1, unsafeField)
 
 foreign import getGameGlobal :: forall e. Effect GameGlobal
 

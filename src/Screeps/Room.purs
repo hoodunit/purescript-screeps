@@ -9,12 +9,11 @@ import Data.Maybe (Maybe(Just, Nothing))
 import Foreign.Object (Object)
 import Data.Tuple (Tuple(Tuple))
 
-import Screeps.Effects (CMD, TICK)
 import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, TargetPosition(..), Terminal)
 import Screeps.FFI (runThisEffectFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: Type
-foreign import getRoomGlobal :: forall e. Effect RoomGlobal
+foreign import getRoomGlobal :: Effect RoomGlobal
 
 -- TODO: costCallback option
 type PathOptions o =
