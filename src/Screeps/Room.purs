@@ -10,7 +10,7 @@ import Foreign.Object (Object)
 import Data.Tuple (Tuple(Tuple))
 
 import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, TargetPosition(..), Terminal)
-import Screeps.FFI (runThisEffectFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FFI (runThisEffectFn1, runThisEffectFn2, runThisEffectFn3, runThisEffectFn4, runThisEffectFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 
 foreign import data RoomGlobal :: Type
 foreign import getRoomGlobal :: Effect RoomGlobal

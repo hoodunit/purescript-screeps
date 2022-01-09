@@ -5,7 +5,6 @@ import Effect
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_rampart)
-import Screeps.Effects (CMD)
 import Screeps.FFI (unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (Rampart, ReturnCode, Structure)

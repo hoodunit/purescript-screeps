@@ -8,10 +8,9 @@ import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_spawn)
-import Screeps.Effects (CMD)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (BodyPartType, Creep, ReturnCode, Spawn, Structure)
-import Screeps.FFI (NullOrUndefined, runThisEffectFn1, runThisEffFn2, runThisFn1, toMaybe, toNullable, unsafeField)
+import Screeps.FFI (NullOrUndefined, runThisEffectFn1, runThisEffectFn2, runThisFn1, toMaybe, toNullable, unsafeField)
 
 type CreepInfo =
   { name :: String
@@ -39,25 +38,25 @@ canCreateCreep spawn parts = runThisFn1 "canCreateCreep" spawn parts
 canCreateCreep' :: forall e. Spawn -> Array BodyPartType -> String -> Effect ReturnCode
 canCreateCreep' spawn parts name' = runThisEffectFn2 "canCreateCreep" spawn parts name'
 
-foreign import createCreepImpl :: forall e.
+foreign import createCreepImpl ::
   Spawn ->
   Array BodyPartType ->
   (ReturnCode -> Either ReturnCode String) ->
   (String -> Either ReturnCode String) ->
-  Effect
-foreign import createCreepPrimeImpl :: forall e mem.
+  Effect Creep
+foreign import createCreepPrimeImpl :: forall mem.
   Spawn ->
   Array BodyPartType ->
   NullOrUndefined String ->
   mem ->
   (ReturnCode -> Either ReturnCode String) ->
   (String -> Either ReturnCode String) ->
-  Effect
+  Effect Creep
 
-createCreep :: forall e. Spawn -> Array BodyPartType -> Effect
+createCreep :: forall e. Spawn -> Array BodyPartType -> Effect Creep
 createCreep spawn parts = createCreepImpl spawn parts Left Right
 
-createCreep' :: forall mem e. (EncodeJson mem) => Spawn -> Array BodyPartType -> Maybe String -> mem -> Effect
+createCreep' :: forall mem e. (EncodeJson mem) => Spawn -> Array BodyPartType -> Maybe String -> mem -> Effect Creep
 createCreep' spawn parts name' mem = createCreepPrimeImpl spawn parts (toNullable name') (encodeJson mem) Left Right
 
 recycleCreep :: forall e. Spawn -> Creep -> Effect ReturnCode

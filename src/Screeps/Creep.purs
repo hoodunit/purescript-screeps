@@ -3,7 +3,7 @@ module Screeps.Creep where
 
 import Prelude
 import Effect
-import Data.Argonaut.Decode (class DecodeJson)
+import Data.Argonaut.Decode (class DecodeJson, JsonDecodeError)
 import Data.Argonaut.Encode (class EncodeJson)
 import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
@@ -126,7 +126,7 @@ harvestMineral = runThisEffectFn1 "harvest"
 heal :: forall e. Creep -> Creep -> Effect ReturnCode
 heal = runThisEffectFn1 "heal"
 
-getMemory :: forall a. (DecodeJson a) => Creep -> String -> Effect a
+getMemory :: forall a. (DecodeJson a) => Creep -> String -> Effect (Either JsonDecodeError a)
 getMemory creep key = fromJson <$> unsafeGetFieldEffect key creepMemory
   where creepMemory = unsafeField "memory" creep
 

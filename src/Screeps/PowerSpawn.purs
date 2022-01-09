@@ -5,8 +5,7 @@ import Effect
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_power_spawn)
-import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffectFn0, runThisEffFn1, unsafeField)
+import Screeps.FFI (runThisEffectFn0, runThisEffectFn1, unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (PowerSpawn, ReturnCode, Structure)
 

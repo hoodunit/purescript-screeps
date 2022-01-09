@@ -5,8 +5,7 @@ import Effect
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_link)
-import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffectFn1, runThisEffFn2, unsafeField)
+import Screeps.FFI (runThisEffectFn1, runThisEffectFn2, unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (Link, ReturnCode, Structure)
 

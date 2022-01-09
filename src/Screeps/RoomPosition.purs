@@ -2,21 +2,21 @@
 module Screeps.RoomPosition where
 
 import Prelude
-import Effect
-import Effect.Exception (EXCEPTION, Error, error, try)
+import Effect (Effect)
+import Effect.Unsafe (unsafePerformEffect)
+import Effect.Exception (Error, error, try)
 import Data.Either (Either(Left, Right))
 import Data.Maybe (Maybe(Nothing), maybe)
 import Unsafe.Coerce (unsafeCoerce)
 
-import Screeps.Effects (CMD)
 import Screeps.Types (Color, Direction, FilterFn, FindContext(..), FindType, LookType, Path, ReturnCode, RoomObject, RoomPosition, TargetPosition(..), StructureType)
-import Screeps.FFI (runThisEffectFn0, runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FFI (runThisEffectFn0, runThisEffectFn1, runThisEffectFn2, runThisEffectFn3, runThisFn0, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 import Screeps.Room (PathOptions)
 
 foreign import mkRoomPosition :: Int -> Int -> String -> RoomPosition
 
 tryPure :: forall a. Effect a -> Either Error a
-tryPure = runPure <<< try
+tryPure = unsafePerformEffect <<< try
 
 type ClosestPathOptions = PathOptions
   ( filter :: Maybe (forall a. a -> Boolean)

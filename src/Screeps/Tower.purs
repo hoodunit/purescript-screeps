@@ -5,10 +5,9 @@ import Effect
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_tower)
-import Screeps.Effects (CMD)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (Creep, ReturnCode, Structure, Tower)
-import Screeps.FFI (runThisEffectFn1, runThisEffFn2, unsafeField)
+import Screeps.FFI (runThisEffectFn1, runThisEffectFn2, unsafeField)
 
 energy :: Tower -> Int
 energy = unsafeField "energy"

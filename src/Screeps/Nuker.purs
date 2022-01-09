@@ -5,7 +5,6 @@ import Effect
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_nuker)
-import Screeps.Effects (CMD)
 import Screeps.FFI (runThisEffectFn1, unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (Nuker, ReturnCode, RoomPosition, Structure)

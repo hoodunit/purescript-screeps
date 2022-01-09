@@ -5,8 +5,7 @@ import Effect
 import Data.Maybe (Maybe)
 
 import Screeps.Constants (structure_terminal)
-import Screeps.Effects (CMD)
-import Screeps.FFI (runThisEffectFn3, runThisEffFn4, unsafeField)
+import Screeps.FFI (runThisEffectFn3, runThisEffectFn4, unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (ResourceType(ResourceType), ReturnCode, Structure, Terminal)
 
