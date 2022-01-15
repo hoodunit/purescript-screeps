@@ -1,17 +1,17 @@
 -- | Corresponds to the Screeps API [Creep](http://support.screeps.com/hc/en-us/articles/203013212-Creep)
 module Screeps.Creep where
 
+import Effect (Effect)
 import Prelude
-import Effect
+
 import Data.Argonaut.Decode (class DecodeJson, JsonDecodeError)
 import Data.Argonaut.Encode (class EncodeJson)
 import Data.Either (Either)
 import Data.Maybe (Maybe(Nothing))
-
-import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
 import Screeps.FFI (runThisEffectFn0, runThisEffectFn1, runThisEffectFn2, runThisEffectFn3, runThisFn1, selectMaybes, toMaybe, unsafeGetFieldEffect, unsafeField, unsafeSetFieldEffect)
 import Screeps.Memory (fromJson, toJson)
 import Screeps.Room (PathOptions)
+import Screeps.Types (BodyPartType, ConstructionSite, Controller, Creep, Direction, Id, Mineral, Path, Resource, ResourceType, ReturnCode, Source, Structure, TargetPosition(..))
 
 foreign import data CreepCargo :: Type
 
@@ -50,6 +50,7 @@ amtCarrying :: Creep -> ResourceType -> Int
 amtCarrying creep res = unsafeField (show res) $ carry creep
 
 foreign import totalAmtCarrying :: Creep -> Int
+foreign import freeCapacity :: Creep -> Int
 
 carryCapacity :: Creep -> Int
 carryCapacity = unsafeField "carryCapacity"
@@ -87,52 +88,58 @@ spawning = unsafeField "spawning"
 ticksToLive :: Creep -> Int
 ticksToLive = unsafeField "ticksToLive"
 
-attackCreep :: forall e. Creep -> Creep -> Effect ReturnCode
+attackCreep :: Creep -> Creep -> Effect ReturnCode
 attackCreep = runThisEffectFn1 "attack"
 
-attackStructure :: forall a e. Creep -> Structure a -> Effect ReturnCode
+attackStructure :: forall a. Creep -> Structure a -> Effect ReturnCode
 attackStructure = runThisEffectFn1 "attack"
 
-attackController :: forall a e. Creep -> Structure a -> Effect ReturnCode
+attackController :: forall a. Creep -> Structure a -> Effect ReturnCode
 attackController = runThisEffectFn1 "attackController"
 
-build :: forall e. Creep -> ConstructionSite -> Effect ReturnCode
+build :: Creep -> ConstructionSite -> Effect ReturnCode
 build = runThisEffectFn1 "build"
 
-cancelOrder :: forall e. Creep -> String -> Effect ReturnCode
+cancelOrder :: Creep -> String -> Effect ReturnCode
 cancelOrder = runThisEffectFn1 "cancelOrder"
 
-claimController :: forall a e. Creep -> Structure a -> Effect ReturnCode
+claimController :: forall a. Creep -> Structure a -> Effect ReturnCode
 claimController = runThisEffectFn1 "claimController"
 
-dismantle :: forall a e. Creep -> Structure a -> Effect ReturnCode
+dismantle :: forall a. Creep -> Structure a -> Effect ReturnCode
 dismantle = runThisEffectFn1 "dismantle"
 
-drop :: forall e. Creep -> ResourceType -> Effect ReturnCode
+drop :: Creep -> ResourceType -> Effect ReturnCode
 drop = runThisEffectFn1 "drop"
 
-dropAmt :: forall e. Creep -> ResourceType -> Int -> Effect ReturnCode
+dropAmt ::  Creep -> ResourceType -> Int -> Effect ReturnCode
 dropAmt = runThisEffectFn2 "drop"
 
 getActiveBodyparts :: Creep -> BodyPartType -> Int
 getActiveBodyparts = runThisFn1 "getActiveBodyparts"
 
-harvestSource :: forall e. Creep -> Source -> Effect ReturnCode
+harvestSource ::  Creep -> Source -> Effect ReturnCode
 harvestSource = runThisEffectFn1 "harvest"
 
-harvestMineral :: forall e. Creep -> Mineral -> Effect ReturnCode
+harvestMineral ::  Creep -> Mineral -> Effect ReturnCode
 harvestMineral = runThisEffectFn1 "harvest"
 
-heal :: forall e. Creep -> Creep -> Effect ReturnCode
+heal ::  Creep -> Creep -> Effect ReturnCode
 heal = runThisEffectFn1 "heal"
 
-getMemory :: forall a. (DecodeJson a) => Creep -> String -> Effect (Either JsonDecodeError a)
-getMemory creep key = fromJson <$> unsafeGetFieldEffect key creepMemory
+getMemoryBy :: forall a. (DecodeJson a) => String -> Creep -> Effect (Either JsonDecodeError a)
+getMemoryBy key creep = fromJson <$> unsafeGetFieldEffect key creepMemory
   where creepMemory = unsafeField "memory" creep
 
-setMemory :: forall a. (EncodeJson a) => Creep -> String -> a -> Effect Unit
-setMemory creep key val = unsafeSetFieldEffect key creepMemory (toJson val)
+setMemoryBy :: forall a. (EncodeJson a) => String -> a -> Creep -> Effect Unit
+setMemoryBy key val creep = unsafeSetFieldEffect key creepMemory (toJson val)
   where creepMemory = unsafeField "memory" creep
+
+getMemory :: forall a. (DecodeJson a) => Creep -> Effect (Either JsonDecodeError a)
+getMemory creep = fromJson <$> unsafeGetFieldEffect "memory" creep
+
+setMemory :: forall a. (EncodeJson a) => a -> Creep -> Effect Unit
+setMemory val creep = unsafeSetFieldEffect "memory" creep (toJson val)
 
 move :: Creep -> Direction -> Effect ReturnCode
 move = runThisEffectFn1 "move"
@@ -153,7 +160,7 @@ moveTo' creep (TargetObj obj) opts = runThisEffectFn2 "moveTo" creep obj (select
 notifyWhenAttacked :: Creep -> Boolean -> Effect ReturnCode
 notifyWhenAttacked = runThisEffectFn1 "notifyWhenAttacked"
 
-pickup :: forall e. Creep -> Resource -> Effect ReturnCode
+pickup ::  Creep -> Resource -> Effect ReturnCode
 pickup = runThisEffectFn1 "pickup"
 
 rangedAttackCreep :: Creep -> Creep -> Effect ReturnCode
