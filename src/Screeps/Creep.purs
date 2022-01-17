@@ -135,12 +135,6 @@ setMemoryBy :: forall a. (EncodeJson a) => String -> a -> Creep -> Effect Unit
 setMemoryBy key val creep = unsafeSetFieldEffect key creepMemory (toJson val)
   where creepMemory = unsafeField "memory" creep
 
-getMemory :: forall a. (DecodeJson a) => Creep -> Effect (Either JsonDecodeError a)
-getMemory creep = fromJson <$> unsafeGetFieldEffect "memory" creep
-
-setMemory :: forall a. (EncodeJson a) => a -> Creep -> Effect Unit
-setMemory val creep = unsafeSetFieldEffect "memory" creep (toJson val)
-
 move :: Creep -> Direction -> Effect ReturnCode
 move = runThisEffectFn1 "move"
 

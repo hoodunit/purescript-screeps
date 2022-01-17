@@ -4,6 +4,7 @@ module Screeps.Spawn where
 import Effect
 import Prelude
 
+import Data.Argonaut.Core (toObject)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
@@ -80,7 +81,7 @@ spawnCreep = spawnCreep' (spawnOpts :: SpawnOptions Unit)
 spawnCreep' :: forall a. EncodeJson a => SpawnOptions a -> Array BodyPartType -> Maybe String  -> Spawn -> Effect ReturnCode
 spawnCreep' opts parts mName spawn = spawnCreepImpl spawn parts (toNullable mName) opts'
   where
-    opts' = (selectMaybes (opts { memory = toJson <$> opts.memory }))
+    opts' = selectMaybes opts { memory = encodeJson <$> opts.memory }
 
 --createCreep :: Spawn -> Array BodyPartType -> Effect Creep
 --createCreep spawn parts = createCreepImpl spawn parts Left Right
@@ -88,10 +89,10 @@ spawnCreep' opts parts mName spawn = spawnCreepImpl spawn parts (toNullable mNam
 --createCreep' :: forall mem e. (EncodeJson mem) => Spawn -> Array BodyPartType -> Maybe String -> mem -> Effect Creep
 --createCreep' spawn parts name' mem = createCreepPrimeImpl spawn parts (toNullable name') (encodeJson mem) Left Right
 
-recycleCreep :: forall e. Spawn -> Creep -> Effect ReturnCode
+recycleCreep :: Spawn -> Creep -> Effect ReturnCode
 recycleCreep = runThisEffectFn1 "recycleCreep"
 
-renewCreep :: forall e. Spawn -> Creep -> Effect ReturnCode
+renewCreep :: Spawn -> Creep -> Effect ReturnCode
 renewCreep = runThisEffectFn1 "renewCreep"
 
 toSpawn :: forall a. Structure a -> Maybe Spawn
