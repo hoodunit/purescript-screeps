@@ -11,11 +11,13 @@ exports.createCreepImpl = function(structure){
                     } else {
                         return left(result);
                     }
-                }
-            }
-        }
-    }
-}
+                };
+            };
+        };
+    };
+};
+
+exports.spawnCreepImpl = structure => parts => name => opts => () => structure.spawnCreep(parts, name, opts);
 
 exports.createCreepPrimeImpl = function(structure){
     return function(parts){
@@ -30,10 +32,10 @@ exports.createCreepPrimeImpl = function(structure){
                             } else {
                                 return left(result);
                             }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+                        };
+                    };
+                };
+            };
+        };
+    };
+};

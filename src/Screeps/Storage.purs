@@ -8,7 +8,7 @@ import Screeps.FFI (unsafeField)
 import Screeps.Structure (unsafeCast)
 import Screeps.Types (ResourceType(ResourceType), Storage, Structure)
 
-foreign import data Store :: *
+foreign import data Store :: Type
 
 store :: Storage -> Store
 store = unsafeField "store"

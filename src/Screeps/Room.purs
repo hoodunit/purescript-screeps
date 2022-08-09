@@ -2,19 +2,18 @@
 module Screeps.Room where
 
 import Prelude
-import Control.Monad.Eff (Eff)
+import Effect
 import Data.Array as Array
 import Data.Either (Either(Left,Right))
 import Data.Maybe (Maybe(Just, Nothing))
-import Data.StrMap as StrMap
+import Foreign.Object (Object)
 import Data.Tuple (Tuple(Tuple))
 
-import Screeps.Effects (CMD, TICK)
 import Screeps.Types (Controller, Color, FilterFn, FindType, LookType, Mode, Path, ReturnCode, Room, RoomPosition, Storage, StructureType, TargetPosition(..), Terminal)
-import Screeps.FFI (runThisEffFn1, runThisEffFn2, runThisEffFn3, runThisEffFn4, runThisEffFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
+import Screeps.FFI (runThisEffectFn1, runThisEffectFn2, runThisEffectFn3, runThisEffectFn4, runThisEffectFn5, runThisFn1, runThisFn2, runThisFn3, selectMaybes, toMaybe, unsafeField)
 
-foreign import data RoomGlobal :: *
-foreign import getRoomGlobal :: forall e. Eff (tick :: TICK | e) RoomGlobal
+foreign import data RoomGlobal :: Type
+foreign import getRoomGlobal :: Effect RoomGlobal
 
 -- TODO: costCallback option
 type PathOptions o =
@@ -71,33 +70,33 @@ serializePath = runThisFn1 "serializePath"
 deserializePath :: RoomGlobal -> String -> Path
 deserializePath = runThisFn1 "deserializePath"
 
-createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Eff (cmd :: CMD | e) ReturnCode
-createConstructionSite room (TargetPt x' y') strucType = runThisEffFn3 "createConstructionSite" room x' y' strucType
-createConstructionSite room (TargetPos pos) strucType = runThisEffFn2 "createConstructionSite" room pos strucType
-createConstructionSite room (TargetObj obj) strucType = runThisEffFn2 "createConstructionSite" room obj strucType
+createConstructionSite :: forall a e. Room -> TargetPosition a -> StructureType -> Effect ReturnCode
+createConstructionSite room (TargetPt x' y') strucType = runThisEffectFn3 "createConstructionSite" room x' y' strucType
+createConstructionSite room (TargetPos pos) strucType = runThisEffectFn2 "createConstructionSite" room pos strucType
+createConstructionSite room (TargetObj obj) strucType = runThisEffectFn2 "createConstructionSite" room obj strucType
 
-createFlag :: forall a e. Room -> TargetPosition a -> Eff (cmd :: CMD | e) ReturnCode
-createFlag room (TargetPt x' y') = runThisEffFn2 "createFlag" room x' y'
-createFlag room (TargetPos pos) = runThisEffFn1 "createFlag" room pos
-createFlag room (TargetObj obj) = runThisEffFn1 "createFlag" room obj
+createFlag :: forall a e. Room -> TargetPosition a -> Effect ReturnCode
+createFlag room (TargetPt x' y') = runThisEffectFn2 "createFlag" room x' y'
+createFlag room (TargetPos pos) = runThisEffectFn1 "createFlag" room pos
+createFlag room (TargetObj obj) = runThisEffectFn1 "createFlag" room obj
 
-createFlagWithName :: forall a e. Room -> TargetPosition a -> String -> Eff (cmd :: CMD | e) ReturnCode
-createFlagWithName room (TargetPt x' y') name' = runThisEffFn3 "createFlag" room x' y' name'
-createFlagWithName room (TargetPos pos) name' = runThisEffFn2 "createFlag" room pos name'
-createFlagWithName room (TargetObj obj) name' = runThisEffFn2 "createFlag" room obj name'
+createFlagWithName :: forall a e. Room -> TargetPosition a -> String -> Effect ReturnCode
+createFlagWithName room (TargetPt x' y') name' = runThisEffectFn3 "createFlag" room x' y' name'
+createFlagWithName room (TargetPos pos) name' = runThisEffectFn2 "createFlag" room pos name'
+createFlagWithName room (TargetObj obj) name' = runThisEffectFn2 "createFlag" room obj name'
 
-createFlagWithColor :: forall a e. Room -> TargetPosition a -> String -> Color -> Eff (cmd :: CMD | e) ReturnCode
-createFlagWithColor room (TargetPt x' y') name' color = runThisEffFn4 "createFlag" room x' y' name' color
-createFlagWithColor room (TargetPos pos) name' color = runThisEffFn3 "createFlag" room pos name' color
-createFlagWithColor room (TargetObj obj) name' color = runThisEffFn3 "createFlag" room obj name' color
+createFlagWithColor :: forall a e. Room -> TargetPosition a -> String -> Color -> Effect ReturnCode
+createFlagWithColor room (TargetPt x' y') name' color = runThisEffectFn4 "createFlag" room x' y' name' color
+createFlagWithColor room (TargetPos pos) name' color = runThisEffectFn3 "createFlag" room pos name' color
+createFlagWithColor room (TargetObj obj) name' color = runThisEffectFn3 "createFlag" room obj name' color
 
-createFlagWithColors :: forall a e. Room -> TargetPosition a -> String -> Color -> Color -> Eff (cmd :: CMD | e) ReturnCode
+createFlagWithColors :: forall a e. Room -> TargetPosition a -> String -> Color -> Color -> Effect ReturnCode
 createFlagWithColors room (TargetPt x' y') name' color color2 =
-  runThisEffFn5 "createFlag" room x' y' name' color color2
+  runThisEffectFn5 "createFlag" room x' y' name' color color2
 createFlagWithColors room (TargetPos pos) name' color color2 =
-  runThisEffFn4 "createFlag" room pos name' color color2
+  runThisEffectFn4 "createFlag" room pos name' color color2
 createFlagWithColors room (TargetObj obj) name' color color2 =
-  runThisEffFn4 "createFlag" room obj name' color color2
+  runThisEffectFn4 "createFlag" room obj name' color color2
 
 find :: forall a. Room -> FindType a -> Array a
 find = runThisFn1 "find"
